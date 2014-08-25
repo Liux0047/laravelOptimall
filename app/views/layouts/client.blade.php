@@ -6,7 +6,7 @@
         <meta name='keywords' content='Optimall' />
         @section('link-css')
         {{ HTML::style('css/bootstrap.min.css'); }}
-        {{ HTML::style('css/font-awesome.min.css'); }}
+        {{ HTML::style('plugins/font-awesome/css/font-awesome.min.css'); }}
         {{ HTML::style('css/animate.min.css'); }}
         {{ HTML::style('css/yamm.css'); }}
         {{ HTML::style('css/style.css'); }}
@@ -79,7 +79,5 @@
         }
     </script>
     @show
-
-
-
+    
 </html>
