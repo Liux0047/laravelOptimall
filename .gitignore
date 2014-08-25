@@ -215,7 +215,7 @@ pip-log.txt
 .mr.developer.cfg
 
 ## images folder
-wwwroot/images/
+wwwroot/images
 
 ## vendor
-vendor/
+vendor
