@@ -58,8 +58,8 @@
 
                 @for ($i=0; $i<2; $i++)
                 @include('components.product-page.product-card', 
-                    array('model' => $promotionModels[$i], 'products' => $products)
-                    )
+                array('model' => $promotionModels[$i], 'products' => $products)
+                )
                 @endfor
             </div>
             <div class="row">
@@ -67,8 +67,8 @@
 
                 @for ($i=2; $i<4; $i++)
                 @include('components.product-page.product-card', 
-                    array('model' => $promotionModels[$i], 'products' => $products)
-                    )
+                array('model' => $promotionModels[$i], 'products' => $products)
+                )
                 @endfor
             </div>
         </div>
@@ -87,20 +87,20 @@
             <div class="row">                
                 @for ($i=0; $i<2; $i++)
                 @include('components.product-page.product-card', 
-                    array('model' => $bestSellerModels[$i], 'products' => $products)
-                    )
+                array('model' => $bestSellerModels[$i], 'products' => $products)
+                )
                 @endfor
-                
+
                 @include('components.product-page.product-card-wide', array('wideModelId' => $wideModelIds['bestSeller'][0]))
-                
+
             </div>
             <div class="row">               
                 @for ($i=2; $i<4; $i++)
                 @include('components.product-page.product-card', 
-                    array('model' => $bestSellerModels[$i], 'products' => $products)
-                    )
+                array('model' => $bestSellerModels[$i], 'products' => $products)
+                )
                 @endfor
-                
+
                 @include('components.product-page.product-card-wide', array('wideModelId' => $wideModelIds['bestSeller'][1]))
             </div>
         </div>
@@ -121,8 +121,8 @@
 
                 @for ($i=0; $i<2; $i++)
                 @include('components.product-page.product-card', 
-                    array('model' => $newArrivalModels[$i], 'products' => $products)
-                    )
+                array('model' => $newArrivalModels[$i], 'products' => $products)
+                )
                 @endfor
             </div>
             <div class="row">
@@ -130,8 +130,8 @@
 
                 @for ($i=2; $i<4; $i++)
                 @include('components.product-page.product-card', 
-                    array('model' => $newArrivalModels[$i], 'products' => $products)
-                    )
+                array('model' => $newArrivalModels[$i], 'products' => $products)
+                )
                 @endfor
             </div>
         </div>
@@ -150,20 +150,20 @@
             <div class="row">                
                 @for ($i=0; $i<2; $i++)
                 @include('components.product-page.product-card', 
-                    array('model' => $featuredModels[$i], 'products' => $products)
-                    )
+                array('model' => $featuredModels[$i], 'products' => $products)
+                )
                 @endfor
-                
+
                 @include('components.product-page.product-card-wide', array('wideModelId' => $wideModelIds['featured'][0]))
-                
+
             </div>
             <div class="row">               
                 @for ($i=2; $i<4; $i++)
                 @include('components.product-page.product-card', 
-                    array('model' => $featuredModels[$i], 'products' => $products)
-                    )
+                array('model' => $featuredModels[$i], 'products' => $products)
+                )
                 @endfor
-                
+
                 @include('components.product-page.product-card-wide', array('wideModelId' => $wideModelIds['featured'][1]))
             </div>
         </div>
@@ -184,8 +184,8 @@
 
                 @for ($i=0; $i<2; $i++)
                 @include('components.product-page.product-card', 
-                    array('model' => $classicalModels[$i], 'products' => $products)
-                    )
+                array('model' => $classicalModels[$i], 'products' => $products)
+                )
                 @endfor
             </div>
             <div class="row">
@@ -193,8 +193,8 @@
 
                 @for ($i=2; $i<4; $i++)
                 @include('components.product-page.product-card', 
-                    array('model' => $classicalModels[$i], 'products' => $products)
-                    )
+                array('model' => $classicalModels[$i], 'products' => $products)
+                )
                 @endfor
             </div>
         </div>
@@ -220,5 +220,18 @@
         lazyLoadCarousel();
     });
 
+</script>
+<script>
+    //change the small img on click of color icon
+    function changeSmallImg(modelId, prodcutId) {
+        $("#small-view-" + modelId + " img").remove();
+        $("#small-view-" + modelId).append(
+                "<img src='{{ asset('images/gallery') }}/" + modelId + "/" + prodcutId + "/medium-view-3.jpg'>");
+    }
+
+    $(".color-icon-link").click(function() {
+        $(".color-icon-link").removeClass("color-icon-clicked");
+        $(this).addClass("color-icon-clicked");
+    });
 </script>
 @stop
