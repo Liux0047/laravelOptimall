@@ -39,14 +39,19 @@
                 'items' => $items, 
                 'O_S_LEFTNames' => $O_S_LEFTNames, 
                 'O_D_RIGHTNames' => $O_D_RIGHTNames,
-                'CommonNames' => $CommonNames )
+                'CommonNames' => $CommonNames,
+                'decrementQuantityAction' => $decrementQuantityAction,
+                'incrementQuantityAction' => $incrementQuantityAction,
+                'removeItemAction' => $removeItemAction, 
+                'setPlanoAction' => $setPlanoAction,
+                'updatePrescriptionAction' => $updatePrescriptionAction)
                 )
                 <tr class="active">                                
                     <td>                                       
                     </td> 
                     <td colspan="4">
                         <form class="form-horizontal" action="/optimall/functions/process-POST/POST-to-shopping-cart.php" method="post" role="form">
-                            <input type="hidden" name="cart_action" value="7">
+                            <input type="hidden" name="cart_action" value=" {{ $applyCoupnAction }}">
                             <div class="form-group" id="coupon-form-group">             
                                 <label for="coupon_code" class="col-md-2 col-md-offset-4 control-label font-blue">
                                     <strong>优惠券</strong>
@@ -65,6 +70,46 @@
         </table>
     </div>
 
+    <div class="row">
+        <div class="col-md-3 col-md-offset-9">
+            <div class="panel panel-default">                        
+                <!-- Table -->
+                <table class="table table-condensed" id="shopping-cart-summary">
+                    <thead></thead>
+                    <tbody>
+                        <tr>
+                            <td class="">总价:</td>
+                            <td class="" id="total_price_cell">
+                                ¥{{ number_format($totalPrice, 2) }}                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="">折扣:</td>
+                            <td class="">
+                                -(<span id="discount_amt_cell">¥{{ number_format($totalDiscount, 2) }} </span>)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-lg font-orange">
+                                <strong>合计:</strong>
+                            </td>
+                            <td class="font-lg font-orange">
+                                <strong id="net_amt_cell">¥{{ number_format($netPrice, 2) }}</strong>
+                            </td>
+                        </tr>
+                    </tbody>                          
+                </table>
+            </div>                    
+            <div class="page-header-btn-group">
+                <a href="{{ URL::to('gallery') }}" class="btn btn-default btn-sm">接着逛逛</a> 
+                <a href="javascript:alertPrescriptionIncomplete();" class="btn btn-warning btn-sm">
+                    去结算 
+                    <i class="fa fa-arrow-circle-right fa-lg"></i>
+                </a>
+            </div>            
+        </div>
+    </div>
+
 </div>
 
 @stop
@@ -79,9 +124,11 @@
 @section("script")
 @parent   
 <script type="text/javascript">
-    
-    $("#prescription_modal_11").on("shown.bs.modal", function (e) { $("#prescription_modal_11 .chosen-select").chosen({width:"95%",no_results_text: "没有找到结果："}); });                
-            
+
+    $("#prescription_modal_11").on("shown.bs.modal", function(e) {
+        $("#prescription_modal_11 .chosen-select").chosen({width: "95%", no_results_text: "没有找到结果："});
+    });
+
     function showUpdateBtn(id) {
         $("#update-" + id).removeClass("hide");
     }

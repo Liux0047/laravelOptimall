@@ -3,7 +3,7 @@
         <span class="item-badge promotion-badge"></span>
         <div class="shop-item-label">
             <div class="pull-left">
-                <span class="discount-price">{{ $model->price }} 
+                <span class="discount-price">{{ number_format($model->price, 0) }} 
                 </span><span class="market-price"><del>¥{{ $model->price + 300 }}</del>
                 </span>
             </div>
