@@ -61,18 +61,8 @@ class ShoppingCartController extends BaseController {
         $orderLineItem = $this->getItembyFromPost();
         $orderLineItem->quantity += 1;
         $orderLineItem->save();
-        $this->calculatePrice(OrderLineItemView::whereNull('order_id')->get());        
-        //get the price
-        $modelId = $orderLineItem->product()->first()->model;
-        $price = ProductModel::find($modelId)->price;
-        $response = array(
-            'quantity' => $orderLineItem->quantity,
-            'itemTotal' => $orderLineItem->quantity * $price,
-            'totalPrice' => $this->totalPrice,
-            'discountAmount' => $this->totalDiscount,
-            'netAmount' => $this->netPrice            
-        ); 
-        return Response::json( $response );
+        //re-calculate the price and send response
+        return Response::json( $this->getUpdateQuantityResponse($orderLineItem) );
     }
     
     public function decrementQuatity() {
@@ -81,18 +71,8 @@ class ShoppingCartController extends BaseController {
             $orderLineItem->quantity -= 1;
         }        
         $orderLineItem->save();
-        $this->calculatePrice(OrderLineItemView::whereNull('order_id')->get());        
-        //get the price
-        $modelId = $orderLineItem->product()->first()->model;
-        $price = ProductModel::find($modelId)->price;
-        $response = array(
-            'quantity' => $orderLineItem->quantity,
-            'itemTotal' => $orderLineItem->quantity * $price,
-            'totalPrice' => $this->totalPrice,
-            'discountAmount' => $this->totalDiscount,
-            'netAmount' => $this->netPrice            
-        ); 
-        return Response::json( $response );
+        //re-calculate the price and send response
+        return Response::json( $this->getUpdateQuantityResponse($orderLineItem) );
     }
     
     public function removeItem() {
@@ -140,5 +120,18 @@ class ShoppingCartController extends BaseController {
             $this->totalPrice += $item->price * $item->quantity;
         }
         $this->netPrice = $this->totalPrice - $this->totalDiscount;
+    }
+    
+    private function getUpdateQuantityResponse ($orderLineItem){
+        $this->calculatePrice(OrderLineItemView::whereNull('order_id')->get());  
+        $modelId = $orderLineItem->product()->first()->model;
+        $price = ProductModel::find($modelId)->price;
+        return array(
+            'quantity' => $orderLineItem->quantity,
+            'itemTotal' => $orderLineItem->quantity * $price,
+            'totalPrice' => $this->totalPrice,
+            'discountAmount' => $this->totalDiscount,
+            'netAmount' => $this->netPrice            
+        ); 
     }
 }
