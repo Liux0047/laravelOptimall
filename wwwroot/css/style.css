@@ -659,19 +659,19 @@ navbar row category*/
     
 }
 .new-arrival-badge{
-    background: url(../img/badges/badge-2.png) no-repeat;    
+    background: url(../images/badges/badge-2.png) no-repeat;    
 }
 .promotion-badge{
-    background: url(../img/badges/badge-4.png) no-repeat;    
+    background: url(../images/badges/badge-4.png) no-repeat;    
 }
 .best-seller-badge{
-    background: url(../img/badges/badge-5.png) no-repeat;    
+    background: url(../images/badges/badge-5.png) no-repeat;    
 }
 .featured-badge{
-    background: url(../img/badges/badge-3.png) no-repeat;    
+    background: url(../images/badges/badge-3.png) no-repeat;    
 }
 .classical-badge{
-    background: url(../img/badges/badge-1.png) no-repeat;    
+    background: url(../images/badges/badge-1.png) no-repeat;    
 }
 /*
 .item-badge {
@@ -683,7 +683,7 @@ navbar row category*/
     height: 46px;
     text-indent: -3000px;
     overflow: hidden;    
-    background: url(../img/icons/item-badge.png) no-repeat;    
+    background: url(../images/icons/item-badge.png) no-repeat;    
 }
 
 .new-arrival-badge{
@@ -736,7 +736,7 @@ navbar row category*/
 #footer {
     min-height: 260px;
     background-color: #252528;
-    //background: url('../img/footer-bg.jpg');
+    //background: url('../images/footer-bg.jpg');
     color: #b5b5b6;
     padding-top: 35px;
     /* margin-top: 50px;*/
@@ -860,12 +860,12 @@ footer a {
     margin-top: 30px; }
 
 #footer .credits .socialicons {
-    background: url("../img/socialicons.png") no-repeat;
+    background: url("../images/socialicons.png") no-repeat;
     width: 265px;
     height: 36px; }
 
 #footer .credits .socialicons_h {
-    background: url("../img/socialicons_h.png") no-repeat;
+    background: url("../images/socialicons_h.png") no-repeat;
     width: 265px;
     height: 36px; }
 
@@ -1167,7 +1167,7 @@ footer a {
 }
 
 .hot{
-    background-image: url('../img/bg-hot.png');
+    background-image: url('../images/bg-hot.png');
     color: white;
     padding:20px;
 }*/
@@ -1278,7 +1278,7 @@ input.jq-validate-error{
 }
 .selection-box:hover, .selection-box.selected{
     box-shadow: 0px 0px 0px 2px #be0601 inset;
-    background-image: url("../img/icons/red-corner.jpg");
+    background-image: url("../images/icons/red-corner.jpg");
     background-position: right bottom;
     background-repeat:no-repeat;
 }
