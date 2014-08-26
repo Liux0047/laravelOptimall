@@ -1,8 +1,8 @@
-@extends ('layouts.customer-base')
+@extends ('layouts.base')
 
 @section('link-css')
-{{ HTML::style('plugins/chosen_v1.0.0/chosen.min.css') }}
 @parent
+{{ HTML::style('plugins/chosen_v1.0.0/chosen.min.css') }}
 @stop
 
 @section ('content')
@@ -11,7 +11,7 @@
     @include('components.product-page.progress-tracker', array('progtrckrStep' => 2))
     <div class="page-header">
         <div class="page-header-btn-group">
-            <a href="/optimall/product-gallery.php" class="btn btn-default btn-sm">
+            <a href="{{ URL::to('gallery') }}" class="btn btn-default btn-sm">
                 接着逛逛
             </a> 
             <a href="javascript:alertPrescriptionIncomplete();" class="btn btn-warning btn-sm">
@@ -35,7 +35,9 @@
             </thead>
             <tbody>
                 @include('components.order-page.cart-item', 
-                array('O_S_LEFTNames' => $O_S_LEFTNames, 
+                array(
+                'items' => $items, 
+                'O_S_LEFTNames' => $O_S_LEFTNames, 
                 'O_D_RIGHTNames' => $O_D_RIGHTNames,
                 'CommonNames' => $CommonNames )
                 )
