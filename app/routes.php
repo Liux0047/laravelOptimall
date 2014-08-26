@@ -11,10 +11,10 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+/*
+ * Index page
+ */
+Route::get('/', 'ProductController@showIndexPage');
 
 /*
  * Route to view-item page
