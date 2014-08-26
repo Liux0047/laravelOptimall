@@ -10,6 +10,7 @@
 <div class="container content-container">
     @include('components.product-page.progress-tracker', array('progtrckrStep' => 2))
     <div class="page-header">
+        @if(count($items))
         <div class="page-header-btn-group">
             <a href="{{ URL::to('gallery') }}" class="btn btn-default btn-sm">
                 接着逛逛
@@ -18,10 +19,12 @@
                 去结算 
                 <i class="fa fa-arrow-circle-right fa-lg"></i>
             </a>
-        </div>                      
+        </div>      
+        @endif
         <h1>我的购物车 <small>Subtext for header</small></h1>                     
     </div>
 
+    @if(count($items))
     <div class="panel panel-default">
         <table class="table shopping-cart-table">
             <thead>
@@ -34,13 +37,15 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach($items as $item)
                 @include('components.order-page.cart-item', 
                 array(
-                'items' => $items, 
+                '$item' => $item, 
                 'O_S_LEFTNames' => $O_S_LEFTNames, 
                 'O_D_RIGHTNames' => $O_D_RIGHTNames,
                 'CommonNames' => $CommonNames)
                 )
+                @endforeach
                 <tr class="active">                                
                     <td>                                       
                     </td> 
@@ -103,6 +108,9 @@
             </div>            
         </div>
     </div>
+    @else 
+    @include('components.order-page.cart-empty')
+    @endif
 
 </div>
 
@@ -146,17 +154,17 @@
     function updateQuantity(itemId, action) {
         $.ajax({
             type: "POST",
-            url: "update-quantity.php",
-            data: {item_id: itemId,
-                cart_action: action
+            url: "{{ URL::to('shopping-cart/') }}/" + action,
+            data: {order_line_item_id: itemId
             }
-        }).done(function(data) {
-            var ajaxReturn = JSON.parse(data);      //parse the return data
-            $("#quantity_" + itemId).text(ajaxReturn.quantity);
-            $("#item_total_" + itemId).text(currency + ajaxReturn.itemTotal.toFixed(2));
-            $("#total_price_cell").text(currency + ajaxReturn.totalPrice.toFixed(2));
-            $("#discount_amt_cell").text(currency + ajaxReturn.discountAmount.toFixed(2));
-            $("#net_amt_cell").text(currency + ajaxReturn.netAmount.toFixed(2));
+        }).done(function(data) {            
+            //var ajaxReturn = JSON.parse(data);      //parse the return data
+            $("#quantity_" + itemId).text(data.quantity);
+            $("#item_total_" + itemId).text(currency + data.itemTotal.toFixed(2));
+            $("#total_price_cell").text(currency + data.totalPrice.toFixed(2));
+            $("#discount_amt_cell").text(currency + data.discountAmount.toFixed(2));
+            $("#net_amt_cell").text(currency + data.netAmount.toFixed(2));
+            
         }).fail(function() {
             //if the connection to database failed
             alert("connection to database has failed");

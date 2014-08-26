@@ -22,6 +22,9 @@ class ShoppingCartController extends BaseController {
         'PD' => array('min'=>50, 'max'=>80,'internval'=>0.5)
     );
     
+    private $totalPrice = 0;
+    private $totalDiscount = 0;
+    private $netPrice = 0;       
     
     public function showShoppingCartPage() {
         
@@ -34,18 +37,14 @@ class ShoppingCartController extends BaseController {
         $items = OrderLineItemView::whereNull('order_id')->get();        
         $params['items'] = $items;
         
-        $totalPrice = 0;
-        foreach ($items as $item){
-            $totalPrice += $item->price;
-        }
-        $params['totalPrice'] = $totalPrice;
+        $this->calculatePrice($items);
+        
+        $params['totalPrice'] = $this->totalPrice;
         
         //implement discount
-        $totalDiscount = 0;
-        $params['totalDiscount'] = $totalDiscount;   
+        $params['totalDiscount'] = $this->totalDiscount;   
         //get net price
-        $params['netPrice'] = $totalPrice - $totalDiscount;       
-        
+        $params['netPrice'] = $this->netPrice;
         
         return View::make('shopping-cart', $params);
     }
@@ -59,19 +58,54 @@ class ShoppingCartController extends BaseController {
     }
     
     public function incrementQuatity() {
-        
+        $orderLineItem = $this->getItembyFromPost();
+        $orderLineItem->quantity += 1;
+        $orderLineItem->save();
+        $this->calculatePrice(OrderLineItemView::whereNull('order_id')->get());        
+        //get the price
+        $modelId = $orderLineItem->product()->first()->model;
+        $price = ProductModel::find($modelId)->price;
+        $response = array(
+            'quantity' => $orderLineItem->quantity,
+            'itemTotal' => $orderLineItem->quantity * $price,
+            'totalPrice' => $this->totalPrice,
+            'discountAmount' => $this->totalDiscount,
+            'netAmount' => $this->netPrice            
+        ); 
+        return Response::json( $response );
     }
     
     public function decrementQuatity() {
-        
+        $orderLineItem = $this->getItembyFromPost();
+        if ($orderLineItem->quantity > 1){
+            $orderLineItem->quantity -= 1;
+        }        
+        $orderLineItem->save();
+        $this->calculatePrice(OrderLineItemView::whereNull('order_id')->get());        
+        //get the price
+        $modelId = $orderLineItem->product()->first()->model;
+        $price = ProductModel::find($modelId)->price;
+        $response = array(
+            'quantity' => $orderLineItem->quantity,
+            'itemTotal' => $orderLineItem->quantity * $price,
+            'totalPrice' => $this->totalPrice,
+            'discountAmount' => $this->totalDiscount,
+            'netAmount' => $this->netPrice            
+        ); 
+        return Response::json( $response );
     }
     
     public function removeItem() {
-        
+        $orderLineItem = $this->getItembyFromPost();
+        $orderLineItem->delete();
+        return Redirect::to('shopping-cart')->with('message', '成功移除此商品');
     }
     
     public function setPlano() {
-        
+        $orderLineItem = $this->getItembyFromPost();
+        $orderLineItem->is_plano = 1;
+        $orderLineItem->save();
+        return Redirect::to('shopping-cart')->with('message', '成功修改验光单');
     }
     
     public function applyCoupon() {
@@ -91,5 +125,20 @@ class ShoppingCartController extends BaseController {
     
     public static function getNumberOfItems (){
         return count(OrderLineItemView::whereNull('order_id')->get());
+    }
+    
+    private function getItembyFromPost() {
+        $itemId = Input::get('order_line_item_id');
+        return OrderLineItem::find($itemId);
+    }
+    
+    private function calculatePrice($items) {
+        $this->totalPrice = 0;
+        $this->totalDiscount = 0;
+        $this->netPrice = 0;
+        foreach ($items as $item){
+            $this->totalPrice += $item->price * $item->quantity;
+        }
+        $this->netPrice = $this->totalPrice - $this->totalDiscount;
     }
 }

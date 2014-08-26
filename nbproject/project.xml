@@ -8,6 +8,8 @@
         <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
             <word>CommonNames</word>
             <word>endfor</word>
+            <word>endforeach</word>
+            <word>endif</word>
         </spellchecker-wordlist>
     </configuration>
 </project>

@@ -22,7 +22,7 @@ class ProductController extends BaseController {
 
         $params['pageTitle'] = $model->model_name_cn . " - 目光之城";
 
-        $params['product'] = $model->products()->firstOrFail();
+        $params['product'] = $model->productViews()->firstOrFail();
         $params['products'] = $model->products;
         $params['lensTypes'] = LensType::all();
         return View::make('product', $params);

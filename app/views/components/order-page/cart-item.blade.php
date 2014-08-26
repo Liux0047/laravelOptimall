@@ -1,4 +1,4 @@
-@foreach($items as $item)
+
 <tr>
     <td class="col-md-4">
         <div class="row">
@@ -20,6 +20,7 @@
         </div>
     </td>
     <td class="col-md-4">
+        @if(!$item->is_plano)
         <div class="btn-group">
             <a class="btn btn-primary btn-sm" data-toggle="modal" href="#prescription_modal_{{ $item->order_line_item_id }}">
                 <span class="fa fa-edit fa-lg"></span> 填写验光单
@@ -43,6 +44,14 @@
                 <input type="hidden" name="order_line_item_id" value="{{ $item->order_line_item_id }}">
             {{ Form::close() }}
         </div>
+        @else
+        <h5><strong>平光镜 </strong></h5>
+        <br>
+        <a class="" data-toggle="modal" href="#prescription_modal_{{ $item->order_line_item_id }}">
+            <span class="fa fa-edit fa-lg"></span> 
+            修改验光单
+        </a>
+        @endif
                 
         {{ Form::open(array('url' => url('shopping-cart/update-prescription'), 'id'=>'prescription_form_'.$item->order_line_item_id, 
                     'novalidate'=>'novalidate', 'class'=>'form-horizontal', 'role'=>'form')) }}        
@@ -170,22 +179,24 @@
         {{ Form::close() }}
     </td>
     <td class="col-md-2">
-        <a href="javascript:updateQuantity({{ $item->order_line_item_id }},3)">
+        <a href="javascript:updateQuantity({{ $item->order_line_item_id }},'decrement-quatity')">
             <i class="fa fa-minus-circle fa-lg"></i>
         </a>
-        <span id="quantity_{{ $item->order_line_item_id }}" class="quantity-cell">1</span>
-        <a href="javascript:updateQuantity({{ $item->order_line_item_id }},4)">
+        <span id="quantity_{{ $item->order_line_item_id }}" class="quantity-cell">
+            {{ $item->quantity }}
+        </span>
+        <a href="javascript:updateQuantity({{ $item->order_line_item_id }},'increment-quatity')">
             <i class="fa fa-plus-circle fa-lg"></i>
         </a>
 
     </td>
     <td class="col-md-1">
         <span class="shopping-cart-price" id="item_total_{{ $item->order_line_item_id }}">
-            ¥{{ number_format($item->price, 2) }}
+            ¥{{ number_format( $item->price * $item->quantity, 2) }}
         </span>
     </td>
     <td class="col-md-1">
-        {{ Form::open(array('url' => url('shopping-cart'), 'id'=>'remove_'.$item->order_line_item_id)) }}        
+        {{ Form::open(array('url' => url('shopping-cart/remove-item'), 'id'=>'remove_'.$item->order_line_item_id)) }}        
             <input type="hidden" name="order_line_item_id" value="{{ $item->order_line_item_id }}">
             <a data-toggle="modal" href="#confirm-remove-{{ $item->order_line_item_id }}">
                 <i class="fa fa-trash-o fa-lg"></i>
@@ -211,4 +222,3 @@
         {{ Form::close() }}
     </td>
 </tr>
-@endforeach

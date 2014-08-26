@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Description of productModel
+ * Description of ProductModel
  *
  * @author Allen
  */
-class ProductModelView extends Eloquent {
+class ProductModel extends Eloquent {
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'model_view';
+    protected $table = 'product_model';
     //primary ID
     protected $primaryKey = 'model_id';
 

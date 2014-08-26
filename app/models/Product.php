@@ -1,20 +1,20 @@
 <?php
 
 /**
- * Description of productModel
+ * Description of Product
  *
  * @author Allen
  */
-class ProductModelView extends Eloquent {
+class Product extends Eloquent {
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'model_view';
+    protected $table = 'product';
     //primary ID
-    protected $primaryKey = 'model_id';
+    protected $primaryKey = 'product_id';
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -22,9 +22,4 @@ class ProductModelView extends Eloquent {
      * @var array
      */
     //protected $hidden = array('password', 'remember_token');
-
-    public function productViews() {
-        return $this->hasMany('ProductView','model');
-    }
-
 }
