@@ -1,4 +1,9 @@
-@extends ('layouts.customer-base')
+@extends ('layouts.base')
+
+@section('link-css')
+@parent
+{{ HTML::style('plugins/raty-2.7.0/jquery.raty.css') }}
+@stop
 
 @section ('content')
 <div id="index-carousel" class="carousel slide">                        
@@ -200,8 +205,13 @@
         </div>
     </div>            
 </div>
-
 @stop
+
+@section('link-script')
+@parent
+{{ HTML::script('plugins/raty-2.7.0/jquery.raty.js') }}
+@stop
+
 
 @section('script')
 @parent
@@ -216,8 +226,19 @@
         var $nextImage = $('#index-carousel .active.item').next('.item').find('img');
         $nextImage.attr('src', $nextImage.data('lazy-load-src'));
     }
+    
     $(document).ready(function() {
         lazyLoadCarousel();
+        
+        $('.raty-star').raty({
+            path: "{{ asset('plugins/raty-2.7.0/images') }}",
+            readOnly: true,
+            halfShow: true,
+            scoreName: "",
+            score: function() {
+                return $(this).attr('data-score');
+            }
+        });
     });
 
 </script>
@@ -234,4 +255,5 @@
         $(this).addClass("color-icon-clicked");
     });
 </script>
+
 @stop

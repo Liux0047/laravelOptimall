@@ -1,4 +1,4 @@
-@extends ('layouts.customer-base')
+@extends ('layouts.base')
 
 @section('link-css')
 @parent

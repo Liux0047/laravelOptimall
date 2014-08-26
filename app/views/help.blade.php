@@ -1,4 +1,4 @@
-@extends ('layouts.customer-base')
+@extends ('layouts.base')
 
 @section ('content')
 <div class="container content-container content-no-header help-page">

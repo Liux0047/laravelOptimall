@@ -30,6 +30,8 @@ class ShoppingCartController extends BaseController {
         $params['CommonNames'] = self::$CommonNames;
         $params['prescriptionOptions'] = self::getPrescriptionOptionList();
         
+        $params['items'] = OrderLineItem::whereNull('order_id')->get();
+        
         return View::make('shopping-cart', $params);
     }
     

@@ -29,22 +29,15 @@
         <div class="info-bar-hover">
             <a href="{{ URL::to('product/'.$model->model_id) }}">
                 评分: 
-                <div id="star_id_{{ $model->model_id }}" class='raty-star'></div>
+                <div id="star_id_{{ $model->model_id }}" class="raty-star" 
+                    @if (($model->average_design_rating + $model->average_comfort_rating + $model->average_quality_rating) > 0)
+                    data-score="{{ ($model->average_design_rating + $model->average_comfort_rating + $model->average_quality_rating) / 3 }}",
+                    @else
+                    data-score="4.5" 
+                    @endif
+                    >                         
+                </div>
             </a>
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    $("#star_id_{{ $model->model_id }}").raty({
-        path: "{{ asset('plugins/raty-2.5.2/img') }}",
-        readOnly: true,
-        halfShow: true,
-        @if (($model->average_design_rating + $model->average_comfort_rating + $model->average_quality_rating) > 0)
-        score: {{ ($model->average_design_rating + $model->average_comfort_rating + $model->average_quality_rating) / 3 }},
-        @else
-        score: 4.5,
-        @endif
-        scoreName: "" 
-    });
-</script>

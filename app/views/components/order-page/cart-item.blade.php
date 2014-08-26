@@ -1,12 +1,18 @@
+@foreach($items as $item)
 <tr>
     <td class="col-md-4">
         <div class="row">
             <div class="col-md-6">
                 <img src="/optimall/asset/img/gallery/1001/6/medium-view-3.jpg" class="shopping-cart-img">
             </div><div class="col-md-6 shopping-cart-item-info">
-                <h4><strong>炫彩夏威夷</strong></h4>
+                <h4><strong>{{ $item->model_name_cn }}</strong></h4>
                 <p>颜色:
-                    <img src="/optimall/asset/img/color/color-2.png"> 纯黑 <br>镜片: 1.61 非球高清翡翠膜<br>单价: ¥198.00
+                    {{ HTML::image('images/color/color-'.$item->color.'.png') }}
+                    {{ $item->color_name_cn }} 
+                    <br>
+                    镜片: {{ $item->lens_title_cn }}
+                    <br>
+                    单价: ¥{{ number_format($item->price, 2) }}
                     <br>
                 </p>
                 <span class="label label-warning">销量优先</span>
@@ -15,7 +21,7 @@
     </td>
     <td class="col-md-4">
         <div class="btn-group">
-            <a class="btn btn-primary btn-sm" data-toggle="modal" href="#prescription_modal_11">
+            <a class="btn btn-primary btn-sm" data-toggle="modal" href="#prescription_modal_{{ $item->order_line_item_id }}">
                 <span class="fa fa-edit fa-lg"></span> 填写验光单
             </a>
             <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
@@ -23,27 +29,29 @@
             </button>
             <ul class="dropdown-menu">
                 <li>
-                    <a href="javascript:document.getElementById('plano_form_11').submit();">
+                    <a href="javascript:document.getElementById('plano_form_{{ $item->order_line_item_id }}').submit();">
                         使用平光镜
                     </a>
                 </li>
                 <li>
-                    <a data-toggle="modal" href="#prescription_modal_11">
+                    <a data-toggle="modal" href="#prescription_modal_{{ $item->order_line_item_id }}">
                         <i class="fa fa-plus"></i> 添加验光单
                     </a>
                 </li>
             </ul>
-            <form action="/optimall/functions/process-POST/POST-to-shopping-cart.php" id="plano_form_11" method="post">
-                <input type="hidden" name="order_line_item_id" value="11">
+            {{ Form::open(array('url' => url('shopping-cart'), 'id'=>'plano_form_'.$item->order_line_item_id)) }}
+                <input type="hidden" name="order_line_item_id" value="{{ $item->order_line_item_id }}">
                 <input type="hidden" name="cart_action" value="6">
-            </form>
+            {{ Form::close() }}
         </div>
-        <form action="/optimall/functions/process-POST/POST-to-shopping-cart.php" method="post" class="form-horizontal" role="form" id="prescription_form_11" novalidate="novalidate">
-            <input type="hidden" name="order_line_item_id" value="11">
+                
+        {{ Form::open(array('url' => url('shopping-cart'), 'id'=>'prescription_form_'.$item->order_line_item_id, 
+                    'novalidate'=>'novalidate', 'class'=>'form-horizontal', 'role'=>'form')) }}        
+            <input type="hidden" name="order_line_item_id" value="{{ $item->order_line_item_id }}">
             <input type="hidden" name="cart_action" value="2">
 
             <!-- Modal -->
-            <div class="modal fade prescription-modal" id="prescription_modal_11" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal fade prescription-modal" id="prescription_modal_{{ $item->order_line_item_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -139,7 +147,7 @@
                                 <div class="col-md-12">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="remember_prescription" id="remember_prescription" value="1" onchange="togglePresName(11);">
+                                            <input type="checkbox" name="remember_prescription" id="remember_prescription" value="1" onchange="togglePresName({{ $item->order_line_item_id }});">
                                             保存我的验光单 <p class="help-block"><small>保存这次填入的验光单以方便您下次使用</small></p>
                                         </label>
                                     </div>
@@ -161,24 +169,24 @@
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
-        </form>
+        {{ Form::close() }}
     </td>
     <td class="col-md-2">
-        <a href="javascript:updateQuantity(11,4)">
+        <a href="javascript:updateQuantity({{ $item->order_line_item_id }},4)">
             <i class="fa fa-minus-circle fa-lg"></i>
         </a>
-        <span id="quantity_11" class="quantity-cell">1</span>
-        <a href="javascript:updateQuantity(11,3)">
+        <span id="quantity_{{ $item->order_line_item_id }}" class="quantity-cell">1</span>
+        <a href="javascript:updateQuantity({{ $item->order_line_item_id }},3)">
             <i class="fa fa-plus-circle fa-lg"></i>
         </a>
 
     </td>
     <td class="col-md-1">
-        <span class="shopping-cart-price" id="item_total_11">¥198.00</span></td><td class="col-md-1">
-        <form action="/optimall/functions/process-POST/POST-to-shopping-cart.php" id="remove-11" method="post">
-            <input type="hidden" name="order_line_item_id" value="11"><input type="hidden" name="cart_action" value="5">
-            <a data-toggle="modal" href="#confirm-remove-11"><i class="fa fa-trash-o fa-lg"></i></a>
-            <div class="modal fade" id="confirm-remove-11" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <span class="shopping-cart-price" id="item_total_{{ $item->order_line_item_id }}">¥198.00</span></td><td class="col-md-1">
+        <form action="/optimall/functions/process-POST/POST-to-shopping-cart.php" id="remove-{{ $item->order_line_item_id }}" method="post">
+            <input type="hidden" name="order_line_item_id" value="{{ $item->order_line_item_id }}"><input type="hidden" name="cart_action" value="5">
+            <a data-toggle="modal" href="#confirm-remove-{{ $item->order_line_item_id }}"><i class="fa fa-trash-o fa-lg"></i></a>
+            <div class="modal fade" id="confirm-remove-{{ $item->order_line_item_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                 <div class="modal-dialog" style="margin-top: -81.5px; margin-left: -300px;">
                     <div class="modal-content" style="max-height: 895px;">
                         <div class="modal-header">
@@ -198,3 +206,4 @@
         </form>
     </td>
 </tr>
+@endforeach
