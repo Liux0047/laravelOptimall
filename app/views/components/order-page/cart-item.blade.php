@@ -39,16 +39,14 @@
                     </a>
                 </li>
             </ul>
-            {{ Form::open(array('url' => url('shopping-cart'), 'id'=>'plano_form_'.$item->order_line_item_id)) }}
+            {{ Form::open(array('url' => url('shopping-cart/set-plano'), 'id'=>'plano_form_'.$item->order_line_item_id)) }}
                 <input type="hidden" name="order_line_item_id" value="{{ $item->order_line_item_id }}">
-                <input type="hidden" name="cart_action" value="{{ $setPlanoAction }}">
             {{ Form::close() }}
         </div>
                 
-        {{ Form::open(array('url' => url('shopping-cart'), 'id'=>'prescription_form_'.$item->order_line_item_id, 
+        {{ Form::open(array('url' => url('shopping-cart/update-prescription'), 'id'=>'prescription_form_'.$item->order_line_item_id, 
                     'novalidate'=>'novalidate', 'class'=>'form-horizontal', 'role'=>'form')) }}        
             <input type="hidden" name="order_line_item_id" value="{{ $item->order_line_item_id }}">
-            <input type="hidden" name="cart_action" value="{{ $updatePrescriptionAction }}">
 
             <!-- Modal -->
             <div class="modal fade prescription-modal" id="prescription_modal_{{ $item->order_line_item_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -172,11 +170,11 @@
         {{ Form::close() }}
     </td>
     <td class="col-md-2">
-        <a href="javascript:updateQuantity({{ $item->order_line_item_id }},{{ $decrementQuantityAction }})">
+        <a href="javascript:updateQuantity({{ $item->order_line_item_id }},3)">
             <i class="fa fa-minus-circle fa-lg"></i>
         </a>
         <span id="quantity_{{ $item->order_line_item_id }}" class="quantity-cell">1</span>
-        <a href="javascript:updateQuantity({{ $item->order_line_item_id }},{{ $incrementQuantityAction }})">
+        <a href="javascript:updateQuantity({{ $item->order_line_item_id }},4)">
             <i class="fa fa-plus-circle fa-lg"></i>
         </a>
 
@@ -189,7 +187,6 @@
     <td class="col-md-1">
         {{ Form::open(array('url' => url('shopping-cart'), 'id'=>'remove_'.$item->order_line_item_id)) }}        
             <input type="hidden" name="order_line_item_id" value="{{ $item->order_line_item_id }}">
-            <input type="hidden" name="cart_action" value="{{ $removeItemAction }}">
             <a data-toggle="modal" href="#confirm-remove-{{ $item->order_line_item_id }}">
                 <i class="fa fa-trash-o fa-lg"></i>
             </a>

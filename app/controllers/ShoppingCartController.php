@@ -9,13 +9,6 @@ class ShoppingCartController extends BaseController {
     public static $O_D_RIGHTNames = array('O_D_SPH', 'O_D_CYL', 'O_D_AXIS', 'O_D_ADD');
     public static $CommonNames = array('PD');
     
-    const ADD_TO_CART = 1;
-    const UPDATE_PRESCRIPTION = 2;
-    const INCREMENT_QUANTITY = 3;
-    const DECREMENT_QUANTITY = 4;            
-    const REMOVE_ITEM = 5;
-    const SET_PLANO = 6;
-    const APPLY_COUPON = 7;
     
     public static $prescriptionOptions = array(
         'O_S_SPH' => array('min'=>0, 'max'=>800,'internval'=>25),
@@ -38,7 +31,7 @@ class ShoppingCartController extends BaseController {
         $params['CommonNames'] = self::$CommonNames;
         $params['prescriptionOptions'] = self::getPrescriptionOptionList();
         
-        $items = OrderLineItem::whereNull('order_id')->get();        
+        $items = OrderLineItemView::whereNull('order_id')->get();        
         $params['items'] = $items;
         
         $totalPrice = 0;
@@ -53,16 +46,38 @@ class ShoppingCartController extends BaseController {
         //get net price
         $params['netPrice'] = $totalPrice - $totalDiscount;       
         
-        $params['addToCartAction'] = self::ADD_TO_CART;
-        $params['updatePrescriptionAction'] = self::UPDATE_PRESCRIPTION;        
-        $params['incrementQuantityAction'] = self::INCREMENT_QUANTITY;
-        $params['decrementQuantityAction'] = self::DECREMENT_QUANTITY;
-        $params['removeItemAction'] = self::REMOVE_ITEM;
-        $params['setPlanoAction'] = self::SET_PLANO;
-        $params['applyCoupnAction'] = self::APPLY_COUPON;        
         
         return View::make('shopping-cart', $params);
     }
+    
+    public function AddItem() {
+        
+    }
+    
+    public function updatePrescription() {
+        
+    }
+    
+    public function incrementQuatity() {
+        
+    }
+    
+    public function decrementQuatity() {
+        
+    }
+    
+    public function removeItem() {
+        
+    }
+    
+    public function setPlano() {
+        
+    }
+    
+    public function applyCoupon() {
+        
+    }
+    
     
     public static function getPrescriptionOptionList(){
         $list = array();
@@ -75,7 +90,6 @@ class ShoppingCartController extends BaseController {
     }
     
     public static function getNumberOfItems (){
-        return count(OrderLineItem::whereNull('order_id')->get());
+        return count(OrderLineItemView::whereNull('order_id')->get());
     }
-
 }

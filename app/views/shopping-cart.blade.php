@@ -39,19 +39,13 @@
                 'items' => $items, 
                 'O_S_LEFTNames' => $O_S_LEFTNames, 
                 'O_D_RIGHTNames' => $O_D_RIGHTNames,
-                'CommonNames' => $CommonNames,
-                'decrementQuantityAction' => $decrementQuantityAction,
-                'incrementQuantityAction' => $incrementQuantityAction,
-                'removeItemAction' => $removeItemAction, 
-                'setPlanoAction' => $setPlanoAction,
-                'updatePrescriptionAction' => $updatePrescriptionAction)
+                'CommonNames' => $CommonNames)
                 )
                 <tr class="active">                                
                     <td>                                       
                     </td> 
                     <td colspan="4">
                         <form class="form-horizontal" action="/optimall/functions/process-POST/POST-to-shopping-cart.php" method="post" role="form">
-                            <input type="hidden" name="cart_action" value=" {{ $applyCoupnAction }}">
                             <div class="form-group" id="coupon-form-group">             
                                 <label for="coupon_code" class="col-md-2 col-md-offset-4 control-label font-blue">
                                     <strong>优惠券</strong>

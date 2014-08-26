@@ -17,7 +17,7 @@ class ProductController extends BaseController {
 
     public function showProductPage($modelId = 1001) {
 
-        $model = ProductModel::findOrFail($modelId);
+        $model = ProductModelView::findOrFail($modelId);
         $params['model'] = $model;
 
         $params['pageTitle'] = $model->model_name_cn . " - 目光之城";
@@ -36,7 +36,7 @@ class ProductController extends BaseController {
         foreach (self::$productLabels as $labelName => $labelValue) {
             //use variable variable name to form model groups of diffrent featured labels
             $modelGroupName = $labelName . 'Models';
-            $$modelGroupName = ProductModel::where('featured_label', '=', $labelValue['id'])->take(4)->get();
+            $$modelGroupName = ProductModelView::where('featured_label', '=', $labelValue['id'])->take(4)->get();
             $params[$modelGroupName] = $$modelGroupName;
             foreach ($$modelGroupName as $model) {
                 //associate model id with all products under this model id

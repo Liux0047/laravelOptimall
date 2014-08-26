@@ -24,9 +24,46 @@ Route::get('product/{modelId}', 'ProductController@showProductPage')
 
 
 /* 
- * Route to shopping cart page
+ * Route to show shopping cart page
  */
 Route::get('shopping-cart/', 'ShoppingCartController@showShoppingCartPage');
+
+
+/*
+ * Route to add item into cart
+ */
+Route::post('shopping-cart/add-item', 'ShoppingCartController@AddItem');
+
+/*
+ * Route to update prescription
+ */
+Route::post('shopping-cart/update-prescription', 'ShoppingCartController@updatePrescription');
+
+/*
+ * Route to increment quatity
+ */
+Route::post('shopping-cart/increment-quatity', 'ShoppingCartController@incrementQuatity');
+
+/*
+ * Route to decrement quatity
+ */
+Route::post('shopping-cart/decrement-quatity', 'ShoppingCartController@decrementQuatity');
+
+/*
+ * Route to remove item
+ */
+Route::post('shopping-cart/remove-item', 'ShoppingCartController@removeItem');
+
+/*
+ * Route to set plano
+ */
+Route::post('shopping-cart/set-plano', 'ShoppingCartController@setPlano');
+
+/*
+ * Route to apply coupon
+ */
+Route::post('shopping-cart/apply-coupon', 'ShoppingCartController@applyCoupon');
+
 
 /*
  * Route to help page

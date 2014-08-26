@@ -8,6 +8,7 @@
 @section ('content')
 <div class="container content-container content-no-header">
     @include('components.product-page.progress-tracker', array('progtrckrStep' => 1))
+    <br>
     <div class="row">    
         <div class="col-md-8" id="product_pic_container">   
             <div class="fotorama"  data-allowfullscreen="native"  data-auto="false">
