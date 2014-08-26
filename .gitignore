@@ -219,3 +219,6 @@ wwwroot/images/
 
 ## vendor
 vendor/
+
+## NetBeans
+nbproject/
