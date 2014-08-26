@@ -61,7 +61,14 @@
                         </p>
                     </div>
                 </div>
-            </section>                        
+            </section>   
+            
+            <section id="beginner-guide">
+                <img src="{{ asset('images/info-page/InfoPage-1.jpg') }}" class="img-responsive" />
+                <img src="{{ asset('images/info-page/InfoPage-2.jpg') }}" class="img-responsive" />
+                <img src="{{ asset('images/info-page/InfoPage-3.jpg') }}" class="img-responsive" />
+                <img src="{{ asset('images/info-page/InfoPage-4.jpg') }}" class="img-responsive" />
+            </section>
         </div>
     </div>            
 </div>

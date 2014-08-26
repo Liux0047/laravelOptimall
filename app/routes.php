@@ -16,4 +16,16 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
+/*
+ * Route to view-item page
+ */
+Route::get('product/{modelId}', 'ProductController@showProductPage')
+        ->where('modelId', '[0-9]+');
+
+/*
+ * Route to help page
+ */
 Route::get('help', 'HelpController@showHelpPage');
+
+
+
