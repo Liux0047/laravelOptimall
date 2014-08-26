@@ -6,6 +6,7 @@
             <name>laravelOptimall</name>
         </data>
         <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
+            <word>CommonNames</word>
             <word>endfor</word>
         </spellchecker-wordlist>
     </configuration>

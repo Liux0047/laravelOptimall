@@ -17,10 +17,16 @@
 Route::get('/', 'ProductController@showIndexPage');
 
 /*
- * Route to view-item page
+ * Route to product page
  */
 Route::get('product/{modelId}', 'ProductController@showProductPage')
         ->where('modelId', '[0-9]+');
+
+
+/* 
+ * Route to shopping cart page
+ */
+Route::get('shopping-cart/', 'ShoppingCartController@showShoppingCartPage');
 
 /*
  * Route to help page
