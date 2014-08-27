@@ -99,7 +99,7 @@ div.vertical-divider {
     height: 90%;
     border-right: 1px solid #909090;
 }
-.modal#termsModal .modal-body {
+.modal#terms_modal .modal-body {
     max-height: 420px;
     overflow-y: auto;
 }

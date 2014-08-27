@@ -22,6 +22,21 @@ Route::get('/', 'ProductController@showIndexPage');
 Route::get('product/{modelId}', 'ProductController@showProductPage')
         ->where('modelId', '[0-9]+');
 
+/*
+ * Route to sign up
+ */
+Route::get('/sign-up', 'MemberController@signUp');
+
+/*
+ * Route to process sign up form submit
+ */
+Route::post('/sign-up', 'MemberController@processSignUp');
+
+/*
+ * Route to verify registration
+ */
+Route::get('/sign-up/verify/{email}/{com_code}', 'MemberController@processSignUp');
+
 
 /* 
  * Route to show shopping cart page
