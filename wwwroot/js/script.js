@@ -1,6 +1,6 @@
 //prevent dropdown collapse accidentally closed
 $(function() {
-    window.prettyPrint && prettyPrint()
+    window.prettyPrint && prettyPrint();
     $(document).on('click', '.yamm .dropdown-menu', function(e) {
         e.stopPropagation();
     });
@@ -27,7 +27,7 @@ $(document).ready(function() {
 //vertical align modal
 function adjustModalMaxHeightAndPosition() {
     $('.modal').each(function() {
-        if ($(this).hasClass('in') == false) {
+        if (!$(this).hasClass('in')) {
             $(this).show(); /* Need this to get modal dimensions */
         }
         ;
@@ -55,7 +55,7 @@ function adjustModalMaxHeightAndPosition() {
                 return -($(this).outerWidth() / 2);
             }
         });
-        if ($(this).hasClass('in') == false) {
+        if (!$(this).hasClass('in')) {
             $(this).hide(); /* Hide modal */
         }
         ;
@@ -70,3 +70,7 @@ $('.navbar').affix({
         top: $('.top-banner').height()
     }
 });
+
+//baidu analytics
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F97599e376911217c874380e476e60e0c' type='text/javascript'%3E%3C/script%3E"));

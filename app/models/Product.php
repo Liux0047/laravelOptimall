@@ -22,4 +22,16 @@ class Product extends Eloquent {
      * @var array
      */
     //protected $hidden = array('password', 'remember_token');
+
+    /*
+     * inverse one to many relationship 
+     */
+    public function productModel() {
+        return $this->belongsTo('ProductModel', 'model');
+    }
+    
+    public function productModelView() {
+        return $this->belongsTo('ProductModelView', 'model');
+    }
+
 }

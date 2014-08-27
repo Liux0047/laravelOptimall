@@ -127,9 +127,12 @@
 @parent   
 <script type="text/javascript">
 
-    $("#prescription_modal_11").on("shown.bs.modal", function(e) {
-        $("#prescription_modal_11 .chosen-select").chosen({width: "95%", no_results_text: "没有找到结果："});
+    @foreach($items as $item)
+    $("#prescription_modal_{{ $item->order_line_item_id }}").on("shown.bs.modal", function(e) {
+        $("#prescription_modal_{{ $item->order_line_item_id }} .chosen-select")
+                .chosen({width: "95%", no_results_text: "没有找到结果："});
     });
+    @endforeach
 
     function showUpdateBtn(id) {
         $("#update-" + id).removeClass("hide");

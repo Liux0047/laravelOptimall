@@ -33,14 +33,17 @@ class ShoppingCartController extends BaseController {
         $params['O_D_RIGHTNames'] = self::$O_D_RIGHTNames;
         $params['CommonNames'] = self::$CommonNames;
         $params['prescriptionOptions'] = self::getPrescriptionOptionList();
-        
+                
         $items = OrderLineItemView::whereNull('order_id')->get();        
-        $params['items'] = $items;
+        $params['items'] = $items;        
+        
+        foreach ($items as $item){
+            $params['prescriptionEntered'][$item->order_line_item_id] = $this->getItemPrescription($item);
+        }        
         
         $this->calculatePrice($items);
         
-        $params['totalPrice'] = $this->totalPrice;
-        
+        $params['totalPrice'] = $this->totalPrice;        
         //implement discount
         $params['totalDiscount'] = $this->totalDiscount;   
         //get net price
@@ -54,8 +57,14 @@ class ShoppingCartController extends BaseController {
     }
     
     public function updatePrescription() {
-        
-    }
+        $prescriptionNames = array_merge(self::$O_S_LEFTNames, self::$O_D_RIGHTNames, self::$CommonNames);
+        $orderLineItem = $this->getItembyFromPost();
+        foreach ($prescriptionNames as $prescriptionName) {
+            $orderLineItem->$prescriptionName = Input::get($prescriptionName);
+        }
+        $orderLineItem->save();
+        return Redirect::to('shopping-cart')->with('message', '成功填写验光单');
+    } 
     
     public function incrementQuatity() {
         $orderLineItem = $this->getItembyFromPost();
@@ -104,7 +113,7 @@ class ShoppingCartController extends BaseController {
     }
     
     public static function getNumberOfItems (){
-        return count(OrderLineItemView::whereNull('order_id')->get());
+        return OrderLineItemView::whereNull('order_id')->count();
     }
     
     private function getItembyFromPost() {
@@ -124,8 +133,7 @@ class ShoppingCartController extends BaseController {
     
     private function getUpdateQuantityResponse ($orderLineItem){
         $this->calculatePrice(OrderLineItemView::whereNull('order_id')->get());  
-        $modelId = $orderLineItem->product()->first()->model;
-        $price = ProductModel::find($modelId)->price;
+        $price = $orderLineItem->product()->first()->productModel()->first()->price;
         return array(
             'quantity' => $orderLineItem->quantity,
             'itemTotal' => $orderLineItem->quantity * $price,
@@ -133,5 +141,19 @@ class ShoppingCartController extends BaseController {
             'discountAmount' => $this->totalDiscount,
             'netAmount' => $this->netPrice            
         ); 
+    }
+        
+    private function getItemPrescription ($orderLineItem){
+        $prescription = array();
+        $prescriptionNames = array_merge(self::$O_S_LEFTNames, self::$O_D_RIGHTNames, self::$CommonNames);
+        foreach ($prescriptionNames as $prescriptionName) {
+            if (isset($orderLineItem->$prescriptionName)){
+                $prescription[$prescriptionName] = $orderLineItem->$orderLineItem;
+            }
+            else {
+                return array();
+            }            
+        }
+        return $prescription;
     }
 }

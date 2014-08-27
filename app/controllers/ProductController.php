@@ -23,7 +23,7 @@ class ProductController extends BaseController {
         $params['pageTitle'] = $model->model_name_cn . " - 目光之城";
 
         $params['product'] = $model->productViews()->firstOrFail();
-        $params['products'] = $model->products;
+        $params['products'] = $model->productViews;
         $params['lensTypes'] = LensType::all();
         return View::make('product', $params);
     }
@@ -40,7 +40,7 @@ class ProductController extends BaseController {
             $params[$modelGroupName] = $$modelGroupName;
             foreach ($$modelGroupName as $model) {
                 //associate model id with all products under this model id
-                $products[$model->model_id] = $model->products;
+                $products[$model->model_id] = $model->productViews;
             }
             $wideModelIds[$labelName] = $labelValue['wideModelId'];
         }
