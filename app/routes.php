@@ -1,15 +1,15 @@
 <?php
 
 /*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
-|
-*/
+  |--------------------------------------------------------------------------
+  | Application Routes
+  |--------------------------------------------------------------------------
+  |
+  | Here is where you can register all of the routes for an application.
+  | It's a breeze. Simply tell Laravel the URIs it should respond to
+  | and give it the Closure to execute when that URI is requested.
+  |
+ */
 
 /*
  * Index page
@@ -48,7 +48,7 @@ Route::get('sign-up/verify/{email}/{com_code}', 'MemberController@verifyRegistra
  */
 Route::get('logout', 'MemberController@logout');
 
-/* 
+/*
  * Route to show shopping cart page
  */
 Route::get('shopping-cart/', 'ShoppingCartController@showShoppingCartPage');
@@ -95,8 +95,9 @@ Route::post('shopping-cart/apply-coupon', 'ShoppingCartController@applyCoupon');
  */
 Route::get('help', 'HelpController@showHelpPage');
 
-
-View::composer('components.page-frame.top-banner', function($view)
-{
+/*
+ * View composer to add number of shopping cart items into top banner
+ */
+View::composer('components.page-frame.top-banner', function($view) {
     $view->with('numCartItems', ShoppingCartController::getNumberOfItems());
 });

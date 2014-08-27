@@ -118,7 +118,13 @@ class ShoppingCartController extends BaseController {
     }
     
     public static function getNumberOfItems (){
-        return OrderLineItemView::whereNull('order_id')->count();
+        if (Auth::check()){
+            return 0;
+        }
+        else {
+            return OrderLineItemView::ofMember(Auth::id())->count();            
+        }
+        
     }
     
     private function getItembyFromPost() {
@@ -127,7 +133,7 @@ class ShoppingCartController extends BaseController {
     }
     
     private function getCartItems() {
-        return OrderLineItemView::whereNull('order_id')->get();
+        return OrderLineItemView::ofMember(Auth::id())->get();
     }
     
     private function calculatePrice($items) {

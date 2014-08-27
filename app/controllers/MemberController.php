@@ -7,13 +7,18 @@
  */
 class MemberController extends BaseController {
 
-    public function login() {
+    public function login() {        
         $email = Input::get('email');
         $password = Input::get('password');
         $rememberMe = Input::get('remember_me');
-        if (Auth::attempt(array('email' => $email, 'password' => $password, 'com_code' => null), $rememberMe)) {
-            //return Redirect::intended('/');
-            return Response::json(array('isValidAccount' => 1));
+        if (Auth::attempt(array('email' => $email, 'password' => $password, 'com_code' => null), $rememberMe)) {            
+            if (Request::ajax()){
+                return Response::json(array('isValidAccount' => 1));                
+            }
+            else {
+                return Redirect::intended('/');
+            }
+            
         }
     }
 
