@@ -28,7 +28,7 @@
                 <a href="{{ URL::to('shopping-cart') }}" >
                     {{ HTML::image('images/cart-icon.png', 'Cart Icon') }} 
                 </a>
-                <span class="badge">1</span>  
+                <span class="badge">{{ $numCartItems }}</span>  
             </div>
         </div>
     </div>

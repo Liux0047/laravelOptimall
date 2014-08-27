@@ -96,4 +96,7 @@ Route::post('shopping-cart/apply-coupon', 'ShoppingCartController@applyCoupon');
 Route::get('help', 'HelpController@showHelpPage');
 
 
-
+View::composer('components.page-frame.top-banner', function($view)
+{
+    $view->with('numCartItems', ShoppingCartController::getNumberOfItems());
+});
