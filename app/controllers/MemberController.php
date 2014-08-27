@@ -21,6 +21,10 @@ class MemberController extends BaseController {
             
         }
     }
+    
+    public function showLoginPage() {
+        return View::make('login');
+    }
 
     public function signUp() {
         $params['pageTitle'] = "注册成为目光之城会员";
