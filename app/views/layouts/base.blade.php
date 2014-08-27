@@ -57,12 +57,11 @@
             }
             $.ajax({
                 type: "POST",
-                url: "/optimall/functions/Ajax/auth-login.php",
+                url: "{{ URL::to('login') }}",
                 data: {email: email, password: password, remember_me: remember_me}
             }).done(function(data) {
-                var ajaxReturn = JSON.parse(data);      //parse the return data
                 //if successfully logged in
-                if (ajaxReturn.isValidUser) {        //if valid user exists         
+                if (data.isValidAccount) {        //if valid user exists         
                     window.location.href = document.URL;
                 }
                 else {

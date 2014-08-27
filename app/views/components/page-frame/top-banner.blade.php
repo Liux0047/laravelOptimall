@@ -3,8 +3,8 @@
         <div class="row">
             <div class="col-md-3 col-sm-8 col-xs-8">
                 <div class="logo">
-                    <a href="/optimall/" title="Return to the homepage">
-                        <img src="{{ asset('images/optimall.png') }}" alt="Optimall logo" />
+                    <a href="{{ URL::to('/') }}" title="Return to the homepage">
+                        {{ HTML::image('images/optimall.png', 'Optimall logo') }} 
                     </a>
                 </div>
             </div>
@@ -25,8 +25,8 @@
                 </div>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-3 cart-icon-ontainer">
-                <a href="/optimall/shopping-cart.php" >
-                    <img src="{{ asset('images/cart-icon.png') }}">
+                <a href="{{ URL::to('shopping-cart') }}" >
+                    {{ HTML::image('images/cart-icon.png', 'Cart Icon') }} 
                 </a>
                 <span class="badge">1</span>  
             </div>

@@ -11,10 +11,9 @@ class MemberController extends BaseController {
         $email = Input::get('email');
         $password = Input::get('password');
         $rememberMe = Input::get('remember_me');
-        if (Auth::attempt(array('email' => $email, 'password' => $password), $rememberMe)) {
-            //check com_code
-
-            return Redirect::intended('/');
+        if (Auth::attempt(array('email' => $email, 'password' => $password, 'com_code' => null), $rememberMe)) {
+            //return Redirect::intended('/');
+            return Response::json(array('isValidAccount' => 1));
         }
     }
 
@@ -52,7 +51,22 @@ class MemberController extends BaseController {
     }
 
     public function verifyRegistration($email, $comCode) {
-        
+        $member = Member::where('email', '=', $email)->firstOrFail();
+        $params = array();
+        if ($member->com_code == $comCode) {
+            $member->com_code = null;
+            $member->save();
+            $params['isSuccessful'] = true;
+        }
+        else {
+            $params['isSuccessful'] = false;
+        }        
+        return View::make('verify-registration-result', $params);
+    }
+    
+    public function logout () {
+        Auth::logout();
+        return Redirect::to('/');
     }
     
     private function generateGUID() {
