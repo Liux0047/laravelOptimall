@@ -13,18 +13,26 @@
         <tbody>
             <tr>
                 <th valign="middle">左眼</th>
-                <td valign="middle">0</td>
-                <td valign="middle">50</td>
-                <td valign="middle">1</td>
-                <td valign="middle">0</td>
+                @foreach($O_S_LEFTNames as $O_S_LEFTName)
+                <td valign="middle">{{ $item->$O_S_LEFTName }}</td>
+                @endforeach
             </tr>
             <tr>
                 <th valign="middle">右眼</th>
-                <td valign="middle">25</td><td valign="middle">50</td>
-                <td valign="middle">1</td><td valign="middle">0</td></tr><tr>
-                <th valign="middle">瞳距(cm)</th><td valign="middle">50.0</td>
+                @foreach($O_D_RIGHTNames as $O_D_RIGHTName)
+                <td valign="middle">{{ $item->$O_D_RIGHTName }}</td>
+                @endforeach
+            </tr>
+            <tr>                
+                <th valign="middle">瞳距(cm)</th>
+                @foreach($CommonNames as $CommonName)
+                <td valign="middle">{{ $item->$CommonName }}</td>
+                @endforeach
                 <td></td><td></td><td></td>
             </tr>            
         </tbody>
     </table>       
 </div>
+<a class="pull-right" data-toggle="modal" href="#prescription_modal_{{ $item->order_line_item_id }}">
+    <span class="fa fa-edit fa-lg"></span> 修改验光单
+</a>

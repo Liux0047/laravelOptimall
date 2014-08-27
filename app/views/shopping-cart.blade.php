@@ -182,7 +182,7 @@
             O_S_SPH: "required",
             O_D_SPH: "required",
             PD: "required",
-            prescription_user_name: "required"
+            prescription_name: "required"
         },
         messages: {
             O_S_SPH: {
@@ -194,7 +194,7 @@
             PD: {
                 required: warningIcon + "请填写瞳距"
             },
-            prescription_user_name: {
+            prescription_name: {
                 required: warningIcon + "请给这只验光单起个名字"
             }
         },
@@ -217,8 +217,10 @@
         onclick: true
     };
 
-    $(document).ready(function() {
-        $('#prescription_form_').validate(rule);
+    $(document).ready(function() {    
+        @foreach($items as $item)
+        $('#prescription_form_{{ $item->order_line_item_id }}').validate(rule);
+        @endforeach
     });
 
 

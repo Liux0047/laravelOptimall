@@ -34,11 +34,11 @@ class ShoppingCartController extends BaseController {
         $params['CommonNames'] = self::$CommonNames;
         $params['prescriptionOptions'] = self::getPrescriptionOptionList();
                 
-        $items = OrderLineItemView::whereNull('order_id')->get();        
+        $items = $this->getCartItems();        
         $params['items'] = $items;        
         
         foreach ($items as $item){
-            $params['prescriptionEntered'][$item->order_line_item_id] = $this->getItemPrescription($item);
+            $params['isPrescriptionEntered'][$item->order_line_item_id] = $this->isPrescriptionEntered($item);
         }        
         
         $this->calculatePrice($items);
@@ -63,6 +63,11 @@ class ShoppingCartController extends BaseController {
             $orderLineItem->$prescriptionName = Input::get($prescriptionName);
         }
         $orderLineItem->save();
+        
+        if (Input::get('remember_prescription')){
+            $this->savePrescription();
+        }
+        
         return Redirect::to('shopping-cart')->with('message', '成功填写验光单');
     } 
     
@@ -121,6 +126,10 @@ class ShoppingCartController extends BaseController {
         return OrderLineItem::find($itemId);
     }
     
+    private function getCartItems() {
+        return OrderLineItemView::whereNull('order_id')->get();
+    }
+    
     private function calculatePrice($items) {
         $this->totalPrice = 0;
         $this->totalDiscount = 0;
@@ -132,7 +141,7 @@ class ShoppingCartController extends BaseController {
     }
     
     private function getUpdateQuantityResponse ($orderLineItem){
-        $this->calculatePrice(OrderLineItemView::whereNull('order_id')->get());  
+        $this->calculatePrice($this->getCartItems());  
         $price = $orderLineItem->product()->first()->productModel()->first()->price;
         return array(
             'quantity' => $orderLineItem->quantity,
@@ -143,17 +152,24 @@ class ShoppingCartController extends BaseController {
         ); 
     }
         
-    private function getItemPrescription ($orderLineItem){
-        $prescription = array();
+    private function isPrescriptionEntered ($orderLineItem){
         $prescriptionNames = array_merge(self::$O_S_LEFTNames, self::$O_D_RIGHTNames, self::$CommonNames);
         foreach ($prescriptionNames as $prescriptionName) {
-            if (isset($orderLineItem->$prescriptionName)){
-                $prescription[$prescriptionName] = $orderLineItem->$orderLineItem;
-            }
-            else {
-                return array();
-            }            
+            if (!isset($orderLineItem->$prescriptionName)){ //false if at least one entry is blank
+                return false;
+            }  
         }
-        return $prescription;
+        return true;
+    }
+    
+    private function savePrescription () {
+        $prescription = new Prescription;
+        $prescriptionNames = array_merge(self::$O_S_LEFTNames, self::$O_D_RIGHTNames, self::$CommonNames);
+        foreach ($prescriptionNames as $prescriptionName) {
+            $prescription->$prescriptionName = Input::get($prescriptionName);
+        }
+        $prescription->name = Input::get('prescription_name');
+        $prescription->member = 58;
+        $prescription->save();
     }
 }

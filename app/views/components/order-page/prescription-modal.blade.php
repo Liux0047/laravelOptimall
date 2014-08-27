@@ -51,7 +51,11 @@
                                 <td valign="middle">
                                     <select name="{{ $O_S_LEFTName }}" id="{{ $O_S_LEFTName }}" data-placeholder="请选择" class="chosen-select" style="width:100px;">
                                         @foreach($prescriptionOptions[$O_S_LEFTName] as $prescriptionOption)
-                                        <option value="{{ $prescriptionOption }}">{{ $prescriptionOption }}</option>
+                                        <option value="{{ $prescriptionOption }}" 
+                                                @if(isset($item->$O_S_LEFTName) && ($item->$O_S_LEFTName == $prescriptionOption) )
+                                                selected=true
+                                                @endif
+                                                >{{ $prescriptionOption }}</option>
                                         @endforeach
                                     </select>
                                 </td>
@@ -63,7 +67,11 @@
                                 <td valign="middle">
                                     <select name="{{ $O_D_RIGHTName }}" id="{{ $O_D_RIGHTName }}" data-placeholder="请选择" class="chosen-select" style="width:100px;">
                                         @foreach($prescriptionOptions[$O_D_RIGHTName] as $prescriptionOption)
-                                        <option value="{{ $prescriptionOption }}">{{ $prescriptionOption }}</option>
+                                        <option value="{{ $prescriptionOption }}" 
+                                                @if(isset($item->$O_D_RIGHTName) && ($item->$O_D_RIGHTName == $prescriptionOption) )
+                                                selected=true
+                                                @endif
+                                                >{{ $prescriptionOption }}</option>
                                         @endforeach
                                     </select>
                                 </td>
@@ -82,7 +90,11 @@
                                 <td valign="middle">
                                     <select name="{{ $CommonName }}" id="{{ $CommonName }}" data-placeholder="请选择" class="chosen-select" style="width:100px;">
                                         @foreach($prescriptionOptions[$CommonName] as $prescriptionOption)
-                                        <option value="{{ $prescriptionOption }}">{{ $prescriptionOption }}</option>
+                                        <option value="{{ $prescriptionOption }}" 
+                                                @if(isset($item->$CommonName) && ($item->$CommonName == $prescriptionOption) )
+                                                selected=true
+                                                @endif
+                                                >{{ $prescriptionOption }}</option>
                                         @endforeach
                                     </select>
                                 </td>
@@ -96,7 +108,10 @@
                         <div class="checkbox">
                             <label>
                                 <input type="checkbox" name="remember_prescription" id="remember_prescription" value="1" onchange="togglePresName({{ $order_line_item_id }});">
-                                保存我的验光单 <p class="help-block"><small>保存这次填入的验光单以方便您下次使用</small></p>
+                                保存我的验光单 
+                                <p class="help-block">
+                                    <small>保存这次填入的验光单以方便您下次使用</small>
+                                </p>
                             </label>
                         </div>
                     </div>
@@ -104,7 +119,7 @@
                 <div class="form-group hidden" id="prescription_user_field">
                     <label class="sr-only" for="prescription_user_field">请给这只验光单起个名字 (20字以内)</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="prescription_user_name" id="prescription_user_name" placeholder="请给这只验光单起个名字 (20字以内)">
+                        <input type="text" class="form-control" name="prescription_name" id="prescription_name" placeholder="请给这只验光单起个名字 (20字以内)">
                     </div>
                 </div>
 

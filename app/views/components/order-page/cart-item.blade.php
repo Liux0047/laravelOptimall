@@ -1,9 +1,8 @@
-
 <tr>
     <td class="col-md-4">
         <div class="row">
             <div class="col-md-6">
-                <img src="/optimall/asset/img/gallery/1001/6/medium-view-3.jpg" class="shopping-cart-img">
+                {{ HTML::image('images/gallery/'.$item->model.'/'.$item->product.'/medium-view-3.jpg', "", array('class' => 'shopping-cart-img')) }}
             </div><div class="col-md-6 shopping-cart-item-info">
                 <h4><strong>{{ $item->model_name_cn }}</strong></h4>
                 <p>颜色:
@@ -20,7 +19,21 @@
         </div>
     </td>
     <td class="col-md-4">
-        @if(!$item->is_plano)
+        @if($item->is_plano)
+        <h5><strong>平光镜 </strong></h5>
+        <br>
+        <a class="" data-toggle="modal" href="#prescription_modal_{{ $item->order_line_item_id }}">
+            <span class="fa fa-edit fa-lg"></span> 
+            修改验光单
+        </a> 
+        @elseif($isPrescriptionEntered[$item->order_line_item_id])
+        @include('components.order-page.prescription-table', array(
+                'item' => $item,
+                'O_S_LEFTNames' => $O_S_LEFTNames,
+                'O_D_RIGHTNames' => $O_D_RIGHTNames,
+                'CommonNames' => $CommonNames
+            ))
+        @else
         <div class="btn-group">
             <a class="btn btn-primary btn-sm" data-toggle="modal" href="#prescription_modal_{{ $item->order_line_item_id }}">
                 <span class="fa fa-edit fa-lg"></span> 填写验光单
@@ -44,24 +57,17 @@
                 <input type="hidden" name="order_line_item_id" value="{{ $item->order_line_item_id }}">
             {{ Form::close() }}
         </div>
-        @else
-        <h5><strong>平光镜 </strong></h5>
-        <br>
-        <a class="" data-toggle="modal" href="#prescription_modal_{{ $item->order_line_item_id }}">
-            <span class="fa fa-edit fa-lg"></span> 
-            修改验光单
-        </a>
         @endif
 
         {{ Form::open(array('url' => url('shopping-cart/update-prescription'), 'id'=>'prescription_form_'.$item->order_line_item_id, 
                     'novalidate'=>'novalidate', 'class'=>'form-horizontal', 'role'=>'form')) }}                            
             <input type="hidden" name="order_line_item_id" value="{{ $item->order_line_item_id }}">
             @include('components.order-page.prescription-modal', array(
-            'order_line_item_id' => $item->order_line_item_id,
-            'O_S_LEFTNames' => $O_S_LEFTNames,
-            'O_D_RIGHTNames' => $O_D_RIGHTNames,
-            'CommonNames' => $CommonNames,
-            'prescriptionOptions' => $prescriptionOptions
+                'order_line_item_id' => $item->order_line_item_id,
+                'O_S_LEFTNames' => $O_S_LEFTNames,
+                'O_D_RIGHTNames' => $O_D_RIGHTNames,
+                'CommonNames' => $CommonNames,
+                'prescriptionOptions' => $prescriptionOptions
             ))
         {{ Form::close() }}
 
