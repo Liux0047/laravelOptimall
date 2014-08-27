@@ -118,7 +118,7 @@ class ShoppingCartController extends BaseController {
     }
     
     public static function getNumberOfItems (){
-        if (Auth::check()){
+        if (!Auth::check()){
             return 0;
         }
         else {
