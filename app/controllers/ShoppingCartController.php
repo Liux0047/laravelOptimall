@@ -41,6 +41,8 @@ class ShoppingCartController extends BaseController {
             $params['isPrescriptionEntered'][$item->order_line_item_id] = $this->isPrescriptionEntered($item);
         }        
         
+        $params['storedPrescriptions'] = Prescription::ofMember(Auth::id())->get();
+        
         $this->calculatePrice($items);
         
         $params['totalPrice'] = $this->totalPrice;        

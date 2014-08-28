@@ -25,7 +25,7 @@ class OrderLineItemView extends Eloquent {
 
     
     /*
-     * dynmaic scope to get irems belonging to a member ID
+     * dynmaic scope to get items belonging to a member ID
      */
     public function scopeOfMember($query, $id) {
         return $query->whereNull('order_id')->where('member','=',$id);

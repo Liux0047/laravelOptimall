@@ -253,6 +253,18 @@
         });
     });
 
+    //enable popover of stored prescription
+    @foreach($storedPrescriptions as $storedPrescription)
+    $("#stored_pres_popover_{{ $storedPrescription->prescription_id }}").popover({
+       html : true,
+       title: "预览验光单详情",
+       content: function() {return $("#stored_pres_form_{{ $storedPrescription->prescription_id }}").html();},
+       trigger:"hover",
+       container:"body",          
+       placement:"right"          
+    });
+    @endforeach
+
 
     </script> 
     @stop

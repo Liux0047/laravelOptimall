@@ -23,4 +23,12 @@ class Prescription extends Eloquent {
      * @var array
      */
     //protected $hidden = array('password', 'remember_token');
+    
+    /*
+     * dynmaic scope to get prescription of a member ID
+     */
+    public function scopeOfMember($query, $id) {
+        return $query->where('member','=',$id);
+    }
+    
 }
