@@ -26,6 +26,6 @@
 	</td>
 	<td class="col-md-1">{{ $item->quantity }}</td>
 	<td class="col-md-1">
-		<span class="shopping-cart-price">¥{{ number_format($item->price+$item->lens_price, 2) }}</span>
+		<span class="shopping-cart-price">¥{{ number_format(($item->price+$item->lens_price)*$item->quantity, 2) }}</span>
 	</td>
 </tr>

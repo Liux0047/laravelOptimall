@@ -53,13 +53,11 @@ class ShoppingCartController extends BaseController {
         }
         else {
             $params['couponCode'] = "";
-            $this->calculatePrice($items, $coupon);
+            $this->calculatePrice($items);
         }
 
         $params['totalPrice'] = $this->totalPrice;
-        //implement discount
         $params['totalDiscount'] = $this->totalDiscount;
-        //get net price
         $params['netPrice'] = $this->netPrice;
 
         return View::make('pages.shopping-cart', $params);
@@ -75,6 +73,15 @@ class ShoppingCartController extends BaseController {
                 return Redirect::to('shopping-cart')->with('warning', '请完整填写所有验光单'); 
             }
         }
+        if (Session::has('couponId')){
+            $coupon = Coupon::find(Session::get('couponId'));
+            $this->calculatePrice($items, $coupon);
+        }
+        else {
+            $this->calculatePrice($items);
+        }
+        $params['totalDiscount'] = $this->totalDiscount;
+        $params['netPrice'] = $this->netPrice;
         
         $addresses = Address::ofMember(Auth::id())->get();
         $params['addresses'] = $addresses;
@@ -194,7 +201,7 @@ class ShoppingCartController extends BaseController {
         return OrderLineItemView::ofMember(Auth::id())->get();
     }
 
-    private function calculatePrice($items, $coupon) {
+    private function calculatePrice($items, $coupon=null) {
         $this->totalPrice = 0;
         $this->totalDiscount = 0;
         $this->netPrice = 0;

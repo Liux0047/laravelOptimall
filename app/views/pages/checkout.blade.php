@@ -61,7 +61,9 @@
 				<div class="panel-body">
 					<p>
 						<strong>实付款:</strong>
-						<span class="font-lg font-orange"><strong>¥596.00</strong></span>
+						<span class="font-lg font-orange"><strong>¥{{ number_format($netPrice, 2) }}</strong></span>
+						<br>
+						<span class="font-grey"> (含 ¥{{ number_format($totalDiscount, 2) }} 折扣 ) </span>
 					</p>
 					@if (isset($selectedAddress))
 					<p id="address_summary">
