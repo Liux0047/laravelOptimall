@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-md-8">
             {{ Form::open(array('url' => 'sign-up', 'role'=>'form', 'id'=>'registration_form', 
-                        'novalidate'=>'novalidate', 'class'=>'form-horizontal')) }}            
+            'novalidate'=>'novalidate', 'class'=>'form-horizontal')) }}            
             <div class="form-group">
                 <label for="nickname" class="col-md-2 control-label">昵称*</label>
                 <div class="col-md-6">
@@ -138,7 +138,7 @@
 @section("script")
 @parent
 <script type="text/javascript">
-    $(document).ready(function() {
+$(document).ready(function() {
         // validate signup form on keyup and submit
         var warningIcon = "<i class='fa fa-warning fa-lg'></i> ";
         $("#registration_form").validate({
@@ -206,16 +206,16 @@
             //onfocusout: true,
             onclick: true
         });
-    });
+});
 
-    function checkTemrsAndConditions() {
-        document.getElementById('agree_terms').checked = true;
-    }
+function checkTemrsAndConditions() {
+    document.getElementById('agree_terms').checked = true;
+}
 
-    $('#terms_modal').on('show.bs.modal', function() {
-        $('.modal-content').css('margin-top', $(window).height() * 0.15);
-        $('.modal-body').css('height', $(window).height() * 0.5);
-    });
+$('#terms_modal').on('show.bs.modal', function() {
+    $('.modal-content').css('margin-top', $(window).height() * 0.15);
+    $('.modal-body').css('height', $(window).height() * 0.5);
+});
 
 </script>
 @stop

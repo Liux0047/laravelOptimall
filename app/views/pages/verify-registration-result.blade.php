@@ -14,7 +14,7 @@
         @else
         验证失败
         @endif
-                      
+
     </p>
 </div>
 @stop

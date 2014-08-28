@@ -39,128 +39,128 @@
             <tbody>
                 @foreach($items as $item)
                 @include('components.order-page.cart-item', 
-                array(
-                '$item' => $item, 
-                'O_S_LEFTNames' => $O_S_LEFTNames, 
-                'O_D_RIGHTNames' => $O_D_RIGHTNames,
-                'CommonNames' => $CommonNames)
-                )
-                @endforeach
-                <tr class="active">                                
-                    <td>                                       
-                    </td> 
-                    <td colspan="4">
-                        <form class="form-horizontal" action="/optimall/functions/process-POST/POST-to-shopping-cart.php" method="post" role="form">
-                            <div class="form-group" id="coupon-form-group">             
-                                <label for="coupon_code" class="col-md-2 col-md-offset-4 control-label font-blue">
-                                    <strong>优惠券</strong>
-                                </label>     
-                                <div class="col-md-4">                                                
-                                    <input type="text" class="form-control" name="coupon_code" placeholder="优惠券代码" value="">                                                       
-                                </div>           
-                                <div class="col-md-1">
-                                    <input type="submit" class="btn btn-primary btn-sm" value="使用优惠券">
-                                </div>
-                            </div>
-                        </form>  
-                    </td>    
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="row">
-        <div class="col-md-3 col-md-offset-9">
-            <div class="panel panel-default">                        
-                <!-- Table -->
-                <table class="table table-condensed" id="shopping-cart-summary">
-                    <thead></thead>
-                    <tbody>
-                        <tr>
-                            <td class="">总价:</td>
-                            <td class="" id="total_price_cell">
-                                ¥{{ number_format($totalPrice, 2) }}                                
-                            </td>
+                    array(
+                        '$item' => $item, 
+                        'O_S_LEFTNames' => $O_S_LEFTNames, 
+                        'O_D_RIGHTNames' => $O_D_RIGHTNames,
+                        'CommonNames' => $CommonNames)
+                        )
+                        @endforeach
+                        <tr class="active">                                
+                            <td>                                       
+                            </td> 
+                            <td colspan="4">
+                                <form class="form-horizontal" action="/optimall/functions/process-POST/POST-to-shopping-cart.php" method="post" role="form">
+                                    <div class="form-group" id="coupon-form-group">             
+                                        <label for="coupon_code" class="col-md-2 col-md-offset-4 control-label font-blue">
+                                            <strong>优惠券</strong>
+                                        </label>     
+                                        <div class="col-md-4">                                                
+                                            <input type="text" class="form-control" name="coupon_code" placeholder="优惠券代码" value="">                                                       
+                                        </div>           
+                                        <div class="col-md-1">
+                                            <input type="submit" class="btn btn-primary btn-sm" value="使用优惠券">
+                                        </div>
+                                    </div>
+                                </form>  
+                            </td>    
                         </tr>
-                        <tr>
-                            <td class="">折扣:</td>
-                            <td class="">
-                                -(<span id="discount_amt_cell">¥{{ number_format($totalDiscount, 2) }} </span>)
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="font-lg font-orange">
-                                <strong>合计:</strong>
-                            </td>
-                            <td class="font-lg font-orange">
-                                <strong id="net_amt_cell">¥{{ number_format($netPrice, 2) }}</strong>
-                            </td>
-                        </tr>
-                    </tbody>                          
+                    </tbody>
                 </table>
-            </div>                    
-            <div class="page-header-btn-group">
-                <a href="{{ URL::to('gallery') }}" class="btn btn-default btn-sm">接着逛逛</a> 
-                <a href="javascript:alertPrescriptionIncomplete();" class="btn btn-warning btn-sm">
-                    去结算 
-                    <i class="fa fa-arrow-circle-right fa-lg"></i>
-                </a>
-            </div>            
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 col-md-offset-9">
+                    <div class="panel panel-default">                        
+                        <!-- Table -->
+                        <table class="table table-condensed" id="shopping-cart-summary">
+                            <thead></thead>
+                            <tbody>
+                                <tr>
+                                    <td class="">总价:</td>
+                                    <td class="" id="total_price_cell">
+                                        ¥{{ number_format($totalPrice, 2) }}                                
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="">折扣:</td>
+                                    <td class="">
+                                        -(<span id="discount_amt_cell">¥{{ number_format($totalDiscount, 2) }} </span>)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="font-lg font-orange">
+                                        <strong>合计:</strong>
+                                    </td>
+                                    <td class="font-lg font-orange">
+                                        <strong id="net_amt_cell">¥{{ number_format($netPrice, 2) }}</strong>
+                                    </td>
+                                </tr>
+                            </tbody>                          
+                        </table>
+                    </div>                    
+                    <div class="page-header-btn-group">
+                        <a href="{{ URL::to('gallery') }}" class="btn btn-default btn-sm">接着逛逛</a> 
+                        <a href="javascript:alertPrescriptionIncomplete();" class="btn btn-warning btn-sm">
+                            去结算 
+                            <i class="fa fa-arrow-circle-right fa-lg"></i>
+                        </a>
+                    </div>            
+                </div>
+            </div>
+            @else 
+            @include('components.order-page.cart-empty')
+            @endif
+
         </div>
-    </div>
-    @else 
-    @include('components.order-page.cart-empty')
-    @endif
 
-</div>
+        @stop
 
-@stop
+        @section("link-script")
+        @parent
+        {{ HTML::script('plugins/jQuery-Validation/jquery.validate.min.js') }}
+        {{ HTML::script('plugins/jQuery-Validation/additional-methods.min.js') }}
+        {{ HTML::script('plugins/chosen_v1.0.0/chosen.jquery.min.js') }}
+        @stop
 
-@section("link-script")
-@parent
-{{ HTML::script('plugins/jQuery-Validation/jquery.validate.min.js') }}
-{{ HTML::script('plugins/jQuery-Validation/additional-methods.min.js') }}
-{{ HTML::script('plugins/chosen_v1.0.0/chosen.jquery.min.js') }}
-@stop
+        @section("script")
+        @parent   
+        <script type="text/javascript">
 
-@section("script")
-@parent   
-<script type="text/javascript">
+        @foreach($items as $item)
+        $("#prescription_modal_{{ $item->order_line_item_id }}").on("shown.bs.modal", function(e) {
+            $("#prescription_modal_{{ $item->order_line_item_id }} .chosen-select")
+            .chosen({width: "95%", no_results_text: "没有找到结果："});
+        });
+        @endforeach
 
-    @foreach($items as $item)
-    $("#prescription_modal_{{ $item->order_line_item_id }}").on("shown.bs.modal", function(e) {
-        $("#prescription_modal_{{ $item->order_line_item_id }} .chosen-select")
-                .chosen({width: "95%", no_results_text: "没有找到结果："});
-    });
-    @endforeach
-
-    function showUpdateBtn(id) {
-        $("#update-" + id).removeClass("hide");
-    }
-
-    function alertPrescriptionIncomplete() {
-        alert("对不起，您还没有填写验光单");
-    }
-
-    function togglePresName(itemId) {
-        if ($('#prescription_modal_' + itemId + ' #remember_prescription').is(':checked')) {
-            $('#prescription_modal_' + itemId + ' #prescription_user_field').removeClass('hidden').addClass('no-display').slideDown('fast');
+        function showUpdateBtn(id) {
+            $("#update-" + id).removeClass("hide");
         }
-        else {
-            $('#prescription_modal_' + itemId + ' #prescription_user_field').slideUp('fast', function() {
-                $('#prescription_modal_' + itemId + ' #prescription_user_field').addClass('hidden').removeClass('no-display');
-            });
-        }
-    }
 
-    var currency = "¥";
-    function updateQuantity(itemId, action) {
-        $.ajax({
-            type: "POST",
-            url: "{{ URL::to('shopping-cart/') }}/" + action,
-            data: {order_line_item_id: itemId
+        function alertPrescriptionIncomplete() {
+            alert("对不起，您还没有填写验光单");
+        }
+
+        function togglePresName(itemId) {
+            if ($('#prescription_modal_' + itemId + ' #remember_prescription').is(':checked')) {
+                $('#prescription_modal_' + itemId + ' #prescription_user_field').removeClass('hidden').addClass('no-display').slideDown('fast');
             }
-        }).done(function(data) {            
+            else {
+                $('#prescription_modal_' + itemId + ' #prescription_user_field').slideUp('fast', function() {
+                    $('#prescription_modal_' + itemId + ' #prescription_user_field').addClass('hidden').removeClass('no-display');
+                });
+            }
+        }
+
+        var currency = "¥";
+        function updateQuantity(itemId, action) {
+            $.ajax({
+                type: "POST",
+                url: "{{ URL::to('shopping-cart/') }}/" + action,
+                data: {order_line_item_id: itemId
+                }
+            }).done(function(data) {            
             //var ajaxReturn = JSON.parse(data);      //parse the return data
             $("#quantity_" + itemId).text(data.quantity);
             $("#item_total_" + itemId).text(currency + data.itemTotal.toFixed(2));
@@ -254,5 +254,5 @@
     });
 
 
-</script> 
-@stop
+    </script> 
+    @stop

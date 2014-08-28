@@ -29,8 +29,8 @@
                 @for ($i=1; $i<=4; $i++)
                 <br>
                 <img src="{{ asset('images/lazyload-holder.png') }}" 
-                     data-original="{{ asset('images/gallery/'.$model->model_id.'/detail-'.$i.'.jpg') }}"
-                     class="lazy ">
+                data-original="{{ asset('images/gallery/'.$model->model_id.'/detail-'.$i.'.jpg') }}"
+                class="lazy ">
                 @endfor
             </div>
         </div>
@@ -63,7 +63,7 @@
         </div>            
     </div>
     
-   
+    
     <div class="tab-pane fade detailed-poster" id="prescription_guide">
 
     </div>
