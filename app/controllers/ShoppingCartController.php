@@ -36,13 +36,18 @@ class ShoppingCartController extends BaseController {
         $items = $this->getCartItems();
         $params['items'] = $items;
 
+        $isAllPrescriptionComplete = true;
         foreach ($items as $item) {
-            $params['isPrescriptionEntered'][$item->order_line_item_id] = $this->isPrescriptionEntered($item);
+            $isEntered = $this->isPrescriptionEntered($item);
+            $params['isPrescriptionEntered'][$item->order_line_item_id] = $isEntered;
+            if (!$isEntered && !$item->is_plano) {
+                $isAllPrescriptionComplete = false;
+            }
         }
-
+        $params['isAllPrescriptionComplete'] = $isAllPrescriptionComplete;
         $params['storedPrescriptions'] = Prescription::ofMember(Auth::id())->get();
         
-        if (Session::get('couponId')){
+        if (Session::has('couponId')){
             $coupon = Coupon::find(Session::get('couponId'));
             $params['couponCode'] = $coupon->coupon_code;
             $this->calculatePrice($items, $coupon);

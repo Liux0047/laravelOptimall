@@ -95,6 +95,11 @@ Route::group(array('before' => 'auth'), function() {
      * Route to apply coupon
      */
     Route::post('shopping-cart/apply-coupon', 'ShoppingCartController@applyCoupon');
+    
+    /*
+     * Route to check tou
+     */
+    Route::get('checkout','');
 });
 
 /*
