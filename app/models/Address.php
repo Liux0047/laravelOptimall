@@ -23,4 +23,8 @@ class Address extends Eloquent {
      * @var array
      */
     //protected $hidden = array('password', 'remember_token');
+    
+    public function scopeOfMember ($query, $id) {
+        return $query->where('member','=',$id);
+    }
 }

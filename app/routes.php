@@ -99,7 +99,17 @@ Route::group(array('before' => 'auth'), function() {
     /*
      * Route to check tou
      */
-    Route::get('checkout','');
+    Route::get('checkout','ShoppingCartController@showCheckoutPage');
+    
+    /*
+     * Route to add address
+     */
+    Route::get('checkout/add-address','ShoppingCartController@showCheckoutPage');
+    
+    /*
+     * Route to update address
+     */
+    Route::get('checkout/update-address','ShoppingCartController@showCheckoutPage');
 });
 
 /*

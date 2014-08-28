@@ -26,7 +26,6 @@ class ShoppingCartController extends BaseController {
     private $netPrice = 0;
 
     public function showShoppingCartPage() {
-
         $params['pageTitle'] = "购物车 - 目光之城";
         $params['O_S_LEFTNames'] = self::$O_S_LEFTNames;
         $params['O_D_RIGHTNames'] = self::$O_D_RIGHTNames;
@@ -64,6 +63,35 @@ class ShoppingCartController extends BaseController {
         $params['netPrice'] = $this->netPrice;
 
         return View::make('pages.shopping-cart', $params);
+    }
+    
+    public function showCheckoutPage () {
+        $params['pageTitle'] = "结算 - 目光之城";
+        
+        $items = $this->getCartItems();
+        $params['items'] = $items;
+        foreach ($items as $item) {
+            if (!$this->isPrescriptionEntered($item) && !$item->is_plano) {
+                return Redirect::to('shopping-cart')->with('warning', '请完整填写所有验光单'); 
+            }
+        }
+        
+        $addresses = Address::ofMember(Auth::id())->get();
+        $params['addresses'] = $addresses;
+        foreach ($addresses as $address) {
+            if ($address->is_default){
+                $params['selectedAddress'] = $address;
+                break;
+            }
+            $params['selectedAddress'] = $address[0];
+        }
+        $params['newAddress'] = new Address;
+        
+        $params['O_S_LEFTNames'] = self::$O_S_LEFTNames;
+        $params['O_D_RIGHTNames'] = self::$O_D_RIGHTNames;
+        $params['CommonNames'] = self::$CommonNames;
+        
+        return View::make('pages.checkout', $params);
     }
 
     public function AddItem() {

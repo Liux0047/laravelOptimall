@@ -30,7 +30,7 @@
                 接着逛逛
             </a> 
             @if ($isAllPrescriptionComplete)
-            <a href="{{ URL::to('check-out') }}" class="btn btn-warning btn-sm">
+            <a href="{{ URL::to('checkout') }}" class="btn btn-warning btn-sm">
                 去结算 
                 <i class="fa fa-arrow-circle-right fa-lg"></i>
             </a>
@@ -117,7 +117,7 @@
             <div class="page-header-btn-group">
                 <a href="{{ URL::to('gallery') }}" class="btn btn-default btn-sm">接着逛逛</a> 
                 @if ($isAllPrescriptionComplete)
-                <a href="{{ URL::to('check-out') }}" class="btn btn-warning btn-sm">
+                <a href="{{ URL::to('checkout') }}" class="btn btn-warning btn-sm">
                     去结算 
                     <i class="fa fa-arrow-circle-right fa-lg"></i>
                 </a>
