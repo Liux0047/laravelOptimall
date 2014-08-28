@@ -25,7 +25,7 @@ class ProductController extends BaseController {
         $params['product'] = $model->productViews()->firstOrFail();
         $params['products'] = $model->productViews;
         $params['lensTypes'] = LensType::all();
-        return View::make('product', $params);
+        return View::make('pages.product', $params);
     }
 
     public function showIndexPage() {
@@ -48,7 +48,7 @@ class ProductController extends BaseController {
         $params['products'] = $products;
         $params['wideModelIds'] = $wideModelIds;        
 
-        return View::make('index', $params);
+        return View::make('pages.index', $params);
     }
 
 }

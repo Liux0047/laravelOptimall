@@ -49,11 +49,18 @@ class ShoppingCartController extends BaseController {
         //get net price
         $params['netPrice'] = $this->netPrice;
         
-        return View::make('shopping-cart', $params);
+        return View::make('pages.shopping-cart', $params);
     }
     
     public function AddItem() {
-        
+        $item = new OrderLineItem;
+        $item->product = Input::get('product_id');
+        $item->lens_type = Input::get('lens_type');
+        $item->quantity = 1;
+        $item->member = Auth::id();
+        $item->is_plano = 0;
+        $item->save();
+        return Redirect::to('shopping-cart')->with('message', '成功添加商品');
     }
     
     public function updatePrescription() {

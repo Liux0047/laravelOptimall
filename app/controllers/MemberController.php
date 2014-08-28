@@ -23,12 +23,12 @@ class MemberController extends BaseController {
     }
     
     public function showLoginPage() {
-        return View::make('login');
+        return View::make('pages.login');
     }
 
     public function signUp() {
         $params['pageTitle'] = "注册成为目光之城会员";
-        return View::make('sign-up', $params);
+        return View::make('pgaes.sign-up', $params);
     }
 
     public function processSignUp() {
@@ -56,7 +56,7 @@ class MemberController extends BaseController {
             $message->to($email, $nickname)->subject('请验证注册信息');
         });
         
-        return View::make('verify-registration', array('email' => $email));
+        return View::make('pages.verify-registration', array('email' => $email));
     }
 
     public function verifyRegistration($email, $comCode) {
@@ -70,7 +70,7 @@ class MemberController extends BaseController {
         else {
             $params['isSuccessful'] = false;
         }        
-        return View::make('verify-registration-result', $params);
+        return View::make('pages.verify-registration-result', $params);
     }
     
     public function logout () {

@@ -32,7 +32,7 @@
                 </small>                        
             </h3>
 
-            {{ Form::open(array('url' => url('foo/bar'), 'class'=>'form', 'id'=>'', 'style'=>'')) }}
+            {{ Form::open(array('url' => url('shopping-cart/add-item'), 'class'=>'form', 'id'=>'', 'style'=>'')) }}
             <table class="view-item-table">
                 <thead>
                     <tr>
@@ -133,7 +133,6 @@
                     <tr>
                         <td></td>
                         <td>
-                            <input type="hidden" name="model_id" value="{{ $model->model_id }}">
                             <button class='btn btn-danger' type='submit' ><i class='fa fa-shopping-cart'></i> 加入购物车</button>                                       
                         </td>
                     </tr>
