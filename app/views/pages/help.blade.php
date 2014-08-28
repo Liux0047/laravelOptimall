@@ -78,27 +78,27 @@
 @parent
 <script>
 
-    /* smooth scroll css */
-    var time = 1000;
-    var offset = -100;
-    $(function() {
-        $(".help-page a[href*=#]:not([href=#])").click(function() {
-            if (location.pathname.replace(/^\//, "") == this.pathname.replace(/^\//, "") && location.hostname == this.hostname) {
-                var target = $(this.hash);
-                target = target.length ? target : $("[name=" + this.hash.slice(1) + "]");
-                if (target.length) {
-                    $("html,body").animate({
-                        scrollTop: target.offset().top + offset
-                    }, time);
-                    return false;
-                }
+/* smooth scroll css */
+var time = 1000;
+var offset = -100;
+$(function() {
+    $(".help-page a[href*=#]:not([href=#])").click(function() {
+        if (location.pathname.replace(/^\//, "") == this.pathname.replace(/^\//, "") && location.hostname == this.hostname) {
+            var target = $(this.hash);
+            target = target.length ? target : $("[name=" + this.hash.slice(1) + "]");
+            if (target.length) {
+                $("html,body").animate({
+                    scrollTop: target.offset().top + offset
+                }, time);
+                return false;
             }
-        });
+        }
     });
+});
 
-    $(".list-group .list-group-item").on("click", function() {
-        $(".list-group .list-group-item").removeClass("active");
-        $(this).addClass("active");
-    });
+$(".list-group .list-group-item").on("click", function() {
+    $(".list-group .list-group-item").removeClass("active");
+    $(this).addClass("active");
+});
 </script>
 @stop
