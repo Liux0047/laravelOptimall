@@ -16,7 +16,7 @@
 		</a>        
 		{{ Form::open(array('url' => 'checkout/update-address', 'id'=>'edit_address_form', 'class'=>'form-horizontal', 'novalidate'=>'novalidate')) }}
 		<input type="hidden" name="address_id" value="{{ $address->address_id }}">  
-		@include('components.order-page.address-modal', array('fieldPrefix'=>$modalAction, 'modal_id'=>'address_modal_'.address->address_id,'address'=>$address))
+		@include('components.order-page.address-modal', array('fieldPrefix'=>$modalAction, 'modalId'=>'address_modal_'.$address->address_id,'address'=>$address))
 		{{ Form::close() }}
 	</div>
 </div>

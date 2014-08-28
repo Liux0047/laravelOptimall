@@ -78,6 +78,7 @@ class ShoppingCartController extends BaseController {
         
         $addresses = Address::ofMember(Auth::id())->get();
         $params['addresses'] = $addresses;
+        $params['selectedAddress'] = null;
         foreach ($addresses as $address) {
             if ($address->is_default){
                 $params['selectedAddress'] = $address;
