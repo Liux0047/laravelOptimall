@@ -50,19 +50,19 @@
                             <td>                                       
                             </td> 
                             <td colspan="4">
-                                <form class="form-horizontal" action="/optimall/functions/process-POST/POST-to-shopping-cart.php" method="post" role="form">
+                                {{ Form::open(array('url' => 'shopping-cart/apply-coupon', 'role' => 'form'))}}
                                     <div class="form-group" id="coupon-form-group">             
                                         <label for="coupon_code" class="col-md-2 col-md-offset-4 control-label font-blue">
                                             <strong>优惠券</strong>
                                         </label>     
                                         <div class="col-md-4">                                                
-                                            <input type="text" class="form-control" name="coupon_code" placeholder="优惠券代码" value="">                                                       
+                                            <input type="text" class="form-control" name="coupon_code" placeholder="优惠券代码" value="{{ $couponCode }}">
                                         </div>           
                                         <div class="col-md-1">
                                             <input type="submit" class="btn btn-primary btn-sm" value="使用优惠券">
                                         </div>
                                     </div>
-                                </form>  
+                                {{ Form::close() }} 
                             </td>    
                         </tr>
                     </tbody>

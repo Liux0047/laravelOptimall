@@ -7,7 +7,7 @@
  */
 class ProductController extends BaseController {
 
-    public static $productLabels = array(
+    public static $eminentModels = array(
         'promotion' => array('id' => 0, 'wideModelId' => array(1001, 1005)),
         'newArrival' => array('id' => 1, 'wideModelId' => array(3001, 3004)),
         'bestSeller' => array('id' => 2, 'wideModelId' => array(2004, 3010)),
@@ -33,10 +33,10 @@ class ProductController extends BaseController {
         $products = array();
         $wideModelIds = array();
 
-        foreach (self::$productLabels as $labelName => $labelValue) {
+        foreach (self::$eminentModels as $labelName => $labelValue) {
             //use variable variable name to form model groups of diffrent featured labels
             $modelGroupName = $labelName . 'Models';
-            $$modelGroupName = ProductModelView::where('featured_label', '=', $labelValue['id'])->take(4)->get();
+            $$modelGroupName = ProductModelView::where('label', '=', $labelValue['id'])->take(4)->get();
             $params[$modelGroupName] = $$modelGroupName;
             foreach ($$modelGroupName as $model) {
                 //associate model id with all products under this model id

@@ -11,7 +11,7 @@
                 <br>
                 镜片: {{ $item->lens_title_cn }}
                 <br>
-                单价: ¥{{ number_format($item->price, 2) }}
+                单价: ¥{{ number_format($item->price+$item->lens_price, 2) }}
                 <br>
             </p>
             <span class="label label-warning">销量优先</span>

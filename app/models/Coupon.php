@@ -28,4 +28,22 @@ class Coupon extends Eloquent {
      * @var array
      */
     //protected $hidden = array('password', 'remember_token');
+
+    /*
+     * query for valid coupon for this coupon code
+     * valid conditon: is active and has not expired
+     */
+    public function scopeValidCoupon($query, $couponCode) {
+        return $query->where('expire_date', '>', new DateTime())
+                        ->where('is_active', '=', '1')
+                        ->where('coupon_code', '=', $couponCode);
+    }
+    
+    /*
+     * one to manay relationship to coupon usage
+     */
+    public function couponUsages (){
+        return $this->hasMany('CouponUsage');
+    }
+
 }
