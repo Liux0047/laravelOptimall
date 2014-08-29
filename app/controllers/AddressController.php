@@ -46,5 +46,6 @@ class AddressController extends BaseController {
         $address->save();
         return Redirect::to('checkout');        
     }
+    
 
 }

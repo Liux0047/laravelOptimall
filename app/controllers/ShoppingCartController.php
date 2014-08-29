@@ -46,8 +46,8 @@ class ShoppingCartController extends BaseController {
         $params['isAllPrescriptionComplete'] = $isAllPrescriptionComplete;
         $params['storedPrescriptions'] = Prescription::ofMember(Auth::id())->get();
 
-        if (Session::has('couponId')) {
-            $coupon = Coupon::find(Session::get('couponId'));
+        $coupon = CouponController::getCoupon();
+        if (isset($coupon)) {            
             $params['couponCode'] = $coupon->coupon_code;
             $params['isCouponApplied'] = true;
             $this->calculatePrice($items, $coupon);
@@ -74,8 +74,8 @@ class ShoppingCartController extends BaseController {
                 return Redirect::to('shopping-cart')->with('warning', '请完整填写所有验光单');
             }
         }
-        if (Session::has('couponId')) {
-            $coupon = Coupon::find(Session::get('couponId'));
+        $coupon = CouponController::getCoupon();
+        if (isset($coupon)) {
             $this->calculatePrice($items, $coupon);
         } else {
             $this->calculatePrice($items);
@@ -85,13 +85,14 @@ class ShoppingCartController extends BaseController {
 
         $addresses = Address::ofMember(Auth::id())->get();
         $params['addresses'] = $addresses;
-        $params['selectedAddress'] = null;
-        foreach ($addresses as $address) {
-            if ($address->is_default) {
-                $params['selectedAddress'] = $address;
-                break;
+        if (count($addresses)) {    //if has address
+            $params['selectedAddress'] = $addresses[0];
+            foreach ($addresses as $address) {
+                if ($address->is_default) {
+                    $params['selectedAddress'] = $address;
+                    break;
+                }
             }
-            $params['selectedAddress'] = $address[0];
         }
         $params['newAddress'] = new Address;
 
@@ -159,7 +160,6 @@ class ShoppingCartController extends BaseController {
         return Redirect::to('shopping-cart')->with('message', '成功修改验光单');
     }
 
-    
     public static function getPrescriptionOptionList() {
         $list = array();
         foreach (self::$prescriptionOptions as $optionName => $optionRange) {
@@ -198,14 +198,12 @@ class ShoppingCartController extends BaseController {
         if (isset($coupon)) {
             if ($coupon->discount_type == 1) {
                 $this->totalDiscount = $coupon->discount_value;
-            }
-            else if ($coupon->discount_type == 2) {
+            } else if ($coupon->discount_type == 2) {
                 $this->totalDiscount = $this->totalPrice * $coupon->discount_value;
-            } 
-            else {
+            } else {
                 $this->totalDiscount = 0;
             }
-        } 
+        }
 
         $this->netPrice = $this->totalPrice - $this->totalDiscount;
     }

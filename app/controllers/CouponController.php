@@ -29,5 +29,15 @@ class CouponController extends BaseController {
         }
         return Redirect::to('shopping-cart')->with('message','成功删除消费卷');
     }
+    
+    public static function getCoupon (){
+        if (Session::has('couponId')){
+            return Coupon::find(Session::get('couponId'));
+        }
+        else {
+            return null;
+        }
+        
+    }
 
 }
