@@ -14,14 +14,14 @@
 	<div class="row" id="address_section">
 		@foreach ($addresses as $address)
 		<div class="col-md-4">
-			@include('components.order-page.address-box', array('modalAction'=>'edit', 'address'=>$address))
+			@include('components.order-page.address-box', array('modalAction'=>'edit', 'address'=>$address, 'selectedAddress'=>$selectedAddress))
 		</div>
 		@endforeach
 
 		<div class="col-md-4"><a href="#add_address_modal" data-toggle="modal">
 			<i class="fa fa-plus"></i> 添加新地址</a>
 		</div>        
-		{{ Form::open(array('url' => 'checkout/add-address', 'id'=>'edit_address_form', 'class'=>'form-horizontal', 'novalidate'=>'novalidate')) }}
+		{{ Form::open(array('url' => 'checkout/add-address', 'id'=>'add_address_form', 'class'=>'form-horizontal', 'novalidate'=>'novalidate')) }}
 		@include('components.order-page.address-modal', array('fieldPrefix'=>'add', 'modalId'=>'add_address_modal', 'address'=>$newAddress ))
 		{{ Form::close() }}		
 	</div>     
@@ -68,27 +68,27 @@
 					@if (isset($selectedAddress))
 					<p id="address_summary">
 						<strong>寄送至:</strong>						
-						{{ $address->province }}   
-						{{ $address->city }}
-						{{ $address->area }}
-						{{ $address->street_name }}, 
-						{{ $address->postal_code }}
+						{{ $selectedAddress->province }}   
+						{{ $selectedAddress->city }}
+						{{ $selectedAddress->area }}
+						{{ $selectedAddress->street_name }}, 
+						{{ $selectedAddress->postal_code }}
 						<br>
 						<strong>收货人:</strong>
-						{{ $address->recipient_name }} {{ $address->phone }}                              
+						{{ $selectedAddress->recipient_name }} {{ $selectedAddress->phone }}                              
 					</p>
 					@else
 					您还没有填写地址
 					@endif
 				</div>
 				<div class="panel-footer">
-					<form role="form" action="/optimall/alipay/alipayapi.php?alipay_action=1" method="post" id="alipay_form" onsubmit="return true;">   
+					<form role="form" action="/optimall/alipay/alipayapi.php?alipay_action=1" method="post" id="alipay_form" onsubmit="alertIfNoAddress();">   
 						<input type="hidden" name="use_alipay_address" id="use_alipay_address" value="0">
 						@if (isset($selectedAddress))
-						<input type="hidden" name="receive_name" value="{{ $address->recipient_name }}">
-						<input type="hidden" name="receive_address" value="{{ $address->province }}  {{ $address->city }} {{ $address->area }} {{ $address->street_name }}">
-						<input type="hidden" name="receive_zip" value="{{ $address->postal_code }}">
-						<input type="hidden" name="receive_phone" value="{{ $address->phone }}">
+						<input type="hidden" name="receive_name" value="{{ $selectedAddress->recipient_name }}">
+						<input type="hidden" name="receive_address" value="{{ $selectedAddress->province }}  {{ $selectedAddress->city }} {{ $selectedAddress->area }} {{ $selectedAddress->street_name }}">
+						<input type="hidden" name="receive_zip" value="{{ $selectedAddress->postal_code }}">
+						<input type="hidden" name="receive_phone" value="{{ $selectedAddress->phone }}">
 						<input type="hidden" name="item_names" value="
 						@foreach ($items as $item)
 						{{ $item->model_name_cn }} 
@@ -201,22 +201,25 @@
 	    $("#add_address_form").validate(rule);
 	});
 
-function alertNoAddress(){
+function alertIfNoAddress(){
 	if ($("#toggle_address").checked){
 		return true;
 	}
 	else {
+		@if(isset($selectedAddress))
+		return true;
+		@else
 		return confirm("确认不填入地址？（您可以在支付宝中选择您的送货地址）？");
+		@endif
 	}
 }
 
 </script> 
 
 <script type="text/javascript">
-@if (isset($selectedAddress))
-addressInit('edit_province','edit_city','edit_area','{{ $selectedAddress->province }}','{{ $selectedAddress->city }}','{{ $selectedAddress->aree }}');
+@if(isset($selectedAddress))
+addressInit('edit_province','edit_city','edit_area','{{ $selectedAddress->province }}','{{ $selectedAddress->city }}','{{ $selectedAddress->area }}');
 @endif
-
-addressInit('add_province','add_city','add_area')
+addressInit('add_province','add_city','add_area');
 </script>   
 @stop

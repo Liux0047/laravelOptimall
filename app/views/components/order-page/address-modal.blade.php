@@ -34,7 +34,7 @@
 				<div class="form-group">
 					<label for="街道地址" class="col-md-2 control-label">街道地址</label>
 					<div class="col-md-10">
-						<input type="text" class="form-control" id="街道地址" name="街道地址"
+						<input type="text" class="form-control" id="街道地址" name="street_name"
 						placeholder="街道地址" 
 						value="{{ $address->street_name }}">
 					</div>
@@ -42,7 +42,7 @@
 				<div class="form-group">
 					<label for="收货人姓名" class="col-md-2 control-label">收货人姓名</label>
 					<div class="col-md-4">
-						<input type="text" class="form-control" id="收货人姓名"  name="收货人姓名"
+						<input type="text" class="form-control" id="收货人姓名"  name="recipient_name"
 						placeholder="收货人姓名" 
 						value="{{ $address->recipient_name }}">
 					</div>

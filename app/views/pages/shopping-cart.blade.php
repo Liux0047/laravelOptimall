@@ -65,19 +65,46 @@
                     <td>                                       
                     </td> 
                     <td colspan="4">
-                        {{ Form::open(array('url' => 'shopping-cart/apply-coupon', 'role' => 'form'))}}
-                        <div class="form-group" id="coupon-form-group">             
+                        {{ Form::open(array('url' => 'shopping-cart/apply-coupon', 'role' => 'form', 'class'=>'form-horizontal'))}}
+                        <div class="form-group has-feedback" id="coupon-form-group">             
                             <label for="coupon_code" class="col-md-2 col-md-offset-4 control-label font-blue">
                                 <strong>优惠券</strong>
                             </label>     
                             <div class="col-md-4">                                                
                                 <input type="text" class="form-control" name="coupon_code" placeholder="优惠券代码" value="{{ $couponCode }}">
-                            </div>           
+                                @if ($isCouponApplied)
+                                <span class="form-control-feedback">
+                                    <a href='#confirm-remove-coupon' data-toggle="modal">
+                                        <i class='fa fa-times fa-lg'></i>
+                                    </a>
+                                </span>
+                                @endif
+                            </div>      
                             <div class="col-md-1">
                                 <input type="submit" class="btn btn-primary btn-sm" value="使用优惠券">
                             </div>
                         </div>
                         {{ Form::close() }} 
+                        {{ Form::open(array('url' => url('shopping-cart/remove-coupon'), 'id'=>'remove_coupon')) }}        
+                        <div class="modal fade" id="confirm-remove-coupon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h4 class="modal-title" id="myModalLabel">取消消费卷</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>
+                                            <i class="fa fa-exclamation-triangle fa-lg"></i>
+                                            确认要放弃使用消费卷？ 
+                                        </p>
+                                        <input type="submit" class="btn btn-danger btn-sm" value="确认">
+                                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
+                        {{ Form::close() }}
                     </td>    
                 </tr>
             </tbody>

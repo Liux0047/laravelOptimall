@@ -94,7 +94,12 @@ Route::group(array('before' => 'auth'), function() {
     /*
      * Route to apply coupon
      */
-    Route::post('shopping-cart/apply-coupon', 'ShoppingCartController@applyCoupon');
+    Route::post('shopping-cart/apply-coupon', 'CouponController@applyCoupon');
+    
+    /*
+     * Route to remove coupon
+     */
+    Route::post('shopping-cart/remove-coupon', 'CouponController@removeCoupon');
     
     /*
      * Route to check tou
@@ -104,12 +109,17 @@ Route::group(array('before' => 'auth'), function() {
     /*
      * Route to add address
      */
-    Route::get('checkout/add-address','ShoppingCartController@showCheckoutPage');
+    Route::post('checkout/add-address','AddressController@createAddress');
     
     /*
      * Route to update address
      */
-    Route::get('checkout/update-address','ShoppingCartController@showCheckoutPage');
+    Route::post('checkout/update-address','AddressController@updateAddress');
+    
+    /*
+     * Route to use address
+     */
+    Route::post('checkout/use-address','AddressController@useAddress');
 });
 
 /*

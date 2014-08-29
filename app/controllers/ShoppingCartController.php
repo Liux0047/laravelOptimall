@@ -45,14 +45,15 @@ class ShoppingCartController extends BaseController {
         }
         $params['isAllPrescriptionComplete'] = $isAllPrescriptionComplete;
         $params['storedPrescriptions'] = Prescription::ofMember(Auth::id())->get();
-        
-        if (Session::has('couponId')){
+
+        if (Session::has('couponId')) {
             $coupon = Coupon::find(Session::get('couponId'));
             $params['couponCode'] = $coupon->coupon_code;
+            $params['isCouponApplied'] = true;
             $this->calculatePrice($items, $coupon);
-        }
-        else {
+        } else {
             $params['couponCode'] = "";
+            $params['isCouponApplied'] = false;
             $this->calculatePrice($items);
         }
 
@@ -62,43 +63,42 @@ class ShoppingCartController extends BaseController {
 
         return View::make('pages.shopping-cart', $params);
     }
-    
-    public function showCheckoutPage () {
+
+    public function showCheckoutPage() {
         $params['pageTitle'] = "结算 - 目光之城";
-        
+
         $items = $this->getCartItems();
         $params['items'] = $items;
         foreach ($items as $item) {
             if (!$this->isPrescriptionEntered($item) && !$item->is_plano) {
-                return Redirect::to('shopping-cart')->with('warning', '请完整填写所有验光单'); 
+                return Redirect::to('shopping-cart')->with('warning', '请完整填写所有验光单');
             }
         }
-        if (Session::has('couponId')){
+        if (Session::has('couponId')) {
             $coupon = Coupon::find(Session::get('couponId'));
             $this->calculatePrice($items, $coupon);
-        }
-        else {
+        } else {
             $this->calculatePrice($items);
         }
         $params['totalDiscount'] = $this->totalDiscount;
         $params['netPrice'] = $this->netPrice;
-        
+
         $addresses = Address::ofMember(Auth::id())->get();
         $params['addresses'] = $addresses;
         $params['selectedAddress'] = null;
         foreach ($addresses as $address) {
-            if ($address->is_default){
+            if ($address->is_default) {
                 $params['selectedAddress'] = $address;
                 break;
             }
             $params['selectedAddress'] = $address[0];
         }
         $params['newAddress'] = new Address;
-        
+
         $params['O_S_LEFTNames'] = self::$O_S_LEFTNames;
         $params['O_D_RIGHTNames'] = self::$O_D_RIGHTNames;
         $params['CommonNames'] = self::$CommonNames;
-        
+
         return View::make('pages.checkout', $params);
     }
 
@@ -159,21 +159,7 @@ class ShoppingCartController extends BaseController {
         return Redirect::to('shopping-cart')->with('message', '成功修改验光单');
     }
 
-    public function applyCoupon() {
-        $coupon = Coupon::validCoupon(Input::get('coupon_code'))->first();
-        if (isset($coupon)) {    //if a valid coupon was found
-            if ($coupon->couponUsages()->where('member', '=', Auth::id())->count()) {
-                //if this coupon has been used
-                return Redirect::to('shopping-cart')->with('warning', '消费卷无效或者已经过期');
-            } else {
-                Session::put('couponId', $coupon->coupon_id);
-                return Redirect::to('shopping-cart')->with('message', '成功添加消费卷');
-            }
-        } else {
-            return Redirect::to('shopping-cart')->with('warning', '消费卷无效或者已经过期');
-        }
-    }
-
+    
     public static function getPrescriptionOptionList() {
         $list = array();
         foreach (self::$prescriptionOptions as $optionName => $optionRange) {
@@ -201,7 +187,7 @@ class ShoppingCartController extends BaseController {
         return OrderLineItemView::ofMember(Auth::id())->get();
     }
 
-    private function calculatePrice($items, $coupon=null) {
+    private function calculatePrice($items, $coupon = null) {
         $this->totalPrice = 0;
         $this->totalDiscount = 0;
         $this->netPrice = 0;
@@ -209,15 +195,18 @@ class ShoppingCartController extends BaseController {
             $this->totalPrice += ($item->price + $item->lens_price) * $item->quantity;
         }
         //calculate discount
-        if ($coupon->discount_type == 1){
-            $this->totalDiscount = $coupon->discount_value;
-        }
-        else if ($coupon->discount_type == 2){
-            $this->totalDiscount = $this->totalPrice * $coupon->discount_value;
-        }
-        else {
-            $this->totalDiscount = 0;
-        }
+        if (isset($coupon)) {
+            if ($coupon->discount_type == 1) {
+                $this->totalDiscount = $coupon->discount_value;
+            }
+            else if ($coupon->discount_type == 2) {
+                $this->totalDiscount = $this->totalPrice * $coupon->discount_value;
+            } 
+            else {
+                $this->totalDiscount = 0;
+            }
+        } 
+
         $this->netPrice = $this->totalPrice - $this->totalDiscount;
     }
 
