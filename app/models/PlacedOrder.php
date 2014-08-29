@@ -22,4 +22,11 @@ class PlacedOrder extends Eloquent {
      * @var array
      */
     //protected $hidden = array('password', 'remember_token');
+    
+    /*
+     * query for orders belonging to this member
+     */
+    public function scopeOfMember($query, $id) {
+        return $query->where('member','=',$id);
+    }
 }

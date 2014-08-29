@@ -120,6 +120,12 @@ Route::group(array('before' => 'auth'), function() {
      * Route to use address
      */
     Route::post('checkout/use-address','AddressController@useAddress');
+    
+    /*
+     * Route to member shopping history page
+     */
+    Route::get('shopping-history','MemberAccountController@showShoppingHistory');
+    
 });
 
 /*
