@@ -122,9 +122,9 @@ Route::group(array('before' => 'auth'), function() {
     Route::post('checkout/use-address','AddressController@useAddress');
     
     /*
-     * Route to member shopping history page
+     * Route to member account functions
      */
-    Route::get('shopping-history','MemberAccountController@showShoppingHistory');
+    Route::controller('member', 'MemberAccountController');
     
 });
 
@@ -132,6 +132,11 @@ Route::group(array('before' => 'auth'), function() {
  * Route to help page
  */
 Route::get('help', 'HelpController@showHelpPage');
+
+/*
+ * Route to remind password controller
+ */
+Route::controller('password-remind', 'RemindersController');
 
 /*
  * View composer to add number of shopping cart items into top banner

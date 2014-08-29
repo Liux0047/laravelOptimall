@@ -105,7 +105,8 @@
                                                         <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">墙外观众</a></h4>
                                                     </div>
                                                     <div id="collapseThree" class="panel-collapse collapse">
-                                                        <div class="panel-body"><p> Facebook: </p> <p>Twitter</p><p>Pinterest</p></div>
+                                                        <div class="panel-body"><p> Facebook: </p> <p>Twitter</p><p>Pinterest</p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -119,60 +120,64 @@
                     <ul class="nav navbar-nav navbar-right">
                         @if(Auth::check())
                         <li>
-                            <a href="{{ URL::to('my-account') }}">欢迎, {{ Auth::user()->nickname }}</a></li>
-                            <li>
-                                <a href="{{ URL::to('logout') }}">退出</a>
-                            </li>
-                            @else
-                            <li class="dropdown" id="login_dropdown_control">
-                                <a href="#" data-toggle="dropdown" class="dropdown-toggle" onclick="enableSubmit();">登录</a>
-                                <div class="dropdown-menu dropdown-login">
-                                    <form role="form" id="login_form">
-                                        <h4>会员登录
-                                            <small>(或<a href="{{ URL::to('sign-up') }}">创建账号)</a></small> 
-                                        </h4>
-                                        <hr>                    
-                                        <div id="login_fail_container" class="no-display">
-                                            <div class="alert alert-danger" id="login_fail_alert">                            
-                                                登陆账号或密码不正确，请重新尝试                        
-                                            </div>
+                            <a href="{{ URL::to('member/shopping-history') }}">
+                                欢迎, {{ Auth::user()->nickname }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ URL::to('logout') }}">退出</a>
+                        </li>
+                        @else
+                        <li class="dropdown" id="login_dropdown_control">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle" onclick="enableSubmit();">登录</a>
+                            <div class="dropdown-menu dropdown-login">
+                                <form role="form" id="login_form">
+                                    <h4>会员登录
+                                        <small>(或<a href="{{ URL::to('sign-up') }}">创建账号)</a></small> 
+                                    </h4>
+                                    <hr>                    
+                                    <div id="login_fail_container" class="no-display">
+                                        <div class="alert alert-danger" id="login_fail_alert">                            
+                                            登陆账号或密码不正确，请重新尝试                        
                                         </div>
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><i class="fa fa-envelope fa-fw fa-lg"></i></span>
-                                                <input type="text" class="form-control" id="login_email" onkeyup="enableSubmit();" name="login_email" placeholder="邮箱地址">
-                                            </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-envelope fa-fw fa-lg"></i></span>
+                                            <input type="text" class="form-control" id="login_email" onkeyup="enableSubmit();" name="login_email" placeholder="邮箱地址">
                                         </div>
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><i class="fa fa-lock fa-fw fa-lg"></i></span>
-                                                <input type="password" class="form-control" id="login_password" onkeyup="enableSubmit();" name="login_password" placeholder="密码">
-                                            </div>
-                                            <p class="help-block pull-right">
-                                                <a href="/optimall/forget-password.php">
-                                                    忘记密码?     
-                                                </a>
-                                            </p>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-lock fa-fw fa-lg"></i></span>
+                                            <input type="password" class="form-control" id="login_password" onkeyup="enableSubmit();" name="login_password" placeholder="密码">
                                         </div>
-                                        <div class="form-group">
-                                            <label class="checkbox-inline">
-                                                <input type="checkbox" id="remember_me" name="remember_me">记住我</label>
-                                            </div>
-                                            <div class="pull-right">
-                                                <img src="/optimall/asset/img/preloader.gif" id="login_preloader_img" class="ajax-preloader no-display">
-                                                <button onclick="auth_login()" class="btn btn-primary btn-sm" id="login_submit" disabled="true">                   
-                                                    登录                    
-                                                </button>          
-                                            </div>
-                                            <div class="clearfix"></div>                    
-                                        </form>      
-                                    </div>            
-                                </li>
-                                <li><a href="{{ URL::to('sign-up') }}">注册</a></li>
-                                @endif
-                            </ul>    
-                        </div><!-- /.nav-collapse -->
-                    </div><!-- /.navbar -->
-                </div>
-            </div>
+                                        <p class="help-block pull-right">
+                                            <a href="/optimall/forget-password.php">
+                                                忘记密码?     
+                                            </a>
+                                        </p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" id="remember_me" name="remember_me">记住我
+                                        </label>
+                                    </div>
+                                    <div class="pull-right">
+                                        {{ HTML::image('images/preloader.gif','', array('id'=>'login_preloader_img', 'class'=>'ajax-preloader no-display')) }}
+                                        <button onclick="auth_login()" class="btn btn-primary btn-sm" id="login_submit" disabled="true">                   
+                                            登录                    
+                                        </button>          
+                                    </div>
+                                    <div class="clearfix"></div>    
+                                </form>      
+                            </div>            
+                        </li>
+                        <li><a href="{{ URL::to('sign-up') }}">注册</a></li>
+                        @endif
+                    </ul>    
+                </div><!-- /.nav-collapse -->
+            </div><!-- /.navbar -->
         </div>
+    </div>
+</div>

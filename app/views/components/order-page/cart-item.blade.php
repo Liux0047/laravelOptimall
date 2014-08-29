@@ -11,7 +11,7 @@
                 <br>
                 镜片: {{ $item->lens_title_cn }}
                 <br>
-                单价: ¥{{ number_format($item->price+$item->lens_price, 2) }}
+                单价: ¥{{ number_format($item->price, 2) }}
                 <br>
             </p>
             <span class="label label-warning">销量优先</span>
@@ -27,7 +27,7 @@
         修改验光单
     </a> 
     @elseif($isPrescriptionEntered[$item->order_line_item_id])
-    @include('components.order-page.prescription-table', array('prescriptoion' => $item,'O_S_LEFTNames' => $O_S_LEFTNames,'O_D_RIGHTNames' => $O_D_RIGHTNames,'CommonNames' => $CommonNames))
+    @include('components.order-page.prescription-table', array('prescription' => $item,'O_S_LEFTNames' => $O_S_LEFTNames,'O_D_RIGHTNames' => $O_D_RIGHTNames,'CommonNames' => $CommonNames))
     <a class="pull-right" data-toggle="modal" href="#prescription_modal_{{ $item->order_line_item_id }}">
         <span class="fa fa-edit fa-lg"></span> 修改验光单
     </a>
@@ -56,15 +56,15 @@
             {{-- generate the form to be submitted --}}
             <div id="stored_pres_form_{{ $storedPrescription->prescription_id }}" class="hidden">
                 {{ Form::open(array('url' => 'shopping-cart/update-prescription')) }}
-                <input type="hidden" name="order_line_item_id" value="{{ $item->order_line_item_id }}">
+                {{ Form::hidden('order_line_item_id', $item->order_line_item_id) }}
                 @foreach ($O_S_LEFTNames as $O_S_LEFTName)
-                <input type="hidden" name="{{ $O_S_LEFTName }}" value="{{ $storedPrescription->$O_S_LEFTName }}">
+                {{ Form::hidden( $O_S_LEFTName, $storedPrescription->$O_S_LEFTName) }}
                 @endforeach
                 @foreach ($O_D_RIGHTNames as $O_D_RIGHTName)
-                <input type="hidden" name="{{ $O_D_RIGHTName }}" value="{{ $storedPrescription->$O_D_RIGHTName }}">
+                {{ Form::hidden($O_D_RIGHTName, $storedPrescription->$O_D_RIGHTName) }}
                 @endforeach
                 @foreach ($CommonNames as $CommonName)
-                <input type="hidden" name="{{ $CommonName }}" value="{{ $storedPrescription->$CommonName }}">
+                {{ Form::hidden($CommonName, $storedPrescription->$CommonName) }}
                 @endforeach
                 {{ Form::close() }}
                 @include('components.order-page.prescription-table', array( 'prescriptoion' => $storedPrescription, 'O_S_LEFTNames' => $O_S_LEFTNames,'O_D_RIGHTNames' => $O_D_RIGHTNames,'CommonNames' => $CommonNames))    
@@ -77,14 +77,14 @@
             </li>
         </ul>
         {{ Form::open(array('url' => url('shopping-cart/set-plano'), 'id'=>'plano_form_'.$item->order_line_item_id)) }}
-        <input type="hidden" name="order_line_item_id" value="{{ $item->order_line_item_id }}">
+        {{ Form::hidden('order_line_item_id',$item->order_line_item_id) }}
         {{ Form::close() }}
     </div>
     @endif
 
     {{ Form::open(array('url' => url('shopping-cart/update-prescription'), 'id'=>'prescription_form_'.$item->order_line_item_id, 
     'novalidate'=>'novalidate', 'class'=>'form-horizontal', 'role'=>'form')) }}                            
-    <input type="hidden" name="order_line_item_id" value="{{ $item->order_line_item_id }}">
+    {{ Form::hidden('order_line_item_id', $item->order_line_item_id)}}
     @include('components.order-page.prescription-modal', array(
         'order_line_item_id' => $item->order_line_item_id,
         'O_S_LEFTNames' => $O_S_LEFTNames,
@@ -109,12 +109,12 @@
     </td>
     <td class="col-md-1">
         <span class="shopping-cart-price" id="item_total_{{ $item->order_line_item_id }}">
-            ¥{{ number_format( $item->price * $item->quantity, 2) }}
+            ¥{{ number_format(($item->price+$item->lens_price)* $item->quantity, 2) }}
         </span>
     </td>
     <td class="col-md-1">
         {{ Form::open(array('url' => url('shopping-cart/remove-item'), 'id'=>'remove_'.$item->order_line_item_id)) }}        
-        <input type="hidden" name="order_line_item_id" value="{{ $item->order_line_item_id }}">
+        {{ Form::hidden('order_line_item_id', $item->order_line_item_id) }}
         <a data-toggle="modal" href="#confirm-remove-{{ $item->order_line_item_id }}">
             <i class="fa fa-trash-o fa-lg"></i>
         </a>
