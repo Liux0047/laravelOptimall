@@ -13,7 +13,7 @@
                 您好！我们最近收到了您重置密码的请求。您可以通过点击下面的链接地址设置新密码。
             </p>
             <p>
-                <a href="{{ URL::to('password/reset', array($token)) }}">重置密码</a>
+                <a href="{{ URL::to('password-remind/reset', array($token)) }}">重置密码</a>
             </p>
             <p>
                 该链接将会在 {{ Config::get('auth.reminder.expire', 60) }} 分钟后失效
