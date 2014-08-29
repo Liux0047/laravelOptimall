@@ -10,19 +10,7 @@
 <div class="container content-container">
     @include('components.product-page.progress-tracker', array('progtrckrStep' => 2))
     <div class="page-header">
-        @if(Session::has('message'))
-        <div class="alert alert-success alert-dismissable fade in">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <i class="fa fa-check-circle"></i> 
-            {{ Session::get('message') }}
-        </div>
-        @elseif (Session::has('warning'))
-        <div class="alert alert-warning alert-dismissable fade in">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <i class="fa fa-exclamation-circle"></i> 
-            {{ Session::get('warning') }}
-        </div>
-        @endif
+        @include('components.page-frame.message-bar')
 
         @if(count($items))
         <div class="page-header-btn-group">

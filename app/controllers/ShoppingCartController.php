@@ -71,7 +71,7 @@ class ShoppingCartController extends BaseController {
         $params['items'] = $items;
         foreach ($items as $item) {
             if (!$this->isPrescriptionEntered($item) && !$item->is_plano) {
-                return Redirect::to('shopping-cart')->with('warning', '请完整填写所有验光单');
+                return Redirect::to('shopping-cart')->with('error', '请完整填写所有验光单');
             }
         }
         $coupon = CouponController::getCoupon();
@@ -111,7 +111,7 @@ class ShoppingCartController extends BaseController {
         $item->member = Auth::id();
         $item->is_plano = 0;
         $item->save();
-        return Redirect::to('shopping-cart')->with('message', '成功添加商品');
+        return Redirect::to('shopping-cart')->with('status', '成功添加商品');
     }
 
     public function updatePrescription() {
@@ -126,7 +126,7 @@ class ShoppingCartController extends BaseController {
             $this->savePrescription();
         }
 
-        return Redirect::to('shopping-cart')->with('message', '成功填写验光单');
+        return Redirect::to('shopping-cart')->with('status', '成功填写验光单');
     }
 
     public function incrementQuatity() {
@@ -150,14 +150,14 @@ class ShoppingCartController extends BaseController {
     public function removeItem() {
         $orderLineItem = $this->getItembyFromPost();
         $orderLineItem->delete();
-        return Redirect::to('shopping-cart')->with('message', '成功移除此商品');
+        return Redirect::to('shopping-cart')->with('status', '成功移除此商品');
     }
 
     public function setPlano() {
         $orderLineItem = $this->getItembyFromPost();
         $orderLineItem->is_plano = 1;
         $orderLineItem->save();
-        return Redirect::to('shopping-cart')->with('message', '成功修改验光单');
+        return Redirect::to('shopping-cart')->with('status', '成功修改验光单');
     }
 
     public static function getPrescriptionOptionList() {

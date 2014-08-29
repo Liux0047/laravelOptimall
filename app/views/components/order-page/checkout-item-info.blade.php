@@ -21,7 +21,7 @@
 		@if ($item->is_plano)
 		<h5><strong>平光镜 </strong></h5>
 		@else
-		@include('components.order-page.prescription-table', array( 'prescriptoion' => $item, 'O_S_LEFTNames' => $O_S_LEFTNames,'O_D_RIGHTNames' => $O_D_RIGHTNames,'CommonNames' => $CommonNames)) 
+		@include('components.order-page.prescription-table', array( 'prescription' => $item, 'O_S_LEFTNames' => $O_S_LEFTNames,'O_D_RIGHTNames' => $O_D_RIGHTNames,'CommonNames' => $CommonNames)) 
 		@endif
 	</td>
 	<td class="col-md-1">{{ $item->quantity }}</td>

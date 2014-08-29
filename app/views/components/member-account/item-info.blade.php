@@ -83,7 +83,7 @@
                                                 <h4 class="modal-title">查看验光单</h4>
                                             </div>
                                             <div class="modal-body">
-                                            @include('components.order-page.prescription_table', array('prescriptoion'=>$item, 'O_S_LEFTNames',=>$O_S_LEFTNames, 'O_D_RIGHTNames'=>$O_D_RIGHTNames,'CommonNames'=>$CommonNames))     
+                                            @include('components.order-page.prescription-table', array('prescription'=>$item, 'O_S_LEFTNames'=>$O_S_LEFTNames, 'O_D_RIGHTNames'=>$O_D_RIGHTNames,'CommonNames'=>$CommonNames))     
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
