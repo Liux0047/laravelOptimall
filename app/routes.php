@@ -92,14 +92,9 @@ Route::group(array('before' => 'auth'), function() {
     Route::post('shopping-cart/set-plano', 'ShoppingCartController@setPlano');
 
     /*
-     * Route to apply coupon
+     * Route to coupon Controller
      */
-    Route::post('shopping-cart/apply-coupon', 'CouponController@applyCoupon');
-    
-    /*
-     * Route to remove coupon
-     */
-    Route::post('shopping-cart/remove-coupon', 'CouponController@removeCoupon');
+    Route::controller('shopping-cart', 'CouponController');
     
     /*
      * Route to check tou
@@ -107,20 +102,10 @@ Route::group(array('before' => 'auth'), function() {
     Route::get('checkout','ShoppingCartController@showCheckoutPage');
     
     /*
-     * Route to add address
+     * Route to address controller
      */
-    Route::post('checkout/add-address','AddressController@createAddress');
-    
-    /*
-     * Route to update address
-     */
-    Route::post('checkout/update-address','AddressController@updateAddress');
-    
-    /*
-     * Route to use address
-     */
-    Route::post('checkout/use-address','AddressController@useAddress');
-    
+    Route::controller('checkout','AddressController');
+        
     /*
      * Route to member account functions
      */
