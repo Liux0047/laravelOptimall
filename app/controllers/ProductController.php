@@ -52,56 +52,61 @@ class ProductController extends BaseController {
     }
 
     public function getGallery() {
-        $numItemsPerPage = Input::get('items_per_page', 12);
-        $params['numItemsPerPage'] = $numItemsPerPage;
+        $filters = array(
+            array('filterName' => 'styles', 'functionName' => 'ofStyles'),
+            array('filterName' => 'categories', 'functionName' => 'ofCategories'),
+            array('filterName' => 'shapes', 'functionName' => 'ofShapes'),
+            array('filterName' => 'materials', 'functionName' => 'ofMaterials'),
+            array('filterName' => 'genders', 'functionName' => 'ofGenders'),
+            array('filterName' => 'frames', 'functionName' => 'ofFrames'),
+            array('filterName' => 'colors', 'functionName' => 'ofBaseColors')
+        );
+        
+        Session::forget('remainingModels');
+
         $params['checkedValues'] = array();
         $models = ProductModelView::distinct();
-        if (Input::has('styles')){
-            $models = $models->ofStyles(Input::get('styles'));
-            $params['checkedValues']['styles'] = Input::get('styles');
-        }
-        if (Input::has('categories')){
-            $models = $models->ofCategories(Input::get('categories'));
-            $params['checkedValues']['categories'] = Input::get('categories');
-        }
-        if (Input::has('shapes')){
-            $models = $models->ofShapes(Input::get('shapes'));
-            $params['checkedValues']['shapes'] = Input::get('shapes');
-        }        
-        if (Input::has('materials')){
-            $models = $models->ofMaterials(Input::get('materials'));
-            $params['checkedValues']['materials'] = Input::get('materials');
-        }        
-        if (Input::has('genders')){
-            $models = $models->ofGenders(Input::get('genders'));
-            $params['checkedValues']['genders'] = Input::get('genders');
-        }
-        if (Input::has('frames')){
-            $models = $models->ofFrames(Input::get('frames'));
-            $params['checkedValues']['frames'] = Input::get('frames');
+
+        foreach ($filters as $filter) {
+            if (Input::has($filter['filterName']) && count(Input::get($filter['filterName']))) {
+                $models = $models->$filter['functionName'](Input::get($filter['filterName']));
+                $params['checkedValues'][$filter['filterName']] = Input::get($filter['filterName']);
+            }
         }
 
         $sortOrder = Input::get('sort_order', 'num_items_sold_display');
         $params['isDesc'] = false;
-        if( Input::get('is_desc') == 1){
+        if (Input::get('is_desc') == 1) {
             $params['isDesc'] = true;
             $models = $models->orderBy($sortOrder, 'DESC');
-        }
-        else {
+        } else {
             $models = $models->orderBy($sortOrder);
         }
         $params['sortOrder'] = $sortOrder;
 
-        $models = $models->paginate($numItemsPerPage);
-        
+        $models = $models->get();
+
+        $itemsOnPage = Config::get('optimall.itemsOnPage');
+        if ($models->count() > $itemsOnPage) {
+            $modelsToDisplay = $models->splice(0, $itemsOnPage);
+            for ($i = 0; $i < $models->count(); $i++) {
+                $remainingModelIds[] = $models->get($i)->model_id;
+            }
+            Session::put('remainingModels', $remainingModelIds);
+        } else {
+            $modelsToDisplay = $models;
+        }
+
         $products = array();
-        $params['models'] = $models;
-        foreach ($models as $model) {
+
+        foreach ($modelsToDisplay as $model) {
             //associate model id with all products under this model id
             $products[$model->model_id] = $model->productViews;
         }
+
+        $params['models'] = $modelsToDisplay;
         $params['products'] = $products;
-        
+
         $params['styles'] = ProductStyle::all();
         $params['categories'] = ProductCategory::all();
         $params['shapes'] = ProductShape::all();
@@ -109,7 +114,43 @@ class ProductController extends BaseController {
         $params['genders'] = ProductGender::all();
         $params['frames'] = ProductFrame::all();
         $params['colors'] = ProductBaseColor::all();
+
         return View::make('pages.gallery', $params);
+    }
+
+    public function postShowRemainingModels() {
+        $models = array();
+        $products = array();
+
+        $itemsOnPage = Config::get('optimall.itemsOnPage');
+        $params['disable'] = false;
+        if (Session::has('remainingModels')) {
+            $remainingModelIds = Session::get('remainingModels');
+            if (count($remainingModelIds) > $itemsOnPage) {
+                $modelIdsToDisplay = array_splice($remainingModelIds, 0, $itemsOnPage);
+                Session::put('remainingModels', $remainingModelIds);
+            } else {
+                $modelIdsToDisplay = Session::get('remainingModels');
+                Session::forget('remainingModels');
+                $params['disable'] = true;
+            }
+        }
+        else {
+            $params['disable'] = true;
+            $modelIdsToDisplay = array();
+        }
+
+        foreach ($modelIdsToDisplay as $modelIds) {
+            $models[] = ProductModelView::find($modelIds);
+        }
+        foreach ($models as $model) {
+            //associate model id with all products under this model id
+            $products[$model->model_id] = $model->productViews;
+        }
+        $params['models'] = $models;
+        $params['products'] = $products;
+
+        return View::make('components.product-page.ajax-load-product-cards', $params);
     }
 
 }

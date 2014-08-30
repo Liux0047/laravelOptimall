@@ -124,6 +124,11 @@ Route::group(array('before' => 'auth'), function() {
 Route::get('gallery','productController@getGallery');
 
 /*
+ * Route to ajax load more products in gallery page
+ */
+Route::post('gallery/load-more-products','ProductController@postShowRemainingModels');
+
+/*
  * Route to help page
  */
 Route::get('help', 'HelpController@showHelpPage');

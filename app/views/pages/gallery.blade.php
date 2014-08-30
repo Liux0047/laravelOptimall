@@ -15,8 +15,7 @@
 		<div class="shop-items-container">
 			<div class="container">
 				<div class="panel panel-default" id="options">
-					<div class="panel-heading">
-						<strong>{{ count($models) }} 结果 </strong>						
+					<div class="panel-heading">					
 						<strong>排序 </strong> 
 
 						@if ($sortOrder == 'num_items_sold_display')
@@ -42,36 +41,22 @@
 						@else
 						<a href="javascript:submitSortOrder('price', 0);">价格优先：从低到高</a> |  
 						@endif
-
-						<strong>每页显示商品数</strong>        
-						<select id="items_per_page" name="items_per_page" class="navbar-select span1" onchange="this.form.submit()">
-							@if ($numItemsPerPage == 12)
-							<option value="12" selected="true">12</option>
-							@else
-							<option value="12">12</option>
-							@endif
-							@if ($numItemsPerPage == 24)
-							<option value="24" selected="true">24</option>
-							@else
-							<option value="24">24</option>
-							@endif
-							@if ($numItemsPerPage == 36)
-							<option value="36" selected="true">36</option>
-							@else
-							<option value="36">36</option>
-							@endif                            
-						</select>
+						
 					</div>
 
-					<div class="panel-body">
+					<div class="panel-body" id="product_cards_container">
 						@foreach ($models as $model)
 						@include('components.product-page.product-card', array('model' => $model, 'products' => $products[$model->model_id]))
 						@endforeach
 					</div>
 
 					<div class="panel-footer">
-						{{ $models->links() }}
-
+						<div class="align-center">
+							<button onclick="loadMoreModels(); return false;" class="btn btn-primary btn-sm" id="load_more_btn">
+								加载更多
+							</button>
+						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -107,6 +92,29 @@ function submitSortOrder(orderName, isDesc){
 		$('#options').append("<input type='hidden' name='is_desc' value='0'>");
 	}
 	document.getElementById("product_gallery_form").submit();
+}
+
+//ajax load more models
+function loadMoreModels() {
+	$.ajax({
+		type: "POST",
+		url: "{{ action('ProductController@postShowRemainingModels') }}",
+		data: {},
+		datatype: 'html'
+	})
+	.done(function(data) {            
+		$("#product_cards_container").append(data);
+		ratyInit();
+		$("img.lazy").lazyload();
+		$(".color-icon-link").click(colorIconClickFunc);
+	})
+	.fail(function() {
+        //if the connection to database failed
+        alert("connection to database has failed");
+    })
+	.always(function() {
+        //
+    });
 }
 
 </script>

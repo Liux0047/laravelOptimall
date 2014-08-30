@@ -200,7 +200,8 @@ function updateQuantity(itemId, action) {
         beforeSend: function(request) {
             return request.setRequestHeader('X-CSRF-Token', $("meta[name='token']").attr('content'));
         }
-    }).done(function(data) {            
+    })
+    .done(function(data) {            
             //var ajaxReturn = JSON.parse(data);      //parse the return data
             $("#quantity_" + itemId).text(data.quantity);
             $("#item_total_" + itemId).text(currency + data.itemTotal.toFixed(2));
@@ -208,45 +209,47 @@ function updateQuantity(itemId, action) {
             $("#discount_amt_cell").text(currency + data.discountAmount.toFixed(2));
             $("#net_amt_cell").text(currency + data.netAmount.toFixed(2));
             
-        }).fail(function() {
+    })
+    .fail(function() {
             //if the connection to database failed
             alert("connection to database has failed");
-        }).always(function() {
+    })
+    .always(function() {
             //
-        });
-    }
+    });
+}
 
-    var warningIcon = "<i class='fa fa-warning fa-lg'></i> ";
-    var rule = {
-        rules: {
-            O_S_SPH: "required",
-            O_D_SPH: "required",
-            PD: "required",
-            prescription_name: "required"
+var warningIcon = "<i class='fa fa-warning fa-lg'></i> ";
+var rule = {
+    rules: {
+        O_S_SPH: "required",
+        O_D_SPH: "required",
+        PD: "required",
+        prescription_name: "required"
+    },
+    messages: {
+        O_S_SPH: {
+            required: warningIcon + "请填写度数"
         },
-        messages: {
-            O_S_SPH: {
-                required: warningIcon + "请填写度数"
-            },
-            O_D_SPH: {
-                required: warningIcon + "请填写度数"
-            },
-            PD: {
-                required: warningIcon + "请填写瞳距"
-            },
-            prescription_name: {
-                required: warningIcon + "请给这只验光单起个名字"
-            }
+        O_D_SPH: {
+            required: warningIcon + "请填写度数"
         },
-        errorElement: "span",
-        errorPlacement: function(error, element) {
-            error.appendTo($(element).parent().parent());
+        PD: {
+            required: warningIcon + "请填写瞳距"
         },
-        success: function(label) {
-            label.html("<span class='jq-validate-valid'><i class='fa fa-check-circle fa-lg'></i></span>");
-        },
-        validClass: "",
-        errorClass: "jq-validate-error",
+        prescription_name: {
+            required: warningIcon + "请给这只验光单起个名字"
+        }
+    },
+    errorElement: "span",
+    errorPlacement: function(error, element) {
+        error.appendTo($(element).parent().parent());
+    },
+    success: function(label) {
+        label.html("<span class='jq-validate-valid'><i class='fa fa-check-circle fa-lg'></i></span>");
+    },
+    validClass: "",
+    errorClass: "jq-validate-error",
         //ignore: [], //uncomment to validate hidden input
         onkeyup: function(element) {
             $(element).valid();
@@ -296,13 +299,13 @@ function updateQuantity(itemId, action) {
     //enable popover of stored prescription
     @foreach($storedPrescriptions as $storedPrescription)
     $("#stored_pres_popover_{{ $storedPrescription->prescription_id }}").popover({
-       html : true,
-       title: "预览验光单详情",
-       content: function() {return $("#stored_pres_form_{{ $storedPrescription->prescription_id }}").html();},
-       trigger:"hover",
-       container:"body",          
-       placement:"right"          
-   });
+     html : true,
+     title: "预览验光单详情",
+     content: function() {return $("#stored_pres_form_{{ $storedPrescription->prescription_id }}").html();},
+     trigger:"hover",
+     container:"body",          
+     placement:"right"          
+ });
     @endforeach
 
 

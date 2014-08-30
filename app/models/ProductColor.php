@@ -22,4 +22,11 @@ class ProductColor extends Eloquent {
      * @var array
      */
     //protected $hidden = array('password', 'remember_token');
+    
+    /*
+     * One to many relationship with base color mapping
+     */
+    public function productColorMapping() {
+        return $this->hasMany('ProductColorMapping', 'product_color');
+    }
 }
