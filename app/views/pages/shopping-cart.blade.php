@@ -59,8 +59,8 @@
                                 <strong>优惠券</strong>
                             </label>     
                             <div class="col-md-4">                                                
-                                <input type="text" class="form-control" name="coupon_code" placeholder="优惠券代码" value="{{ $couponCode }}">
-                                @if ($isCouponApplied)
+                                <input type="text" class="form-control" name="coupon_code" placeholder="优惠券代码" value="{{ $coupon->coupon_code or '' }}">
+                                @if (isset($coupon))
                                 <span class="form-control-feedback">
                                     <a href='#confirm-remove-coupon' data-toggle="modal">
                                         <i class='fa fa-times fa-lg'></i>

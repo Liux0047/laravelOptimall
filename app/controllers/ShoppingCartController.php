@@ -28,11 +28,7 @@ class ShoppingCartController extends BaseController {
     public function __construct() {
         $items = $this->getCartItems();
         $coupon = CouponController::getCoupon();
-        if (isset($coupon)) {
-            $this->calculatePrice($items, $coupon);
-        } else {
-            $this->calculatePrice($items);
-        }
+        $this->calculatePrice($items, $coupon);
     }
 
     public function getMyCart() {
@@ -57,16 +53,9 @@ class ShoppingCartController extends BaseController {
         $params['storedPrescriptions'] = Prescription::ofMember(Auth::id())->get();
 
         $coupon = CouponController::getCoupon();
-        if (isset($coupon)) {
-            $params['couponCode'] = $coupon->coupon_code;
-            $params['isCouponApplied'] = true;
-            $this->calculatePrice($items, $coupon);
-        } else {
-            $params['couponCode'] = "";
-            $params['isCouponApplied'] = false;
-            $this->calculatePrice($items);
-        }
-
+        $params['coupon'] = $coupon;
+        $this->calculatePrice($items, $coupon);
+        
         $params['totalPrice'] = $this->totalPrice;
         $params['totalDiscount'] = $this->totalDiscount;
         $params['netPrice'] = $this->netPrice;
@@ -78,6 +67,9 @@ class ShoppingCartController extends BaseController {
         $params['pageTitle'] = "结算 - 目光之城";
 
         $items = $this->getCartItems();
+        if (count($items) == 0){
+            return Redirect::to('/');
+        }
         $params['items'] = $items;
         foreach ($items as $item) {
             if (!$this->isPrescriptionEntered($item) && !$item->is_plano) {
@@ -85,11 +77,8 @@ class ShoppingCartController extends BaseController {
             }
         }
         $coupon = CouponController::getCoupon();
-        if (isset($coupon)) {
-            $this->calculatePrice($items, $coupon);
-        } else {
-            $this->calculatePrice($items);
-        }
+        $this->calculatePrice($items, $coupon);
+        
         $params['totalDiscount'] = $this->totalDiscount;
         $params['netPrice'] = $this->netPrice;
 
@@ -150,11 +139,13 @@ class ShoppingCartController extends BaseController {
         }
         $orderLineItem->save();
         //re-calculate the price and send response
-        $this->calculatePrice($this->getCartItems());
+        $coupon = CouponController::getCoupon();
+        $this->calculatePrice($this->getCartItems(), $coupon);
         $price = $orderLineItem->product()->first()->productModel()->first()->price;
+        $lensPrice = $orderLineItem->lensType()->first()->price;
         return Response::json(array(
                     'quantity' => $orderLineItem->quantity,
-                    'itemTotal' => $orderLineItem->quantity * $price,
+                    'itemTotal' => $orderLineItem->quantity * ($price + $lensPrice),
                     'totalPrice' => $this->totalPrice,
                     'discountAmount' => $this->totalDiscount,
                     'netAmount' => $this->netPrice
@@ -201,7 +192,7 @@ class ShoppingCartController extends BaseController {
         return OrderLineItemView::ofMember(Auth::id())->get();
     }
 
-    private function calculatePrice($items, $coupon = null) {
+    private function calculatePrice($items, $coupon) {
         $this->totalPrice = 0;
         $this->totalDiscount = 0;
         $this->netPrice = 0;

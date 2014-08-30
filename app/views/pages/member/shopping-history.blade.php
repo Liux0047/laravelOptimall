@@ -12,7 +12,7 @@
         <div class="col-xs-12 col-sm-10">
             @if (count($orders))
             @foreach ($orders as $order)
-            @include('components.member-accountitem-info', array('order'=>$order, 'item'=>$items[$order->order_id],'O_S_LEFTNames'=>$O_S_LEFTNames, 'O_D_RIGHTNames'=>$O_D_RIGHTNames, 'CommonNames'=>$CommonNames))
+            @include('components.member-account.item-info', array('order'=>$order, 'items'=>$items[$order->order_id],'O_S_LEFTNames'=>$O_S_LEFTNames, 'O_D_RIGHTNames'=>$O_D_RIGHTNames, 'CommonNames'=>$CommonNames))
             @endforeach    
             @else
             您还没有购买任何商品

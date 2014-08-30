@@ -22,7 +22,10 @@
             </div>
             <div class="col-md-1"> 
                 @if ($order->order_status == 1)
-                <a href="/optimall/alipay/alipayapi.php?alipay_action=2&amp;order_number={{ order->order_id }}" class="btn btn-warning btn-xs"> 去付款</a>
+                {{ Form::open(array('action'=>'AlipayController@postReSubmitPayment'))}}
+                {{ Form::hidden('order_id', $order->order_id)}}
+                {{ Form::submit('去付款', array('class'=>'btn btn-warning btn-xs')) }}
+                {{ Form::close() }}
                 @endif
             </div>
         </div>
@@ -60,10 +63,10 @@
                             </td>
                             <td>{{ $item->model_name_cn }}</td>
                             <td> 
-                                {{ HTML::images('images/color/color-'.$item->color.'.png') }}
+                                {{ HTML::image('images/color/color-'.$item->color.'.png') }}
                                 {{ $item->color_name_cn }}
                             </td>
-                            <td>{{ $items->lens_title_cn }}</td>
+                            <td>{{ $item->lens_title_cn }}</td>
                             <td>¥{{ number_format($item->price+$item->lens_price, 2) }}</td>
                             <td>{{ $item->quantity }}</td>
                             <td>
@@ -83,7 +86,7 @@
                                                 <h4 class="modal-title">查看验光单</h4>
                                             </div>
                                             <div class="modal-body">
-                                            @include('components.order-page.prescription-table', array('prescription'=>$item, 'O_S_LEFTNames'=>$O_S_LEFTNames, 'O_D_RIGHTNames'=>$O_D_RIGHTNames,'CommonNames'=>$CommonNames))     
+                                                @include('components.order-page.prescription-table', array('prescription'=>$item, 'O_S_LEFTNames'=>$O_S_LEFTNames, 'O_D_RIGHTNames'=>$O_D_RIGHTNames,'CommonNames'=>$CommonNames))     
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
@@ -91,8 +94,10 @@
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
                                 </div><!-- /.modal -->
+                                @endif
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

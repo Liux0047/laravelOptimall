@@ -7,7 +7,7 @@
  */
 class OrderController extends BaseController{
     
-    public function insertOrder ($items, $paymentMethod, $amount, $address, $couponId=null){
+    public function insertOrder ($items, $paymentMethod, $amount, $address, $couponId){
         $order = new PlacedOrder;
         $order->member = Auth::id();
         $order->coupon = $couponId;
@@ -19,6 +19,9 @@ class OrderController extends BaseController{
         $order->receive_address = $address->receive_address;
         $order->receive_zip = $address->receive_zip;
         $order->receive_phone = $address->receive_phone;
+        if (isset($couponId)){
+            $order->coupon = $couponId;
+        }
         
         $order->save();
         

@@ -27,6 +27,10 @@ class OrderLineItem extends Eloquent {
         return $this->belongsTo('Product', 'product');
     }
     
+    public function LensType() {
+        return $this->belongsTo('LensType', 'lens_type');
+    }
+    
     /*
      * dynmaic scope to get items belonging to a member ID
      */

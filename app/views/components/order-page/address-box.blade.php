@@ -20,7 +20,7 @@
 		</a>    
 		@else
 		{{ Form::open(array('action' => 'AddressController@postUseAddress')) }}
-		<input type="hidden" name="address_id" value="{{ $address->address_id }}">		
+		{{ Form::hidden('address_id', $address->address_id )}}
 		<a title="use this address" href="#" onclick="$(this).closest('form').submit();return false;">
 			<i class="fa fa-location-arrow fa-lg"></i> 使用此地址
 		</a>

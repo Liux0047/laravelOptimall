@@ -105,6 +105,10 @@ Route::group(array('before' => 'auth'), function() {
      */
     Route::post('alipay/submit-order', 'AlipayController@postSubmitOrder');
     /*
+     * Route to re-submit the payment
+     */
+    Route::post('alipay/re-submit-payment','AlipayController@postReSubmitPayment');
+    /*
      * Route to Alipay notify URL
      */
     Route::get('alipay/notify', 'AlipayController@getNotify');
