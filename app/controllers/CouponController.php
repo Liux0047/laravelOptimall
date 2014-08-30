@@ -30,6 +30,25 @@ class CouponController extends BaseController {
         return Redirect::back()->with('status','成功删除消费卷');
     }
     
+    /*
+     * Record this coupon usage
+     * returns the coupon ID if successful
+     */
+    public function recordCouponUsage () {
+        if (Session::has('couponId')){
+            $couponId = Session::get('couponId');
+            $couponUsage = new CouponUsage;
+            $couponUsage->coupon_id = $couponId;
+            $couponUsage->member = Auth::id();
+            $couponUsage->save();
+            Session::forget('couponId');
+            return $couponId;
+        }
+        else {
+            return null;
+        }
+    }
+    
     public static function getCoupon (){
         if (Session::has('couponId')){
             return Coupon::find(Session::get('couponId'));

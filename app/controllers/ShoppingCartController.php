@@ -25,6 +25,16 @@ class ShoppingCartController extends BaseController {
     private $totalDiscount = 0;
     private $netPrice = 0;
 
+    public function __construct() {
+        $items = $this->getCartItems();
+        $coupon = CouponController::getCoupon();
+        if (isset($coupon)) {
+            $this->calculatePrice($items, $coupon);
+        } else {
+            $this->calculatePrice($items);
+        }
+    }
+
     public function getMyCart() {
         $params['pageTitle'] = "购物车 - 目光之城";
         $params['O_S_LEFTNames'] = self::$O_S_LEFTNames;
@@ -133,8 +143,7 @@ class ShoppingCartController extends BaseController {
         $orderLineItem = $this->getItemsFromPost();
         if (Input::get('action') == 'increment') {
             $orderLineItem->quantity += 1;
-        } 
-        else if (Input::get('action') == 'decrement') {
+        } else if (Input::get('action') == 'decrement') {
             if ($orderLineItem->quantity > 1) {
                 $orderLineItem->quantity -= 1;
             }
@@ -143,12 +152,12 @@ class ShoppingCartController extends BaseController {
         //re-calculate the price and send response
         $this->calculatePrice($this->getCartItems());
         $price = $orderLineItem->product()->first()->productModel()->first()->price;
-        return Response::json( array(
-            'quantity' => $orderLineItem->quantity,
-            'itemTotal' => $orderLineItem->quantity * $price,
-            'totalPrice' => $this->totalPrice,
-            'discountAmount' => $this->totalDiscount,
-            'netAmount' => $this->netPrice
+        return Response::json(array(
+                    'quantity' => $orderLineItem->quantity,
+                    'itemTotal' => $orderLineItem->quantity * $price,
+                    'totalPrice' => $this->totalPrice,
+                    'discountAmount' => $this->totalDiscount,
+                    'netAmount' => $this->netPrice
         ));
     }
 
@@ -181,17 +190,6 @@ class ShoppingCartController extends BaseController {
         } else {
             return OrderLineItemView::ofMember(Auth::id())->count();
         }
-    }
-    
-    public function getNetPrice () {
-        $items = $this->getCartItems();
-        $coupon = CouponController::getCoupon();
-        if (isset($coupon)) {
-            $this->calculatePrice($items, $coupon);
-        } else {
-            $this->calculatePrice($items);
-        }
-        return $this->netPrice;
     }
 
     private function getItemsFromPost() {
@@ -244,5 +242,15 @@ class ShoppingCartController extends BaseController {
         $prescription->member = Auth::id();
         $prescription->save();
     }
+    
+    public function getTotalDiscount() {
+        return $this->totalDiscount;
+    }
+
+    public function getNetPrice() {
+        return $this->netPrice;
+    }
+
+
 
 }

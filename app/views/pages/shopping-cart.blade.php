@@ -195,7 +195,11 @@ function updateQuantity(itemId, action) {
     $.ajax({
         type: "POST",
         url: "{{ action('ShoppingCartController@postUpdateQuatity') }}",
-        data: {order_line_item_id: itemId, action: action}
+        data: {order_line_item_id: itemId, action: action },
+        datatype: 'json',
+        beforeSend: function(request) {
+            return request.setRequestHeader('X-CSRF-Token', $("meta[name='token']").attr('content'));
+        }
     }).done(function(data) {            
             //var ajaxReturn = JSON.parse(data);      //parse the return data
             $("#quantity_" + itemId).text(data.quantity);
@@ -292,13 +296,13 @@ function updateQuantity(itemId, action) {
     //enable popover of stored prescription
     @foreach($storedPrescriptions as $storedPrescription)
     $("#stored_pres_popover_{{ $storedPrescription->prescription_id }}").popover({
-     html : true,
-     title: "预览验光单详情",
-     content: function() {return $("#stored_pres_form_{{ $storedPrescription->prescription_id }}").html();},
-     trigger:"hover",
-     container:"body",          
-     placement:"right"          
- });
+       html : true,
+       title: "预览验光单详情",
+       content: function() {return $("#stored_pres_form_{{ $storedPrescription->prescription_id }}").html();},
+       trigger:"hover",
+       container:"body",          
+       placement:"right"          
+   });
     @endforeach
 
 

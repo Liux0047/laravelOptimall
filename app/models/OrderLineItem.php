@@ -26,5 +26,12 @@ class OrderLineItem extends Eloquent {
     public function Product() {
         return $this->belongsTo('Product', 'product');
     }
+    
+    /*
+     * dynmaic scope to get items belonging to a member ID
+     */
+    public function scopeOfMember($query, $id) {
+        return $query->whereNull('order_id')->where('member','=',$id);
+    }
 
 }

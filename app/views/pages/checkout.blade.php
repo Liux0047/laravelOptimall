@@ -82,18 +82,14 @@
 					@endif
 				</div>
 				<div class="panel-footer">
-					<form role="form" action="/optimall/alipay/alipayapi.php?alipay_action=1" method="post" id="alipay_form" onsubmit="alertIfNoAddress();">   
+					{{ Form::open(array('action'=>'AlipayController@postSubmitOrder', 'onsubmit'=>'alertIfNoAddress();', 'id'=>'alipay_form')) }}   
 						<input type="hidden" name="use_alipay_address" id="use_alipay_address" value="0">
 						@if (isset($selectedAddress))
-						<input type="hidden" name="receive_name" value="{{ $selectedAddress->recipient_name }}">
+						<input type="hidden" name="recipient_name" value="{{ $selectedAddress->recipient_name }}">
 						<input type="hidden" name="receive_address" value="{{ $selectedAddress->province }}  {{ $selectedAddress->city }} {{ $selectedAddress->area }} {{ $selectedAddress->street_name }}">
 						<input type="hidden" name="receive_zip" value="{{ $selectedAddress->postal_code }}">
 						<input type="hidden" name="receive_phone" value="{{ $selectedAddress->phone }}">
-						<input type="hidden" name="item_names" value="
-						@foreach ($items as $item)
-						{{ $item->model_name_cn }} 
-						@endforeach
-						">  
+						<input type="hidden" name="item_names" value="@foreach ($items as $item){{ $item->model_name_cn }} @endforeach">  
 						@else
 						@endif                        
 						<a href="{{ action('ShoppingCartController@getMyCart') }}" class="space-right">
@@ -101,7 +97,7 @@
 							返回购物车            
 						</a>
 						<input type="submit" class="btn btn-warning btn-sm" value="提交订单">          
-					</form>      
+					{{ Form::close() }}
 
 				</div>
 			</div><!-- .panel -->                            

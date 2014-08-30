@@ -58,8 +58,33 @@ Route::group(array('before' => 'auth'), function() {
     /*
      * Route to shopping cart controler
      */
-    Route::controller('shopping-cart', 'ShoppingCartController');
+    Route::get('shopping-cart/my-cart', 'ShoppingCartController@getMyCart');
+    /*
+     * Route to add item into cart
+     */
+    Route::post('shopping-cart/add-item', 'ShoppingCartController@postAddItem');
+    /*
+     * Route to update prescription
+     */
+    Route::post('shopping-cart/update-prescription', 'ShoppingCartController@postUpdatePrescription');
+    /*
+     * Route to increment quatity
+     */
+    Route::post('shopping-cart/update-quatity', 'ShoppingCartController@postUpdateQuatity');
+    /*
+     * Route to remove item
+     */
+    Route::post('shopping-cart/remove-item', 'ShoppingCartController@postRemoveItem');
+    /*
+     * Route to set plano
+     */
+    Route::post('shopping-cart/set-plano', 'ShoppingCartController@postSetPlano');
 
+    /*
+     * Route to checkout
+     */
+    Route::get('shopping-cart/checkout', 'ShoppingCartController@getCheckout');
+    
     /*
      * Route to coupon Controller
      */
@@ -75,6 +100,18 @@ Route::group(array('before' => 'auth'), function() {
      */
     Route::controller('member', 'MemberAccountController');
     
+    /*
+     * Route to submit order into Alipay
+     */
+    Route::post('alipay/submit-order', 'AlipayController@postSubmitOrder');
+    /*
+     * Route to Alipay notify URL
+     */
+    Route::get('alipay/notify', 'AlipayController@getNotify');
+    /*
+     * Route to Alipay return
+     */
+    Route::get('alipay/return', 'AlipayController@getReturn');
 });
 
 /*
