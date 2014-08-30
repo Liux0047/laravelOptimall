@@ -58,7 +58,7 @@ and open the template in the editor.
                 </tr>
                 <tr>
                     <td>总额:</td>
-                    <td>{{ $net_amount }}<small>(含{{ $discount_amount }}折扣)</small></td>
+                    <td>{{ $net_amount }}元 <small>(含{{ $discount_amount }} 元折扣)</small></td>
                 </tr>
             </tbody>
         </table>
