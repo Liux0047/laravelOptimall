@@ -87,6 +87,13 @@ Route::get('help', 'HelpController@showHelpPage');
  */
 Route::controller('password-remind', 'RemindersController');
 
+
+//all routes sent via a post http request will use the csrf filter
+Route::when('shopping-cart/*', 'csrf', array('post'));
+Route::when('coupon/*', 'csrf', array('post'));
+Route::when('address/*', 'csrf', array('post'));
+Route::when('member/*', 'csrf', array('post'));
+
 /*
  * View composer to add number of shopping cart items into top banner
  */

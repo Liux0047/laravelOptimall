@@ -116,7 +116,7 @@ class ShoppingCartController extends BaseController {
 
     public function postUpdatePrescription() {
         $prescriptionNames = array_merge(self::$O_S_LEFTNames, self::$O_D_RIGHTNames, self::$CommonNames);
-        $orderLineItem = $this->getItembyFromPost();
+        $orderLineItem = $this->getItemsFromPost();
         foreach ($prescriptionNames as $prescriptionName) {
             $orderLineItem->$prescriptionName = Input::get($prescriptionName);
         }
@@ -130,7 +130,7 @@ class ShoppingCartController extends BaseController {
     }
 
     public function postUpdateQuatity() {
-        $orderLineItem = $this->getItembyFromPost();
+        $orderLineItem = $this->getItemsFromPost();
         if (Input::get('action') == 'increment') {
             $orderLineItem->quantity += 1;
         } 
@@ -153,13 +153,13 @@ class ShoppingCartController extends BaseController {
     }
 
     public function postRemoveItem() {
-        $orderLineItem = $this->getItembyFromPost();
+        $orderLineItem = $this->getItemsFromPost();
         $orderLineItem->delete();
         return Redirect::back()->with('status', '成功移除此商品');
     }
 
     public function postSetPlano() {
-        $orderLineItem = $this->getItembyFromPost();
+        $orderLineItem = $this->getItemsFromPost();
         $orderLineItem->is_plano = 1;
         $orderLineItem->save();
         return Redirect::back()->with('status', '成功修改验光单');
@@ -182,8 +182,19 @@ class ShoppingCartController extends BaseController {
             return OrderLineItemView::ofMember(Auth::id())->count();
         }
     }
+    
+    public function getNetPrice () {
+        $items = $this->getCartItems();
+        $coupon = CouponController::getCoupon();
+        if (isset($coupon)) {
+            $this->calculatePrice($items, $coupon);
+        } else {
+            $this->calculatePrice($items);
+        }
+        return $this->netPrice;
+    }
 
-    private function getItembyFromPost() {
+    private function getItemsFromPost() {
         $itemId = Input::get('order_line_item_id');
         return OrderLineItem::find($itemId);
     }
