@@ -11,21 +11,21 @@
  *
  * @author Allen
  */
-class LensType extends Eloquent{
-    /**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
-	protected $table = 'lens_type';
-        
-        //primary ID
-        protected $primaryKey = 'lens_type_id';
+class LensType extends Eloquent {
 
-	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
-	 * @var array
-	 */
-	//protected $hidden = array('password', 'remember_token');
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'lens_type';
+    //primary ID
+    protected $primaryKey = 'lens_type_id';
+
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    //protected $hidden = array('password', 'remember_token');
 }

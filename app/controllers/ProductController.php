@@ -52,7 +52,48 @@ class ProductController extends BaseController {
     }
 
     public function getGallery() {
-        $models = ProductModelView::paginate(15);
+        $numItemsPerPage = Input::get('items_per_page', 12);
+        $params['numItemsPerPage'] = $numItemsPerPage;
+        $params['checkedValues'] = array();
+        $models = ProductModelView::distinct();
+        if (Input::has('styles')){
+            $models = $models->ofStyles(Input::get('styles'));
+            $params['checkedValues']['styles'] = Input::get('styles');
+        }
+        if (Input::has('categories')){
+            $models = $models->ofCategories(Input::get('categories'));
+            $params['checkedValues']['categories'] = Input::get('categories');
+        }
+        if (Input::has('shapes')){
+            $models = $models->ofShapes(Input::get('shapes'));
+            $params['checkedValues']['shapes'] = Input::get('shapes');
+        }        
+        if (Input::has('materials')){
+            $models = $models->ofMaterials(Input::get('materials'));
+            $params['checkedValues']['materials'] = Input::get('materials');
+        }        
+        if (Input::has('genders')){
+            $models = $models->ofGenders(Input::get('genders'));
+            $params['checkedValues']['genders'] = Input::get('genders');
+        }
+        if (Input::has('frames')){
+            $models = $models->ofFrames(Input::get('frames'));
+            $params['checkedValues']['frames'] = Input::get('frames');
+        }
+
+        $sortOrder = Input::get('sort_order', 'num_items_sold_display');
+        $params['isDesc'] = false;
+        if( Input::get('is_desc') == 1){
+            $params['isDesc'] = true;
+            $models = $models->orderBy($sortOrder, 'DESC');
+        }
+        else {
+            $models = $models->orderBy($sortOrder);
+        }
+        $params['sortOrder'] = $sortOrder;
+
+        $models = $models->paginate($numItemsPerPage);
+        
         $products = array();
         $params['models'] = $models;
         foreach ($models as $model) {
@@ -60,6 +101,14 @@ class ProductController extends BaseController {
             $products[$model->model_id] = $model->productViews;
         }
         $params['products'] = $products;
+        
+        $params['styles'] = ProductStyle::all();
+        $params['categories'] = ProductCategory::all();
+        $params['shapes'] = ProductShape::all();
+        $params['materials'] = ProductMaterial::all();
+        $params['genders'] = ProductGender::all();
+        $params['frames'] = ProductFrame::all();
+        $params['colors'] = ProductBaseColor::all();
         return View::make('pages.gallery', $params);
     }
 

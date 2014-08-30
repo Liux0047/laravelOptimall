@@ -1,3 +1,103 @@
 <div class="shop-items blocky">
-                        <div class="panel panel-primary"><div class="panel-heading">优化您的搜索</div><table class="table table-condensed"><thead></thead><thead></thead><tbody><tr><th class="active"><span>性别</span></th><td><label class="checkbox-inline"><input type="checkbox" name="gender[]" value="0" onchange="this.form.submit();"> 男士</label><label class="checkbox-inline"><input type="checkbox" name="gender[]" value="1" onchange="this.form.submit();"> 女士</label></td></tr><tr><th class="active"><span>颜色</span></th><td><label class="checkbox-inline"><input type="checkbox" name="base_color[]" value="1" onchange="this.form.submit();"> 黑色</label><label class="checkbox-inline"><input type="checkbox" name="base_color[]" value="2" onchange="this.form.submit();"> 蓝色</label><label class="checkbox-inline"><input type="checkbox" name="base_color[]" value="3" onchange="this.form.submit();"> 黄色</label><label class="checkbox-inline"><input type="checkbox" name="base_color[]" value="4" onchange="this.form.submit();"> 红色</label><label class="checkbox-inline"><input type="checkbox" name="base_color[]" value="5" onchange="this.form.submit();"> 豹纹</label><label class="checkbox-inline"><input type="checkbox" name="base_color[]" value="6" onchange="this.form.submit();"> 棕色</label><label class="checkbox-inline"><input type="checkbox" name="base_color[]" value="7" onchange="this.form.submit();"> 灰色</label><label class="checkbox-inline"><input type="checkbox" name="base_color[]" value="8" onchange="this.form.submit();"> 渐变</label><label class="checkbox-inline"><input type="checkbox" name="base_color[]" value="9" onchange="this.form.submit();"> 粉色</label><label class="checkbox-inline"><input type="checkbox" name="base_color[]" value="10" onchange="this.form.submit();"> 绿色</label><label class="checkbox-inline"><input type="checkbox" name="base_color[]" value="11" onchange="this.form.submit();"> 紫色</label><label class="checkbox-inline"><input type="checkbox" name="base_color[]" value="12" onchange="this.form.submit();"> 白色</label><label class="checkbox-inline"><input type="checkbox" name="base_color[]" value="13" onchange="this.form.submit();"> 金色</label></td></tr><tr><th class="active"><span>形状</span></th><td><label class="checkbox-inline"><input type="checkbox" name="shape[]" value="0" onchange="this.form.submit();"> 矩形</label><label class="checkbox-inline"><input type="checkbox" name="shape[]" value="1" onchange="this.form.submit();"> 圆形</label></td></tr><tr><th class="active"><span>材料</span></th><td><label class="checkbox-inline"><input type="checkbox" name="material[]" value="0" onchange="this.form.submit();"> 金属</label><label class="checkbox-inline"><input type="checkbox" name="material[]" value="1" onchange="this.form.submit();"> 塑料</label></td></tr><tr><th class="active"><span>框型</span></th><td><label class="checkbox-inline"><input type="checkbox" name="frame[]" value="0" onchange="this.form.submit();"> 半框</label><label class="checkbox-inline"><input type="checkbox" name="frame[]" value="1" onchange="this.form.submit();"> 全框</label><label class="checkbox-inline"><input type="checkbox" name="frame[]" value="2" onchange="this.form.submit();"> 无框</label></td></tr><tr><th class="active"><span>风格</span></th><td><label class="checkbox-inline"><input type="checkbox" name="style[]" value="0" onchange="this.form.submit();"> 简约</label><label class="checkbox-inline"><input type="checkbox" name="style[]" value="1" onchange="this.form.submit();"> 休闲</label></td></tr></tbody></table></div>                       
-                    </div>
+	<div class="panel panel-primary">
+		<div class="panel-heading">优化您的搜索</div>
+		<table class="table table-condensed">
+			<thead>
+			</thead>
+			<tbody>
+				<tr>
+					<th class="active"><span>性别</span></th>
+					<td>
+						@foreach($genders as $gender)
+						<label class="checkbox-inline">
+							@if(isset($checkedValues['genders']) && in_array($gender->gender_id, $checkedValues['genders']))
+							<input type="checkbox" name="genders[]" value="{{ $gender->gender_id }}" onchange="this.form.submit();" checked> 
+							@else
+							<input type="checkbox" name="genders[]" value="{{ $gender->gender_id }}" onchange="this.form.submit();"> 
+							@endif
+							{{ $gender->gender_name_cn }}
+						</label>
+						@endforeach						
+					</td>
+				</tr>
+				<tr>
+					<th class="active"><span>颜色</span></th>
+					<td>
+						@foreach($colors as $color)
+						<label class="checkbox-inline">
+							@if(isset($checkedValues['colors']) && in_array($color->base_color_id, $checkedValues['colors']))
+							<input type="checkbox" name="colors[]" value="{{ $color->base_color_id }}" onchange="this.form.submit();" checked>
+							@else
+							<input type="checkbox" name="colors[]" value="{{ $color->base_color_id }}" onchange="this.form.submit();">
+							@endif
+							{{ $color->base_color_name_cn }}
+						</label>
+						@endforeach						
+					</td>
+				</tr>
+				<tr>
+					<th class="active"><span>形状</span></th>
+					<td>
+						@foreach($shapes as $shape)
+						<label class="checkbox-inline">
+							@if(isset($checkedValues['shapes']) && in_array($shape->shape_id, $checkedValues['shapes']))
+							<input type="checkbox" name="shapes[]" value="{{ $shape->shape_id }}" onchange="this.form.submit();" checked> 
+							@else
+							<input type="checkbox" name="shapes[]" value="{{ $shape->shape_id }}" onchange="this.form.submit();"> 
+							@endif							
+							{{ $shape->shape_name_cn }}
+						</label>
+						@endforeach						
+					</td>
+				</tr>
+				<tr>
+					<th class="active"><span>材料</span></th>
+					<td>
+						@foreach($materials as $material)
+						<label class="checkbox-inline">
+							@if(isset($checkedValues['materials']) && in_array($material->material_id, $checkedValues['materials']))
+							<input type="checkbox" name="materials[]" value="{{ $material->material_id }}" onchange="this.form.submit();" checked> 
+							@else
+							<input type="checkbox" name="materials[]" value="{{ $material->material_id }}" onchange="this.form.submit();"> 
+							@endif	
+							{{ $material->material_name_cn }}
+						</label>
+						@endforeach						
+					</td>
+				</tr>
+				<tr>
+					<th class="active"><span>框型</span></th>
+					<td>
+						@foreach($frames as $frame)
+						<label class="checkbox-inline">
+							@if(isset($checkedValues['frames']) && in_array($frame->frame_id, $checkedValues['frames']))
+							<input type="checkbox" name="frames[]" value="{{ $frame->frame_id }}" onchange="this.form.submit();" checked> 
+							@else
+							<input type="checkbox" name="frames[]" value="{{ $frame->frame_id }}" onchange="this.form.submit();"> 
+							@endif								
+							{{ $frame->frame_name_cn }}
+						</label>
+						@endforeach						
+					</td>
+				</tr>
+				<tr>
+					<th class="active"><span>风格</span></th>
+					<td>
+						@foreach($styles as $style)
+						<label class="checkbox-inline">
+							@if(isset($checkedValues['styles']) && in_array($style->style_id, $checkedValues['styles']))
+							<input type="checkbox" name="styles[]" value="{{ $style->style_id }}" onchange="this.form.submit();" checked> 
+							@else
+							<input type="checkbox" name="styles[]" value="{{ $style->style_id }}" onchange="this.form.submit();"> 
+							@endif								
+							{{ $style->style_name_cn }}
+						</label>
+						@endforeach						
+					</td>
+				</tr>
+				
+				
+			</tbody>
+		</table>
+	</div>                       
+</div>
