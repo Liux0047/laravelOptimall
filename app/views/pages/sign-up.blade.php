@@ -10,6 +10,9 @@
     </div>
 
     <div class="row">
+        <div class="col-md-4">
+            {{ HTML::image('images/registration.jpg') }}
+        </div>
         <div class="col-md-8">
             {{ Form::open(array('url' => 'sign-up', 'role'=>'form', 'id'=>'registration_form', 
             'novalidate'=>'novalidate', 'class'=>'form-horizontal')) }}            
@@ -54,9 +57,6 @@
                 </div>
             </div>
             {{ Form::close() }}
-        </div>
-        <div class="col-md-4">
-            {{ HTML::image('images/registration.png') }}
         </div>
     </div>
 

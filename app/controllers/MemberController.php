@@ -28,7 +28,7 @@ class MemberController extends BaseController {
 
     public function signUp() {
         $params['pageTitle'] = "注册成为目光之城会员";
-        return View::make('pgaes.sign-up', $params);
+        return View::make('pages.sign-up', $params);
     }
 
     public function processSignUp() {
