@@ -12,14 +12,14 @@
         <a href="{{ URL::to('product/'.$model->model_id) }}" id="small-view-{{ $model->model_id }}">
             <span class="img-valign-helper"></span>
             <img src="{{ asset('images/lazyload-holder.png') }}" 
-            data-original="{{ asset('images/gallery/'.$model->model_id.'/'.$products[$model->model_id][0]->product_id.'/medium-view-3.jpg') }}" 
+            data-original="{{ asset('images/gallery/'.$model->model_id.'/'.$products[0]->product_id.'/medium-view-3.jpg') }}" 
             class="lazy">
         </a>
     </div>
     <div class="shop-item-details">
         <h5>{{ $model->model_name_cn }}</h5>
         <p>
-            @foreach($products[$model->model_id] as $product)
+            @foreach($products as $product)
             <span onclick="changeSmallImg({{ $model->model_id }}, {{ $product->product_id }});" class="color-icon-link"> 
                 <img src="{{ asset('images/color/color-'.$product->color.'.png') }}" class="color-icon">
             </span>

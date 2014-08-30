@@ -14,12 +14,12 @@
 /*
  * Index page
  */
-Route::get('/', 'ProductController@showIndexPage');
+Route::get('/', 'ProductController@getIndex');
 
 /*
  * Route to product page
  */
-Route::get('product/{modelId}', 'ProductController@showProductPage')
+Route::get('product/{modelId}', 'ProductController@getProduct')
         ->where('modelId', '[0-9]+');
 
 /*
@@ -117,6 +117,11 @@ Route::group(array('before' => 'auth'), function() {
      */
     Route::get('alipay/return', 'AlipayController@getReturn');
 });
+
+/*
+ * Route to prodct gallery page
+ */
+Route::get('gallery','productController@getGallery');
 
 /*
  * Route to help page

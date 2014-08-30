@@ -15,7 +15,7 @@ class ProductController extends BaseController {
         'classical' => array('id' => 4, 'wideModelId' => array(2002, 3009))
     );
 
-    public function showProductPage($modelId = 1001) {
+    public function getProduct($modelId = 1001) {
 
         $model = ProductModelView::findOrFail($modelId);
         $params['model'] = $model;
@@ -28,7 +28,7 @@ class ProductController extends BaseController {
         return View::make('pages.product', $params);
     }
 
-    public function showIndexPage() {
+    public function getIndex() {
 
         $products = array();
         $wideModelIds = array();
@@ -46,9 +46,21 @@ class ProductController extends BaseController {
         }
 
         $params['products'] = $products;
-        $params['wideModelIds'] = $wideModelIds;        
+        $params['wideModelIds'] = $wideModelIds;
 
         return View::make('pages.index', $params);
+    }
+
+    public function getGallery() {
+        $models = ProductModelView::paginate(15);
+        $products = array();
+        $params['models'] = $models;
+        foreach ($models as $model) {
+            //associate model id with all products under this model id
+            $products[$model->model_id] = $model->productViews;
+        }
+        $params['products'] = $products;
+        return View::make('pages.gallery', $params);
     }
 
 }

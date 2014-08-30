@@ -95,7 +95,7 @@ class AlipayController extends BaseController {
      */
 
     private function generateTradeNumber($orderId) {
-        return 'CN' . str_pad($orderId, 8, "0", STR_PAD_LEFT);
+        return 'CN' . str_pad($orderId, Config::get('optimall.orderCodeLength'), "0", STR_PAD_LEFT);
     }
 
     /*
