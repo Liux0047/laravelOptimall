@@ -32,7 +32,7 @@
             </small>                        
         </h3>
 
-        {{ Form::open(array('url' => url('shopping-cart/add-item'), 'class'=>'form', 'id'=>'', 'style'=>'')) }}
+        {{ Form::open(array('action' => 'ShoppingCartController@postAddItem', 'class'=>'form', 'id'=>'')) }}
         <table class="view-item-table">
             <thead>
                 <tr>

@@ -120,7 +120,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         @if(Auth::check())
                         <li>
-                            <a href="{{ URL::to('member/shopping-history') }}">
+                            <a href="{{ URL::action('MemberAccountController@getShoppingHistory'); }}">
                                 欢迎, {{ Auth::user()->nickname }}
                             </a>
                         </li>

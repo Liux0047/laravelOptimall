@@ -56,55 +56,19 @@ Route::group(array('before' => 'auth'), function() {
     Route::get('logout', 'MemberController@logout');
 
     /*
-     * Route to show shopping cart page
+     * Route to shopping cart controler
      */
-    Route::get('shopping-cart/', 'ShoppingCartController@showShoppingCartPage');
-
-
-    /*
-     * Route to add item into cart
-     */
-    Route::post('shopping-cart/add-item', 'ShoppingCartController@AddItem');
-
-    /*
-     * Route to update prescription
-     */
-    Route::post('shopping-cart/update-prescription', 'ShoppingCartController@updatePrescription');
-
-    /*
-     * Route to increment quatity
-     */
-    Route::post('shopping-cart/increment-quatity', 'ShoppingCartController@incrementQuatity');
-
-    /*
-     * Route to decrement quatity
-     */
-    Route::post('shopping-cart/decrement-quatity', 'ShoppingCartController@decrementQuatity');
-
-    /*
-     * Route to remove item
-     */
-    Route::post('shopping-cart/remove-item', 'ShoppingCartController@removeItem');
-
-    /*
-     * Route to set plano
-     */
-    Route::post('shopping-cart/set-plano', 'ShoppingCartController@setPlano');
+    Route::controller('shopping-cart', 'ShoppingCartController');
 
     /*
      * Route to coupon Controller
      */
-    Route::controller('shopping-cart', 'CouponController');
-    
-    /*
-     * Route to check tou
-     */
-    Route::get('checkout','ShoppingCartController@showCheckoutPage');
-    
+    Route::controller('coupon', 'CouponController');
+        
     /*
      * Route to address controller
      */
-    Route::controller('checkout','AddressController');
+    Route::controller('address','AddressController');
         
     /*
      * Route to member account functions

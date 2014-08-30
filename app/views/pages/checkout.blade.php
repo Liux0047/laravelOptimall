@@ -21,7 +21,7 @@
 		<div class="col-md-4"><a href="#add_address_modal" data-toggle="modal">
 			<i class="fa fa-plus"></i> 添加新地址</a>
 		</div>        
-		{{ Form::open(array('url' => 'checkout/add-address', 'id'=>'add_address_form', 'class'=>'form-horizontal', 'novalidate'=>'novalidate')) }}
+		{{ Form::open(array('action' => 'AddressController@postAddAddress', 'id'=>'add_address_form', 'class'=>'form-horizontal', 'novalidate'=>'novalidate')) }}
 		@include('components.order-page.address-modal', array('fieldPrefix'=>'add', 'modalId'=>'add_address_modal', 'address'=>$newAddress ))
 		{{ Form::close() }}		
 	</div>     
@@ -96,7 +96,7 @@
 						">  
 						@else
 						@endif                        
-						<a href="{{ URL::to('shopping-cart') }}" class="space-right">
+						<a href="{{ action('ShoppingCartController@getMyCart') }}" class="space-right">
 							<i class="fa fa-arrow-circle-left"></i>  
 							返回购物车            
 						</a>

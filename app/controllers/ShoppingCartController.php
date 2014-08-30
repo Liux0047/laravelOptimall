@@ -25,7 +25,7 @@ class ShoppingCartController extends BaseController {
     private $totalDiscount = 0;
     private $netPrice = 0;
 
-    public function showShoppingCartPage() {
+    public function getMyCart() {
         $params['pageTitle'] = "购物车 - 目光之城";
         $params['O_S_LEFTNames'] = self::$O_S_LEFTNames;
         $params['O_D_RIGHTNames'] = self::$O_D_RIGHTNames;
@@ -47,7 +47,7 @@ class ShoppingCartController extends BaseController {
         $params['storedPrescriptions'] = Prescription::ofMember(Auth::id())->get();
 
         $coupon = CouponController::getCoupon();
-        if (isset($coupon)) {            
+        if (isset($coupon)) {
             $params['couponCode'] = $coupon->coupon_code;
             $params['isCouponApplied'] = true;
             $this->calculatePrice($items, $coupon);
@@ -64,7 +64,7 @@ class ShoppingCartController extends BaseController {
         return View::make('pages.shopping-cart', $params);
     }
 
-    public function showCheckoutPage() {
+    public function getCheckout() {
         $params['pageTitle'] = "结算 - 目光之城";
 
         $items = $this->getCartItems();
@@ -103,7 +103,7 @@ class ShoppingCartController extends BaseController {
         return View::make('pages.checkout', $params);
     }
 
-    public function AddItem() {
+    public function postAddItem() {
         $item = new OrderLineItem;
         $item->product = Input::get('product_id');
         $item->lens_type = Input::get('lens_type');
@@ -111,10 +111,10 @@ class ShoppingCartController extends BaseController {
         $item->member = Auth::id();
         $item->is_plano = 0;
         $item->save();
-        return Redirect::to('shopping-cart')->with('status', '成功添加商品');
+        return Redirect::action('ShoppingCartController@getMyCart')->with('status', '成功添加商品');
     }
 
-    public function updatePrescription() {
+    public function postUpdatePrescription() {
         $prescriptionNames = array_merge(self::$O_S_LEFTNames, self::$O_D_RIGHTNames, self::$CommonNames);
         $orderLineItem = $this->getItembyFromPost();
         foreach ($prescriptionNames as $prescriptionName) {
@@ -126,38 +126,43 @@ class ShoppingCartController extends BaseController {
             $this->savePrescription();
         }
 
-        return Redirect::to('shopping-cart')->with('status', '成功填写验光单');
+        return Redirect::back()->with('status', '成功填写验光单');
     }
 
-    public function incrementQuatity() {
+    public function postUpdateQuatity() {
         $orderLineItem = $this->getItembyFromPost();
-        $orderLineItem->quantity += 1;
-        $orderLineItem->save();
-        //re-calculate the price and send response
-        return Response::json($this->getUpdateQuantityResponse($orderLineItem));
-    }
-
-    public function decrementQuatity() {
-        $orderLineItem = $this->getItembyFromPost();
-        if ($orderLineItem->quantity > 1) {
-            $orderLineItem->quantity -= 1;
+        if (Input::get('action') == 'increment') {
+            $orderLineItem->quantity += 1;
+        } 
+        else if (Input::get('action') == 'decrement') {
+            if ($orderLineItem->quantity > 1) {
+                $orderLineItem->quantity -= 1;
+            }
         }
         $orderLineItem->save();
         //re-calculate the price and send response
-        return Response::json($this->getUpdateQuantityResponse($orderLineItem));
+        $this->calculatePrice($this->getCartItems());
+        $price = $orderLineItem->product()->first()->productModel()->first()->price;
+        return Response::json( array(
+            'quantity' => $orderLineItem->quantity,
+            'itemTotal' => $orderLineItem->quantity * $price,
+            'totalPrice' => $this->totalPrice,
+            'discountAmount' => $this->totalDiscount,
+            'netAmount' => $this->netPrice
+        ));
     }
 
-    public function removeItem() {
+    public function postRemoveItem() {
         $orderLineItem = $this->getItembyFromPost();
         $orderLineItem->delete();
-        return Redirect::to('shopping-cart')->with('status', '成功移除此商品');
+        return Redirect::back()->with('status', '成功移除此商品');
     }
 
-    public function setPlano() {
+    public function postSetPlano() {
         $orderLineItem = $this->getItembyFromPost();
         $orderLineItem->is_plano = 1;
         $orderLineItem->save();
-        return Redirect::to('shopping-cart')->with('status', '成功修改验光单');
+        return Redirect::back()->with('status', '成功修改验光单');
     }
 
     public static function getPrescriptionOptionList() {
@@ -208,18 +213,6 @@ class ShoppingCartController extends BaseController {
         $this->netPrice = $this->totalPrice - $this->totalDiscount;
     }
 
-    private function getUpdateQuantityResponse($orderLineItem) {
-        $this->calculatePrice($this->getCartItems());
-        $price = $orderLineItem->product()->first()->productModel()->first()->price;
-        return array(
-            'quantity' => $orderLineItem->quantity,
-            'itemTotal' => $orderLineItem->quantity * $price,
-            'totalPrice' => $this->totalPrice,
-            'discountAmount' => $this->totalDiscount,
-            'netAmount' => $this->netPrice
-        );
-    }
-
     private function isPrescriptionEntered($orderLineItem) {
         $prescriptionNames = array_merge(self::$O_S_LEFTNames, self::$O_D_RIGHTNames, self::$CommonNames);
         foreach ($prescriptionNames as $prescriptionName) {
@@ -237,7 +230,7 @@ class ShoppingCartController extends BaseController {
             $prescription->$prescriptionName = Input::get($prescriptionName);
         }
         $prescription->name = Input::get('prescription_name');
-        $prescription->member = 58;
+        $prescription->member = Auth::id();
         $prescription->save();
     }
 

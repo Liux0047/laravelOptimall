@@ -67,7 +67,7 @@
                 {{ Form::hidden($CommonName, $storedPrescription->$CommonName) }}
                 @endforeach
                 {{ Form::close() }}
-                @include('components.order-page.prescription-table', array( 'prescriptoion' => $storedPrescription, 'O_S_LEFTNames' => $O_S_LEFTNames,'O_D_RIGHTNames' => $O_D_RIGHTNames,'CommonNames' => $CommonNames))    
+                @include('components.order-page.prescription-table', array( 'prescription' => $storedPrescription, 'O_S_LEFTNames' => $O_S_LEFTNames,'O_D_RIGHTNames' => $O_D_RIGHTNames,'CommonNames' => $CommonNames))    
             </div>
             @endforeach
             <li>
@@ -96,13 +96,13 @@
 
     </td>
     <td class="col-md-2">
-        <a href="javascript:updateQuantity({{ $item->order_line_item_id }},'decrement-quatity')">
+        <a href="javascript:updateQuantity({{ $item->order_line_item_id }},'decrement')">
             <i class="fa fa-minus-circle fa-lg"></i>
         </a>
         <span id="quantity_{{ $item->order_line_item_id }}" class="quantity-cell">
             {{ $item->quantity }}
         </span>
-        <a href="javascript:updateQuantity({{ $item->order_line_item_id }},'increment-quatity')">
+        <a href="javascript:updateQuantity({{ $item->order_line_item_id }},'increment')">
             <i class="fa fa-plus-circle fa-lg"></i>
         </a>
 

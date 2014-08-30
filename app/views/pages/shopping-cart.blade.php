@@ -18,7 +18,7 @@
                 接着逛逛
             </a> 
             @if ($isAllPrescriptionComplete)
-            <a href="{{ URL::to('checkout') }}" class="btn btn-warning btn-sm">
+            <a href="{{ action('ShoppingCartController@getCheckout') }}" class="btn btn-warning btn-sm">
                 去结算 
                 <i class="fa fa-arrow-circle-right fa-lg"></i>
             </a>
@@ -53,7 +53,7 @@
                     <td>                                       
                     </td> 
                     <td colspan="4">
-                        {{ Form::open(array('url' => 'shopping-cart/apply-coupon', 'role' => 'form', 'class'=>'form-horizontal'))}}
+                        {{ Form::open(array('action' => 'CouponController@postApplyCoupon', 'role' => 'form', 'class'=>'form-horizontal'))}}
                         <div class="form-group has-feedback" id="coupon-form-group">             
                             <label for="coupon_code" class="col-md-2 col-md-offset-4 control-label font-blue">
                                 <strong>优惠券</strong>
@@ -73,7 +73,7 @@
                             </div>
                         </div>
                         {{ Form::close() }} 
-                        {{ Form::open(array('url' => url('shopping-cart/remove-coupon'), 'id'=>'remove_coupon')) }}        
+                        {{ Form::open(array('action' => 'CouponController@postRemoveCoupon', 'id'=>'remove_coupon')) }}        
                         <div class="modal fade" id="confirm-remove-coupon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -132,7 +132,7 @@
             <div class="page-header-btn-group">
                 <a href="{{ URL::to('gallery') }}" class="btn btn-default btn-sm">接着逛逛</a> 
                 @if ($isAllPrescriptionComplete)
-                <a href="{{ URL::to('checkout') }}" class="btn btn-warning btn-sm">
+                <a href="{{ action('ShoppingCartController@getCheckout') }}" class="btn btn-warning btn-sm">
                     去结算 
                     <i class="fa fa-arrow-circle-right fa-lg"></i>
                 </a>
@@ -194,9 +194,8 @@ var currency = "¥";
 function updateQuantity(itemId, action) {
     $.ajax({
         type: "POST",
-        url: "{{ URL::to('shopping-cart/') }}/" + action,
-        data: {order_line_item_id: itemId
-        }
+        url: "{{ action('ShoppingCartController@postUpdateQuatity') }}",
+        data: {order_line_item_id: itemId, action: action}
     }).done(function(data) {            
             //var ajaxReturn = JSON.parse(data);      //parse the return data
             $("#quantity_" + itemId).text(data.quantity);

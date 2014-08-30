@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-3 cart-icon-ontainer">
-                <a href="{{ URL::to('shopping-cart') }}" >
+                <a href="{{ action('ShoppingCartController@getMyCart') }}" >
                     {{ HTML::image('images/cart-icon.png', 'Cart Icon') }} 
                 </a>
                 <span class="badge">{{ $numCartItems }}</span>  

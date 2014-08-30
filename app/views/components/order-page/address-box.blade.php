@@ -19,7 +19,7 @@
 			编辑地址
 		</a>    
 		@else
-		{{ Form::open(array('url' => 'checkout/use-address')) }}
+		{{ Form::open(array('action' => 'AddressController@postUseAddress')) }}
 		<input type="hidden" name="address_id" value="{{ $address->address_id }}">		
 		<a title="use this address" href="#" onclick="$(this).closest('form').submit();return false;">
 			<i class="fa fa-location-arrow fa-lg"></i> 使用此地址
@@ -28,7 +28,7 @@
 		@endif
 
 		@if($address->address_id==$selectedAddress->address_id)	
-		{{ Form::open(array('url' => 'checkout/update-address', 'id'=>'edit_address_form', 'class'=>'form-horizontal', 'novalidate'=>'novalidate')) }}
+		{{ Form::open(array('action' => 'AddressController@postUpdateAddress', 'id'=>'edit_address_form', 'class'=>'form-horizontal', 'novalidate'=>'novalidate')) }}
 		<input type="hidden" name="address_id" value="{{ $address->address_id }}">  
 		@include('components.order-page.address-modal', array('fieldPrefix'=>$modalAction, 'modalId'=>'address_modal_'.$address->address_id,'address'=>$address))
 		{{ Form::close() }}

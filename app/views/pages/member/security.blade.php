@@ -12,7 +12,7 @@
 
         <div class="col-xs-12 col-md-10">         
             @include('components.page-frame.message-bar')
-            {{ Form::open(array('url'=>'member/change-password', 'novalidate'=>'novalidate', 'class'=>'form-horizontal', 'id'=>'change_pwd_form')) }}
+            {{ Form::open(array('action'=>'MemberAccountController@postChangePassword', 'novalidate'=>'novalidate', 'class'=>'form-horizontal', 'id'=>'change_pwd_form')) }}
                 <div class="form-group">
                     <label for="current_password" class="col-md-2 control-label">当前密码</label>
                     <div class="col-md-4">
