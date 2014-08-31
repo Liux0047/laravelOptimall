@@ -1,0 +1,36 @@
+#shihuiduoduo {
+    padding-top: 50px;
+    width: 100%;
+    background-color: #fef5e4;
+}
+
+#shihuiduoduo #shihuiduoduo_title img, #shihuiduoduo #shihuiduoduo_element img{    
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+#shihuiduoduo #shihuiduoduo_element {
+}
+#shihuiduoduo #shihuiduoduo_element img {
+    
+    opacity: 0;
+}
+
+#shihuiduoduo #shihuiduoduo_element.shown img {
+    display: block;
+    -webkit-animation: scroll-show-animation 2s; /* Chrome, Safari, Opera */
+    animation: scroll-show-animation 2s;
+    opacity: 1;
+    
+    
+}
+/* Chrome, Safari, Opera */
+@-webkit-keyframes scroll-show-animation {
+    0%   {opacity: 0; }
+    100% {opacity: 1; }
+}
+/* Standard syntax */
+@keyframes scroll-show-animation {
+    0%   {opacity: 0; }
+    100% {opacity: 1; }
+}
