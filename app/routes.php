@@ -103,11 +103,11 @@ Route::group(array('before' => 'auth'), function() {
     /*
      * Route to submit order into Alipay
      */
-    Route::post('alipay/submit-order', 'AlipayController@postSubmitOrder');
+    Route::post('alipay/submit-order', 'OrderController@postSubmitOrder');
     /*
      * Route to re-submit the payment
      */
-    Route::post('alipay/re-submit-payment','AlipayController@postReSubmitPayment');
+    Route::post('alipay/re-submit-payment','OrderController@postReSubmitPayment');
     /*
      * Route to Alipay notify URL
      */
@@ -129,9 +129,9 @@ Route::get('gallery','productController@getGallery');
 Route::post('gallery/load-more-products','ProductController@postShowRemainingModels');
 
 /*
- * Route to help page
+ * Route to about page
  */
-Route::get('help', 'HelpController@showHelpPage');
+Route::controller('help', 'HelpController');
 
 /*
  * Route to remind password controller

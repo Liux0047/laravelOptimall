@@ -82,7 +82,7 @@
 					@endif
 				</div>
 				<div class="panel-footer">
-					{{ Form::open(array('action'=>'AlipayController@postSubmitOrder', 'onsubmit'=>'alertIfNoAddress();', 'id'=>'alipay_form')) }}   
+					{{ Form::open(array('action'=>'OrderController@postSubmitOrder', 'onsubmit'=>'alertIfNoAddress();', 'id'=>'alipay_form')) }}   
 						<input type="hidden" name="use_alipay_address" id="use_alipay_address" value="0">
 						@if (isset($selectedAddress))
 						<input type="hidden" name="recipient_name" value="{{ $selectedAddress->recipient_name }}">

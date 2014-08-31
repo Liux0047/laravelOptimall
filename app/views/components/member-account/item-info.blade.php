@@ -22,7 +22,7 @@
             </div>
             <div class="col-md-1"> 
                 @if ($order->order_status == 1)
-                {{ Form::open(array('action'=>'AlipayController@postReSubmitPayment'))}}
+                {{ Form::open(array('action'=>'OrderController@postReSubmitPayment'))}}
                 {{ Form::hidden('order_id', $order->order_id)}}
                 {{ Form::submit('去付款', array('class'=>'btn btn-warning btn-xs')) }}
                 {{ Form::close() }}

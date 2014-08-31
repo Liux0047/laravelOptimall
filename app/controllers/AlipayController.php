@@ -20,67 +20,9 @@ class AlipayController extends BaseController {
      * 支付宝网关地址（新）
      */
     private $alipay_gateway_new = 'https://mapi.alipay.com/gateway.do?';
+    
 
-    public function postSubmitOrder() {
-
-        $items = OrderLineItem::ofMember(Auth::id())->get();
-        if (count($items) == 0) {
-            return Redirect::to('/');
-        }
-
-        $cartController = new ShoppingCartController();
-        //必填
-        $price = $cartController->getNetPrice();
-
-        //clear the coupon and record the usage
-        $couponController = new CouponController();
-        $couponId = $couponController->recordCouponUsage();
-
-        $address = new Address;
-        $address->recipient_name = Input::get('recipient_name', '');
-        $address->receive_address = Input::get('receive_address', '');
-        $address->receive_zip = Input::get('receive_zip', '');
-        $address->receive_phone = Input::get('receive_phone', '');
-
-        $orderController = new OrderController();
-        $order = $orderController->insertOrder($items, "Alipay", $price, $address, $couponId);
-
-        if (!isset($order->order_id)) {
-            die("Order not created");
-        }
-        $tradeNumber = $this->generateTradeNumber($order->order_id);
-
-        //send email
-        $params['orderNumber'] = $tradeNumber;
-        $params['created_at'] = (new DateTime($order->created_at))->format('Y-m-d H:i:s');
-        $params['recipient_name'] = $order->recipient_name;
-        $params['receive_address'] = $order->receive_address;
-        $params['receive_phone'] = $order->receive_phone;
-        $params['net_amount'] = $cartController->getNetPrice();
-        $params['discount_amount'] = $cartController->getTotalDiscount();
-        Mail::queue('emails.order.confirm-order', $params, function($message) {
-            $message->to(Auth::user()->email)->subject('订单提交成功');
-        });
-
-        return $this->generateAlipayPage($tradeNumber, $price, $address);
-    }
-
-    public function postReSubmitPayment() {
-        if (!Input::has('order_id')) {
-            return Redirect::to('/');
-        }
-        $orderId = Input::get('order_id');
-        $order = PlacedOrder::find($orderId);
-        $price = $order->total_transaction_amount;
-        $tradeNumber = $this->generateTradeNumber($orderId);
-        $address = new Address;
-        $address->recipient_name = $order->recipient_name;
-        $address->receive_zip = $order->receive_zip;
-        $address->receive_phone = $order->receive_phone;
-        $address->receive_address = $order->receive_address;
-
-        return $this->generateAlipayPage($tradeNumber, $price, $address);
-    }
+    
 
     public function getNotfity() {
         
@@ -94,7 +36,7 @@ class AlipayController extends BaseController {
      * transform an order ID into Alipay trade number
      */
 
-    private function generateTradeNumber($orderId) {
+    public function generateTradeNumber($orderId) {
         return 'CN' . str_pad($orderId, Config::get('optimall.orderCodeLength'), "0", STR_PAD_LEFT);
     }
 
@@ -102,8 +44,9 @@ class AlipayController extends BaseController {
      * generate a HTML form and submit with params
      */
 
-    private function generateAlipayPage($tradeNumber, $price, $address) {
-        /*         * ************************请求参数************************* */
+    public function generateAlipayPage($tradeNumber, $price, $address) {
+        
+        /*         * ************************请求参数************************* */        
         //支付类型
         $payment_type = "1";
         //必填，不能修改
