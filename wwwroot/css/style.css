@@ -1310,11 +1310,14 @@ input.jq-validate-error{
     padding-top: 7px;
 }
 .lens-selection-box{
-    width: 180px;
+    width: 240px;
     margin-right: 5px;
 }
 .lens-selection-box .fa-check{
     padding-left: 5px;
+}
+.lens-selection-box .original-price{
+    color: #777E83;
 }
 .lens-img {
     width:250px;

@@ -116,8 +116,8 @@
                        @endif
                        " id="lens_{{ $lensTypes[$i]->lens_type_id }}" 
                        onclick="changeLens({{ $lensTypes[$i]->lens_type_id }}, {{ $lensTypes[$i]->price }}, {{ $model->price }}, {{ $model->price * 1.5 }});" > 
-                       {{ $lensTypes[$i]->title_cn }} + 
-                       <strong>¥{{ number_format($lensTypes[$i]->price, 2) }}</strong>                                     
+                       {{ $lensTypes[$i]->title_cn }} 
+                       (套餐价:<strong>¥{{ number_format($lensTypes[$i]->price, 2) }}</strong>)
                        <i class='fa fa-check'></i>
                    </div>
                    <a href="#" data-toggle="popover"  data-title="{{ $lensTypes[$i]->title_cn }}" 
