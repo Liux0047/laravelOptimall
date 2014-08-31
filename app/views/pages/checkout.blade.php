@@ -56,7 +56,21 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-4 col-md-offset-8">
+		{{ Form::open(array('action'=>'OrderController@postSubmitOrder', 'onsubmit'=>'alertIfNoAddress();', 'id'=>'order_submit_form', 'role'=>'form')) }}   
+		<div class="col-md-6">
+			<div class="form-group">
+				<textarea class="form-control" name="message_to_seller" rows="2" placeholder="买家留言(45字以内)"></textarea>
+			</div>
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" id="is_invoice_required">需要发票
+				</label>
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control no-display" id="invoice_header" name="invoice_header" placeholder="请填写发票抬头">
+			</div>
+		</div>
+		<div class="col-md-4 col-md-offset-2">
 			<div class="panel panel-default align-right">                            
 				<div class="panel-body">
 					<p>
@@ -81,27 +95,25 @@
 					您还没有填写地址
 					@endif
 				</div>
-				<div class="panel-footer">
-					{{ Form::open(array('action'=>'OrderController@postSubmitOrder', 'onsubmit'=>'alertIfNoAddress();', 'id'=>'alipay_form')) }}   
-						<input type="hidden" name="use_alipay_address" id="use_alipay_address" value="0">
-						@if (isset($selectedAddress))
-						<input type="hidden" name="recipient_name" value="{{ $selectedAddress->recipient_name }}">
-						<input type="hidden" name="receive_address" value="{{ $selectedAddress->province }}  {{ $selectedAddress->city }} {{ $selectedAddress->area }} {{ $selectedAddress->street_name }}">
-						<input type="hidden" name="receive_zip" value="{{ $selectedAddress->postal_code }}">
-						<input type="hidden" name="receive_phone" value="{{ $selectedAddress->phone }}">
-						<input type="hidden" name="item_names" value="@foreach ($items as $item){{ $item->model_name_cn }} @endforeach">  
-						@else
-						@endif                        
-						<a href="{{ action('ShoppingCartController@getMyCart') }}" class="space-right">
-							<i class="fa fa-arrow-circle-left"></i>  
-							返回购物车            
-						</a>
-						<input type="submit" class="btn btn-warning btn-sm" value="提交订单">          
-					{{ Form::close() }}
-
+				<div class="panel-footer">					
+					<input type="hidden" name="use_alipay_address" id="use_alipay_address" value="0">
+					@if (isset($selectedAddress))
+					<input type="hidden" name="recipient_name" value="{{ $selectedAddress->recipient_name }}">
+					<input type="hidden" name="receive_address" value="{{ $selectedAddress->province }}  {{ $selectedAddress->city }} {{ $selectedAddress->area }} {{ $selectedAddress->street_name }}">
+					<input type="hidden" name="receive_zip" value="{{ $selectedAddress->postal_code }}">
+					<input type="hidden" name="receive_phone" value="{{ $selectedAddress->phone }}">
+					<input type="hidden" name="item_names" value="@foreach ($items as $item){{ $item->model_name_cn }} @endforeach">  
+					@else
+					@endif                        
+					<a href="{{ action('ShoppingCartController@getMyCart') }}" class="space-right">
+						<i class="fa fa-arrow-circle-left"></i>  
+						返回购物车            
+					</a>
+					<input type="submit" class="btn btn-warning btn-sm" value="提交订单">          
 				</div>
 			</div><!-- .panel -->                            
 		</div>
+		{{ Form::close() }}
 	</div><!-- .row -->                
 </div>
 @stop
@@ -131,6 +143,15 @@
 	 			$("#address_summary").slideDown();
 	 			$("input[name='use_alipay_address']").val('0');
 	 		}
+	 	});      
+
+	 	$("#is_invoice_required").change(function() {
+	 		if (this.checked) {
+	 			$("#invoice_header").slideDown(300);	 			
+	 		}
+	 		else {
+	 			$("#invoice_header").slideUp(300);
+	 		}
 	 	});                
 
 	    //address input validation rule
@@ -157,7 +178,10 @@
 	    			required: true,
 	    			minlength:8,
 	    			digits: true
-	    		} 
+	    		},
+	    		message_to_seller: {
+	    			maxlength: 45
+	    		}
 	    	},                    
 	    	messages: {
 	    		province: {
@@ -180,7 +204,10 @@
 	    			required: warningIcon + "请输入收件人电话",
 	    			minlength: warningIcon + "请输入正确的电话号码",
 	    			digits: warningIcon + "请输入正确的电话号码"                    
-	    		} 
+	    		},
+	    		message_to_seller: {
+	    			maxlength: "请控制在45字以内"
+	    		}
 	    	},
 	    	errorElement: "span",
 	    	errorPlacement: function(error, element) {
@@ -195,6 +222,34 @@
 	    
 	    $("#edit_address_form").validate(rule);                
 	    $("#add_address_form").validate(rule);
+
+	    //validate order submit for
+	    $("#order_submit_form").validate({
+	    	rules: {
+	    		message_to_seller: {
+	    			maxlength: 45
+	    		},
+	    		invoice_header: {
+	    			maxlength: 45
+	    		}
+	    	},                    
+	    	messages: {
+	    		message_to_seller: {
+	    			maxlength: warningIcon+ "请控制在45字以内"
+	    		},
+	    		invoice_header: {
+	    			maxlength: warningIcon + "请控制在45字以内"
+	    		}
+	    	},
+	    	errorElement: "span",
+	    	errorPlacement: function(error, element) {
+	    		error.appendTo($(element).parent());
+	    	},
+	    	validClass: "",
+	    	errorClass: "jq-validate-error",
+	        //ignore: [], //validate hidden input
+	        onclick: true
+	    });
 	});
 
 function alertIfNoAddress(){

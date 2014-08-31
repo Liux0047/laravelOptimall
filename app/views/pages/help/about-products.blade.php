@@ -32,7 +32,10 @@
 	</div>
 	<div class="section-element-container">
 		<img src="{{ asset('images/lazyload-holder.png') }}" 
-		data-original="{{ asset('images/help/about-product/InfoPage-2.jpg') }}" 
+		data-original="{{ asset('images/help/about-product/InfoPage-2-1.jpg') }}" 
+		class="lazy">
+		<img src="{{ asset('images/lazyload-holder.png') }}" 
+		data-original="{{ asset('images/help/about-product/InfoPage-2-2.jpg') }}" 
 		class="lazy">
 	</div>		
 	<div class="section-transition">

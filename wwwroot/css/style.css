@@ -515,6 +515,7 @@ navbar row category*/
     border-bottom: 3px solid  #B31C3D;
     border-left: 3px solid  #B31C3D;
     border-right: 3px solid #B31C3D;
+    border-top: 3px solid #B31C3D;
 }
 .navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-brand {
     color: #B31C3D;
