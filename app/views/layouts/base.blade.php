@@ -76,6 +76,12 @@ function auth_login() {
         $("#login_preloader_img").hide();
     });
 }
+
+//lazy load fade in effect
+$("img.lazy").lazyload({
+    effect : "fadeIn"
+});
+      
 </script>
 @show
 

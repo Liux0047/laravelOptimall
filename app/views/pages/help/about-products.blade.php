@@ -6,36 +6,89 @@
 @stop
 
 @section ('content')
-<div id="shihuiduoduo">
-	<div id="shihuiduoduo_title">
-		{{ HTML::image('images/help/about-product/InfoPage-title-1.png')}}
+<div id="muguangzhicheng" class="about-product-section">
+	<div class="section-title">
+		<img src="{{ asset('images/lazyload-holder.png') }}" 
+		data-original="{{ asset('images/help/about-product/InfoPage-title-1.jpg') }}" 
+		class="lazy">
 	</div>
-	<div id="shihuiduoduo_element">
-		{{ HTML::image('images/help/about-product/InfoPage-elements-1.png')}}	
+	<div class="section-element-container">
+		<img src="{{ asset('images/lazyload-holder.png') }}" 
+		data-original="{{ asset('images/help/about-product/InfoPage-1.jpg') }}" 
+		class="lazy">
 	</div>		
-	{{ HTML::image('images/help/about-product/InfoPage-1bg.png')}}
-<div>
+	<div class="section-transition">
+		<img src="{{ asset('images/lazyload-holder.png') }}" 
+		data-original="{{ asset('images/help/about-product/InfoPage-1bg.jpg') }}" 
+		class="lazy">
+	</div>
+</div>
 
-@for ($i=0; $i<=5; $i++)
-<img src="{{ asset('images/lazyload-holder.png') }}" 
-data-original="{{ asset('images/help/InfoPage-'.$i.'.jpg') }}" 
-class="lazy">
-@endfor
+<div id="shihuiduoduo" class="about-product-section">
+	<div class="section-title">
+		<img src="{{ asset('images/lazyload-holder.png') }}" 
+		data-original="{{ asset('images/help/about-product/InfoPage-title-2.jpg') }}" 
+		class="lazy">
+	</div>
+	<div class="section-element-container">
+		<img src="{{ asset('images/lazyload-holder.png') }}" 
+		data-original="{{ asset('images/help/about-product/InfoPage-2.jpg') }}" 
+		class="lazy">
+	</div>		
+	<div class="section-transition">
+		<img src="{{ asset('images/lazyload-holder.png') }}" 
+		data-original="{{ asset('images/help/about-product/InfoPage-2bg.jpg') }}" 
+		class="lazy">
+	</div>
+</div>
+
+<div id="gaopingzhizuo" class="about-product-section">
+	<div class="section-title">
+		<img src="{{ asset('images/lazyload-holder.png') }}" 
+		data-original="{{ asset('images/help/about-product/InfoPage-title-3.jpg') }}" 
+		class="lazy">
+	</div>
+	<div class="section-element-container">
+		<img src="{{ asset('images/lazyload-holder.png') }}" 
+		data-original="{{ asset('images/help/about-product/InfoPage-3.jpg') }}" 
+		class="lazy">
+	</div>		
+	<div class="section-transition">
+		<img src="{{ asset('images/lazyload-holder.png') }}" 
+		data-original="{{ asset('images/help/about-product/InfoPage-3bg.jpg') }}" 
+		class="lazy">
+	</div>
+</div>
+
+<div id="gouwubaozhang-1" class="about-product-section">
+	<div class="section-title">
+		<img src="{{ asset('images/lazyload-holder.png') }}" 
+		data-original="{{ asset('images/help/about-product/InfoPage-title-4.jpg') }}" 
+		class="lazy">
+	</div>
+	<div class="section-element-container">
+		<img src="{{ asset('images/lazyload-holder.png') }}" 
+		data-original="{{ asset('images/help/about-product/InfoPage-4-1.jpg') }}" 
+		class="lazy">
+	</div>		
+	<div class="section-transition">
+		<img src="{{ asset('images/lazyload-holder.png') }}" 
+		data-original="{{ asset('images/help/about-product/InfoPage-4bg.jpg') }}" 
+		class="lazy">
+	</div>
+</div>
+
+<div id="gouwubaozhang-2" class="about-product-section">
+	<div class="section-element-container">
+		<img src="{{ asset('images/lazyload-holder.png') }}" 
+		data-original="{{ asset('images/help/about-product/InfoPage-4-2.jpg') }}" 
+		class="lazy"> 
+	</div>
+</div>
 @stop
 
 @section('script')
+@parent
 <script>
-
-$(document).ready(function () {
-	$("#shihuiduoduo_element").addClass("shown");
-});
-
-$(window).scroll(function (event) {
-    var scrollposition = $(window).scrollTop();
-    if (scrollposition > $("#shihuiduoduo_element").offset().top - 300){
-    	$("#shihuiduoduo_element").addClass("shown");
-    }
-    // Do something
-});
 </script>
 @stop

@@ -1,36 +1,39 @@
-#shihuiduoduo {
-    padding-top: 50px;
+.about-product-section {
+    padding-top: 50px;          
+    min-height: 500px;
+}
+.about-product-section .section-title {
+    
+}
+.about-product-section .section-title img {
+    display: block;
+    margin: auto;
+}
+.about-product-section .section-element-container {    
+    position: relative;        
+}
+.about-product-section .section-element-container img{
+    display: block; 
+    margin: auto;    
+    min-height: 150px;
+}
+
+.about-product-section .section-transition {
     width: 100%;
-    background-color: #fef5e4;
 }
 
-#shihuiduoduo #shihuiduoduo_title img, #shihuiduoduo #shihuiduoduo_element img{    
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+#muguangzhicheng {
+    background: #fef5e4;
 }
-#shihuiduoduo #shihuiduoduo_element {
+#shihuiduoduo {
+    background: #ffeac5;
 }
-#shihuiduoduo #shihuiduoduo_element img {
-    
-    opacity: 0;
+#gaopingzhizuo {
+    background: #ffae9b;
 }
-
-#shihuiduoduo #shihuiduoduo_element.shown img {
-    display: block;
-    -webkit-animation: scroll-show-animation 2s; /* Chrome, Safari, Opera */
-    animation: scroll-show-animation 2s;
-    opacity: 1;
-    
-    
+#gouwubaozhang-1 {
+    background: #fef5e4;
 }
-/* Chrome, Safari, Opera */
-@-webkit-keyframes scroll-show-animation {
-    0%   {opacity: 0; }
-    100% {opacity: 1; }
-}
-/* Standard syntax */
-@keyframes scroll-show-animation {
-    0%   {opacity: 0; }
-    100% {opacity: 1; }
+#gouwubaozhang-2 {
+    background: #ffeac5;
 }

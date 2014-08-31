@@ -29,12 +29,9 @@ class OrderController extends BaseController{
             $item->order_id = $order->order_id;
             $item->save();
             $model = $item->product()->first()->productModel()->first();
-            echo $model->num_items_sold;
-            $model->num_items_sold ++;
+            $model->num_items_sold_display += rand(1, 5);
             $model->save();
-            echo $model->num_items_sold;
         }
-        die();
         return $order;
     }
     
