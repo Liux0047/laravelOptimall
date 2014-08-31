@@ -47,7 +47,7 @@
             </thead>
             <tbody>
                 @foreach($items as $item)
-                @include('components.order-page.cart-item', array('$item' => $item, 'O_S_LEFTNames' => $O_S_LEFTNames, 'O_D_RIGHTNames' => $O_D_RIGHTNames, 'CommonNames' => $CommonNames))
+                @include('components.order-page.cart-item', array('$item' => $item, 'prescriptionNames'=>$prescriptionNames))
                 @endforeach
                 <tr class="active">                                
                     <td>                                       

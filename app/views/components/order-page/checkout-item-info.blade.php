@@ -17,11 +17,15 @@
 			</div>
 		</div>
 	</td>
-	<td class="col-md-4">       
+	<td class="col-md-4">     
+		@if (!$isPrescriptionRequired[$item->order_line_item_id])
 		@if ($item->is_plano)
 		<h5><strong>平光镜 </strong></h5>
 		@else
-		@include('components.order-page.prescription-table', array( 'prescription' => $item, 'O_S_LEFTNames' => $O_S_LEFTNames,'O_D_RIGHTNames' => $O_D_RIGHTNames,'CommonNames' => $CommonNames)) 
+		<h5><strong>无镜片 </strong></h5>
+		@endif
+		@else
+		@include('components.order-page.prescription-table', array( 'prescription' => $item, 'prescriptionNames'=>$prescriptionNames)) 
 		@endif
 	</td>
 	<td class="col-md-1">{{ $item->quantity }}</td>

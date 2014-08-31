@@ -70,7 +70,9 @@
                             <td>¥{{ number_format($item->price+$item->lens_price, 2) }}</td>
                             <td>{{ $item->quantity }}</td>
                             <td>
-                                @if($item->is_plano)
+                                @if ($item->lens_type == 1)
+                                <p>无镜片</p>
+                                @elseif($item->is_plano)
                                 <p>平光镜</p>
                                 @else
                                 <p>
@@ -86,7 +88,7 @@
                                                 <h4 class="modal-title">查看验光单</h4>
                                             </div>
                                             <div class="modal-body">
-                                                @include('components.order-page.prescription-table', array('prescription'=>$item, 'O_S_LEFTNames'=>$O_S_LEFTNames, 'O_D_RIGHTNames'=>$O_D_RIGHTNames,'CommonNames'=>$CommonNames))     
+                                                @include('components.order-page.prescription-table', array('prescription'=>$item, 'prescriptionNames'=>$prescriptionNames))     
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>

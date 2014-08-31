@@ -33,9 +33,9 @@ class ShoppingCartController extends BaseController {
 
     public function getMyCart() {
         $params['pageTitle'] = "购物车 - 目光之城";
-        $params['O_S_LEFTNames'] = self::$O_S_LEFTNames;
-        $params['O_D_RIGHTNames'] = self::$O_D_RIGHTNames;
-        $params['CommonNames'] = self::$CommonNames;
+        $params['prescriptionNames']['O_S_LEFTNames'] = self::$O_S_LEFTNames;
+        $params['prescriptionNames']['O_D_RIGHTNames'] = self::$O_D_RIGHTNames;
+        $params['prescriptionNames']['CommonNames'] = self::$CommonNames;
         $params['prescriptionOptions'] = self::getPrescriptionOptionList();
 
         $items = $this->getCartItems();
@@ -43,10 +43,14 @@ class ShoppingCartController extends BaseController {
 
         $isAllPrescriptionComplete = true;
         foreach ($items as $item) {
+            $isRequired = $this->isPrescriptionRequired($item);
             $isEntered = $this->isPrescriptionEntered($item);
             $params['isPrescriptionEntered'][$item->order_line_item_id] = $isEntered;
-            if (!$isEntered && !$item->is_plano) {
-                $isAllPrescriptionComplete = false;
+            $params['isPrescriptionRequired'][$item->order_line_item_id] = $isRequired;
+            if ($isRequired) {
+                if (!$isEntered) {
+                    $isAllPrescriptionComplete = false;
+                }
             }
         }
         $params['isAllPrescriptionComplete'] = $isAllPrescriptionComplete;
@@ -55,7 +59,7 @@ class ShoppingCartController extends BaseController {
         $coupon = CouponController::getCoupon();
         $params['coupon'] = $coupon;
         $this->calculatePrice($items, $coupon);
-        
+
         $params['totalPrice'] = $this->totalPrice;
         $params['totalDiscount'] = $this->totalDiscount;
         $params['netPrice'] = $this->netPrice;
@@ -67,18 +71,23 @@ class ShoppingCartController extends BaseController {
         $params['pageTitle'] = "结算 - 目光之城";
 
         $items = $this->getCartItems();
-        if (count($items) == 0){
+        if (count($items) == 0) {
             return Redirect::to('/');
         }
         $params['items'] = $items;
         foreach ($items as $item) {
-            if (!$this->isPrescriptionEntered($item) && !$item->is_plano) {
-                return Redirect::to('shopping-cart')->with('error', '请完整填写所有验光单');
+            $isRequired = $this->isPrescriptionRequired($item);
+            $params['isPrescriptionRequired'][$item->order_line_item_id] = $isRequired;
+            if ($isRequired){
+                if (!$this->isPrescriptionEntered($item)){
+                    return Redirect::action('ShoppingCartController@getMyCart')
+                                    ->with('error', '请完整填写所有验光单');
+                }
             }
         }
         $coupon = CouponController::getCoupon();
         $this->calculatePrice($items, $coupon);
-        
+
         $params['totalDiscount'] = $this->totalDiscount;
         $params['netPrice'] = $this->netPrice;
 
@@ -95,9 +104,9 @@ class ShoppingCartController extends BaseController {
         }
         $params['newAddress'] = new Address;
 
-        $params['O_S_LEFTNames'] = self::$O_S_LEFTNames;
-        $params['O_D_RIGHTNames'] = self::$O_D_RIGHTNames;
-        $params['CommonNames'] = self::$CommonNames;
+        $params['prescriptionNames']['O_S_LEFTNames'] = self::$O_S_LEFTNames;
+        $params['prescriptionNames']['O_D_RIGHTNames'] = self::$O_D_RIGHTNames;
+        $params['prescriptionNames']['CommonNames'] = self::$CommonNames;
 
         return View::make('pages.checkout', $params);
     }
@@ -233,7 +242,7 @@ class ShoppingCartController extends BaseController {
         $prescription->member = Auth::id();
         $prescription->save();
     }
-    
+
     public function getTotalDiscount() {
         return $this->totalDiscount;
     }
@@ -242,6 +251,8 @@ class ShoppingCartController extends BaseController {
         return $this->netPrice;
     }
 
-
+    private function isPrescriptionRequired($item) {
+        return $item->lens_type != 1 && !$item->is_plano;
+    }
 
 }

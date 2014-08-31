@@ -17,7 +17,7 @@
             @foreach($prescriptions as $prescription)
             <h4>{{ $prescription->name }}</h4>
             <hr>
-            @include('components.order-page.prescription-table', array('prescription'=>$prescription, 'O_S_LEFTNames'=>$O_S_LEFTNames, 'O_D_RIGHTNames'=>$O_D_RIGHTNames,'CommonNames'=>$CommonNames))  
+            @include('components.order-page.prescription-table', array('prescription'=>$prescription, 'prescriptionNames'=>$prescriptionNames))  
 
             <div class="pull-right">
                 {{ Form::open(array('action'=>'MemberAccountController@postDeletePrescription')) }}

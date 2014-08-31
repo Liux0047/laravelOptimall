@@ -13,19 +13,19 @@
         <tbody>
             <tr>
                 <th valign="middle">左眼</th>
-                @foreach($O_S_LEFTNames as $O_S_LEFTName)
+                @foreach($prescriptionNames['O_S_LEFTNames'] as $O_S_LEFTName)
                 <td valign="middle">{{ $prescription->$O_S_LEFTName }}</td>
                 @endforeach
             </tr>
             <tr>
                 <th valign="middle">右眼</th>
-                @foreach($O_D_RIGHTNames as $O_D_RIGHTName)
+                @foreach($prescriptionNames['O_D_RIGHTNames'] as $O_D_RIGHTName)
                 <td valign="middle">{{ $prescription->$O_D_RIGHTName }}</td>
                 @endforeach
             </tr>
             <tr>                
                 <th valign="middle">瞳距(cm)</th>
-                @foreach($CommonNames as $CommonName)
+                @foreach($prescriptionNames['CommonNames'] as $CommonName)
                 <td valign="middle">{{ $prescription->$CommonName }}</td>
                 @endforeach
                 <td></td><td></td><td></td>

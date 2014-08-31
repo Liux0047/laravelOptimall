@@ -10,9 +10,9 @@ class MemberAccountController extends BaseController {
     public function getShoppingHistory() {
         $params['pageTitle'] = "已下单 - 我的目光之城";
 
-        $params['O_S_LEFTNames'] = ShoppingCartController::$O_S_LEFTNames;
-        $params['O_D_RIGHTNames'] = ShoppingCartController::$O_D_RIGHTNames;
-        $params['CommonNames'] = ShoppingCartController::$CommonNames;
+        $params['prescriptionNames']['O_S_LEFTNames'] = ShoppingCartController::$O_S_LEFTNames;
+        $params['prescriptionNames']['O_D_RIGHTNames'] = ShoppingCartController::$O_D_RIGHTNames;
+        $params['prescriptionNames']['CommonNames'] = ShoppingCartController::$CommonNames;
 
         $orders = PlacedOrder::ofMember(Auth::id())->get();
         $params['orders'] = $orders;
@@ -54,9 +54,9 @@ class MemberAccountController extends BaseController {
     public function getMyPrescription () {
         $params['pageTitle'] = "验光单 - 我的目光之城";
         $params['prescriptions'] = Prescription::ofMember(Auth::id())->get();
-        $params['O_S_LEFTNames'] = ShoppingCartController::$O_S_LEFTNames;
-        $params['O_D_RIGHTNames'] = ShoppingCartController::$O_D_RIGHTNames;
-        $params['CommonNames'] = ShoppingCartController::$CommonNames;
+        $params['prescriptionNames']['O_S_LEFTNames'] = ShoppingCartController::$O_S_LEFTNames;
+        $params['prescriptionNames']['O_D_RIGHTNames'] = ShoppingCartController::$O_D_RIGHTNames;
+        $params['prescriptionNames']['CommonNames'] = ShoppingCartController::$CommonNames;
         return View::make('pages.member.my-prescription', $params);
     }
     

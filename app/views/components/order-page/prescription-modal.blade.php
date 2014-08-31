@@ -47,7 +47,7 @@
             <tbody>
                 <tr>
                     <th valign="middle">左眼</th>
-                    @foreach($O_S_LEFTNames as $O_S_LEFTName)
+                    @foreach($prescriptionNames['O_S_LEFTNames'] as $O_S_LEFTName)
                     <td valign="middle">
                         <select name="{{ $O_S_LEFTName }}" id="{{ $O_S_LEFTName }}" data-placeholder="请选择" class="chosen-select" style="width:100px;">
                             @foreach($prescriptionOptions[$O_S_LEFTName] as $prescriptionOption)
@@ -63,7 +63,7 @@
                 </tr>
                 <tr>
                     <th valign="middle">左眼</th>
-                    @foreach($O_D_RIGHTNames as $O_D_RIGHTName)
+                    @foreach($prescriptionNames['O_D_RIGHTNames'] as $O_D_RIGHTName)
                     <td valign="middle">
                         <select name="{{ $O_D_RIGHTName }}" id="{{ $O_D_RIGHTName }}" data-placeholder="请选择" class="chosen-select" style="width:100px;">
                             @foreach($prescriptionOptions[$O_D_RIGHTName] as $prescriptionOption)
@@ -86,7 +86,7 @@
                     </a>
                 </th>
 
-                @foreach($CommonNames as $CommonName)
+                @foreach($prescriptionNames['CommonNames'] as $CommonName)
                 <td valign="middle">
                     <select name="{{ $CommonName }}" id="{{ $CommonName }}" data-placeholder="请选择" class="chosen-select" style="width:100px;">
                         @foreach($prescriptionOptions[$CommonName] as $prescriptionOption)
