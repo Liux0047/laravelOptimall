@@ -510,12 +510,11 @@ navbar row category*/
     margin-bottom: 0px;
     min-height: 37px;
     z-index: 998;
+    border-bottom: 1px solid #EEEEEE;
 }
 
 .navbar-inverse {
-    //background-color: #dd3b5e;
     background-color: white;
-    border-color: #B31C3D;
     font-size: 1.0em;
 }
 
@@ -538,6 +537,7 @@ navbar row category*/
 .navbar-inverse .navbar-nav>.open>a,.navbar-inverse .navbar-nav>.open>a:hover, 
 .navbar-inverse .navbar-nav>li>a:hover,.navbar-inverse .navbar-nav .open .dropdown-menu>li>a:hover,
 .navbar-inverse .navbar-nav .open .dropdown-menu>li>a:focus ,.navbar-inverse .dropdown-menu>li>a:hover,
+.navbar-inverse .navbar-header a.navbar-brand:hover,
 .navbar-nav>li>a.hovered{
     color: #fff;
     background-color:  #B31C3D;

@@ -8,7 +8,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/optimall/">Optimall</a> 
+                    <a class="navbar-brand" href="{{ asset('/') }}">目光之城</a> 
                 </div>
                 <div id="navbar-collapse-1" class="navbar-collapse navbar-responsive-collapse collapse">
                     <ul class="nav navbar-nav">
