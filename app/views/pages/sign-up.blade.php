@@ -41,6 +41,12 @@
                 </div>
             </div>
             <div class="form-group">
+                <label for="ambassador_code" class="col-md-2 control-label">邀请码</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="ambassador_code" name="ambassador_code" placeholder="请输入对方提供的邀请码">
+                </div>
+            </div>
+            <div class="form-group">
                 <div class="col-md-offset-2 col-md-4">
                     <div class="checkbox">
                         <input type="checkbox" name="agree_terms" id="agree_terms">

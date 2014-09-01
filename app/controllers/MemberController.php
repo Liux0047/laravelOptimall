@@ -11,7 +11,7 @@ class MemberController extends BaseController {
         $email = Input::get('email');
         $password = Input::get('password');
         $rememberMe = Input::get('remember_me');
-        if (Auth::attempt(array('email' => $email, 'password' => $password, 'com_code' => null), $rememberMe)) {            
+        if (Auth::attempt(array('email' => $email, 'password' => $password, 'reg_code' => null), $rememberMe)) {            
             if (Request::ajax()){
                 return Response::json(array('isValidAccount' => 1));                
             }
@@ -36,6 +36,12 @@ class MemberController extends BaseController {
         $email = Input::get('email');
         $password = Input::get('password');
         $confirmPassword = Input::get('confirm_password');
+        
+        if (Input::has('ambassador_code')){
+            if (!AmbassadorController::isAmbassadorCodeValid(Input::get('ambassador_code'))){
+                return Redirect::back()->with('message', '邀请码不存在，请重新输入');
+            }
+        }
 
         if ($password !== $confirmPassword) {
             return Redirect::to('sign-up')->with('message', ' 两次输入的密码不符合');
@@ -44,12 +50,17 @@ class MemberController extends BaseController {
         $member->nickname = $nickname;
         $member->email = $email;
         $member->password = Hash::make($password);
-        $member->com_code = $this->generateGUID();
+        $member->reg_code = $this->generateGUID();
         $member->save();
+        
+        //create ambassador relationship
+        if (Input::has('ambassador_code')){
+            AmbassadorController::createAmbassadorRealtion($member->member_id, Input::get('ambassador_code'));
+        }
 
         //send email
         $data['email'] = $email;
-        $data['link'] = URL::to('sign-up/verify'.'/'.$email.'/'.$member->com_code);
+        $data['link'] = URL::to('sign-up/verify'.'/'.$email.'/'.$member->reg_code);
         Mail::queue('emails.auth.verify-registration', $data, function($message) {
             $nickname = Input::get('nickname');
             $email = Input::get('email');
@@ -62,8 +73,8 @@ class MemberController extends BaseController {
     public function verifyRegistration($email, $comCode) {
         $member = Member::where('email', '=', $email)->firstOrFail();
         $params = array();
-        if ($member->com_code == $comCode) {
-            $member->com_code = null;
+        if ($member->reg_code == $comCode) {
+            $member->reg_code = null;
             $member->save();
             $params['isSuccessful'] = true;
         }

@@ -43,7 +43,7 @@ class Coupon extends Eloquent {
      * one to manay relationship to coupon usage
      */
     public function couponUsages (){
-        return $this->hasMany('CouponUsage');
+        return $this->hasMany('CouponUsage', 'coupon_id');
     }
 
 }

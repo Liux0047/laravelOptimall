@@ -32,7 +32,6 @@ Route::get('login', 'MemberController@showLoginPage');
  */
 Route::post('login', 'MemberController@login');
 
-
 /*
  * Route to sign up
  */
@@ -46,7 +45,7 @@ Route::post('sign-up', 'MemberController@processSignUp');
 /*
  * Route to verify registration
  */
-Route::get('sign-up/verify/{email}/{com_code}', 'MemberController@verifyRegistration');
+Route::get('sign-up/verify/{email}/{reg_code}', 'MemberController@verifyRegistration');
 
 
 Route::group(array('before' => 'auth'), function() {
@@ -84,22 +83,22 @@ Route::group(array('before' => 'auth'), function() {
      * Route to checkout
      */
     Route::get('shopping-cart/checkout', 'ShoppingCartController@getCheckout');
-    
+
     /*
      * Route to coupon Controller
      */
     Route::controller('coupon', 'CouponController');
-        
+
     /*
      * Route to address controller
      */
-    Route::controller('address','AddressController');
-        
+    Route::controller('address', 'AddressController');
+
     /*
      * Route to member account functions
      */
     Route::controller('member', 'MemberAccountController');
-    
+
     /*
      * Route to submit order into Alipay
      */
@@ -107,7 +106,7 @@ Route::group(array('before' => 'auth'), function() {
     /*
      * Route to re-submit the payment
      */
-    Route::post('alipay/re-submit-payment','OrderController@postReSubmitPayment');
+    Route::post('alipay/re-submit-payment', 'OrderController@postReSubmitPayment');
     /*
      * Route to Alipay notify URL
      */
@@ -116,17 +115,27 @@ Route::group(array('before' => 'auth'), function() {
      * Route to Alipay return
      */
     Route::get('alipay/return', 'AlipayController@getReturn');
+
+    /*
+     * Route to ambassador creation page
+     */
+    Route::get('ambassador/', 'AmbassadorController@getAmabassador');
+    
+    /*
+     * Route to process create ambassador
+     */
+    Route::post('ambassador/create-ambassador', 'AmbassadorController@postCreateAmbassador');
 });
 
 /*
  * Route to prodct gallery page
  */
-Route::get('gallery','productController@getGallery');
+Route::get('gallery', 'productController@getGallery');
 
 /*
  * Route to ajax load more products in gallery page
  */
-Route::post('gallery/load-more-products','ProductController@postShowRemainingModels');
+Route::post('gallery/load-more-products', 'ProductController@postShowRemainingModels');
 
 /*
  * Route to about page
