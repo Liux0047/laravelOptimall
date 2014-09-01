@@ -100,12 +100,12 @@ class MemberAccountController extends BaseController {
         $refund->quantity = $quantity;
 
         if (Input::hasFile('photo') && Input::file('photo')->isValid()) {
-            if (Input::file('photo')->getSize() < 4 * pow(2, 20)) {
+            if (Input::file('photo')->getSize() < 2 * pow(2, 20)) {
                 $path = public_path();
                 Input::file('photo')->move($path.'/images/uploads/refunds/', $item->order_line_item_id.".jpg");
             }
             else {
-                return Redirect::back()->with('error', '文件尺寸过大，请重新上传');
+                return Redirect::action('MemberAccountController@getShoppingHistory')->with('error', '文件尺寸过大，请重新上传');
             }
         }
 

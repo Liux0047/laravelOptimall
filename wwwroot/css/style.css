@@ -81,6 +81,9 @@ img {
 .font-black{
     color:black;
 }
+.font-green {
+    color: #009900;
+}
 .no-display {    
     display: none;
 }
@@ -1197,7 +1200,7 @@ footer a {
 span.jq-validate-error, p.jq-validate-error {
     padding-left: 2px;
     position: relative;
-    top: 2px;;
+    top: 5px;;
     color: orange;
 }
 .jq-validate-error span.jq-validate-valid{
@@ -1246,6 +1249,10 @@ input.jq-validate-error{
 }
 .order-summary-table .modal{
     text-align: left;
+}
+.order-summary-table tbody tr td img.item-small-view {
+    width:110px;
+    height: 67px;
 }
 
 /* view item */

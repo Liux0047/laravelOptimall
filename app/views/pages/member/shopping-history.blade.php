@@ -10,6 +10,7 @@
     <div class="row">
         @include('components.member-account.side-nav', array('entry'=>1))
         <div class="col-xs-12 col-sm-10">
+            @include('components.page-frame.message-bar')
             @if (count($orders))
             @foreach ($orders as $order)
             @include('components.member-account.item-info', array('order'=>$order, 'items'=>$items[$order->order_id],'prescriptionNames'=>$prescriptionNames))
@@ -21,4 +22,53 @@
         </div><!--col-md-10-->
     </div><!--/row-->
 </div>
+@stop
+
+
+
+@section('link-script')
+@parent
+{{ HTML::script('plugins/jQuery-Validation/jquery.validate.min.js') }}
+{{ HTML::script('js/jQuery-Validation-customize.js') }}
+@stop
+
+
+@section('script')
+@parent
+<script type="text/javascript">
+$(document).ready(function() {
+    // validate signup form on keyup and submit
+    var warningIcon = "<i class='fa fa-warning fa-lg'></i> ";
+    $(".refund-form").validate({
+        rules: {
+            reason: {
+                required: true,
+                maxlength: 150
+            }
+        },
+        messages: {
+            reason: {
+                required: warningIcon + "请填写退款理由",
+                maxlength: warningIcon + "请不要超过150字"
+            }
+        },
+        errorElement: "span",
+        errorPlacement: function(error, element) {
+            error.appendTo($(element).parent());
+        },
+        validClass: "",
+        errorClass: "jq-validate-error",
+        //ignore: [], //validate hidden input
+        onkeyup: function(element) {
+            $(element).valid();
+        },
+        onfocusout: function(element) {
+            $(element).valid();
+        },
+        //onkeyup: true,
+        //onfocusout: true,
+        onclick: true
+    });
+});
+</script>
 @stop

@@ -128,7 +128,7 @@
                                                     <textarea class="form-control" rows="3" name="reason" placeholder="150字以内"></textarea>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="reason">附图(4M以内, jpg格式): </label>
+                                                    <label for="reason">附图(2M以内, jpg格式): </label>
                                                     {{ Form::file('photo') }}
                                                 </div>                                                
                                                 <p>
