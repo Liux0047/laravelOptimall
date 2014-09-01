@@ -22,11 +22,24 @@ class PlacedOrder extends Eloquent {
      * @var array
      */
     //protected $hidden = array('password', 'remember_token');
-    
+
     /*
      * query for orders belonging to this member
      */
     public function scopeOfMember($query, $id) {
-        return $query->where('member','=',$id);
+        return $query->where('member', '=', $id);
     }
+
+    /*
+     * query for first-time orders belonging to this ambassador
+     */
+
+    public function ofAmbassadorFirstOrder($query, $id) {
+        return $query->join('ambassador_relation', 'ambassador_relation.invited_member', '=', ' orders_placed.member')
+                        ->where('cambassador_relation.ambassador', '=', $id)
+                        ->where('is_first_purchase', '=', 'true');
+    }
+    
+    
+
 }

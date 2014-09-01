@@ -91,8 +91,13 @@ class OrderController extends BaseController{
         $order->invoice_header = Input::get('invoice_header');
         $order->message_to_seller = Input::get('message_to_seller');
         
+        // take note of the coupon used, if any
         if (isset($couponId)){
             $order->coupon = $couponId;
+        }
+        // check if this is the first purchase
+        if (PlacedOrder::ofMember(Auth::id())->count() == 0){
+            $order->is_first_purchase = true;
         }
         
         $order->save();

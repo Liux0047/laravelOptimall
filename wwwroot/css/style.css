@@ -104,6 +104,12 @@ div.vertical-divider {
     overflow-y: auto;
 }
 
+/* table modification */
+.table tr.obscure>td, .table tr>td.obscure {
+    background-color: #f7f7f9;
+    color: #B8B8B8;
+}
+
 
 /* popover modification */
 .popover {     
