@@ -52,14 +52,14 @@
                             <td width="15%">镜片</td>
                             <td width="10%">单价</td>
                             <td width="10%">订购数量</td>      
-                            <td width="20%"></td>
+                            <td width="20%">商品操作</td>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($items as $item)
                         <tr>
                             <td>
-                                {{ HTML::image('images/gallery/'.$item->model.'/'.$item->product.'/medium-view-3.jpg','', array('class'=>'product-img-tiny')) }}
+                                {{ HTML::image('images/gallery/'.$item->model.'/'.$item->product.'/medium-view-3.jpg','', array('class'=>'item-small-view')) }}
                             </td>
                             <td>{{ $item->model_name_cn }}</td>
                             <td> 
@@ -97,6 +97,63 @@
                                     </div><!-- /.modal-dialog -->
                                 </div><!-- /.modal -->
                                 @endif
+                                {{-- enable refund modal if status more than paid --}}
+                                @if($order->order_status > 1)
+                                @if(!isset($item->refund))
+                                <p>
+                                    <a href="#" data-toggle="modal" data-target="#refund_{{ $item->order_line_item_id }}" >
+                                        申请退款
+                                    </a>
+                                </p>
+                                {{ Form::open(array('action'=>'MemberAccountController@postClaimRefund', 'class'=>'refund-form','files'=>true)) }}
+                                {{ Form::hidden('order_line_item_id', $item->order_line_item_id) }}
+                                <div class="modal fade" id="refund_{{ $item->order_line_item_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+                                    <div class="modal-dialog" >
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                <h4 class="modal-title">退款申请表</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label for="quantity">退货数量: </label>
+                                                    <select class="form-control" name="quantity">
+                                                        @for($i=1; $i<= $item->quantity; $i++)
+                                                        <option value="{{ $i }}">{{ $i }}</option>
+                                                        @endfor                                                  
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="reason">退货原因: </label>
+                                                    <textarea class="form-control" rows="3" name="reason" placeholder="150字以内"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="reason">附图(4M以内, jpg格式): </label>
+                                                    {{ Form::file('photo') }}
+                                                </div>                                                
+                                                <p>
+                                                    退货的一些说明
+                                                </p>
+
+                                                
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
+                                                {{ Form::submit('提交申请', array('class'=>'btn btn-primary btn-sm'))}}
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
+                                </div><!-- /.modal -->
+                                {{ Form::close()}}
+                                @else
+                                <p>
+                                    <a href="#" data-toggle="modal" data-target="#refund_{{ $item->order_line_item_id }}" >
+                                        查看退款详情
+                                    </a>
+                                    @include('components.member-account.refund-info-modal', array('item'=>$item))
+                                </p>
+                                @endif
+                                @endif
                             </td>
                         </tr>
                         @endforeach
@@ -106,3 +163,5 @@
         </div>
     </div>
 </div>
+
+

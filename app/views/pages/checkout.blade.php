@@ -134,23 +134,23 @@
 	 $(document).ready(function() {
 	 	$("#toggle_address").change(function() {
 	 		if (this.checked) {
-	 			$("#address_section").slideUp();
-	 			$("#address_summary").slideUp();
+	 			$("#address_section").hide(300);
+	 			$("#address_summary").hide(300);
 	 			$("input[name='use_alipay_address']").val('1');
 	 		}
 	 		else {
-	 			$("#address_section").slideDown();
-	 			$("#address_summary").slideDown();
+	 			$("#address_section").show(300);
+	 			$("#address_summary").show(300);
 	 			$("input[name='use_alipay_address']").val('0');
 	 		}
 	 	});      
 
 	 	$("#is_invoice_required").change(function() {
 	 		if (this.checked) {
-	 			$("#invoice_header").slideDown(300);	 			
+	 			$("#invoice_header").show(300);	 			
 	 		}
 	 		else {
-	 			$("#invoice_header").slideUp(300);
+	 			$("#invoice_header").hide(300);
 	 		}
 	 	});                
 

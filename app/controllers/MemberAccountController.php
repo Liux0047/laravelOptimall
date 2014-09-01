@@ -74,8 +74,8 @@ class MemberAccountController extends BaseController {
         $params['reward'] = array();
         $params['totalReward'] = 0;
         //$params['ambassadorOrders'] = AmbassadorView::ofAmbassador(Auth::id());
-        $orders = AmbassadorView::ofAmbassador(58)->get();
-        $params['ambassadorOrders'] = $orders;        
+        $orders = AmbassadorView::ofAmbassador(Auth::id())->get();
+        $params['ambassadorOrders'] = $orders;
         foreach ($orders as $order) {
             if ($order->is_first_purchase) {
                 $params['reward'][$order->order_id] = $order->total_transaction_amount * Config::get('optimall.ambassadorFirstReward');
@@ -85,10 +85,34 @@ class MemberAccountController extends BaseController {
             if (!$order->is_ambassador_reward_claimed) {
                 $params['totalReward'] += $params['reward'][$order->order_id];
             }
-            
-        }        
-        
+        }
         return View::make('pages.member.ambassador-panel', $params);
+    }
+
+    public function postClaimRefund() {
+        $refund = new Refund;
+        $item = OrderLineItem::find(Input::get('order_line_item_id'));
+        $refund->reason = Input::get('reason');
+        $quantity = Input::get('quantity', 1);
+        if ($quantity > $item->quantity) {   //if input quantity exceeds the line item quantity
+            $quantity = $item->quantity;
+        }
+        $refund->quantity = $quantity;
+
+        if (Input::hasFile('photo') && Input::file('photo')->isValid()) {
+            if (Input::file('photo')->getSize() < 4 * pow(2, 20)) {
+                $path = public_path();
+                Input::file('photo')->move($path.'/images/uploads/refunds/', $item->order_line_item_id.".jpg");
+            }
+            else {
+                return Redirect::back()->with('error', '文件尺寸过大，请重新上传');
+            }
+        }
+
+        $refund->save();
+        $item->refund = $refund->refund_id;
+        $item->save();
+        return Redirect::back()->with('status', '退款申请提交成功');
     }
 
 }

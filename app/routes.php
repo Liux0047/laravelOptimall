@@ -125,6 +125,17 @@ Route::group(array('before' => 'auth'), function() {
      * Route to process create ambassador
      */
     Route::post('ambassador/create-ambassador', 'AmbassadorController@postCreateAmbassador');
+    
+    /*
+     * Route to change alipay address
+     */
+    Route::post('ambassador/change-alipay-account', 'AmbassadorController@postChangeAlipayAccount');
+    
+    /*
+     * Route to claim rewards
+     */
+    Route::post('ambassador/claim-rewards', 'AmbassadorController@postClaimRewards');    
+    
 });
 
 /*
@@ -153,6 +164,7 @@ Route::when('shopping-cart/*', 'csrf', array('post'));
 Route::when('coupon/*', 'csrf', array('post'));
 Route::when('address/*', 'csrf', array('post'));
 Route::when('member/*', 'csrf', array('post'));
+Route::when('ambassador/*', 'csrf', array('post'));
 
 /*
  * View composer to add number of shopping cart items into top banner
