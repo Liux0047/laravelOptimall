@@ -106,7 +106,8 @@ function loadMoreModels() {
 		$("#product_cards_container").append(data);
 		ratyInit();
 		$("img.lazy").lazyload();
-		$(".color-icon-link").click(colorIconClickFunc);
+		$(".color-icon-link").click(colorIconClickFunc);		
+		$(".ajax-load-container").fadeIn(1000);
 	})
 	.fail(function() {
         //if the connection to database failed
