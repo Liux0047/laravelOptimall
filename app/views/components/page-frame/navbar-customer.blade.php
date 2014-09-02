@@ -153,14 +153,14 @@
                                             <input type="password" class="form-control" id="login_password" onkeyup="enableSubmit();" name="login_password" placeholder="密码">
                                         </div>
                                         <p class="help-block pull-right">
-                                            <a href="/optimall/forget-password.php">
+                                            <a href="{{ action('RemindersController@getRemind') }}">
                                                 忘记密码?     
                                             </a>
                                         </p>
                                     </div>
                                     <div class="form-group">
                                         <label class="checkbox-inline">
-                                            <input type="checkbox" id="remember_me" name="remember_me">记住我
+                                            <input type="checkbox" id="remember_me" name="remember_me" checked>记住我
                                         </label>
                                     </div>
                                     <div class="pull-right">

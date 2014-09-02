@@ -11,7 +11,7 @@
 	<div class="page-header">
 		<h2>选择收货地址 <small>Subtext for header</small></h2>
 	</div>      
-	<div class="row" id="address_section">
+	<div class="row no-display" id="address_section">
 		@foreach ($addresses as $address)
 		<div class="col-md-4">
 			@include('components.order-page.address-box', array('modalAction'=>'edit', 'address'=>$address, 'selectedAddress'=>$selectedAddress))
@@ -132,6 +132,8 @@
 	 * hide or show address area in respond to choose_alipay_address selection
 	 */
 	 $(document).ready(function() {
+	 	$("#address_section").show(300);   
+
 	 	$("#toggle_address").change(function() {
 	 		if (this.checked) {
 	 			$("#address_section").hide(300);
