@@ -14,13 +14,13 @@
             <div class="fotorama"  data-allowfullscreen="native"  data-auto="false">
                 @for ($i = 1; $i <= 4; $i++)
                 <a href="{{ asset('images/gallery/'.$model->model_id.'/'.$product->product_id.'/medium-view-'.$i.'.jpg') }}" 
-                 data-thumb="{{ asset('images/gallery/'.$model->model_id.'/'.$product->product_id.'/medium-view-'.$i.'.jpg') }}" 
-                 data-full="{{ asset('images/gallery/'.$model->model_id.'/'.$product->product_id.'/large-view-'.$i.'.jpg') }}">           
-             </a>  
-             @endfor      
-         </div>
-     </div>
-     <div class="col-md-4">
+                   data-thumb="{{ asset('images/gallery/'.$model->model_id.'/'.$product->product_id.'/medium-view-'.$i.'.jpg') }}" 
+                   data-full="{{ asset('images/gallery/'.$model->model_id.'/'.$product->product_id.'/large-view-'.$i.'.jpg') }}">           
+               </a>  
+               @endfor      
+           </div>
+       </div>
+       <div class="col-md-4">
         <h3>
             <strong>{{ $model->model_name_cn }}</strong>
             <small class="font-brown">
@@ -110,17 +110,17 @@
                 <td>
                     @for ($i=0; $i<count($lensTypes); $i++)
                     <div class="lens-selection-container">
-                       <div class="selection-box lens-selection-box 
-                       @if ($i == 0) 
-                       selected
-                       @endif
-                       " id="lens_{{ $lensTypes[$i]->lens_type_id }}" 
-                       onclick="changeLens({{ $lensTypes[$i]->lens_type_id }}, {{ $lensTypes[$i]->price }}, {{ $model->price }}, {{ $model->price * 1.5 }});" > 
-                       {{ $lensTypes[$i]->title_cn }} 
-                       (套餐价:<strong>¥{{ number_format($lensTypes[$i]->price, 2) }}</strong>)
-                       <i class='fa fa-check'></i>
-                   </div>
-                   <a href="#" data-toggle="popover"  data-title="{{ $lensTypes[$i]->title_cn }}" 
+                     <div class="selection-box lens-selection-box 
+                     @if ($i == 0) 
+                     selected
+                     @endif
+                     " id="lens_{{ $lensTypes[$i]->lens_type_id }}" 
+                     onclick="changeLens({{ $lensTypes[$i]->lens_type_id }}, {{ $lensTypes[$i]->price }}, {{ $model->price }}, {{ $model->price * 1.5 }});" > 
+                     {{ $lensTypes[$i]->title_cn }} 
+                     (套餐价:<strong>¥{{ number_format($lensTypes[$i]->price, 2) }}</strong>)
+                     <i class='fa fa-check'></i>
+                 </div>
+                 <a href="#" data-toggle="popover"  data-title="{{ $lensTypes[$i]->title_cn }}" 
                     data-content="{{ $lensTypes[$i]->description_cn }}" >
                     <i class='fa fa-info-circle fa-lg'></i> 
                 </a>
@@ -149,8 +149,9 @@
 
 @section("link-script")
 @parent
-{{ HTML::script('plugins/raty-2.5.2/jquery.raty.min.js') }}
+{{ HTML::script('plugins/raty-2.7.0/jquery.raty.js') }}
 {{ HTML::script('plugins/fotorama-4.5.2/fotorama.js') }}
+{{ HTML::script('plugins/jQuery-Knob/jquery.knob.min.js') }}
 @stop
 
 @section("script")
@@ -171,64 +172,64 @@ var fotoramaInit = function() {
 }
 fotoramaInit();
 
-    //change color option box based on click
-    function changeColor(productId) {
-        $(".color-selection-box").removeClass("selected");
-        $(".color-selection-box#color_" + productId).addClass("selected");
-        //change the hidden input value
-        $("input[name='product_id']").val(productId);
-        changeProductPic(productId);
-    }
-    
-    //chnage product pic after color choice
-    function changeProductPic(productId) {
-        $("#product_pic_container").html("");
-        $("#product_pic_container").append("<div class='fotorama' data-allowfullscreen='native'  data-auto='false'>");
-        @for ($i=1; $i<=4; $i++)            
-        $("#product_pic_container .fotorama").append(
-            "<a href='{{ asset('images/gallery/'.$model->model_id) }}/" + productId + "/medium-view-{{ $i }}.jpg' " +
-            "data-thumb='{{ asset('images/gallery/'.$model->model_id) }}/" + productId + "/medium-view-{{ $i }}.jpg' " +
-            "data-full='{{ asset('images/gallery/'.$model->model_id) }}/" + productId + "/large-view-{{ $i }}.jpg'> "
-            );
-        @endfor
-        $("#product_pic_container").append("</div>");
-        fotoramaInit();       
-    }
-    
-    //change lens based on click
-    function changeLens(lensId, lensPrice, basePrice, baseMarketPrice) {
-        $(".lens-selection-box").removeClass("selected");
-        $(".lens-selection-box#lens_" + lensId).addClass("selected");
-        //change the hidden input value
-        $("input[name='lens_type']").val(lensId);
-        //change the sales price
-        var newPrice = basePrice + lensPrice;
-        document.getElementById("sales-price").innerHTML = newPrice.toFixed(2);
-        //change the markete price
-        var newMarketPrice = baseMarketPrice + lensPrice;
-        document.getElementById("market-price").innerHTML = newMarketPrice.toFixed(2);
-    }
+//change color option box based on click
+function changeColor(productId) {
+    $(".color-selection-box").removeClass("selected");
+    $(".color-selection-box#color_" + productId).addClass("selected");
+    //change the hidden input value
+    $("input[name='product_id']").val(productId);
+    changeProductPic(productId);
+}
 
-    //enable popover
-    $(document).ready(function() {
-        $('.lens-selection-container a').popover({
-            trigger: 'hover',
-            html: 'true',
-            placement: 'bottom',
-            container: 'body'
-        });
+//chnage product pic after color choice
+function changeProductPic(productId) {
+    $("#product_pic_container").html("");
+    $("#product_pic_container").append("<div class='fotorama' data-allowfullscreen='native'  data-auto='false'>");
+    @for ($i=1; $i<=4; $i++)            
+    $("#product_pic_container .fotorama").append(
+        "<a href='{{ asset('images/gallery/'.$model->model_id) }}/" + productId + "/medium-view-{{ $i }}.jpg' " +
+        "data-thumb='{{ asset('images/gallery/'.$model->model_id) }}/" + productId + "/medium-view-{{ $i }}.jpg' " +
+        "data-full='{{ asset('images/gallery/'.$model->model_id) }}/" + productId + "/large-view-{{ $i }}.jpg'> "
+        );
+    @endfor
+    $("#product_pic_container").append("</div>");
+    fotoramaInit();       
+}
+
+//change lens based on click
+function changeLens(lensId, lensPrice, basePrice, baseMarketPrice) {
+    $(".lens-selection-box").removeClass("selected");
+    $(".lens-selection-box#lens_" + lensId).addClass("selected");
+    //change the hidden input value
+    $("input[name='lens_type']").val(lensId);
+    //change the sales price
+    var newPrice = basePrice + lensPrice;
+    document.getElementById("sales-price").innerHTML = newPrice.toFixed(2);
+    //change the markete price
+    var newMarketPrice = baseMarketPrice + lensPrice;
+    document.getElementById("market-price").innerHTML = newMarketPrice.toFixed(2);
+}
+
+//enable popover
+$(document).ready(function() {
+    $('.lens-selection-container a').popover({
+        trigger: 'hover',
+        html: 'true',
+        placement: 'bottom',
+        container: 'body'
     });
+});
 
-    //scroll to tab content
-    $('#review_count_button').click(function(e) {
-        e.preventDefault();
-        $("#user_review_tab").trigger("click");
-        $('html, body').animate({
-            scrollTop: ($('.nav-tabs').offset().top) - 100
-        }, 1000);
-        return false;
-    });
+//scroll to tab content
+$('#review_count_button').click(function(e) {
+    e.preventDefault();
+    $("#user_review_tab").trigger("click");
+    $('html, body').animate({
+        scrollTop: ($('.nav-tabs').offset().top) - 100
+    }, 1000);
+    return false;
+});
 
-
-    </script>       
-    @stop
+</script>       
+@include('components.product-page.jquery-knob-js')
+@stop
