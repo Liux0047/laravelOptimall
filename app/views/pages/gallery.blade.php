@@ -107,7 +107,9 @@ function loadMoreModels() {
 		ratyInit();
 		$("img.lazy").lazyload();
 		$(".color-icon-link").click(colorIconClickFunc);		
-		$(".ajax-load-container").fadeIn(1000);
+		$(".ajax-load-container").show(300, function() {
+			$(this).hide().fadeIn(1000);
+		});
 	})
 	.fail(function() {
         //if the connection to database failed

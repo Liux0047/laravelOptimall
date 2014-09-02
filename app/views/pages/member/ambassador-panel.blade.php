@@ -42,7 +42,7 @@
                         <tr @if($order->is_ambassador_reward_claimed) class="obscure" @endif>
                             <td>{{ $order->nickname }}</td>
                             <td>{{ $order->email }}</td>
-                            <td>{{ $order->created_at }}</td>
+                            <td>{{ $order->order_created_at }}</td>
                             <td>¥{{ number_format($order->total_transaction_amount, 2) }}</td>
                             <td>
                                 @if($order->is_first_purchase)

@@ -21,11 +21,12 @@ class AmbassadorView extends Eloquent {
      *
      * @var array
      */
-    
     /*
      * Dynamic scope to query all orders belonging to this ambassador
      */
-    public function scopeOfAmbassador ($query, $id){
-        return $query->where('ambassador','=', $id);
+    public function scopeOfAmbassador($query, $id) {                
+        return $query->where('ambassador', '=', $id);
+                                        
     }
+
 }
