@@ -97,14 +97,28 @@
                                     </div><!-- /.modal-dialog -->
                                 </div><!-- /.modal -->
                                 @endif
-                                {{-- enable refund modal if status more than paid --}}
+
+                                {{-- enable review and refund modal if status more than paid --}}
                                 @if($order->order_status > 1)
+                                @if(!isset($item->review))       
+                                <p>
+                                    <a data-toggle="modal" href="#add_review_{{ $item->order_line_item_id }}">
+                                        <i class="fa fa-pencil"></i> 添加评论
+                                    </a>        
+                                </p>            
+                                {{ Form::open(array('action'=>'MemberAccountController@postCreateReview', 'class'=>'review-form', 'role'=>'form')) }}
+                                {{ Form::hidden('order_line_item_id', $item->order_line_item_id) }}
+                                @include('components.member-account.review-modal', array('item'=>$item))
+                                {{ Form::close()}}
+                                @else
+                                @endif
+
                                 @if(!isset($item->refund))
                                 <p>
                                     <a href="#" data-toggle="modal" data-target="#refund_{{ $item->order_line_item_id }}" >
-                                        申请退款
+                                        <i class="fa fa-yen"></i> 申请退款
                                     </a>
-                                </p>
+                                </p>        
                                 {{ Form::open(array('action'=>'MemberAccountController@postClaimRefund', 'class'=>'refund-form','files'=>true)) }}
                                 {{ Form::hidden('order_line_item_id', $item->order_line_item_id) }}
                                 <div class="modal fade" id="refund_{{ $item->order_line_item_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
@@ -135,7 +149,7 @@
                                                     退货的一些说明
                                                 </p>
 
-                                                
+
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
@@ -148,7 +162,7 @@
                                 @else
                                 <p>
                                     <a href="#" data-toggle="modal" data-target="#refund_{{ $item->order_line_item_id }}" >
-                                        查看退款详情
+                                        <i class="fa fa-search-plus"></i> 查看退款详情
                                     </a>
                                     @include('components.member-account.refund-info-modal', array('item'=>$item))
                                 </p>

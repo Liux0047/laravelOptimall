@@ -114,5 +114,20 @@ class MemberAccountController extends BaseController {
         $item->save();
         return Redirect::back()->with('status', '退款申请提交成功');
     }
+    
+    public function postCreateReview () {
+        $review = new Review;        
+        $review->title = Input::get('title');
+        $review->content = Input::get('content');
+        $review->design_rating = Input::get('score_design','5');
+        $review->comfort_rating = Input::get('score_comfort', '5');
+        $review->quality_rating = Input::get('score_quality', '5');
+        $review->save();
+        $item = OrderLineItem::find(Input::get('order_line_item_id'));
+        $item->review = $review->review_id;
+        $item->save();
+        return Redirect::back()->with('status', '评论成功');
+        
+    }
 
 }

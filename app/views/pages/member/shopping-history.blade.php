@@ -1,5 +1,10 @@
 @extends ('layouts.base')
 
+@section('link-css')
+@parent
+{{ HTML::style('plugins/raty-2.7.0/jquery.raty.css') }}
+@stop
+
 @section ('content')
 <div class="container content-container">
     <div class="page-header">
@@ -18,7 +23,6 @@
             @else
             您还没有购买任何商品
             @endif
-
         </div><!--col-md-10-->
     </div><!--/row-->
 </div>
@@ -30,6 +34,7 @@
 @parent
 {{ HTML::script('plugins/jQuery-Validation/jquery.validate.min.js') }}
 {{ HTML::script('js/jQuery-Validation-customize.js') }}
+{{ HTML::script('plugins/raty-2.7.0/jquery.raty.js') }}
 @stop
 
 
@@ -37,38 +42,89 @@
 @parent
 <script type="text/javascript">
 $(document).ready(function() {
-    // validate signup form on keyup and submit
+    // validate refund form on keyup and submit
     var warningIcon = "<i class='fa fa-warning fa-lg'></i> ";
-    $(".refund-form").validate({
-        rules: {
-            reason: {
-                required: true,
-                maxlength: 150
-            }
-        },
-        messages: {
-            reason: {
-                required: warningIcon + "请填写退款理由",
-                maxlength: warningIcon + "请不要超过150字"
-            }
-        },
-        errorElement: "span",
-        errorPlacement: function(error, element) {
-            error.appendTo($(element).parent());
-        },
-        validClass: "",
-        errorClass: "jq-validate-error",
-        //ignore: [], //validate hidden input
-        onkeyup: function(element) {
-            $(element).valid();
-        },
-        onfocusout: function(element) {
-            $(element).valid();
-        },
-        //onkeyup: true,
-        //onfocusout: true,
-        onclick: true
+    $(".refund-form").each(function() {
+        $(this).validate({
+            rules: {
+                reason: {
+                    required: true,
+                    maxlength: 150
+                }
+            },
+            messages: {
+                reason: {
+                    required: warningIcon + "请填写退款理由",
+                    maxlength: warningIcon + "请不要超过150字"
+                }
+            },
+            errorElement: "span",
+            errorPlacement: function(error, element) {
+                error.appendTo($(element).parent());
+            },
+            validClass: "",
+            errorClass: "jq-validate-error",
+            //ignore: [], //validate hidden input
+            onkeyup: function(element) {
+                $(element).valid();
+            },
+            onfocusout: function(element) {
+                $(element).valid();
+            },
+            //onkeyup: true,
+            //onfocusout: true,
+            onclick: true
+        });
     });
+
+
+    //validate review form
+    $(".review-form").each(function() {
+        $(this).validate({      
+            rules: {
+                score_comfort: "required",
+                score_design: "required",
+                score_quality: "required",
+                title: "required",
+                content: "required"
+            },
+            messages: {
+                score_comfort: {
+                    required: warningIcon + "请选择分数"
+                },
+                score_design: {
+                    required: warningIcon + "请选择分数"
+                },
+                score_quality: {
+                    required: warningIcon + "请选择分数"
+                },
+                title: {
+                    required: warningIcon + "请输入评论标题"
+                },
+                content: {
+                    required: warningIcon + "请输入评论内容"
+                }
+            },
+            errorElement: "p",
+            errorPlacement: function(error, element) {
+                error.appendTo($(element).parent());
+            },
+            validClass: "",
+            errorClass: "jq-validate-error",
+            //ignore: [], //uncomment to validate hidden input
+            onclick: true   
+        });
+    });
+
+    //enable raty function 
+    $(".raty-star-input").raty({ 
+        path: "{{ asset('plugins/raty-2.7.0/images') }}", 
+        halfShow : false,
+        scoreName: function() {
+            return $(this).attr('data-scoreName');
+        }
+    });
+
 });
 </script>
 @stop
