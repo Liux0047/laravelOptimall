@@ -101,7 +101,7 @@
                         @if (Auth::check())                        
                         @if (in_array($review->review_id, $thumbedList))
                         <a href="javascript:removeThumbUp({{ $review->review_id }})" class='thumbed'>
-                            <i class='fa fa-thumbs-o-up fa-lg'></i> 
+                            <i class='fa fa-thumbs-up fa-lg'></i> 
                         </a>
                         <span>我和</span> {{ $review->thumb_ups - 1 }} 人点赞
                         @else                        

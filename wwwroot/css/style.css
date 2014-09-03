@@ -1357,11 +1357,7 @@ input.jq-validate-error{
     border-right: 1px solid #dddddd;
     border-bottom: 1px solid #dddddd;
 }
-.thumb-btn a {
-    color: #A0A0A0 ;
-}
 .thumb-btn a.thumbed {
-    color: #008cba;
     -webkit-animation: pop-up 0.5s;
     -moz-animation: pop-up 0.5s;
     animation: pop-up 0.5s;

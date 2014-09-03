@@ -260,7 +260,7 @@ function thumbUp(reviewId){
     }).done(function (data){
         $('#thumb_btn_' + reviewId + ' a').remove();
         $('#thumb_btn_' + reviewId).prepend(
-            "<a href='javascript:removeThumbUp(" + reviewId + ")' class='thumbed'><i class='fa fa-thumbs-o-up fa-lg'></i></a> <span>我和</span> "
+            "<a href='javascript:removeThumbUp(" + reviewId + ")' class='thumbed'><i class='fa fa-thumbs-up fa-lg'></i></a> <span>我和</span> "
             );
     }).fail(function() {
         //if the connection to database failed
