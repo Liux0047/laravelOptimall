@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang='zh-Hans'>
 <head>
-    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <meta charset="UTF-8">
     <meta name='keywords' content='Optimall' />
     <meta name='token' content='{{ csrf_token() }}'/>
     @section('link-css')
