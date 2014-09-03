@@ -22,6 +22,9 @@ return array(
     //the number of days after which an order is confirmed
     'ambassadorOrderConfirmation'=> 40,
     
+    //the number of days after which the reward is not claimable
+    'ambassadorClaimDuration'=> 365,
+    
     //the minimum amount that an ambassador can claim
     'minAmbassadorClaim'=> 80,
     

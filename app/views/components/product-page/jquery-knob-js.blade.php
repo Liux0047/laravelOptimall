@@ -46,10 +46,10 @@ var currentQualityRating = 0;
 var currentDesignRating = 0;
 var currentComfortRating = 0;
 //final ratings
-var endOverllRating = ({{ 4.5 }})*20;
-var endQualityRating = ({{ 4.5 }})*20;
-var endDesignRating = ({{ 4.5 }})*20;
-var endComfortRating = ({{ 4.5 }})*20;
+var endOverllRating = ({{ ($model->average_design_rating + $model->average_comfort_rating + $model->average_quality_rating) / 3 }})*20;
+var endQualityRating = ({{ $model->average_quality_rating }})*20;
+var endDesignRating = ({{ $model->average_design_rating }})*20;
+var endComfortRating = ({{ $model->average_comfort_rating }})*20;
 
 var refreshIntervalId;
 $('#user_review_tab[data-toggle="tab"]').on('shown.bs.tab', function(e) {

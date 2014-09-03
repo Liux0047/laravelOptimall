@@ -28,6 +28,7 @@ class AmbassadorView extends Eloquent {
         $daysDiff = Config::get('optimall.ambassadorSubsequentPeriod');
         $orderConfirmation = Config::get('optimall.ambassadorOrderConfirmation');
         // from this ambassador' id
+        // order created within the valid reward duration
         // order created 40 days before and (either first purchase or subsequent purchase within 60 days)
         return $query->whereRaw(' `ambassador` = ' . $id . ' and  '
                         . '`order_created_at` <= DATE_SUB(NOW(),INTERVAL ' . $orderConfirmation . ' DAY) and '

@@ -92,9 +92,11 @@
                 <h4>{{ $review->title }}
                     <small> {{ $review->nickname }} 于 {{ $review->created_at }} 发布 </small>                  
                 </h4>            
-                <div class="raty-star" id="star_id_{{ $model->model_id }}" 
-                    data-score="{{ ($review->design_rating + $review->comfort_rating + $review->quality_rating) / 3 }}">
-                </div>
+                <p>
+                    <div class="raty-star" id="star_id_{{ $model->model_id }}" 
+                        data-score="{{ ($review->design_rating + $review->comfort_rating + $review->quality_rating) / 3 }}">
+                    </div>
+                </p>                
                 <p> {{ $review->content }}</p>
                 <p>                    
                     <span id='thumb_btn_{{ $review->review_id }}' class='thumb-btn'>

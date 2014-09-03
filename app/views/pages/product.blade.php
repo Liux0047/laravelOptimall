@@ -295,5 +295,5 @@ function removeThumbUp(reviewId){
 }
 
 </script>       
-@include('components.product-page.jquery-knob-js')
+@include('components.product-page.jquery-knob-js', array('model'=>$model))
 @stop

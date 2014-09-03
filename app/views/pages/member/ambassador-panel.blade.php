@@ -40,7 +40,7 @@
                     </thead>
                     <tbody>
                         @foreach ($ambassadorOrders as $order)
-                        <tr @if($order->is_ambassador_reward_claimed) class="obscure" @endif>
+                        <tr @if($order->is_ambassador_reward_claimed || in_array($order->order_id, $overdueOrders)) class="obscure" @endif>
                             <td>{{ $order->nickname }}</td>
                             <td>{{ $order->email }}</td>
                             <td>{{ $order->order_created_at }}</td>
@@ -61,13 +61,15 @@
                             </td>
                             <td>¥{{ number_format($reward[$order->order_id], 2) }}</td>
                             <td>
-                                @if($order->is_ambassador_reward_claimed)                                 
+                                @if($order->is_ambassador_reward_claimed)      
                                 @if ($order->is_ambassador_reward_processed)
                                 已领取
                                 @else
                                 已申请领取
                                 @endif
-                                @else
+                                @elseif (in_array($order->order_id, $overdueOrders))      
+                                已过期 
+                                @else                 
                                 可领取
                                 @endif
                             </td>

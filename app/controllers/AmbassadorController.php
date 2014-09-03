@@ -76,14 +76,25 @@ class AmbassadorController extends BaseController {
     
     public static function getRewards($orders) {
         $rewardParam['totalReward'] = 0;
+        $rewardParam['reward'] = array();
+        $rewardParam['overdueOrders'] = array();
+        $dateNow = new DateTime();
         foreach ($orders as $order) {
             if ($order->is_first_purchase) {
                 $rewardParam['reward'][$order->order_id] = $order->total_transaction_amount * Config::get('optimall.ambassadorFirstReward');
             } else {
                 $rewardParam['reward'][$order->order_id] = $order->total_transaction_amount * Config::get('optimall.ambassadorSubsequentReward');
             }
+            $dateDiff = abs($dateNow->diff(new DateTime($order->order_created_at))->days);
+            //if not claimed and not overdue
             if (!$order->is_ambassador_reward_claimed) {
-                $rewardParam['totalReward'] += $rewardParam['reward'][$order->order_id];
+                if ($dateDiff > Config::get('optimall.ambassadorClaimDuration')){
+                    $rewardParam['overdueOrders'][] = $order->order_id;
+                }
+                else {
+                    $rewardParam['totalReward'] += $rewardParam['reward'][$order->order_id];
+                }
+                
             }
         }
         $rewardParam['isMinMet'] = $rewardParam['totalReward'] >= Config::get('optimall.minAmbassadorClaim');
