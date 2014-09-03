@@ -44,6 +44,10 @@ class AmbassadorController extends BaseController {
     
     public function postClaimRewards () {
         $orders = AmbassadorView::ofAmbassador(Auth::id())->get();
+        $reward = self::getRewards($orders);
+        if (!$reward['isMinMet']){
+            return Redirect::back()->with('error','没有到底最低返利要求');
+        }
         foreach ($orders as $order){
             $placedOrder = PlacedOrder::find($order->order_id);
             $placedOrder->is_ambassador_reward_claimed = true;
@@ -68,6 +72,22 @@ class AmbassadorController extends BaseController {
     
     public static function isAmbassadorCodeValid ($code) {
         return (Member::where('ambassador_code', '=', $code)->count() > 0);
+    }
+    
+    public static function getRewards($orders) {
+        $rewardParam['totalReward'] = 0;
+        foreach ($orders as $order) {
+            if ($order->is_first_purchase) {
+                $rewardParam['reward'][$order->order_id] = $order->total_transaction_amount * Config::get('optimall.ambassadorFirstReward');
+            } else {
+                $rewardParam['reward'][$order->order_id] = $order->total_transaction_amount * Config::get('optimall.ambassadorSubsequentReward');
+            }
+            if (!$order->is_ambassador_reward_claimed) {
+                $rewardParam['totalReward'] += $rewardParam['reward'][$order->order_id];
+            }
+        }
+        $rewardParam['isMinMet'] = $rewardParam['totalReward'] >= Config::get('optimall.minAmbassadorClaim');
+        return $rewardParam;
     }
 
     private function generateUniqueId() {

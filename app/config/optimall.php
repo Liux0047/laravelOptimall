@@ -16,7 +16,13 @@ return array(
     //the percentage of ambassador rewards for subsequent purchase
     'ambassadorSubsequentReward'=> 0.1,
     
-    //the percentage of ambassador subsequent reward period (in days)
+    //the ambassador subsequent reward period (in days)
     'ambassadorSubsequentPeriod'=> 60,
+    
+    //the number of days after which an order is confirmed
+    'ambassadorOrderConfirmation'=> 40,
+    
+    //the minimum amount that an ambassador can claim
+    'minAmbassadorClaim'=> 80,
     
 );

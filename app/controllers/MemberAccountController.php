@@ -71,21 +71,15 @@ class MemberAccountController extends BaseController {
 
     public function getAmbassadorPanel() {
         $params['pageTitle'] = "目光之星 - 我的目光之城";
-        $params['reward'] = array();
-        $params['totalReward'] = 0;
+        $params['reward'] = array();        
         //$params['ambassadorOrders'] = AmbassadorView::ofAmbassador(Auth::id());
         $orders = AmbassadorView::ofAmbassador(Auth::id())->get();
         $params['ambassadorOrders'] = $orders;
-        foreach ($orders as $order) {
-            if ($order->is_first_purchase) {
-                $params['reward'][$order->order_id] = $order->total_transaction_amount * Config::get('optimall.ambassadorFirstReward');
-            } else {
-                $params['reward'][$order->order_id] = $order->total_transaction_amount * Config::get('optimall.ambassadorSubsequentReward');
-            }
-            if (!$order->is_ambassador_reward_claimed) {
-                $params['totalReward'] += $params['reward'][$order->order_id];
-            }
-        }
+        $reward = AmbassadorController::getRewards($orders);
+        $params['reward'] = $reward['reward'];
+        $params['totalReward'] =  $reward['totalReward'];
+        $params['isMinMet'] =  $reward['isMinMet'];
+        
         return View::make('pages.member.ambassador-panel', $params);
     }
 
@@ -102,24 +96,22 @@ class MemberAccountController extends BaseController {
         if (Input::hasFile('photo') && Input::file('photo')->isValid()) {
             if (Input::file('photo')->getSize() < 2 * pow(2, 20)) {
                 $path = public_path();
-                Input::file('photo')->move($path.'/images/uploads/refunds/', $item->order_line_item_id.".jpg");
-            }
-            else {
+                Input::file('photo')->move($path . '/images/uploads/refunds/', $item->order_line_item_id . ".jpg");
+            } else {
                 return Redirect::action('MemberAccountController@getShoppingHistory')->with('error', '文件尺寸过大，请重新上传');
             }
         }
-
         $refund->save();
         $item->refund = $refund->refund_id;
         $item->save();
         return Redirect::back()->with('status', '退款申请提交成功');
     }
-    
-    public function postCreateReview () {
-        $review = new Review;        
+
+    public function postCreateReview() {
+        $review = new Review;
         $review->title = Input::get('title');
         $review->content = Input::get('content');
-        $review->design_rating = Input::get('score_design','5');
+        $review->design_rating = Input::get('score_design', '5');
         $review->comfort_rating = Input::get('score_comfort', '5');
         $review->quality_rating = Input::get('score_quality', '5');
         $review->save();
@@ -127,7 +119,6 @@ class MemberAccountController extends BaseController {
         $item->review = $review->review_id;
         $item->save();
         return Redirect::back()->with('status', '评论成功');
-        
     }
 
 }

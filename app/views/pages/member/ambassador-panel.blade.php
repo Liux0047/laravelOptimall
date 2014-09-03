@@ -13,6 +13,7 @@
         <div class="col-xs-12 col-md-10">         
             @include('components.page-frame.message-bar')
 
+            @if (Auth::user()->is_approved_ambassador)
             <div>
                 <h5>
                     我的邀请码: <strong>{{ Auth::user()->ambassador_code }}</strong>
@@ -81,10 +82,17 @@
                     </div>
                 </div>
             </div>
-            <div class="align-right">
+            <div class="align-right">                
+                @if ($isMinMet)
                 {{ Form::open(array('action'=>'AmbassadorController@postClaimRewards'))}}
                 {{ Form::submit('申请领取', array('class'=>'btn btn-primary btn-sm'))}}
                 {{ Form::close() }}
+                @else
+                <button class="btn btn-primary btn-sm", disabled=true>
+                    申请领取（最低 {{ Config::get('optimall.minAmbassadorClaim') }} 元)
+                </button>
+                @endif
+                
             </div>
 
             <div>
@@ -118,6 +126,11 @@
                     @endif
                 </p>
             </div>
+            @elseif (isset(Auth::user()->ambassador_info))
+            请等待批准
+            @else 
+            请加入目光之星计划
+            @endif
         </div>
     </div>
 </div>

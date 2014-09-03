@@ -24,9 +24,15 @@ class AmbassadorView extends Eloquent {
     /*
      * Dynamic scope to query all orders belonging to this ambassador
      */
-    public function scopeOfAmbassador($query, $id) {                
-        return $query->where('ambassador', '=', $id);
-                                        
+    public function scopeOfAmbassador($query, $id) {
+        $daysDiff = Config::get('optimall.ambassadorSubsequentPeriod');
+        $orderConfirmation = Config::get('optimall.ambassadorOrderConfirmation');
+        // from this ambassador' id
+        // order created 40 days before and (either first purchase or subsequent purchase within 60 days)
+        return $query->whereRaw(' `ambassador` = ' . $id . ' and  '
+                        . '`order_created_at` <= DATE_SUB(NOW(),INTERVAL ' . $orderConfirmation . ' DAY) and '
+                        . '(`is_first_purchase`=true '
+                        . 'or DATEDIFF(`order_created_at`, `ambassador_relation_created_at`) < ' . $daysDiff . ')');
     }
 
 }
