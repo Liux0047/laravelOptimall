@@ -25,6 +25,7 @@ class ProductController extends BaseController {
         $params['product'] = $model->productViews()->firstOrFail();
         $params['products'] = $model->productViews;
         $params['lensTypes'] = LensType::all();
+        $params['reviews'] = Review::ofModel($model)->get();
         return View::make('pages.product', $params);
     }
 
@@ -36,7 +37,8 @@ class ProductController extends BaseController {
         foreach (self::$eminentModels as $labelName => $labelValue) {
             //use variable variable name to form model groups of diffrent featured labels
             $modelGroupName = $labelName . 'Models';
-            $$modelGroupName = ProductModelView::where('label', '=', $labelValue['id'])->take(4)->get();
+            $$modelGroupName = ProductModelView::where('label', '=', $labelValue['id'])
+                            ->orderBy('num_items_sold_display', 'DESC')->take(4)->get();
             $params[$modelGroupName] = $$modelGroupName;
             foreach ($$modelGroupName as $model) {
                 //associate model id with all products under this model id
@@ -61,7 +63,7 @@ class ProductController extends BaseController {
             array('filterName' => 'frames', 'functionName' => 'ofFrames'),
             array('filterName' => 'colors', 'functionName' => 'ofBaseColors')
         );
-        
+
         Session::forget('remainingModels');
 
         $params['checkedValues'] = array();
@@ -134,8 +136,7 @@ class ProductController extends BaseController {
                 Session::forget('remainingModels');
                 $params['disable'] = true;
             }
-        }
-        else {
+        } else {
             $params['disable'] = true;
             $modelIdsToDisplay = array();
         }

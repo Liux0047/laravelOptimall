@@ -14,7 +14,7 @@ class MemberAccountController extends BaseController {
         $params['prescriptionNames']['O_D_RIGHTNames'] = ShoppingCartController::$O_D_RIGHTNames;
         $params['prescriptionNames']['CommonNames'] = ShoppingCartController::$CommonNames;
 
-        $orders = PlacedOrder::ofMember(Auth::id())->get();
+        $orders = PlacedOrder::ofMember(Auth::id())->orderBy('created_at','DESC')->get();
         $params['orders'] = $orders;
 
         $items = array();
