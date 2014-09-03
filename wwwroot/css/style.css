@@ -98,6 +98,11 @@ img {
 a:hover {
     text-decoration: none;
 }
+a.disabled {
+   pointer-events: none;
+   cursor: default;
+   color: #C0C0C0;
+}
 div.vertical-divider {
     height: 90%;
     border-right: 1px solid #909090;

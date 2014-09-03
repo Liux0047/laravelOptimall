@@ -86,6 +86,37 @@
                         <td><h4>质量</h4></td>
                     </tr>
                 </table>
+                @if ($hasReview)
+                @foreach($reviews as $review)
+                <hr>
+                <h4>{{ $review->title }}
+                    <small> {{ $review->nickname }} 于 {{ $review->created_at }} 发布 </small>                  
+                </h4>            
+                <div class="raty-star" id="star_id_{{ $model->model_id }}" 
+                    data-score="{{ ($review->design_rating + $review->comfort_rating + $review->quality_rating) / 3 }}">
+                </div>
+                <p> {{ $review->content }}</p>
+                <p>
+                    @if (in_array($review->review_id, $thumbedList))
+                    <a href="#" class="disabled">
+                        <i class='fa fa-thumbs-o-up fa-lg'></i> 
+                    </a>
+                    我和 {{ $review->thumb_ups - 1 }} 人点赞
+                    @else
+                    <span id='thumb_btn_{{ $review->review_id }}'>
+                        @if (Auth::check())
+                        <a href="javascript:thumbUp('{{ $review->review_id }}')">
+                            <i class='fa fa-thumbs-o-up fa-lg'></i>
+                        </a>
+                        @endif  
+                    </span>
+                    {{ $review->thumb_ups }} 人点赞
+                    @endif                    
+                </p>
+                @endforeach
+                @else
+                暂无评论
+                @endif
             </div>
         </div>
 

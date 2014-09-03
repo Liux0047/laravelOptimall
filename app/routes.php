@@ -135,6 +135,11 @@ Route::group(array('before' => 'auth'), function() {
      * Route to claim rewards
      */
     Route::post('ambassador/claim-rewards', 'AmbassadorController@postClaimRewards');    
+        
+    /*
+     * Route to handle review functions
+     */
+    Route::controller('review', 'ReviewController');    
     
 });
 
@@ -165,6 +170,7 @@ Route::when('coupon/*', 'csrf', array('post'));
 Route::when('address/*', 'csrf', array('post'));
 Route::when('member/*', 'csrf', array('post'));
 Route::when('ambassador/*', 'csrf', array('post'));
+Route::when('review/*', 'csrf', array('post'));
 
 /*
  * View composer to add number of shopping cart items into top banner

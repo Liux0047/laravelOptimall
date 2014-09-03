@@ -25,7 +25,17 @@ class ProductController extends BaseController {
         $params['product'] = $model->productViews()->firstOrFail();
         $params['products'] = $model->productViews;
         $params['lensTypes'] = LensType::all();
-        $params['reviews'] = Review::ofModel($model)->get();
+        $reviews = Review::ofModel($model->model_id)->get();
+        $params['reviews'] = $reviews;
+        //invalid review collection if contains only one entry withoug review_id
+        $params['hasReview'] = !($reviews->count() == 1 && !isset($reviews[0]->review_id));
+        $params['thumbedList'] = array();
+        if (Auth::check()){
+            $thumbUps = ThumbUp::ofMember(Auth::id())->get();
+            foreach ($thumbUps as $thumbUp){
+                $params['thumbedList'][] = $thumbUp->review;
+            }
+        }        
         return View::make('pages.product', $params);
     }
 

@@ -102,12 +102,17 @@ function endIncrementRating (){
 function thumbUp(reviewId){
     $.ajax({
         type: "POST",
-        url: "",
+        url: "{{ action('ReviewController@postThumbUp') }}",
         data: {review_id: reviewId
+        },
+        datatype: 'json',
+        beforeSend: function(request) {
+            return request.setRequestHeader('X-CSRF-Token', $("meta[name='token']").attr('content'));
         }
     }).done(function (data){
-        var ajaxReturn = JSON.parse(data);      //parse the return data
-        $('#thumbup_btn_' + reviewId).text("我和 ");
+        $('#thumb_btn_' + reviewId).html(
+            "<a href='#'' class='disabled'><i class='fa fa-thumbs-o-up fa-lg'></i></a> 我和 "
+            );
     }).fail(function() {
         //if the connection to database failed
         alert("connection to database has failed");

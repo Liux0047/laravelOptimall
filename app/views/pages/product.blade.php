@@ -55,8 +55,21 @@
                 </tr>
                 <tr>
                     <td><span class="font-grey">评价</span></td>
-                    <td class="review-cell" >      
+                    <td class="review-cell" >    
+                        @if($hasReview)  
+                        <div class="review-star-container">
+                            <div class="raty-star" id="star_id_{{ $model->model_id }}" 
+                                data-score="{{ ($model->average_design_rating + $model->average_comfort_rating + $model->average_quality_rating) / 3 }}">
+                            </div>
+                        </div>
+                        <div class="reivew-count-container">
+                            <a href="#" id="review_count_button" >
+                                (点击查看 {{ count($reviews) }} 条评论)
+                            </a>
+                        </div>                        
+                        @else
                         目前没有评论
+                        @endif
                     </td>
                 </tr>
                 <tr>
@@ -67,6 +80,7 @@
                 </tr>
             </tbody>
         </table>
+
         <div class='row font-brown'>
             <div class='col-md-4'>
                 <i class='fa fa-calendar'></i> 
@@ -90,59 +104,50 @@
                     <td><span class="font-grey">选择颜色</span></td>
                     <td>
                         @for ($i=0; $i<count($products); $i++)
-                        <div class="selection-box color-selection-box 
-                        @if ($i == 0) 
-                        selected
-                        @endif
-                        " id="color_{{ $products[$i]->product_id }}" onclick='changeColor({{ $products[$i]->product_id }});' >
-                        <img src="{{ asset('images/color/color-'.$products[$i]->color.'.png') }}">
-                        {{ $products[$i]->color_name_cn }}
-                        <i class='fa fa-check'></i>
-                    </div>
-                    @endfor                           
-                    <input type="hidden" name="product_id" value="{{ $products[0]->product_id }}">   
-                    <br>
-                </td>
-            </tr>
-            <tr><td class="table-separator"></td></tr>
-            <tr>
-                <td><span class="font-grey">选择镜片</span></td>
-                <td>
-                    @for ($i=0; $i<count($lensTypes); $i++)
-                    <div class="lens-selection-container">
-                     <div class="selection-box lens-selection-box 
-                     @if ($i == 0) 
-                     selected
-                     @endif
-                     " id="lens_{{ $lensTypes[$i]->lens_type_id }}" 
-                     onclick="changeLens({{ $lensTypes[$i]->lens_type_id }}, {{ $lensTypes[$i]->price }}, {{ $model->price }}, {{ $model->price * 1.5 }});" > 
-                     {{ $lensTypes[$i]->title_cn }} 
-                     (套餐价:<strong>¥{{ number_format($lensTypes[$i]->price, 2) }}</strong>)
-                     <i class='fa fa-check'></i>
-                 </div>
-                 <a href="#" data-toggle="popover"  data-title="{{ $lensTypes[$i]->title_cn }}" 
-                    data-content="{{ $lensTypes[$i]->description_cn }}" >
-                    <i class='fa fa-info-circle fa-lg'></i> 
-                </a>
-            </div>
-            @endfor
-            <input type="hidden" name="lens_type" value="{{ $lensTypes[0]->lens_type_id }}">
-        </td>
-    </tr>
-    <tr><td class="table-separator"></td></tr>
-    <tr>
-        <td></td>
-        <td>
-            <button class='btn btn-danger' type='submit' ><i class='fa fa-shopping-cart'></i> 加入购物车</button>                                       
-        </td>
-    </tr>
-</tbody>                            
-</table>              
-{{ Form::close() }}
-</div>
+                        <div class="selection-box color-selection-box @if ($i == 0) selected @endif" id="color_{{ $products[$i]->product_id }}" onclick='changeColor({{ $products[$i]->product_id }});' >
+                            <img src="{{ asset('images/color/color-'.$products[$i]->color.'.png') }}">
+                            {{ $products[$i]->color_name_cn }}
+                            <i class='fa fa-check'></i>
+                        </div>
+                        @endfor                           
+                        <input type="hidden" name="product_id" value="{{ $products[0]->product_id }}">   
+                        <br>
+                    </td>
+                </tr>
+                <tr><td class="table-separator"></td></tr>
+                <tr>
+                    <td><span class="font-grey">选择镜片</span></td>
+                    <td>
+                        @for ($i=0; $i<count($lensTypes); $i++)
+                        <div class="lens-selection-container">
+                            <div class="selection-box lens-selection-box @if ($i == 0) selected @endif" id="lens_{{ $lensTypes[$i]->lens_type_id }}" onclick="changeLens({{ $lensTypes[$i]->lens_type_id }}, {{ $lensTypes[$i]->price }}, {{ $model->price }}, {{ $model->price * 1.5 }});" > 
+                                {{ $lensTypes[$i]->title_cn }} 
+                                (套餐价:<strong>¥{{ number_format($lensTypes[$i]->price, 2) }}</strong>)
+                                <i class='fa fa-check'></i>                                
+                            </div>
+                            <a href="#" data-toggle="popover"  data-title="{{ $lensTypes[$i]->title_cn }}" 
+                                data-content="{{ $lensTypes[$i]->description_cn }}" >
+                                <i class='fa fa-info-circle fa-lg'></i> 
+                            </a>
+                        </div>
+                        @endfor
+                        <input type="hidden" name="lens_type" value="{{ $lensTypes[0]->lens_type_id }}">
+                    </td>
+                </tr>
+                <tr><td class="table-separator"></td></tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button class='btn btn-danger' type='submit' ><i class='fa fa-shopping-cart'></i> 加入购物车</button>                                       
+                    </td>
+                </tr>
+            </tbody>                            
+        </table>              
+        {{ Form::close() }}
+    </div>
 </div>
 
-@include('components.product-page.product-info', array('model' => $model))
+@include('components.product-page.product-info', array('model' => $model, 'reviews'=>$reviews,'thumbedList'=>$thumbedList, 'hasReview'=>$hasReview))
 </div>
 
 @stop
@@ -217,6 +222,16 @@ $(document).ready(function() {
         html: 'true',
         placement: 'bottom',
         container: 'body'
+    });
+
+    $('.raty-star').raty({
+        path: "{{ asset('plugins/raty-2.7.0/images') }}",
+        readOnly: true,
+        halfShow: true,
+        scoreName: "",
+        score: function() {
+            return $(this).attr('data-score');
+        }
     });
 });
 

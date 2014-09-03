@@ -18,7 +18,7 @@ class ThumbUp extends Eloquent {
      *
      * @var string
      */
-    protected $table = 'thumb_ups';
+    protected $table = 'thumb_up';
     //primary ID
     protected $primaryKey = 'thumb_up_id';
 
@@ -28,5 +28,12 @@ class ThumbUp extends Eloquent {
      * @var array
      */
     //protected $hidden = array('password', 'remember_token');
+    
+    /*
+     * Dynamic scope to get all thumbups by a member
+     */
+    public function scopeOfMember ($query, $memberId) {
+        return $query->where('member','=',$memberId);
+    }
 }
 
