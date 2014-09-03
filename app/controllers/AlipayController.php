@@ -21,14 +21,17 @@ class AlipayController extends BaseController {
      */
     private $alipay_gateway_new = 'https://mapi.alipay.com/gateway.do?';
     
+    /**
+     * HTTPS形式消息验证地址
+     */
+    private $https_verify_url = 'https://mapi.alipay.com/gateway.do?service=notify_verify&';
 
-    
+    /**
+     * HTTP形式消息验证地址
+     */
+    private $http_verify_url = 'http://notify.alipay.com/trade/notify_query.do?';
 
     public function getNotfity() {
-        
-    }
-
-    public function getReturn() {
         
     }
 
@@ -45,8 +48,8 @@ class AlipayController extends BaseController {
      */
 
     public function generateAlipayPage($tradeNumber, $price, $address) {
-        
-        /*         * ************************请求参数************************* */        
+
+        /*         * ************************请求参数************************* */
         //支付类型
         $payment_type = "1";
         //必填，不能修改
@@ -54,7 +57,7 @@ class AlipayController extends BaseController {
         $notify_url = action('AlipayController@getNotify');
         //需http://格式的完整路径，不能加?id=123这类自定义参数
         //页面跳转同步通知页面路径
-        $return_url = action('AlipayController@getReturn');
+        $return_url = action('OrderController@getAlipayReturn');
         //需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
         //卖家支付宝帐户
         $seller_email = '13861383782';
@@ -231,6 +234,133 @@ class AlipayController extends BaseController {
         $sResult = getHttpResponsePOST($this->alipay_gateway_new, Config::get('alipay.cacert'), $para, trim(strtolower(Config::get('alipay.input_charset'))));
 
         return $sResult;
+    }
+    
+
+    /**
+     * 针对notify_url验证消息是否是支付宝发出的合法消息
+     * @return 验证结果
+     */
+    private function verifyNotify() {
+        if (empty($_POST)) {//判断POST来的数组是否为空
+            return false;
+        } else {
+            //生成签名结果
+            $isSign = $this->getSignVeryfy($_POST, $_POST["sign"]);
+            //获取支付宝远程服务器ATN结果（验证是否是支付宝发来的消息）
+            $responseTxt = 'true';
+            if (!empty($_POST["notify_id"])) {
+                $responseTxt = $this->getResponse($_POST["notify_id"]);
+            }
+
+            //写日志记录
+            //if ($isSign) {
+            //	$isSignStr = 'true';
+            //}
+            //else {
+            //	$isSignStr = 'false';
+            //}
+            //$log_text = "responseTxt=".$responseTxt."\n notify_url_log:isSign=".$isSignStr.",";
+            //$log_text = $log_text.createLinkString($_POST);
+            //logResult($log_text);
+            //验证
+            //$responsetTxt的结果不是true，与服务器设置问题、合作身份者ID、notify_id一分钟失效有关
+            //isSign的结果不是true，与安全校验码、请求时的参数格式（如：带自定义参数等）、编码格式有关
+            if (preg_match("/true$/i", $responseTxt) && $isSign) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    /**
+     * 针对return_url验证消息是否是支付宝发出的合法消息
+     * @return 验证结果
+     */
+    public function verifyReturn() {
+        if (empty($_GET)) {//判断POST来的数组是否为空
+            return false;
+        } else {
+            //生成签名结果
+            $isSign = $this->getSignVeryfy($_GET, $_GET["sign"]);
+            //获取支付宝远程服务器ATN结果（验证是否是支付宝发来的消息）
+            $responseTxt = 'true';
+            if (!empty($_GET["notify_id"])) {
+                $responseTxt = $this->getResponse($_GET["notify_id"]);
+            }
+
+            //写日志记录
+            //if ($isSign) {
+            //	$isSignStr = 'true';
+            //}
+            //else {
+            //	$isSignStr = 'false';
+            //}
+            //$log_text = "responseTxt=".$responseTxt."\n return_url_log:isSign=".$isSignStr.",";
+            //$log_text = $log_text.createLinkString($_GET);
+            //logResult($log_text);
+            //验证
+            //$responsetTxt的结果不是true，与服务器设置问题、合作身份者ID、notify_id一分钟失效有关
+            //isSign的结果不是true，与安全校验码、请求时的参数格式（如：带自定义参数等）、编码格式有关
+            if (preg_match("/true$/i", $responseTxt) && $isSign) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    /**
+     * 获取返回时的签名验证结果
+     * @param $para_temp 通知返回来的参数数组
+     * @param $sign 返回的签名结果
+     * @return 签名验证结果
+     */
+    private function getSignVeryfy($para_temp, $sign) {
+        //除去待签名参数数组中的空值和签名参数
+        $para_filter = $this->paraFilter($para_temp);
+
+        //对待签名参数数组排序
+        $para_sort = $this->argSort($para_filter);
+
+        //把数组所有元素，按照“参数=参数值”的模式用“&”字符拼接成字符串
+        $prestr = $this->createLinkstring($para_sort);
+
+        $isSgin = false;
+        switch (strtoupper(trim(Config::get('alipay.sign_type')))) {
+            case "MD5" :
+                $isSgin = $this->md5Verify($prestr, $sign, Config::get('alipay.sign_type'));
+                break;
+            default :
+                $isSgin = false;
+        }
+
+        return $isSgin;
+    }
+
+    /**
+     * 获取远程服务器ATN结果,验证返回URL
+     * @param $notify_id 通知校验ID
+     * @return 服务器ATN结果
+     * 验证结果集：
+     * invalid命令参数不对 出现这个错误，请检测返回处理中partner和key是否为空 
+     * true 返回正确信息
+     * false 请检查防火墙或者是服务器阻止端口问题以及验证时间是否超过一分钟
+     */
+    private function getResponse($notify_id) {
+        $transport = strtolower(trim(Config::get('alipay.transport')));
+        $partner = trim(Config::get('alipay.partner'));
+        $veryfy_url = '';
+        if ($transport == 'https') {
+            $veryfy_url = $this->https_verify_url;
+        } else {
+            $veryfy_url = $this->http_verify_url;
+        }
+        $veryfy_url = $veryfy_url . "partner=" . $partner . "&notify_id=" . $notify_id;
+        $responseTxt = $this->getHttpResponseGET($veryfy_url, base_path().Config::get('alipay.cacert'));
+
+        return $responseTxt;
     }
 
     /**

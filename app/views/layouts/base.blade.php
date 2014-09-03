@@ -21,7 +21,7 @@
     @include('components.page-frame.navbar-customer')
     @if(App::environment() != 'local')
     <div class="alert alert-danger align-center" role="alert">
-        <h2>网址正在内测阶段，请勿购买<h2>
+        <h2>网站正在内测阶段，请勿购买<h2>
     </div>
     @endif
     @yield('content')

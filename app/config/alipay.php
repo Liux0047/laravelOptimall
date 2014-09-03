@@ -24,10 +24,10 @@
 return array(
     
     //合作身份者id，以2088开头的16位纯数字
-    'partner' => '2088702489087160',
+    'partner' => '2088611146364530',
     
     //安全检验码，以数字和字母组成的32位字符
-    'key' => '2mqk39wrdfhtzy4y37k3pqavpz3t2cpi',
+    'key' => 'dwsmt7lowddbigw5vdso2mnyl5rcvvnk',
     
     //签名方式 不需修改
     'sign_type' => 'MD5',
@@ -37,7 +37,7 @@ return array(
     
     //ca证书路径地址，用于curl中ssl校验
     //请保证cacert.pem文件在当前文件夹目录中
-    'cacert' => getcwd() . '\\cacert.pem',
+    'cacert' => '\\cacert.pem',
     
     //访问模式,根据自己的服务器是否支持ssl访问，若支持请选择https；若不支持请选择http
     'transport' => 'http'

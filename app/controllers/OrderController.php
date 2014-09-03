@@ -5,14 +5,14 @@
  *
  * @author Allen
  */
-class OrderController extends BaseController{
-    
-    public function postSubmitOrder (){
+class OrderController extends BaseController {
+
+    public function postSubmitOrder() {
         $items = OrderLineItem::ofMember(Auth::id())->get();
         if (count($items) == 0) {
             return Redirect::to('/');
         }
-        
+
         $alipayController = new AlipayController();
 
         $cartController = new ShoppingCartController();
@@ -48,18 +48,17 @@ class OrderController extends BaseController{
         Mail::queue('emails.order.confirm-order', $params, function($message) {
             $message->to(Auth::user()->email)->subject('订单提交成功');
         });
-                
+
         return $alipayController->generateAlipayPage($tradeNumber, $price, $address);
     }
-    
-    
+
     public function postReSubmitPayment() {
         if (!Input::has('order_id')) {
             return Redirect::to('/');
         }
-        
+
         $alipayController = new AlipayController();
-        
+
         $orderId = Input::get('order_id');
         $order = PlacedOrder::find($orderId);
         $price = $order->total_transaction_amount;
@@ -70,12 +69,46 @@ class OrderController extends BaseController{
         $address->receive_phone = $order->receive_phone;
         $address->receive_address = $order->receive_address;
 
-        
+
         return $alipayController->generateAlipayPage($tradeNumber, $price, $address);
     }
-    
-    
-    public function insertOrder ($items, $paymentMethod, $amount, $address, $couponId){
+
+    public function getAlipayReturn() {
+        $AlipayController = new AlipayController();
+        $verify_result = $AlipayController->verifyReturn();
+        if ($verify_result) {    //verify success
+            //——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
+            //获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表
+            //商户订单号
+            $out_trade_no = Input::get('out_trade_no');
+            //支付宝交易号
+            $trade_no = Input::get('trade_no');
+            //交易状态
+            $trade_status = Input::get('trade_status');
+
+            if ($trade_status == 'WAIT_SELLER_SEND_GOODS') {
+                //判断该笔订单是否在商户网站中已经做过处理
+                //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+                //如果有做过处理，不执行商户的业务程序
+                $order = PlacedOrder::find(substr($out_trade_no, 2));
+                if (!isset($order->payment_ref_no) && $order->order_status == 1) {
+                    $order->payment_ref_no = $trade_no;
+                    $order->payment_amount = Input::get('total_fee');
+                    $order->payment_time = (new DateTime())->format('Y-m-d H:i:s');
+                    $order->order_status = 2;
+                    $order->save();
+                }
+            }
+            $params['verifyResult'] = "Verify success";
+        } else {
+            //验证失败
+            //如要调试，请看alipay_notify.php页面的verifyReturn函数
+            $params['verifyResult'] = "Verify fails";
+        }
+        return View::make('pages.alipay-result', $params);
+    }
+
+    public function insertOrder($items, $paymentMethod, $amount, $address, $couponId) {
         $order = new PlacedOrder;
         $order->member = Auth::id();
         $order->coupon = $couponId;
@@ -87,22 +120,22 @@ class OrderController extends BaseController{
         $order->receive_address = $address->receive_address;
         $order->receive_zip = $address->receive_zip;
         $order->receive_phone = $address->receive_phone;
-        
+
         $order->invoice_header = Input::get('invoice_header');
         $order->message_to_seller = Input::get('message_to_seller');
-        
+
         // take note of the coupon used, if any
-        if (isset($couponId)){
+        if (isset($couponId)) {
             $order->coupon = $couponId;
         }
         // check if this is the first purchase
-        if (PlacedOrder::ofMember(Auth::id())->count() == 0){
+        if (PlacedOrder::ofMember(Auth::id())->count() == 0) {
             $order->is_first_purchase = true;
         }
-        
+
         $order->save();
-        
-        foreach($items as $item) {
+
+        foreach ($items as $item) {
             $item->order_id = $order->order_id;
             $item->save();
             $model = $item->product()->first()->productModel()->first();
@@ -111,5 +144,5 @@ class OrderController extends BaseController{
         }
         return $order;
     }
-    
+
 }

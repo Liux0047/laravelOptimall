@@ -110,11 +110,11 @@ Route::group(array('before' => 'auth'), function() {
     /*
      * Route to Alipay notify URL
      */
-    Route::get('alipay/notify', 'AlipayController@getNotify');
+    Route::get('alipay-return/notify', 'AlipayController@getNotify');
     /*
      * Route to Alipay return
      */
-    Route::get('alipay/return', 'AlipayController@getReturn');
+    Route::get('alipay-return/return', 'OrderController@getAlipayReturn');
 
     /*
      * Route to ambassador creation page
@@ -171,6 +171,7 @@ Route::when('address/*', 'csrf', array('post'));
 Route::when('member/*', 'csrf', array('post'));
 Route::when('ambassador/*', 'csrf', array('post'));
 Route::when('review/*', 'csrf', array('post'));
+Route::when('alipay/*', 'csrf', array('post'));
 
 /*
  * View composer to add number of shopping cart items into top banner
