@@ -25,17 +25,19 @@ class ProductController extends BaseController {
         $params['product'] = $model->productViews()->firstOrFail();
         $params['products'] = $model->productViews;
         $params['lensTypes'] = LensType::all();
-        $reviews = Review::ofModel($model->model_id)->get();
+        $reviews = Review::ofModel($modelId)->get();
         $params['reviews'] = $reviews;
         //invalid review collection if contains only one entry withoug review_id
         $params['hasReview'] = !($reviews->count() == 1 && !isset($reviews[0]->review_id));
         $params['thumbedList'] = array();
-        if (Auth::check()){
+        if (Auth::check()) { //get the list of reviews that the member has thumbed up
             $thumbUps = ThumbUp::ofMember(Auth::id())->get();
-            foreach ($thumbUps as $thumbUp){
+            foreach ($thumbUps as $thumbUp) {
                 $params['thumbedList'][] = $thumbUp->review;
             }
-        }        
+        }
+        $params['alsoBuys'] = OrderLineItemView::viewThisAlsoBuy($modelId)->take(5)->get();
+        $this->recordViewHistory($modelId);
         return View::make('pages.product', $params);
     }
 
@@ -162,6 +164,18 @@ class ProductController extends BaseController {
         $params['products'] = $products;
 
         return View::make('components.product-page.ajax-load-product-cards', $params);
+    }
+
+    private function recordViewHistory($modelId) {
+        if (Auth::check()) {
+            $count = ViewItemHistory::where('member', '=', Auth::id())->where('model', '=', $modelId)->count();
+            if ($count == 0) {
+                $viewhistory = new ViewItemHistory;
+                $viewhistory->member = Auth::id();
+                $viewhistory->model = $modelId;
+                $viewhistory->save();
+            }
+        }
     }
 
 }

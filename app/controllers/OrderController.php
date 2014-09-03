@@ -56,7 +56,6 @@ class OrderController extends BaseController {
         if (!Input::has('order_id')) {
             return Redirect::to('/');
         }
-
         $alipayController = new AlipayController();
 
         $orderId = Input::get('order_id');
@@ -90,14 +89,7 @@ class OrderController extends BaseController {
                 //判断该笔订单是否在商户网站中已经做过处理
                 //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
                 //如果有做过处理，不执行商户的业务程序
-                $order = PlacedOrder::find(substr($out_trade_no, 2));
-                if (!isset($order->payment_ref_no) && $order->order_status == 1) {
-                    $order->payment_ref_no = $trade_no;
-                    $order->payment_amount = Input::get('total_fee');
-                    $order->payment_time = (new DateTime())->format('Y-m-d H:i:s');
-                    $order->order_status = 2;
-                    $order->save();
-                }
+                $this->recordPayment($out_trade_no, $trade_no);
             }
             $params['verifyResult'] = "Verify success";
         } else {
@@ -143,6 +135,32 @@ class OrderController extends BaseController {
             $model->save();
         }
         return $order;
+    }
+
+    private function recordPayment($out_trade_no, $trade_no) {
+        $order = PlacedOrder::find(substr($out_trade_no, 2));
+        if (!isset($order->payment_ref_no) && $order->order_status == 1) {
+            $order->payment_ref_no = $trade_no;
+            $order->payment_amount = Input::get('total_fee');
+            $order->payment_time = (new DateTime())->format('Y-m-d H:i:s');
+            $order->order_status = 2;
+            if (Input::has('receive_name')) {
+                $order->recipient_name = Input::get('receive_name');
+            }
+            if (Input::has('receive_address')) {
+                $order->receive_address = Input::get('receive_address');
+            }
+            if (Input::has('receive_zip')) {
+                $order->receive_zip = Input::get('receive_zip');
+            }
+            if (Input::has('receive_phone')) {
+                $order->receive_phone = Input::get('receive_phone');
+            }
+            if (Input::has('receive_mobile')) {
+                $order->receive_phone = Input::get('receive_mobile');
+            }
+            $order->save();
+        }
     }
 
 }

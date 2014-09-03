@@ -36,5 +36,16 @@ class OrderLineItemView extends Eloquent {
     public function scopeOfOrder($query, $orderId) {
         return $query->where('order_id','=',$orderId);
     }
+    
+    /*
+     * Dynamic scope to query for 'people viewed this item bought...'
+     */
+    public function scopeViewThisAlsoBuy ($query, $modelId) {
+        return $query->select('model', DB::raw('count(*) AS times_bought'))
+                ->whereRaw('`member` IN (select `member` from `view_item_history` where `model`='.$modelId.')')
+                ->where('model','!=',$modelId)
+                ->groupBy('model')
+                ->orderBy('times_bought', 'DESC');
+    }
 
 }

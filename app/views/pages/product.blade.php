@@ -6,6 +6,9 @@
 @stop
 
 @section ('content')
+@foreach($alsoBuys as $alsoBuy)
+{{ $alsoBuy->model }}
+@endforeach
 <div class="container content-container content-no-header">
     @include('components.product-page.progress-tracker', array('progtrckrStep' => 1))
     <br>
