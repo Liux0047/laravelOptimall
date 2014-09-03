@@ -96,22 +96,24 @@
                     data-score="{{ ($review->design_rating + $review->comfort_rating + $review->quality_rating) / 3 }}">
                 </div>
                 <p> {{ $review->content }}</p>
-                <p>
-                    @if (in_array($review->review_id, $thumbedList))
-                    <a href="#" class="disabled">
-                        <i class='fa fa-thumbs-o-up fa-lg'></i> 
-                    </a>
-                    我和 {{ $review->thumb_ups - 1 }} 人点赞
-                    @else
-                    <span id='thumb_btn_{{ $review->review_id }}'>
-                        @if (Auth::check())
-                        <a href="javascript:thumbUp('{{ $review->review_id }}')">
+                <p>                    
+                    <span id='thumb_btn_{{ $review->review_id }}' class='thumb-btn'>
+                        @if (Auth::check())                        
+                        @if (in_array($review->review_id, $thumbedList))
+                        <a href="javascript:removeThumbUp({{ $review->review_id }})" class='thumbed'>
+                            <i class='fa fa-thumbs-o-up fa-lg'></i> 
+                        </a>
+                        <span>我和</span> {{ $review->thumb_ups - 1 }} 人点赞
+                        @else                        
+                        <a href="javascript:thumbUp({{ $review->review_id }})">
                             <i class='fa fa-thumbs-o-up fa-lg'></i>
                         </a>
+                        {{ $review->thumb_ups }} 人点赞
                         @endif  
-                    </span>
-                    {{ $review->thumb_ups }} 人点赞
-                    @endif                    
+                        @else
+                        {{ $review->thumb_ups }} 人点赞
+                        @endif  
+                    </span>           
                 </p>
                 @endforeach
                 @else

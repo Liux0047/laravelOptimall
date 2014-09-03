@@ -245,6 +245,55 @@ $('#review_count_button').click(function(e) {
     return false;
 });
 
+
+//thumb up Ajax
+function thumbUp(reviewId){
+    $.ajax({
+        type: "POST",
+        url: "{{ action('ReviewController@postThumbUp') }}",
+        data: {review_id: reviewId
+        },
+        datatype: 'json',
+        beforeSend: function(request) {
+            return request.setRequestHeader('X-CSRF-Token', $("meta[name='token']").attr('content'));
+        }
+    }).done(function (data){
+        $('#thumb_btn_' + reviewId + ' a').remove();
+        $('#thumb_btn_' + reviewId).prepend(
+            "<a href='javascript:removeThumbUp(" + reviewId + ")' class='thumbed'><i class='fa fa-thumbs-o-up fa-lg'></i></a> <span>我和</span> "
+            );
+    }).fail(function() {
+        //if the connection to database failed
+        alert("connection to database has failed");
+    }).always(function() {
+        //
+    });
+}
+//remove thumb up Ajax
+function removeThumbUp(reviewId){
+    $.ajax({
+        type: "POST",
+        url: "{{ action('ReviewController@postRemoveThumbUp') }}",
+        data: {review_id: reviewId
+        },
+        datatype: 'json',
+        beforeSend: function(request) {
+            return request.setRequestHeader('X-CSRF-Token', $("meta[name='token']").attr('content'));
+        }
+    }).done(function (data){
+        $('#thumb_btn_' + reviewId + ' a').remove();
+        $('#thumb_btn_' + reviewId + ' span').remove();
+        $('#thumb_btn_' + reviewId).prepend(
+            "<a href='javascript:thumbUp(" + reviewId + ")'><i class='fa fa-thumbs-o-up fa-lg'></i></a> "
+            );
+    }).fail(function() {
+        //if the connection to database failed
+        alert("connection to database has failed");
+    }).always(function() {
+        //
+    });
+}
+
 </script>       
 @include('components.product-page.jquery-knob-js')
 @stop

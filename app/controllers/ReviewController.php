@@ -31,4 +31,11 @@ class ReviewController extends BaseController {
         }
     }
 
+    public function postRemoveThumbUp() {
+        if (Request::ajax()) {
+            $thumbUp = ThumbUp::where('member','=',Auth::id())->where('review','=',Input::get('review_id'));
+            $thumbUp->delete();
+            return Response::json(array('success'=>true));
+        }
+    }
 }
