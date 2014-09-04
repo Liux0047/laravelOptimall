@@ -27,7 +27,7 @@
                     <div id="CYL_legend"></div>
                 </div>
             </div>
-            
+
             @foreach($prescriptions as $prescription)
             <div class="prescription-history-container">
                 <h4>
@@ -81,31 +81,31 @@
 @parent
 <script type="text/javascript">
 
-var labels = [
+var labels = ["曾经年少时",
 @foreach($prescriptions as $prescription)
 "{{ (new DateTime($prescription->created_at))->format('Y/m/d') }}",
 @endforeach
 ]
 
-var O_S_SPHData = [
+var O_S_SPHData = [0,
 @foreach($prescriptions as $prescription)
 {{ $prescription->O_S_SPH }},
 @endforeach
 ]
 
-var O_D_SPHData = [
+var O_D_SPHData = [0,
 @foreach($prescriptions as $prescription)
 {{ $prescription->O_D_SPH }},
 @endforeach
 ]
 
-var O_S_CYLData = [
+var O_S_CYLData = [0,
 @foreach($prescriptions as $prescription)
 {{ $prescription->O_S_CYL }},
 @endforeach
 ]
 
-var O_D_CYLData = [
+var O_D_CYLData = [0,
 @foreach($prescriptions as $prescription)
 {{ $prescription->O_D_CYL }},
 @endforeach

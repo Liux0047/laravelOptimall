@@ -9,6 +9,7 @@
 <div class="container content-container">
 	@include('components.product-page.progress-tracker', array('progtrckrStep' => 3))
 	<div class="page-header">
+		@include('components.page-frame.message-bar')
 		<h2>选择收货地址 <small>Subtext for header</small></h2>
 	</div>      
 	<div class="row no-display" id="address_section">
@@ -161,28 +162,29 @@
 	    var rule = {
 	    	rules: {
 	    		province: {
-	    			required: true
+	    			required: true,
+	    			maxlength:25
 	    		},
 	    		postal_code: {
 	    			required: true,
 	    			digits:true,
-	    			minlength:6,
+	    			minlength:5,
 	    			maxlength:6
 	    		},
 	    		street_name: {
 	    			required: true,
-	    			minlength:5
+	    			minlength:5,
+	    			maxlength:100
 	    		},
 	    		recipient_name:{
-	    			required: true
+	    			required: true,
+	    			maxlength: 45
 	    		},
 	    		phone: {
-	    			required: true,
+	    			required: true,	    			
+	    			digits: true,
 	    			minlength:8,
-	    			digits: true
-	    		},
-	    		message_to_seller: {
-	    			maxlength: 45
+	    			maxlength:20
 	    		}
 	    	},                    
 	    	messages: {
@@ -197,18 +199,18 @@
 	    		},
 	    		street_name: {
 	    			required: warningIcon + "请输入邮编",
-	    			minlength:warningIcon + "请输入至少五个字符"
+	    			minlength:warningIcon + "请输入至少五个字符",
+	    			maxlength:warningIcon + "字符数超过上限(100)"
 	    		},
 	    		recipient_name:{
-	    			required: warningIcon + "请输入收件人姓名"
+	    			required: warningIcon + "请输入收件人姓名",
+	    			maxlength:warningIcon + "字符数超过上限(45)"
 	    		},
 	    		phone: {
-	    			required: warningIcon + "请输入收件人电话",
+	    			required: warningIcon + "请输入收件人电话",	    			
+	    			digits: warningIcon + "请输入正确的电话号码",
 	    			minlength: warningIcon + "请输入正确的电话号码",
-	    			digits: warningIcon + "请输入正确的电话号码"                    
-	    		},
-	    		message_to_seller: {
-	    			maxlength: "请控制在45字以内"
+	    			maxlength:warningIcon + "字符数超过上限(20)"                    
 	    		}
 	    	},
 	    	errorElement: "span",
