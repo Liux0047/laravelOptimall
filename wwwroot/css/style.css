@@ -1365,7 +1365,6 @@ input.jq-validate-error{
     -moz-animation: pop-up 0.5s;
     animation: pop-up 0.5s;
 }
-
 /* Chrome, Safari, Opera */
 @-webkit-keyframes pop-up {
     0% { -webkit-transform: scale(1); }
@@ -1382,6 +1381,18 @@ input.jq-validate-error{
     50% { transform: scale(1.5)}
     100% { transform: scale(1); }
 }
+.also-buy-container {
+}
+
+.also-buy-container .discount-price {
+    font-size: 14px;
+}
+.also-buy-container .market-price {
+    font-size: 12px;
+}
+
+
+
 /*info page section*/
 .section-grey {
     background: #eee;

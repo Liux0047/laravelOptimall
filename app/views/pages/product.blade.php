@@ -6,9 +6,7 @@
 @stop
 
 @section ('content')
-@foreach($alsoBuys as $alsoBuy)
-{{ $alsoBuy->model }}
-@endforeach
+
 <div class="container content-container content-no-header">
     @include('components.product-page.progress-tracker', array('progtrckrStep' => 1))
     <br>
@@ -150,7 +148,7 @@
     </div>
 </div>
 
-@include('components.product-page.product-info', array('model' => $model, 'reviews'=>$reviews,'thumbedList'=>$thumbedList, 'hasReview'=>$hasReview))
+@include('components.product-page.product-info', array('model' => $model, 'reviews'=>$reviews,'thumbedList'=>$thumbedList, 'hasReview'=>$hasReview, 'alsoBuys'=>$alsoBuys))
 </div>
 
 @stop

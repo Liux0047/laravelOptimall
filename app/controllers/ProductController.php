@@ -36,7 +36,7 @@ class ProductController extends BaseController {
                 $params['thumbedList'][] = $thumbUp->review;
             }
         }
-        $params['alsoBuys'] = OrderLineItemView::viewThisAlsoBuy($modelId)->take(5)->get();
+        $params['alsoBuys'] = $this->getAlsoBuyModels($modelId);
         $this->recordViewHistory($modelId);
         return View::make('pages.product', $params);
     }
@@ -176,6 +176,18 @@ class ProductController extends BaseController {
                 $viewhistory->save();
             }
         }
+    }
+    
+    private function getAlsoBuyModels ($cuurentModelId) {
+        $baseModels = OrderLineItemView::viewThisAlsoBuy($cuurentModelId)->take(5)->get();
+        $models = array();
+        $products = array();
+        foreach ($baseModels as $baseModel){
+            $model = ProductModelView::find($baseModel->model);
+            $models[] = $model;
+            $products[$baseModel->model] = $model->productViews;
+        }
+        return array('models'=>$models, 'products'=>$products);
     }
 
 }
