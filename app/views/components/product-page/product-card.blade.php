@@ -1,6 +1,16 @@
 <div class="col-md-3 col-sm-6 col-xs-6 padding-narrow">
     <div class="shop-item">
+        @if ($model->label == 0)
         <span class="item-badge promotion-badge"></span>
+        @elseif ($model->label == 1)
+        <span class="item-badge best-seller-badge"></span>
+        @elseif ($model->label == 2)
+        <span class="item-badge new-arrival-badge"></span>
+        @elseif ($model->label == 3)
+        <span class="item-badge featured-badge"></span>
+        @elseif ($model->label == 4)
+        <span class="item-badge classical-badge"></span>
+        @endif
         <div class="shop-item-label">
             <div class="pull-left">
                 <span class="discount-price">

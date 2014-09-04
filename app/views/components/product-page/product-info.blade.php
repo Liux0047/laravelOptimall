@@ -68,105 +68,62 @@
 
     </div>
     <div class="tab-pane fade" id="user_review">
-        <div class="row">
-            <div class="col-md-9">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <table class="align-center" width="100%">
-                            <tr>
-                                <td width="30%">
-                                    <input class="knob" id="overall_rating" value="0">                            
-                                </td>
-                                <td width="20%"><input class="knob" id="design_rating" value="{{ $model->average_design_rating }}"></td>
-                                <td width="20%"><input class="knob" id="comfort_rating" value="{{ $model->average_comfort_rating }}"></td>
-                                <td width="20%"><input class="knob" id="quality_rating" value="{{ $model->average_quality_rating }}"></td>
-                            </tr>
-                            <tr>
-                                <td><h4>总体评分</h4></td>
-                                <td><h4>外观</h4></td>
-                                <td><h4>舒适</h4></td>
-                                <td><h4>质量</h4></td>
-                            </tr>
-                        </table>
-                        @if ($hasReview)
-                        @foreach($reviews as $review)
-                        <hr>
-                        <h4>{{ $review->title }}
-                            <small> {{ $review->nickname }} 于 {{ $review->created_at }} 发布 </small>                  
-                        </h4>            
-                        <p>
-                            <div class="raty-star" id="star_id_{{ $model->model_id }}" 
-                                data-score="{{ ($review->design_rating + $review->comfort_rating + $review->quality_rating) / 3 }}">
-                            </div>
-                        </p>                
-                        <p> {{ $review->content }}</p>
-                        <p>                    
-                            <span id='thumb_btn_{{ $review->review_id }}' class='thumb-btn'>
-                                @if (Auth::check())                        
-                                @if (in_array($review->review_id, $thumbedList))
-                                <a href="javascript:removeThumbUp({{ $review->review_id }})" class='thumbed'>
-                                    <i class='fa fa-thumbs-up fa-lg'></i> 
-                                </a>
-                                <span>我和</span> {{ $review->thumb_ups - 1 }} 人点赞
-                                @else                        
-                                <a href="javascript:thumbUp({{ $review->review_id }})">
-                                    <i class='fa fa-thumbs-o-up fa-lg'></i>
-                                </a>
-                                {{ $review->thumb_ups }} 人点赞
-                                @endif  
-                                @else
-                                {{ $review->thumb_ups }} 人点赞
-                                @endif  
-                            </span>           
-                        </p>
-                        @endforeach
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table class="align-center" width="100%">
+                    <tr>
+                        <td width="30%">
+                            <input class="knob" id="overall_rating" value="0">                            
+                        </td>
+                        <td width="20%"><input class="knob" id="design_rating" value="{{ $model->average_design_rating }}"></td>
+                        <td width="20%"><input class="knob" id="comfort_rating" value="{{ $model->average_comfort_rating }}"></td>
+                        <td width="20%"><input class="knob" id="quality_rating" value="{{ $model->average_quality_rating }}"></td>
+                    </tr>
+                    <tr>
+                        <td><h4>总体评分</h4></td>
+                        <td><h4>外观</h4></td>
+                        <td><h4>舒适</h4></td>
+                        <td><h4>质量</h4></td>
+                    </tr>
+                </table>
+                @if ($hasReview)
+                @foreach($reviews as $review)
+                <hr>
+                <h4>{{ $review->title }}
+                    <small> {{ $review->nickname }} 于 {{ $review->created_at }} 发布 </small>                  
+                </h4>            
+                <p>
+                    <div class="raty-star" id="star_id_{{ $model->model_id }}" 
+                        data-score="{{ ($review->design_rating + $review->comfort_rating + $review->quality_rating) / 3 }}">
+                    </div>
+                </p>                
+                <p> {{ $review->content }}</p>
+                <p>                    
+                    <span id='thumb_btn_{{ $review->review_id }}' class='thumb-btn'>
+                        @if (Auth::check())                        
+                        @if (in_array($review->review_id, $thumbedList))
+                        <a href="javascript:removeThumbUp({{ $review->review_id }})" class='thumbed'>
+                            <i class='fa fa-thumbs-up fa-lg'></i> 
+                        </a>
+                        <span>我和</span> {{ $review->thumb_ups - 1 }} 人点赞
+                        @else                        
+                        <a href="javascript:thumbUp({{ $review->review_id }})">
+                            <i class='fa fa-thumbs-o-up fa-lg'></i>
+                        </a>
+                        {{ $review->thumb_ups }} 人点赞
+                        @endif  
                         @else
-                        <hr>
-                        暂无评论
-                        @endif
-                    </div>
-                </div>
+                        {{ $review->thumb_ups }} 人点赞
+                        @endif  
+                    </span>           
+                </p>
+                @endforeach
+                @else
+                <hr>
+                暂无评论
+                @endif
             </div>
-
-            <div class="col-md-3">
-                <div class="panel panel-default also-buy-container">
-                    <div class="panel-heading">猜你喜欢的：</div>                    
-                    
-                    <table class="table">
-                        @foreach($alsoBuys['models'] as $alsoBuyModel)
-                        <tr>
-                            <td rowspan="3" width="50%">
-                                <img src="{{ asset('images/lazyload-holder.png') }}" 
-                                data-original="{{ asset('images/gallery/'.$alsoBuyModel->model_id.'/'.$alsoBuys['products'][$alsoBuyModel->model_id][0]->product_id.'/medium-view-3.jpg') }}" 
-                                class="lazy">
-                            </td>
-                            <td>
-                                <h5><strong>{{ $alsoBuyModel->model_name_cn }}</strong></h4>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span class="discount-price">
-                                        {{ number_format($alsoBuyModel->price, 0) }} 
-                                    </span>
-                                    <span class="market-price"><del>¥{{ $alsoBuyModel->price + 300 }}</del></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @foreach($alsoBuys['products'][$alsoBuyModel->model_id] as $product)
-                                    <span class="color-icon-link"> 
-                                        <img src="{{ asset('images/color/color-'.$product->color.'.png') }}" class="color-icon">
-                                    </span>
-                                    @endforeach
-                                </td>
-                            </tr>
-                            @endforeach
-                        </table>
-                        
-                    </div>
-                </div>
-            </div>
-        </div><!-- .row -->
+        </div>
     </div>
 </div>
+

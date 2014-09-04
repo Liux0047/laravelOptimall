@@ -84,8 +84,13 @@ function auth_login() {
 
 //lazy load fade in effect
 $("img.lazy").lazyload({
-    effect : "fadeIn"
+    effect : "fadeIn",
+    failure_limit : 10
 });
+//trigger a fake scroll to lazy load image
+$(document).ready(function(){
+    $('body,html').scroll();
+})
       
 </script>
 @show
