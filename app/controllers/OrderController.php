@@ -179,7 +179,9 @@ class OrderController extends BaseController {
             'recipient_name' => 'required|max:45',
             'receive_address' => 'required|min:5|max:120',
             'receive_zip' => 'required|digits_between:5,6',
-            'receive_phone' => 'required|min:8|max:20'
+            'receive_phone' => 'required|min:8|max:20',
+            'invoice_header' => 'max:45',
+            'message_to_seller' => 'max:45'
         );
         return Validator::make(Input::all(), $rules);
         
