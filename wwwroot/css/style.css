@@ -1569,3 +1569,23 @@ ol.progtrckr li.progtrckr-todo:before {
 .feature .info-left {
     float: left;
 }
+
+/* member Account page */
+.prescription-chart-container {
+    margin-bottom: 30px;
+    position: relative;
+}
+.prescription-chart-container .legend {
+    position: absolute;
+    right:0px;
+    top: 15px;
+}
+.prescription-chart-container .legend .title {    
+    margin: 0.5em;
+    /* border-style: solid; */
+    border-width: 0 0 0 1em;
+    padding: 0 0.3em;
+}
+.prescription-history-container {
+    margin-bottom: 50px;
+}
