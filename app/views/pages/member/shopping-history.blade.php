@@ -82,13 +82,27 @@ $(document).ready(function() {
     $(".review-form").each(function() {
         $(this).validate({      
             rules: {
+                title: {
+                    required: true,
+                    maxlength: 45
+                },
+                content: {
+                    required: true,
+                    maxlength: 200
+                },
                 score_comfort: "required",
                 score_design: "required",
-                score_quality: "required",
-                title: "required",
-                content: "required"
+                score_quality: "required"
             },
             messages: {
+                title: {
+                    required: warningIcon + "请输入评论标题",
+                    maxlength: warningIcon + "请不要超过字符上限(45)"
+                },
+                content: {
+                    required: warningIcon + "请输入评论内容",
+                    maxlength: warningIcon + "请不要超过字符上限(200)"
+                },
                 score_comfort: {
                     required: warningIcon + "请选择分数"
                 },
@@ -97,13 +111,7 @@ $(document).ready(function() {
                 },
                 score_quality: {
                     required: warningIcon + "请选择分数"
-                },
-                title: {
-                    required: warningIcon + "请输入评论标题"
-                },
-                content: {
-                    required: warningIcon + "请输入评论内容"
-                }
+                }                
             },
             errorElement: "p",
             errorPlacement: function(error, element) {
@@ -114,7 +122,7 @@ $(document).ready(function() {
             //ignore: [], //uncomment to validate hidden input
             onclick: true   
         });
-    });
+});
 
     //enable raty function 
     $(".raty-star-input").raty({ 

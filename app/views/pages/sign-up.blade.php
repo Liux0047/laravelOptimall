@@ -3,6 +3,7 @@
 @section ('content')
 <div class="container content-container">
     <div class="page-header">
+        @include('components.page-frame.message-bar')
         <h1>
             注册新会员                    
             <small>轻松一点，享受会员特权和及时优惠资讯</small>
@@ -155,7 +156,8 @@ $(document).ready(function() {
                 },
                 email: {
                     required: true,
-                    email: true
+                    email: true,
+                    maxlength: 50
                 },
                 password: {
                     required: true,
@@ -178,11 +180,14 @@ $(document).ready(function() {
                 },
                 email: {
                     required: warningIcon + "请输入您的邮箱",
-                    email: warningIcon + "请输入正确的邮箱"
+                    email: warningIcon + "请输入正确的邮箱",
+                    maxlength: warningIcon + "邮箱长度不能超过50个字符"
                 },
                 password: {
-                    required: warningIcon + "请输入密码",
-                    passwordCheck: warningIcon + "请输入6-16位半角字符（必须包括数字，小写字母和大写字母）"
+                    required: warningIcon + "请输入新密码",
+                    minlength: warningIcon + "密码至少需要6位",
+                    passwordCheck: warningIcon + "密码必须包括至少一个数字和字母，且不能有其他字符",
+                    maxlength: warningIcon + "密码最多20位"
                 },
                 confirm_password: {
                     required: warningIcon + "请再次输入新密码",

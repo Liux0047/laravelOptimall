@@ -145,12 +145,19 @@ class ShoppingCartController extends BaseController {
 
     public function postRemoveItem() {
         $orderLineItem = $this->getItemsFromPost();
+        if ($orderLineItem->member != Auth::id()){
+            return Redirect::back()->with('error', '无法移除此商品');
+        }
+            
         $orderLineItem->delete();
         return Redirect::back()->with('status', '成功移除此商品');
     }
 
     public function postSetPlano() {
         $orderLineItem = $this->getItemsFromPost();
+        if ($orderLineItem->member != Auth::id()){
+            return Redirect::back()->with('error', '无法修改验光单');
+        }
         $orderLineItem->is_plano = 1;
         $orderLineItem->save();
         return Redirect::back()->with('status', '成功修改验光单');

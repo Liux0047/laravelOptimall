@@ -29,6 +29,12 @@ class MemberAccountController extends BaseController {
     }
 
     public function postChangePassword() {
+        $validator = $this->validateSecurity();
+        
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator);
+        }
+        
         $currentPassword = Input::get('current_password');
         $newPassword = Input::get('new_password');
         $confirmPassword = Input::get('confirm_password');
@@ -56,8 +62,8 @@ class MemberAccountController extends BaseController {
     }
 
     public function postDeletePrescription() {
-        $prescription = Prescription::find(Input::get('prescription_id'));
-        if (isset($prescription)) {
+        $prescription = Prescription::findOrFail(Input::get('prescription_id'));
+        if (isset($prescription) && $prescription->member == Auth::id()) {
             $prescription->delete();
             return Redirect::back()->with('status', '成功删除验光单');
         } else {
@@ -81,8 +87,18 @@ class MemberAccountController extends BaseController {
     }
 
     public function postClaimRefund() {
+        $validator = $this->validateClaimRefund();
+        
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator);
+        }        
+        
+        $item = OrderLineItem::findOrFail(Input::get('order_line_item_id'));
+        if ($item->member != Auth::id()){
+            return Redirect::back()->with('error', '退款申请提失败');
+        }
+        
         $refund = new Refund;
-        $item = OrderLineItem::find(Input::get('order_line_item_id'));
         $refund->reason = Input::get('reason');
         $quantity = Input::get('quantity', 1);
         if ($quantity > $item->quantity) {   //if input quantity exceeds the line item quantity
@@ -104,5 +120,21 @@ class MemberAccountController extends BaseController {
         return Redirect::back()->with('status', '退款申请提交成功');
     }
     
+    
+    private function validateSecurity() {
+        $rules = array(
+            'new_password' => 'required|min:6|max:16|alpha_num'
+        );
+        return Validator::make(Input::all(), $rules);
+        
+    }
+    
+    private function validateClaimRefund() {
+        $rules = array(
+            'reason' => 'required|max:150'
+        );
+        return Validator::make(Input::all(), $rules);
+        
+    }
 
 }

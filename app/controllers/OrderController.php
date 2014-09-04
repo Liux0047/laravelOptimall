@@ -8,6 +8,14 @@
 class OrderController extends BaseController {
 
     public function postSubmitOrder() {
+        
+        $validator = $this->validateAddress();
+        
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator);
+        }
+        
+        //redirect to home page if no items pending
         $items = OrderLineItem::ofMember(Auth::id())->get();
         if (count($items) == 0) {
             return Redirect::to('/');
@@ -54,12 +62,15 @@ class OrderController extends BaseController {
 
     public function postReSubmitPayment() {
         if (!Input::has('order_id')) {
-            return Redirect::to('/');
+            return Redirect::back();
         }
         $alipayController = new AlipayController();
 
         $orderId = Input::get('order_id');
-        $order = PlacedOrder::find($orderId);
+        $order = PlacedOrder::findOrFail($orderId);
+        if ($order->member != Auth::id()) {
+            return Redirect::back()->with('error','订单号有误');
+        }
         $price = $order->total_transaction_amount;
         $tradeNumber = $alipayController->generateTradeNumber($orderId);
         $address = new Address;
@@ -161,6 +172,17 @@ class OrderController extends BaseController {
             }
             $order->save();
         }
+    }
+    
+    private function validateAddress() {
+        $rules = array(
+            'recipient_name' => 'required|max:45',
+            'receive_address' => 'required|min:5|max:120',
+            'receive_zip' => 'required|digits_between:5,6',
+            'receive_phone' => 'required|min:8|max:20'
+        );
+        return Validator::make(Input::all(), $rules);
+        
     }
 
 }

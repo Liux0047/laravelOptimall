@@ -17,7 +17,7 @@ class RemindersController extends Controller {
      * @return Response
      */
     public function postRemind() {
-        switch ($response = Password::remind(Input::only('email'), function($message){
+        switch ($response = Password::remind(Input::only('email'), function($message) {
             $message->subject('重置密码请求');
         })) {
             case Password::INVALID_USER:

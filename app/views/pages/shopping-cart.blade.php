@@ -209,14 +209,14 @@ function updateQuantity(itemId, action) {
             $("#discount_amt_cell").text(currency + data.discountAmount.toFixed(2));
             $("#net_amt_cell").text(currency + data.netAmount.toFixed(2));
             
-    })
+        })
     .fail(function() {
             //if the connection to database failed
             alert("connection to database has failed");
-    })
+        })
     .always(function() {
             //
-    });
+        });
 }
 
 var warningIcon = "<i class='fa fa-warning fa-lg'></i> ";
@@ -299,13 +299,13 @@ var rule = {
     //enable popover of stored prescription
     @foreach($storedPrescriptions as $storedPrescription)
     $("#stored_pres_popover_{{ $storedPrescription->prescription_id }}").popover({
-     html : true,
-     title: "预览验光单详情",
-     content: function() {return $("#stored_pres_form_{{ $storedPrescription->prescription_id }}").html();},
-     trigger:"hover",
-     container:"body",          
-     placement:"right"          
- });
+       html : true,
+       title: "预览验光单详情",
+       content: function() {return $("#stored_pres_form_{{ $storedPrescription->prescription_id }}").html();},
+       trigger:"hover",
+       container:"body",          
+       placement:"right"          
+   });
     @endforeach
 
 

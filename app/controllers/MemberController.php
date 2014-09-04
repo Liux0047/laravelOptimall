@@ -31,7 +31,14 @@ class MemberController extends BaseController {
         return View::make('pages.sign-up', $params);
     }
 
-    public function processSignUp() {
+    public function postSignUp() {
+        
+        $validator = $this->validateSignUp();
+        
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator);
+        }
+        
         $nickname = Input::get('nickname');
         $email = Input::get('email');
         $password = Input::get('password');
@@ -39,12 +46,16 @@ class MemberController extends BaseController {
         
         if (Input::has('ambassador_code')){
             if (!AmbassadorController::isAmbassadorCodeValid(Input::get('ambassador_code'))){
-                return Redirect::back()->with('message', '邀请码不存在，请重新输入');
+                return Redirect::back()->with('error', '邀请码不存在，请重新输入');
             }
         }
 
         if ($password !== $confirmPassword) {
-            return Redirect::to('sign-up')->with('message', ' 两次输入的密码不符合');
+            return Redirect::back()->with('error', '两次输入的密码不符合');
+        }
+        
+        if(Member::where('email','=',$email)->count() > 0){
+            return Redirect::back()->with('error', '此邮箱已经被注册');
         }
         $member = new Member;
         $member->nickname = $nickname;
@@ -91,6 +102,16 @@ class MemberController extends BaseController {
     
     private function generateGUID() {
         return md5(uniqid(rand()));
+    }
+    
+    private function validateSignUp() {
+        $rules = array(
+            'nickname' => 'required|max:20',
+            'email'=> 'required|max:50',
+            'password' => 'required|min:6|max:16|alpha_num'
+        );
+        return Validator::make(Input::all(), $rules);
+        
     }
 
 }

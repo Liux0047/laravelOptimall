@@ -40,7 +40,7 @@ Route::get('sign-up', 'MemberController@signUp');
 /*
  * Route to process sign up form submit
  */
-Route::post('sign-up', 'MemberController@processSignUp');
+Route::post('sign-up', 'MemberController@postSignUp');
 
 /*
  * Route to verify registration

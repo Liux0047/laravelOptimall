@@ -198,7 +198,7 @@
 	    			maxlength:warningIcon + "请输入正确格式的邮编"
 	    		},
 	    		street_name: {
-	    			required: warningIcon + "请输入邮编",
+	    			required: warningIcon + "请输入地址",
 	    			minlength:warningIcon + "请输入至少五个字符",
 	    			maxlength:warningIcon + "字符数超过上限(100)"
 	    		},
