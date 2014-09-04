@@ -23,19 +23,19 @@
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane fade in active detailed-poster" id="detailed_description">
+    <div class="tab-pane fade in active detailed-poster-container" id="detailed_description">
         <div class="row">
             <div class="col-md-12 img-size-limit">
                 @for ($i=1; $i<=4; $i++)
                 <br>
                 <img src="{{ asset('images/lazyload-holder.png') }}" 
                 data-original="{{ asset('images/gallery/'.$model->model_id.'/detail-'.$i.'.jpg') }}"
-                class="lazy ">
+                class="lazy poster">
                 @endfor
             </div>
         </div>
     </div>
-    <div class="tab-pane fade detailed-poster" id="lens_description">
+    <div class="tab-pane fade detailed-poster-container" id="lens_description">
         <div class="row">
             <div class="col-md-12">     
                 <h1 class="shelf-header">
@@ -64,7 +64,7 @@
     </div>
     
     
-    <div class="tab-pane fade detailed-poster" id="prescription_guide">
+    <div class="tab-pane fade detailed-poster-container" id="prescription_guide">
 
     </div>
     <div class="tab-pane fade detailed-poster" id="user_review">

@@ -1352,10 +1352,13 @@ input.jq-validate-error{
     left: 110px;
     top: 3px;
 }
-.detailed-poster {
+.detailed-poster-container {
     border-left: 1px solid #dddddd;
     border-right: 1px solid #dddddd;
     border-bottom: 1px solid #dddddd;
+}
+.detailed-poster-container img.poster {
+    min-height: 300px;
 }
 .thumb-btn a.thumbed {
     -webkit-animation: pop-up 0.5s;

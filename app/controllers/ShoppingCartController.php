@@ -7,20 +7,6 @@
  */
 class ShoppingCartController extends BaseController {
 
-    public static $O_S_LEFTNames = array('O_S_SPH', 'O_S_CYL', 'O_S_AXIS', 'O_S_ADD');
-    public static $O_D_RIGHTNames = array('O_D_SPH', 'O_D_CYL', 'O_D_AXIS', 'O_D_ADD');
-    public static $CommonNames = array('PD');
-    public static $prescriptionOptions = array(
-        'O_S_SPH' => array('min' => 0, 'max' => 800, 'internval' => 25),
-        'O_S_CYL' => array('min' => 0, 'max' => 200, 'internval' => 25),
-        'O_S_AXIS' => array('min' => 0, 'max' => 180, 'internval' => 1),
-        'O_S_ADD' => array('min' => 0, 'max' => 800, 'internval' => 25),
-        'O_D_SPH' => array('min' => 0, 'max' => 800, 'internval' => 25),
-        'O_D_CYL' => array('min' => 0, 'max' => 200, 'internval' => 25),
-        'O_D_AXIS' => array('min' => 0, 'max' => 180, 'internval' => 1),
-        'O_D_ADD' => array('min' => 0, 'max' => 800, 'internval' => 25),
-        'PD' => array('min' => 50, 'max' => 80, 'internval' => 0.5)
-    );
     private $totalPrice = 0;
     private $totalDiscount = 0;
     private $netPrice = 0;
@@ -33,10 +19,8 @@ class ShoppingCartController extends BaseController {
 
     public function getMyCart() {
         $params['pageTitle'] = "购物车 - 目光之城";
-        $params['prescriptionNames']['O_S_LEFTNames'] = self::$O_S_LEFTNames;
-        $params['prescriptionNames']['O_D_RIGHTNames'] = self::$O_D_RIGHTNames;
-        $params['prescriptionNames']['CommonNames'] = self::$CommonNames;
-        $params['prescriptionOptions'] = self::getPrescriptionOptionList();
+        $params['prescriptionNames'] = PrescriptionController::getPrescriptionNames();
+        $params['prescriptionOptions'] = PrescriptionController::getPrescriptionOptionList();
 
         $items = $this->getCartItems();
         $params['items'] = $items;
@@ -78,8 +62,8 @@ class ShoppingCartController extends BaseController {
         foreach ($items as $item) {
             $isRequired = $this->isPrescriptionRequired($item);
             $params['isPrescriptionRequired'][$item->order_line_item_id] = $isRequired;
-            if ($isRequired){
-                if (!$this->isPrescriptionEntered($item)){
+            if ($isRequired) {
+                if (!$this->isPrescriptionEntered($item)) {
                     return Redirect::action('ShoppingCartController@getMyCart')
                                     ->with('error', '请完整填写所有验光单');
                 }
@@ -104,9 +88,7 @@ class ShoppingCartController extends BaseController {
         }
         $params['newAddress'] = new Address;
 
-        $params['prescriptionNames']['O_S_LEFTNames'] = self::$O_S_LEFTNames;
-        $params['prescriptionNames']['O_D_RIGHTNames'] = self::$O_D_RIGHTNames;
-        $params['prescriptionNames']['CommonNames'] = self::$CommonNames;
+        $params['prescriptionNames'] = PrescriptionController::getPrescriptionNames();
 
         return View::make('pages.checkout', $params);
     }
@@ -123,7 +105,7 @@ class ShoppingCartController extends BaseController {
     }
 
     public function postUpdatePrescription() {
-        $prescriptionNames = array_merge(self::$O_S_LEFTNames, self::$O_D_RIGHTNames, self::$CommonNames);
+        $prescriptionNames = PrescriptionController::getPrescriptionNameArray();
         $orderLineItem = $this->getItemsFromPost();
         foreach ($prescriptionNames as $prescriptionName) {
             $orderLineItem->$prescriptionName = Input::get($prescriptionName);
@@ -131,7 +113,7 @@ class ShoppingCartController extends BaseController {
         $orderLineItem->save();
 
         if (Input::get('remember_prescription')) {
-            $this->savePrescription();
+            PrescriptionController::savePrescription();
         }
 
         return Redirect::back()->with('status', '成功填写验光单');
@@ -174,16 +156,6 @@ class ShoppingCartController extends BaseController {
         return Redirect::back()->with('status', '成功修改验光单');
     }
 
-    public static function getPrescriptionOptionList() {
-        $list = array();
-        foreach (self::$prescriptionOptions as $optionName => $optionRange) {
-            for ($option = $optionRange['min']; $option <= $optionRange['max']; $option += $optionRange['internval']) {
-                $list[$optionName][] = $option;
-            }
-        }
-        return $list;
-    }
-
     public static function getNumberOfItems() {
         if (!Auth::check()) {
             return 0;
@@ -223,24 +195,13 @@ class ShoppingCartController extends BaseController {
     }
 
     private function isPrescriptionEntered($orderLineItem) {
-        $prescriptionNames = array_merge(self::$O_S_LEFTNames, self::$O_D_RIGHTNames, self::$CommonNames);
+        $prescriptionNames = PrescriptionController::getPrescriptionNameArray();
         foreach ($prescriptionNames as $prescriptionName) {
             if (!isset($orderLineItem->$prescriptionName)) { //false if at least one entry is blank
                 return false;
             }
         }
         return true;
-    }
-
-    private function savePrescription() {
-        $prescription = new Prescription;
-        $prescriptionNames = array_merge(self::$O_S_LEFTNames, self::$O_D_RIGHTNames, self::$CommonNames);
-        foreach ($prescriptionNames as $prescriptionName) {
-            $prescription->$prescriptionName = Input::get($prescriptionName);
-        }
-        $prescription->name = Input::get('prescription_name');
-        $prescription->member = Auth::id();
-        $prescription->save();
     }
 
     public function getTotalDiscount() {
