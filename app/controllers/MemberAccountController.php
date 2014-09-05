@@ -56,7 +56,7 @@ class MemberAccountController extends BaseController {
 
     public function getMyPrescription() {
         $params['pageTitle'] = "验光单 - 我的目光之城";
-        $params['prescriptions'] = Prescription::ofMember(Auth::id())->get();
+        $params['prescriptions'] = Prescription::ofMember(Auth::id())->orderBy('created_at')->get();
         $params['prescriptionNames'] = PrescriptionController::getPrescriptionNames();
         return View::make('pages.member.my-prescription', $params);
     }

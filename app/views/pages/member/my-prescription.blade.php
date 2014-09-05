@@ -28,12 +28,15 @@
                 </div>
             </div>
 
-            @foreach($prescriptions as $prescription)
+            @foreach($prescriptions->reverse() as $prescription)
             <div class="prescription-history-container">
-                <h4>
-                    {{ $prescription->name }}
-                    <small> 创建于{{ $prescription->created_at }}</small>
-                </h4>
+                <div class="page-header">
+                    <h4>
+                        {{ $prescription->name }}
+                        <small> 创建于 {{ (new DateTime($prescription->created_at))->format('Y/m/d') }}</small>
+                    </h4>
+                </div>
+
                 @include('components.order-page.prescription-table', array('prescription'=>$prescription, 'prescriptionNames'=>$prescriptionNames))  
 
                 <div class="pull-right">
@@ -62,7 +65,7 @@
                     </div><!-- /.modal -->
                     {{ Form::close() }}
                 </div>
-            </div>    
+            </div>                
             @endforeach      
         </div>
     </div>
@@ -117,7 +120,7 @@ var SPHData = {
     labels : labels,
     datasets : [
     {
-        label: "My First dataset",
+        label: "O_S_SPH dataset",
         fillColor : "rgba(220,220,220,0.2)",
         strokeColor : "rgba(220,220,220,1)",
         pointColor : "rgba(220,220,220,1)",
@@ -128,7 +131,7 @@ var SPHData = {
         title : '左眼'
     },
     {
-        label: "My Second dataset",
+        label: "O_D_SPH dataset",
         fillColor : "rgba(151,187,205,0.2)",
         strokeColor : "rgba(151,187,205,1)",
         pointColor : "rgba(151,187,205,1)",
@@ -146,7 +149,7 @@ var CYLData = {
     labels : labels,
     datasets : [
     {
-        label: "My First dataset",
+        label: "O_S_CYL dataset",
         fillColor : "rgba(220,220,220,0.2)",
         strokeColor : "rgba(220,220,220,1)",
         pointColor : "rgba(220,220,220,1)",
@@ -157,7 +160,7 @@ var CYLData = {
         title : '左眼'
     },
     {
-        label: "My Second dataset",
+        label: "O_D_CYL dataset",
         fillColor : "rgba(151,187,205,0.2)",
         strokeColor : "rgba(151,187,205,1)",
         pointColor : "rgba(151,187,205,1)",

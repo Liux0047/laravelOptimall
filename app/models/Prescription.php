@@ -28,7 +28,7 @@ class Prescription extends Eloquent {
      * dynmaic scope to get prescription of a member ID
      */
     public function scopeOfMember($query, $id) {
-        return $query->where('member','=',$id)->orderBy('created_at','DESC');
+        return $query->where('member','=',$id);
     }
     
 }

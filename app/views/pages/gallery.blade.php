@@ -16,32 +16,26 @@
 			<div class="container">
 				<div class="panel panel-default" id="options">
 					<div class="panel-heading">					
-						<strong>排序 </strong> 
-
-						@if ($sortOrder == 'num_items_sold_display')
-						<a class="label label-primary" href="javascript:submitSortOrder('num_items_sold_display', 1);">销量优先</a> |  
-						@else
-						<a href="javascript:submitSortOrder('num_items_sold_display', 1);">销量优先</a> |  
-						@endif
-
-						@if ($sortOrder == 'average_design_rating')
-						<a class="label label-primary" href="javascript:submitSortOrder('average_design_rating', 1);">评分：由高到低</a> |  
-						@else
-						<a href="javascript:submitSortOrder('average_design_rating', 1);">评分：由高到低</a> |  
-						@endif
-
-						@if ($sortOrder == 'price' && $isDesc == true)
-						<a class="label label-primary" href="javascript:submitSortOrder('price', 1);">价格优先：从高到低</a> |  
-						@else
-						<a href="javascript:submitSortOrder('price', 1);">价格优先：从高到低</a> |  
-						@endif
-
-						@if ($sortOrder == 'price' && $isDesc == false)
-						<a class="label label-primary" href="javascript:submitSortOrder('price', 0);">价格优先：从低到高</a> |  
-						@else
-						<a href="javascript:submitSortOrder('price', 0);">价格优先：从低到高</a> |  
-						@endif
 						
+
+						<a class="sorting-option @if ($sortOrder == 'num_items_sold_display') selected-sorting-option @endif" href="javascript:submitSortOrder('num_items_sold_display', 1);">
+							销量优先
+						</a> 
+
+						<a class="sorting-option @if ($sortOrder == 'average_design_rating') selected-sorting-option @endif" href="javascript:submitSortOrder('average_design_rating', 1);">
+							评分：由高到低
+							
+						</a> 
+
+						<a class="sorting-option @if ($sortOrder == 'price' && $isDesc == true) selected-sorting-option @endif" href="javascript:submitSortOrder('price', 1);">
+							价格优先：从高到低
+						</a> 
+						
+						<a class="sorting-option @if ($sortOrder == 'price' && $isDesc == false) selected-sorting-option @endif" href="javascript:submitSortOrder('price', 0);">
+							价格优先：从低到高
+						</a> 
+						
+
 					</div>
 
 					<div class="panel-body" id="product_cards_container">
@@ -52,11 +46,10 @@
 
 					<div class="panel-footer">
 						<div class="align-center">
-							<button onclick="loadMoreModels(); return false;" class="btn btn-primary btn-sm" id="load_more_btn">
-								加载更多
-							</button>
-						</div>
-						
+							<button onclick="loadMoreModels(); return false;" class="btn btn-primary" id="load_more_btn">
+								加载更多	{{ HTML::image('images/preloader-white.gif','loading',array('class'=>'ajax-preloader no-display', 'id'=>'load_more_preloader_img'))}}			
+							</button>													
+						</div>						
 					</div>
 				</div>
 			</div>
@@ -96,6 +89,8 @@ function submitSortOrder(orderName, isDesc){
 
 //ajax load more models
 function loadMoreModels() {
+	$("#load_more_preloader_img").show();
+	$("#load_more_btn").prop('disabled', true);
 	$.ajax({
 		type: "POST",
 		url: "{{ action('ProductController@postShowRemainingModels') }}",
@@ -117,6 +112,7 @@ function loadMoreModels() {
     })
 	.always(function() {
         //
+        $("#load_more_preloader_img").hide();
     });
 }
 

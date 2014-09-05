@@ -1017,17 +1017,6 @@ footer a {
 
 /*login*/
 
-
-/*modal fade speed
- .fade {
-   opacity: 0;
-   -webkit-transition: opacity 0.05s linear;
-      -moz-transition: opacity 0.05s linear;
-       -ms-transition: opacity 0.05s linear;
-        -o-transition: opacity 0.05s linear;
-           transition: opacity 0.05s linear;
- }
-*/
 /* login dropdown */
 .yamm .nav.navbar-right .dropdown-login{
     padding: 25px;
@@ -1100,6 +1089,16 @@ footer a {
 }
 
 
+/* Gallery page */
+.sorting-option {
+    font-size: 12px;
+    padding: 6px 10px;
+    border-right: 1px solid #C0C0C0;
+}
+.selected-sorting-option, .selected-sorting-option:hover {
+    background-color: #008cba;
+    color: #FFFFFF;
+}
 /* shopping cart page */
 .shopping-cart-img{
     margin-top: 10px;
@@ -1406,8 +1405,6 @@ input.jq-validate-error{
 .also-buy-container .also-buy-img-cell img {
     height:79px;
 }
-
-
 
 
 /*info page section*/

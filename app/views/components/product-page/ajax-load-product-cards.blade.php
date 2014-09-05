@@ -4,9 +4,8 @@
 @endforeach
 </div>
 <script type="text/javascript">
-@if ($disable)
-$("#load_more_btn").prop('disabled', true);
-$("#load_more_btn").addClass('disabled');
+@if (!$disable)
+$("#load_more_btn").prop('disabled', false);
 @endif
 
 </script>
