@@ -63,6 +63,14 @@ class AmbassadorController extends BaseController {
         }
         return Redirect::back()->with('status', '成功申请返利');
     }
+    
+    public function postSendInvitation () {
+        $data['nickname'] = Auth::user()->nickname;
+        Mail::queue('emails.member.invitation', $data, function($message) {
+            $email = Input::get('email');
+            $message->to($email)->subject(Auth::user()->nickname.' 邀请了你去逛逛目光之城');
+        });
+    }
 
     public static function createAmbassadorRelation($newMemberId, $code) {
         $ambassadorRelation = new AmbassadorRelation;        
@@ -122,6 +130,13 @@ class AmbassadorController extends BaseController {
     private function validateAlipay() {
         $rules = array(
             'alipay_account' => 'required|max:45'
+        );
+        return Validator::make(Input::all(), $rules);
+    }
+    
+    private function validateInvitaion () {
+        $rules = array(
+            'email' => 'required|email|max:45'
         );
         return Validator::make(Input::all(), $rules);
     }
