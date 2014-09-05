@@ -151,6 +151,13 @@ div.vertical-divider {
         width: 100%;
     }
 } 
+/* nav tab modification */
+.tab-content .tab-pane-bordered{
+    border-left: 1px solid #dddddd;
+    border-right: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    padding-bottom: 10px;
+}
 
 
 /*
@@ -559,6 +566,7 @@ navbar row category*/
     background-color: #333333;
     transition: background-color 1s, color 1s;
     -webkit-transition: background-color 1s, color 1s;    
+    border-bottom: 0px;
 }
 #nav.affix .navbar-nav>li>a, #nav.affix .navbar-brand{
     color: white;
@@ -1351,12 +1359,8 @@ input.jq-validate-error{
     left: 110px;
     top: 3px;
 }
-.detailed-poster-container {
-    border-left: 1px solid #dddddd;
-    border-right: 1px solid #dddddd;
-    border-bottom: 1px solid #dddddd;
-}
-.detailed-poster-container img.poster {
+
+.tab-content .tab-pane img.poster {
     min-height: 300px;
 }
 .thumb-btn a.thumbed {
@@ -1616,4 +1620,14 @@ ol.progtrckr li.progtrckr-todo:before {
 }
 .prescription-history-container {
     margin-bottom: 50px;
+}
+
+
+/* ambassador pages */
+.ambassador-tabs>li {
+    width:25%;
+    text-align: center;
+}
+.ambassador-tabs>li>a{
+    margin-right: 0px;
 }

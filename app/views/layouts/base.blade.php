@@ -90,6 +90,10 @@ $("img.lazy").lazyload({
 //trigger a fake scroll to lazy load image
 $(document).ready(function(){
     $('body,html').scroll();
+
+    $('.nav-tabs li a').on('shown.bs.tab', function(e) {
+        $(window).trigger("scroll");
+    });
 })
       
 </script>

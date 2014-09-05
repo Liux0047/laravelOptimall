@@ -25,5 +25,14 @@ class Member extends Eloquent implements UserInterface, RemindableInterface {
 	 * @var array
 	 */
 	protected $hidden = array('password', 'remember_token');
+        
+        /*
+         * Dynamic scope to get member ID given ambassador code
+         */
+        public function scopeGetAmbassador ($query, $code) {
+            return $query->select('member.member_id')
+                    ->join('ambassador_info','ambassador_info.ambassador_info_id','=','member.ambassador_info')
+                    ->where('ambassador_code', '=', $code);
+        }
 
 }

@@ -7,13 +7,13 @@
  */
 class AmbassadorController extends BaseController {
 
-    public function getAmabassador() {
-        $params['pageTitle'] = "目光之城形象大使";
-        return View::make('pages.ambassador.ambassador', $params);
+    public function getIntro() {
+        $params['pageTitle'] = "目光之星";
+        return View::make('pages.ambassador', $params);
     }
 
     public function postCreateAmbassador() {
-        $params['pageTitle'] = "目光之城形象大使";
+        $params['pageTitle'] = "目光之星";
 
         $validator = $this->validateInput();
 
@@ -63,10 +63,10 @@ class AmbassadorController extends BaseController {
         return Redirect::back()->with('status', '成功申请返利');
     }
 
-    public static function createAmbassadorRealtion($newMemberId, $code) {
-        $ambassadorRelation = new AmbassadorRelation;
-        $ambassadorId = Member::where('ambassador_code', '=', $code)->first()->member_id;
-        if (isset($ambassadorId)) {
+    public static function createAmbassadorRelation($newMemberId, $code) {
+        $ambassadorRelation = new AmbassadorRelation;        
+        if (Member::getAmbassador($code)->count() > 0) {
+            $ambassadorId = Member::getAmbassador($code)->first()->member_id;
             $ambassadorRelation->ambassador = $ambassadorId;
             $ambassadorRelation->invited_member = $newMemberId;
             $ambassadorRelation->save();

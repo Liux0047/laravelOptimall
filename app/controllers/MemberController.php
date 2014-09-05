@@ -66,7 +66,7 @@ class MemberController extends BaseController {
         
         //create ambassador relationship
         if (Input::has('ambassador_code')){
-            AmbassadorController::createAmbassadorRealtion($member->member_id, Input::get('ambassador_code'));
+            AmbassadorController::createAmbassadorRelation($member->member_id, Input::get('ambassador_code'));
         }
 
         //send email

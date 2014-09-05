@@ -21,21 +21,15 @@
 						<a class="sorting-option @if ($sortOrder == 'num_items_sold_display') selected-sorting-option @endif" href="javascript:submitSortOrder('num_items_sold_display', 1);">
 							销量优先
 						</a> 
-
 						<a class="sorting-option @if ($sortOrder == 'average_design_rating') selected-sorting-option @endif" href="javascript:submitSortOrder('average_design_rating', 1);">
 							评分：由高到低
-							
-						</a> 
-
+						</a>
 						<a class="sorting-option @if ($sortOrder == 'price' && $isDesc == true) selected-sorting-option @endif" href="javascript:submitSortOrder('price', 1);">
 							价格优先：从高到低
 						</a> 
-						
 						<a class="sorting-option @if ($sortOrder == 'price' && $isDesc == false) selected-sorting-option @endif" href="javascript:submitSortOrder('price', 0);">
 							价格优先：从低到高
 						</a> 
-						
-
 					</div>
 
 					<div class="panel-body" id="product_cards_container">
@@ -103,7 +97,9 @@ function loadMoreModels() {
 		$("img.lazy").lazyload();
 		$(".color-icon-link").click(colorIconClickFunc);		
 		$(".ajax-load-container").show(300, function() {
-			$(this).hide().fadeIn(1000);
+			$(this).hide().fadeIn(1000, function() {
+				$('body,html').scroll();
+			});
 		});
 	})
 	.fail(function() {

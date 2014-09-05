@@ -117,31 +117,30 @@ Route::group(array('before' => 'auth'), function() {
     Route::get('alipay-return/return', 'OrderController@getAlipayReturn');
 
     /*
-     * Route to ambassador creation page
-     */
-    Route::get('ambassador/', 'AmbassadorController@getAmabassador');
-    
-    /*
      * Route to process create ambassador
      */
     Route::post('ambassador/create-ambassador', 'AmbassadorController@postCreateAmbassador');
-    
+
     /*
      * Route to change alipay address
      */
     Route::post('ambassador/change-alipay-account', 'AmbassadorController@postChangeAlipayAccount');
-    
+
     /*
      * Route to claim rewards
      */
-    Route::post('ambassador/claim-rewards', 'AmbassadorController@postClaimRewards');    
-        
+    Route::post('ambassador/claim-rewards', 'AmbassadorController@postClaimRewards');
+
     /*
      * Route to handle review functions
      */
-    Route::controller('review', 'ReviewController');    
-    
+    Route::controller('review', 'ReviewController');
 });
+
+/*
+ * Route to ambassador introduction page
+ */
+Route::get('ambassador/intro', 'AmbassadorController@getIntro');
 
 /*
  * Route to prodct gallery page

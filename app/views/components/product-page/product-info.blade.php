@@ -23,7 +23,7 @@
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane fade in active detailed-poster-container" id="detailed_description">
+    <div class="tab-pane fade in active tab-pane-bordered" id="detailed_description">
         <div class="row">
             <div class="col-md-12 img-size-limit">
                 @for ($i=1; $i<=4; $i++)
@@ -35,36 +35,21 @@
             </div>
         </div>
     </div>
-    <div class="tab-pane fade detailed-poster-container" id="lens_description">
+    <div class="tab-pane fade tab-pane-bordered" id="lens_description">
         <div class="row">
-            <div class="col-md-12">     
-                <h1 class="shelf-header">
-                    <span class="title">
-                        <a href="#">积家 <small>LENSES</small></a>
-                    </span>
-                    <span class="divider"></span>
-                </h1>
-                <img src="/optimall/asset/img/lens/description_1.jpg">            
-                <h1 class="shelf-header">
-                    <span class="title">
-                        <a href="#">推荐 <small>FEATURED</small></a>
-                    </span>
-                    <span class="divider"></span>
-                </h1>
-                <img src="/optimall/asset/img/lazyload-holder.png" data-original="/optimall/asset/img/lens/description_2.jpg"" class="lazy ">            
-                <h1 class="shelf-header">
-                    <span class="title">
-                        <a href="#">推荐 <small>FEATURED</small></a>
-                    </span>
-                    <span class="divider"></span>
-                </h1>
-                <img src="/optimall/asset/img/lazyload-holder.png" data-original="/optimall/asset/img/lens/description_3.jpg"" class="lazy ">
+            <div class="col-md-12 img-size-limit">
+                @for ($i=1; $i<=6; $i++)
+                <img src="{{ asset('images/lazyload-holder.png') }}" 
+                data-original="{{ asset('images/lens/poster-'.$i.'.jpg') }}"
+                class="lazy poster">
+                <br>
+                @endfor
             </div>
         </div>            
     </div>
     
     
-    <div class="tab-pane fade detailed-poster-container" id="prescription_guide">
+    <div class="tab-pane fade tab-pane-bordered" id="prescription_guide">
 
     </div>
     <div class="tab-pane fade" id="user_review">
