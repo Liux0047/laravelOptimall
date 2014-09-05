@@ -72,9 +72,10 @@ class MemberAccountController extends BaseController {
     }
 
     public function getAmbassadorPanel() {
-        $params['pageTitle'] = "目光之星 - 我的目光之城";
-        if (!isset(Auth::user()->ambassadorInfo)) {
+        $params['pageTitle'] = "目光之星 - 我的目光之城";        
+        if (Auth::user()->ambassadorInfo()->count() > 0) {
             $params['reward'] = array();
+            $params['ambassadorInfo'] = Auth::user()->ambassadorInfo;
             $orders = AmbassadorView::ofAmbassador(Auth::id())->get();
             $params['ambassadorOrders'] = $orders;
             $reward = AmbassadorController::getRewards($orders);
@@ -82,7 +83,6 @@ class MemberAccountController extends BaseController {
             $params['totalReward'] = $reward['totalReward'];
             $params['overdueOrders'] = $reward['overdueOrders'];
             $params['isMinMet'] = $reward['isMinMet'];
-
             return View::make('pages.member.ambassador-panel', $params);
         }
         else {

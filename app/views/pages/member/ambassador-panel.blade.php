@@ -17,7 +17,7 @@
             @if (Auth::user()->is_approved_ambassador)
             <div>
                 <h5>
-                    我的邀请码: <strong>{{ Auth::user()->ambassadorInfo->ambassador_code }}</strong>
+                    我的邀请码: <strong>{{ $ambassadorInfo->ambassador_code }}</strong>
                 </h5>                
             </div>
             <br>
@@ -100,10 +100,10 @@
 
             <div>
                 <p>
-                    @if (isset(Auth::user()->alipay_account))
+                    @if (isset($ambassadorInfo->alipay_account))
                     <h5>
                         我的支付宝账号:  
-                        <span class="font-orange"><strong>{{ Auth::user()->alipay_account }} </strong></span>
+                        <span class="font-orange"><strong>{{ $ambassadorInfo->alipay_account }} </strong></span>
                         <small>
                             <a title="Click to dropdown" href="#" onclick="$('#change_alipay_block').toggle(300);return false;">                        
                                 <i class="fa fa-pencil"></i>  更换 
@@ -116,7 +116,7 @@
                         <div class="form-group">
                             <label for="alipay_account" class="col-sm-2 control-label">支付宝账号</label>
                             <div class="col-md-6">
-                                <input type="text" id="alipay_account" name="alipay_account" class="form-control" value="{{ Auth::user()->alipay_account }}" placeholder="请填写您的支付宝账号">
+                                <input type="text" id="alipay_account" name="alipay_account" class="form-control" value="{{ $ambassadorInfo->alipay_account }}" placeholder="请填写您的支付宝账号">
                             </div>              
                         </div>          
                         <div class="form-group">
@@ -129,10 +129,10 @@
                     @endif
                 </p>
             </div>
-            @elseif (isset(Auth::user()->ambassador_info))
-            请等待批准
+            
             @else 
-            请加入目光之星计划
+            <h4>您的申请我们已经收到, 请耐心等待客服的回复。</h4>
+            {{ HTML::image('images/ambassador/waiting.jpg','',array('style'=>'margin:auto;'))}}
             @endif
         </div>
     </div>
@@ -167,9 +167,6 @@ $(document).ready(function() {
         errorElement: "span",
         errorPlacement: function(error, element) {
             error.appendTo($(element).parent());
-        },
-        success: function(label) {
-            label.html("<span class='jq-validate-valid'><i class='fa fa-check-circle fa-lg'></i></span>");
         },
         validClass: "",
         errorClass: "jq-validate-error",

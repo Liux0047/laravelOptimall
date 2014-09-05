@@ -92,9 +92,6 @@ $(document).ready(function() {
 		errorPlacement: function(error, element) {
 			error.appendTo($(element).parent());
 		},
-		success: function(label) {
-			label.html("<span class='jq-validate-valid'><i class='fa fa-check-circle fa-lg'></i></span>");
-		},
 		validClass: "",
 		errorClass: "jq-validate-error",
 	    //ignore: [], //validate hidden input

@@ -15,14 +15,14 @@ class AmbassadorController extends BaseController {
     public function postCreateAmbassador() {
         $params['pageTitle'] = "目光之星";
 
-        $validator = $this->validateInput();
+        $validator = $this->validateCreateAmbassador();
 
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator);
         }
 
         //if member has not registered as ambassador
-        if (isset(Auth::user()->ambassadorInfo)) {
+        if (Auth::user()->ambassadorInfo()->count()== 0) {
             $ambassadorInfo = new AmbassadorInfo;
             $code = $this->generateUniqueId();
             $ambassadorInfo->alipay_account = Input::get('alipay_account');
@@ -39,14 +39,14 @@ class AmbassadorController extends BaseController {
 
     public function postChangeAlipayAccount() {
 
-        $validator = $this->validateInput();
+        $validator = $this->validateAlipay();
 
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator);
         }
         
-        Auth::user()->alipay_account = Input::get('alipay_account');
-        Auth::user()->save();
+        Auth::user()->ambassadorInfo->alipay_account = Input::get('alipay_account');
+        Auth::user()->ambassadorInfo->save();
         return Redirect::back()->with('status', '成功更新支付宝账号');
     }
 
@@ -110,11 +110,18 @@ class AmbassadorController extends BaseController {
         return uniqid();
     }
 
-    private function validateInput() {
+    private function validateCreateAmbassador() {
         $rules = array(
             'alipay_account' => 'required|max:45',
             'mobile_phone' => 'required|max:20',
             'ambassador_plan' => 'required|max:100',
+        );
+        return Validator::make(Input::all(), $rules);
+    }
+    
+    private function validateAlipay() {
+        $rules = array(
+            'alipay_account' => 'required|max:45'
         );
         return Validator::make(Input::all(), $rules);
     }
