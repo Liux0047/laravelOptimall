@@ -3,7 +3,8 @@
 @section ('content')
 <div class="container content-container">
     <div class="page-header">
-        <h1>我的目光之城                    
+        <h1>
+            我的目光之城                    
             <small>目光之星</small>
         </h1>
     </div>
@@ -16,7 +17,7 @@
             @if (Auth::user()->is_approved_ambassador)
             <div>
                 <h5>
-                    我的邀请码: <strong>{{ Auth::user()->ambassador_code }}</strong>
+                    我的邀请码: <strong>{{ Auth::user()->ambassadorInfo->ambassador_code }}</strong>
                 </h5>                
             </div>
             <br>

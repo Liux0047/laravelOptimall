@@ -12,7 +12,7 @@ class MemberAccountController extends BaseController {
 
         $params['prescriptionNames'] = PrescriptionController::getPrescriptionNames();
 
-        $orders = PlacedOrder::ofMember(Auth::id())->orderBy('created_at','DESC')->get();
+        $orders = PlacedOrder::ofMember(Auth::id())->orderBy('created_at', 'DESC')->get();
         $params['orders'] = $orders;
 
         $items = array();
@@ -30,11 +30,11 @@ class MemberAccountController extends BaseController {
 
     public function postChangePassword() {
         $validator = $this->validateSecurity();
-        
+
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator);
         }
-        
+
         $currentPassword = Input::get('current_password');
         $newPassword = Input::get('new_password');
         $confirmPassword = Input::get('confirm_password');
@@ -73,31 +73,35 @@ class MemberAccountController extends BaseController {
 
     public function getAmbassadorPanel() {
         $params['pageTitle'] = "目光之星 - 我的目光之城";
-        $params['reward'] = array();        
-        //$params['ambassadorOrders'] = AmbassadorView::ofAmbassador(Auth::id());
-        $orders = AmbassadorView::ofAmbassador(Auth::id())->get();
-        $params['ambassadorOrders'] = $orders;
-        $reward = AmbassadorController::getRewards($orders);
-        $params['reward'] = $reward['reward'];
-        $params['totalReward'] =  $reward['totalReward'];
-        $params['overdueOrders'] = $reward['overdueOrders'];
-        $params['isMinMet'] =  $reward['isMinMet'];
-        
-        return View::make('pages.member.ambassador-panel', $params);
+        if (!isset(Auth::user()->ambassadorInfo)) {
+            $params['reward'] = array();
+            $orders = AmbassadorView::ofAmbassador(Auth::id())->get();
+            $params['ambassadorOrders'] = $orders;
+            $reward = AmbassadorController::getRewards($orders);
+            $params['reward'] = $reward['reward'];
+            $params['totalReward'] = $reward['totalReward'];
+            $params['overdueOrders'] = $reward['overdueOrders'];
+            $params['isMinMet'] = $reward['isMinMet'];
+
+            return View::make('pages.member.ambassador-panel', $params);
+        }
+        else {
+            return View::make('pages.member.create-ambassador', $params);
+        }
     }
 
     public function postClaimRefund() {
         $validator = $this->validateClaimRefund();
-        
+
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator);
-        }        
-        
+        }
+
         $item = OrderLineItem::findOrFail(Input::get('order_line_item_id'));
-        if ($item->member != Auth::id()){
+        if ($item->member != Auth::id()) {
             return Redirect::back()->with('error', '退款申请提失败');
         }
-        
+
         $refund = new Refund;
         $refund->reason = Input::get('reason');
         $quantity = Input::get('quantity', 1);
@@ -114,27 +118,24 @@ class MemberAccountController extends BaseController {
                 return Redirect::action('MemberAccountController@getShoppingHistory')->with('error', '文件尺寸过大，请重新上传');
             }
         }
+        
+        $refund->order_line_item = $item->order_line_item_id;
         $refund->save();
-        $item->refund = $refund->refund_id;
-        $item->save();
         return Redirect::back()->with('status', '退款申请提交成功');
     }
-    
-    
+
     private function validateSecurity() {
         $rules = array(
             'new_password' => 'required|min:6|max:16|alpha_num'
         );
         return Validator::make(Input::all(), $rules);
-        
     }
-    
+
     private function validateClaimRefund() {
         $rules = array(
             'reason' => 'required|max:150'
         );
         return Validator::make(Input::all(), $rules);
-        
     }
 
 }

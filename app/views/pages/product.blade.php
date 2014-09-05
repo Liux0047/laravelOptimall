@@ -273,10 +273,7 @@ $(document).ready(function() {
             return $(this).attr('data-score');
         }
     });
-
-    $('.nav-tabs li a').on('shown.bs.tab', function(e) {
-        $(window).trigger("scroll");
-    });
+    
 });
 
 //scroll to tab content

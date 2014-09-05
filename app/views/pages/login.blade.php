@@ -46,17 +46,6 @@
 @section('script')
 @parent
 <script type="text/javascript">
-$(document).ready(function() {
-        //skroll initialization
-        skrollr.init({
-            forceHeight: false,
-            easing: {
-                vibrate: function(p) {
-                    return Math.sin(p * 10 * Math.PI);
-                }
-            }
-        });
-    });
 
 </script> 
 @stop

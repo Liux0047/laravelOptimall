@@ -22,17 +22,18 @@ class AmbassadorController extends BaseController {
         }
 
         //if member has not registered as ambassador
-        if (!isset(Auth::user()->ambassador_code) || strlen(Auth::user()->ambassador_code) == 0) {
-            $params['isAlreadyAmbassador'] = false;
+        if (isset(Auth::user()->ambassadorInfo)) {
+            $ambassadorInfo = new AmbassadorInfo;
             $code = $this->generateUniqueId();
-            $params['amabassadorCode'] = $code;
-            Auth::user()->ambassador_code = $code;
-            Auth::user()->alipay_account = Input::get('alipay_account');
-            Auth::user()->save();
-            return View::make('pages.ambassador.ambassador-created', $params);
+            $ambassadorInfo->alipay_account = Input::get('alipay_account');
+            $ambassadorInfo->mobile_phone = Input::get('mobile_phone');
+            $ambassadorInfo->ambassador_plan = Input::get('ambassador_plan');
+            $ambassadorInfo->ambassador_code = $code;
+            $ambassadorInfo->member = Auth::id();
+            $ambassadorInfo->save();
+            return Redirect::back()->with('status','成功注册为目光之星，请等待回复');
         } else {
-            $params['isAlreadyAmbassador'] = true;
-            return View::make('pages.ambassador.ambassador-created', $params);
+            return Redirect::back()->with('warning','您已经是目光之星了');
         }
     }
 
@@ -111,7 +112,9 @@ class AmbassadorController extends BaseController {
 
     private function validateInput() {
         $rules = array(
-            'alipay_account' => 'required|max:45'
+            'alipay_account' => 'required|max:45',
+            'mobile_phone' => 'required|max:20',
+            'ambassador_plan' => 'required|max:100',
         );
         return Validator::make(Input::all(), $rules);
     }

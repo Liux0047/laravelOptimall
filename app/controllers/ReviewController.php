@@ -23,6 +23,7 @@ class ReviewController extends BaseController {
         $review = new Review;
         $review->title = Input::get('title');
         $review->content = Input::get('content');
+        
         $review->design_rating = Input::get('score_design', '5');
         if ($review->design_rating > 5) {
             $review->design_rating = 5;
@@ -35,10 +36,10 @@ class ReviewController extends BaseController {
         if ($review->quality_rating > 5) {
             $review->quality_rating = 5;
         }
+        
+        $review->order_line_item = $item->order_line_item_id;
         $review->save();
         
-        $item->review = $review->review_id;
-        $item->save();
         return Redirect::back()->with('status', '评论成功');
     }
 

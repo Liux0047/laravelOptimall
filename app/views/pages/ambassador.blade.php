@@ -2,7 +2,9 @@
 
 @section('content')
 <div class="container content-container content-no-header">	
-	{{ HTML::image('images/ambassador/call-to-action.jpg') }}
+	<a href="{{ action('MemberAccountController@getAmbassadorPanel') }}">
+		{{ HTML::image('images/ambassador/call-to-action.jpg') }}
+	</a>
 
 	<!--detailed product info -->
 	<ul class="nav nav-tabs ambassador-tabs" role="tablist">
@@ -30,7 +32,7 @@
 
 	<div class="tab-content">
 		<div class="tab-pane fade in active tab-pane-bordered" id="about_ambassador">
-			
+
 		</div>
 
 		<div class="tab-pane fade tab-pane-bordered" id="how_it_works">
