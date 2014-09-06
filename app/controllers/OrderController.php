@@ -16,7 +16,7 @@ class OrderController extends BaseController {
         }
         
         //redirect to home page if no items pending
-        $items = OrderLineItem::ofMember(Auth::id())->get();
+        $items = OrderLineItem::cartItems(Auth::id())->get();
         if (count($items) == 0) {
             return Redirect::to('/');
         }
@@ -68,7 +68,7 @@ class OrderController extends BaseController {
 
         $orderId = Input::get('order_id');
         $order = PlacedOrder::findOrFail($orderId);
-        if ($order->member != Auth::id()) {
+        if ($order->member_id != Auth::id()) {
             return Redirect::back()->with('error','订单号有误');
         }
         $price = $order->total_transaction_amount;
@@ -113,12 +113,12 @@ class OrderController extends BaseController {
 
     public function insertOrder($items, $paymentMethod, $amount, $address, $couponId) {
         $order = new PlacedOrder;
-        $order->member = Auth::id();
+        $order->member_id = Auth::id();
         $order->coupon = $couponId;
         $order->payment_method = $paymentMethod;
         $order->total_transaction_amount = $amount;
         $order->currency_code = 'RMB';
-        $order->order_status = 1;
+        $order->order_status_id = 1;
         $order->recipient_name = $address->recipient_name;
         $order->receive_address = $address->receive_address;
         $order->receive_zip = $address->receive_zip;
@@ -129,7 +129,7 @@ class OrderController extends BaseController {
 
         // take note of the coupon used, if any
         if (isset($couponId)) {
-            $order->coupon = $couponId;
+            $order->coupon_id = $couponId;
         }
         // check if this is the first purchase
         if (PlacedOrder::ofMember(Auth::id())->count() == 0) {
@@ -141,7 +141,7 @@ class OrderController extends BaseController {
         foreach ($items as $item) {
             $item->order_id = $order->order_id;
             $item->save();
-            $model = $item->product()->first()->productModel()->first();
+            $model = $item->product->productModel;
             $model->num_items_sold_display += rand(1, 5);
             $model->save();
         }
@@ -154,7 +154,7 @@ class OrderController extends BaseController {
             $order->payment_ref_no = $trade_no;
             $order->payment_amount = Input::get('total_fee');
             $order->payment_time = (new DateTime())->format('Y-m-d H:i:s');
-            $order->order_status = 2;
+            $order->order_status_id = 2;
             if (Input::has('receive_name')) {
                 $order->recipient_name = Input::get('receive_name');
             }

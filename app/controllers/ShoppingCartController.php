@@ -38,7 +38,7 @@ class ShoppingCartController extends BaseController {
             }
         }
         $params['isAllPrescriptionComplete'] = $isAllPrescriptionComplete;
-        $params['storedPrescriptions'] = Prescription::ofMember(Auth::id())->get();
+        $params['storedPrescriptions'] = Auth::user()->prescriptions;
 
         $coupon = CouponController::getCoupon();
         $params['coupon'] = $coupon;
@@ -75,7 +75,7 @@ class ShoppingCartController extends BaseController {
         $params['totalDiscount'] = $this->totalDiscount;
         $params['netPrice'] = $this->netPrice;
 
-        $addresses = Address::ofMember(Auth::id())->get();
+        $addresses = Auth::user()->addresses;
         $params['addresses'] = $addresses;
         if (count($addresses)) {    //if has address
             $params['selectedAddress'] = $addresses[0];
@@ -87,7 +87,7 @@ class ShoppingCartController extends BaseController {
             }
         }
         $params['newAddress'] = new Address;
-
+        
         $params['prescriptionNames'] = PrescriptionController::getPrescriptionNames();
 
         return View::make('pages.checkout', $params);
@@ -95,10 +95,10 @@ class ShoppingCartController extends BaseController {
 
     public function postAddItem() {
         $item = new OrderLineItem;
-        $item->product = Input::get('product_id');
-        $item->lens_type = Input::get('lens_type');
+        $item->product_id = Input::get('product_id');
+        $item->lens_type_id = Input::get('lens_type');
         $item->quantity = 1;
-        $item->member = Auth::id();
+        $item->member_id = Auth::id();
         $item->is_plano = 0;
         $item->save();
         return Redirect::action('ShoppingCartController@getMyCart')->with('status', '成功添加商品');
@@ -132,8 +132,8 @@ class ShoppingCartController extends BaseController {
         //re-calculate the price and send response
         $coupon = CouponController::getCoupon();
         $this->calculatePrice($this->getCartItems(), $coupon);
-        $price = $orderLineItem->product()->first()->productModel()->first()->price;
-        $lensPrice = $orderLineItem->lensType()->first()->price;
+        $price = $orderLineItem->product->productModel->price;
+        $lensPrice = $orderLineItem->lensType->price;
         return Response::json(array(
                     'quantity' => $orderLineItem->quantity,
                     'itemTotal' => $orderLineItem->quantity * ($price + $lensPrice),
@@ -145,17 +145,16 @@ class ShoppingCartController extends BaseController {
 
     public function postRemoveItem() {
         $orderLineItem = $this->getItemsFromPost();
-        if ($orderLineItem->member != Auth::id()){
+        if ($orderLineItem->member_id != Auth::id()){
             return Redirect::back()->with('error', '无法移除此商品');
-        }
-            
+        }            
         $orderLineItem->delete();
         return Redirect::back()->with('status', '成功移除此商品');
     }
 
     public function postSetPlano() {
         $orderLineItem = $this->getItemsFromPost();
-        if ($orderLineItem->member != Auth::id()){
+        if ($orderLineItem->member_id != Auth::id()){
             return Redirect::back()->with('error', '无法修改验光单');
         }
         $orderLineItem->is_plano = 1;
@@ -167,7 +166,7 @@ class ShoppingCartController extends BaseController {
         if (!Auth::check()) {
             return 0;
         } else {
-            return OrderLineItemView::ofMember(Auth::id())->count();
+            return OrderLineItemView::cartItems(Auth::id())->count();
         }
     }
 
@@ -177,7 +176,7 @@ class ShoppingCartController extends BaseController {
     }
 
     private function getCartItems() {
-        return OrderLineItemView::ofMember(Auth::id())->get();
+        return OrderLineItemView::cartItems(Auth::id())->get();
     }
 
     private function calculatePrice($items, $coupon) {
@@ -189,9 +188,9 @@ class ShoppingCartController extends BaseController {
         }
         //calculate discount
         if (isset($coupon)) {
-            if ($coupon->discount_type == 1) {
+            if ($coupon->discount_type_id == 1) {
                 $this->totalDiscount = $coupon->discount_value;
-            } else if ($coupon->discount_type == 2) {
+            } else if ($coupon->discount_type_id == 2) {
                 $this->totalDiscount = $this->totalPrice * $coupon->discount_value;
             } else {
                 $this->totalDiscount = 0;
@@ -220,7 +219,7 @@ class ShoppingCartController extends BaseController {
     }
 
     private function isPrescriptionRequired($item) {
-        return $item->lens_type != 1 && !$item->is_plano;
+        return $item->lens_type_id != 1 && !$item->is_plano;
     }
 
 }

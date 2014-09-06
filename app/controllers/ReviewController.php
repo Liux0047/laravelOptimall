@@ -16,7 +16,7 @@ class ReviewController extends BaseController {
         }
         
         $item = OrderLineItem::find(Input::get('order_line_item_id'));
-        if ($item->member != Auth::id()){
+        if ($item->member_id != Auth::id()){
             return Redirect::back()->with('error'.'无法添加评论');
         }
         
@@ -37,7 +37,7 @@ class ReviewController extends BaseController {
             $review->quality_rating = 5;
         }
         
-        $review->order_line_item = $item->order_line_item_id;
+        $review->order_line_item_id = $item->order_line_item_id;
         $review->save();
         
         return Redirect::back()->with('status', '评论成功');
@@ -46,8 +46,8 @@ class ReviewController extends BaseController {
     public function postThumbUp() {
         if (Request::ajax()) {
             $thumbUp = new ThumbUp;
-            $thumbUp->member = Auth::id();
-            $thumbUp->review = Input::get('review_id');
+            $thumbUp->member_id = Auth::id();
+            $thumbUp->review_id = Input::get('review_id');
             $thumbUp->save();
             return Response::json(array('success'=>true));
         }
@@ -55,7 +55,8 @@ class ReviewController extends BaseController {
 
     public function postRemoveThumbUp() {
         if (Request::ajax()) {
-            $thumbUp = ThumbUp::where('member','=',Auth::id())->where('review','=',Input::get('review_id'));
+            $thumbUp = ThumbUp::where('member_id','=',Auth::id())
+                    ->where('review_id','=',Input::get('review_id'));
             $thumbUp->delete();
             return Response::json(array('success'=>true));
         }

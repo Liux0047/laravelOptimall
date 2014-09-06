@@ -15,11 +15,6 @@ class MemberAccountController extends BaseController {
         $orders = Auth::user()->placedOrders()->orderBy('created_at', 'DESC')->get();
         $params['orders'] = $orders;
 
-        $items = array();
-        foreach ($orders as $order) {
-            $items[$order->order_id] = $order->orderLineItemViews;
-        }
-        $params['items'] = $items;
         return View::make('pages.member.shopping-history', $params);
     }
 
@@ -56,14 +51,14 @@ class MemberAccountController extends BaseController {
 
     public function getMyPrescription() {
         $params['pageTitle'] = "验光单 - 我的目光之城";
-        $params['prescriptions'] = Prescription::ofMember(Auth::id())->orderBy('created_at')->get();
+        $params['prescriptions'] = Auth::user()->prescriptions()->orderBy('created_at')->get();
         $params['prescriptionNames'] = PrescriptionController::getPrescriptionNames();
         return View::make('pages.member.my-prescription', $params);
     }
 
     public function postDeletePrescription() {
         $prescription = Prescription::findOrFail(Input::get('prescription_id'));
-        if (isset($prescription) && $prescription->member == Auth::id()) {
+        if (isset($prescription) && $prescription->member_id == Auth::id()) {
             $prescription->delete();
             return Redirect::back()->with('status', '成功删除验光单');
         } else {
@@ -98,7 +93,7 @@ class MemberAccountController extends BaseController {
         }
 
         $item = OrderLineItem::findOrFail(Input::get('order_line_item_id'));
-        if ($item->member != Auth::id()) {
+        if ($item->member_id != Auth::id()) {
             return Redirect::back()->with('error', '退款申请提失败');
         }
 
@@ -119,7 +114,7 @@ class MemberAccountController extends BaseController {
             }
         }
         
-        $refund->order_line_item = $item->order_line_item_id;
+        $refund->order_line_item_id = $item->order_line_item_id;
         $refund->save();
         return Redirect::back()->with('status', '退款申请提交成功');
     }

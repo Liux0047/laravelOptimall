@@ -29,7 +29,7 @@ class AmbassadorController extends BaseController {
             $ambassadorInfo->mobile_phone = Input::get('mobile_phone');
             $ambassadorInfo->ambassador_plan = Input::get('ambassador_plan');
             $ambassadorInfo->ambassador_code = $code;
-            $ambassadorInfo->member = Auth::id();
+            $ambassadorInfo->member_id = Auth::id();
             $ambassadorInfo->save();
             return Redirect::back()->with('status','成功注册为目光之星，请等待回复');
         } else {
@@ -74,7 +74,7 @@ class AmbassadorController extends BaseController {
 
     public static function createAmbassadorRelation($newMemberId, $code) {
         $ambassadorRelation = new AmbassadorRelation;        
-        if (Member::getAmbassador($code)->count() > 0) {
+        if (Member::getAmbassador($code)->count() > 0) {    //if code belongs to a valid ambassador
             $ambassadorId = Member::getAmbassador($code)->first()->member_id;
             $ambassadorRelation->ambassador = $ambassadorId;
             $ambassadorRelation->invited_member = $newMemberId;
@@ -86,7 +86,7 @@ class AmbassadorController extends BaseController {
     }
 
     public static function isAmbassadorCodeValid($code) {
-        return (Member::where('ambassador_code', '=', $code)->count() > 0);
+        return Member::getAmbassador($code)->count() > 0;
     }
 
     public static function getRewards($orders) {

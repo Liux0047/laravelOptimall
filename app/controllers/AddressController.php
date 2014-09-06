@@ -22,10 +22,10 @@ class AddressController extends BaseController {
             $address->$addressField = Input::get($addressField);
         }
         //set all address as non-default
-        Address::ofMember(Auth::id())->update(array('is_default' => 0));
+        Auth::user()->addresses()->update(array('is_default' => 0));
         //set the newly added address as the default
         $address->is_default = true;
-        $address->member = Auth::id();
+        $address->member_id = Auth::id();
         $address->save();
         return Redirect::back();
     }
@@ -39,7 +39,7 @@ class AddressController extends BaseController {
         }
 
         $address = Address::findOrFail(Input::get('address_id'));
-        if ($address->member == Auth::id()) {
+        if ($address->member_id == Auth::id()) {
             foreach (self::$addressFields as $addressField) {
                 $address->$addressField = Input::get($addressField);
             }
@@ -54,9 +54,9 @@ class AddressController extends BaseController {
 
     public function postUseAddress() {
         $address = Address::findOrFail(Input::get('address_id'));
-        if ($address->member == Auth::id()) {
+        if ($address->member_id == Auth::id()) {
             //set all address as non-default
-            Address::ofMember(Auth::id())->update(array('is_default' => 0));
+            Auth::user()->addresses()->update(array('is_default' => 0));
             //set this address as the default        
             $address->is_default = true;
             $address->save();

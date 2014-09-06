@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <p>
-                        订货会员: {{ $order->member()->first()->nickname }} ({{ $order->member()->first()->email }})
+                        订货会员: {{ $order->member->nickname }} ({{ $order->member->email }})
                     </p>
                     <p>
                         订单总额: {{ $order->total_transaction_amount }} {{ $order->currency_code }} 

@@ -11,7 +11,7 @@ class CouponController extends BaseController {
     public function postApplyCoupon() {
         $coupon = Coupon::validCoupon(Input::get('coupon_code'))->first();
         if (isset($coupon)) {    //if a valid coupon was found
-            if ($coupon->couponUsages()->where('member', '=', Auth::id())->count()) {
+            if ($coupon->couponUsages()->where('member_id', '=', Auth::id())->count() > 0) {
                 //if this coupon has been used
                 return Redirect::back()->with('error', '消费卷已经被使用');
             } else {
@@ -39,7 +39,7 @@ class CouponController extends BaseController {
             $couponId = Session::get('couponId');
             $couponUsage = new CouponUsage;
             $couponUsage->coupon_id = $couponId;
-            $couponUsage->member = Auth::id();
+            $couponUsage->member_id = Auth::id();
             $couponUsage->save();
             Session::forget('couponId');
             return $couponId;

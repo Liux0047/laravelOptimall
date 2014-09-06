@@ -29,36 +29,57 @@ class Member extends Eloquent implements UserInterface, RemindableInterface {
     /*
      * One to one relationship with ambassadorInfo
      */
+
     public function ambassadorInfo() {
-        return $this->hasOne('AmbassadorInfo','member');
+        return $this->hasOne('AmbassadorInfo', 'member');
     }
-    
+
     /*
      * One to many relationship with PlacedOrder
      */
+
     public function placedOrders() {
-        return $this->hasMany('PlacedOrder','member_id');
+        return $this->hasMany('PlacedOrder', 'member_id');
     }
-    
+
     /*
      * One to many relationship with orderLineItemView
      */
+
     public function orderLineItemViews() {
-        return $this->hasMany('OrderLineItemView','member_id');
+        return $this->hasMany('OrderLineItemView', 'member_id');
     }
-    
+
     /*
      * One to many relationship with orderLineItem
      */
+
     public function orderLineItems() {
-        return $this->hasMany('OrderLineItem','member_id');
+        return $this->hasMany('OrderLineItem', 'member_id');
     }
-    
+
+    /*
+     * One to many relationship with Address
+     */
+
+    public function addresses() {
+        return $this->hasMany('Address', 'member_id');
+    }
+
     /*
      * One to many relationship with Prescription
      */
+
     public function prescriptions() {
         return $this->hasMany('Prescription', 'member_id');
+    }
+    
+    /*
+     * One to many relationship with ThumbUp
+     */
+
+    public function thumbUps() {
+        return $this->hasMany('ThumbUp', 'member_id');
     }
 
     /*
@@ -67,8 +88,9 @@ class Member extends Eloquent implements UserInterface, RemindableInterface {
 
     public function scopeGetAmbassador($query, $code) {
         return $query->select('member.member_id')
-                        ->join('ambassador_info', 'ambassador_info.ambassador_info_id', '=', 'member.ambassador_info')
-                        ->where('ambassador_code', '=', $code);
+                        ->join('ambassador_info', 'ambassador_info.member_id', '=', 'member.member_id')
+                        ->where('ambassador_info.ambassador_code', '=', $code)
+                        ->where('member.is_approved_ambassador', '=', '1');
     }
 
 }

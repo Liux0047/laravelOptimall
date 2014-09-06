@@ -31,9 +31,9 @@ class ProductController extends BaseController {
         $params['hasReview'] = !($reviews->count() == 1 && !isset($reviews[0]->review_id));
         $params['thumbedList'] = array();
         if (Auth::check()) { //get the list of reviews that the member has thumbed up
-            $thumbUps = ThumbUp::ofMember(Auth::id())->get();
+            $thumbUps = Auth::user()->thumbUps;
             foreach ($thumbUps as $thumbUp) {
-                $params['thumbedList'][] = $thumbUp->review;
+                $params['thumbedList'][] = $thumbUp->review_id;
             }
         }
         $params['alsoBuys'] = $this->getAlsoBuyModels($modelId);
@@ -42,8 +42,6 @@ class ProductController extends BaseController {
     }
 
     public function getIndex() {
-
-        $products = array();
         $wideModelIds = array();
 
         foreach (self::$eminentModels as $labelName => $labelValue) {
@@ -52,14 +50,9 @@ class ProductController extends BaseController {
             $$modelGroupName = ProductModelView::where('label', '=', $labelValue['id'])
                             ->orderBy('num_items_sold_display', 'DESC')->take(4)->get();
             $params[$modelGroupName] = $$modelGroupName;
-            foreach ($$modelGroupName as $model) {
-                //associate model id with all products under this model id
-                $products[$model->model_id] = $model->productViews;
-            }
             $wideModelIds[$labelName] = $labelValue['wideModelId'];
         }
 
-        $params['products'] = $products;
         $params['wideModelIds'] = $wideModelIds;
 
         return View::make('pages.index', $params);
@@ -77,17 +70,15 @@ class ProductController extends BaseController {
         );
 
         Session::forget('remainingModels');
-
         $params['checkedValues'] = array();
+        
         $models = ProductModelView::distinct();
-
         foreach ($filters as $filter) {
             if (Input::has($filter['filterName']) && count(Input::get($filter['filterName']))) {
                 $models = $models->$filter['functionName'](Input::get($filter['filterName']));
                 $params['checkedValues'][$filter['filterName']] = Input::get($filter['filterName']);
             }
         }
-
         $sortOrder = Input::get('sort_order', 'num_items_sold_display');
         $params['isDesc'] = false;
         if (Input::get('is_desc') == 1) {
@@ -97,7 +88,6 @@ class ProductController extends BaseController {
             $models = $models->orderBy($sortOrder);
         }
         $params['sortOrder'] = $sortOrder;
-
         $models = $models->get();
 
         $itemsOnPage = Config::get('optimall.itemsOnPage');
@@ -111,15 +101,7 @@ class ProductController extends BaseController {
             $modelsToDisplay = $models;
         }
 
-        $products = array();
-
-        foreach ($modelsToDisplay as $model) {
-            //associate model id with all products under this model id
-            $products[$model->model_id] = $model->productViews;
-        }
-
         $params['models'] = $modelsToDisplay;
-        $params['products'] = $products;
 
         $params['styles'] = ProductStyle::all();
         $params['categories'] = ProductCategory::all();
@@ -134,7 +116,6 @@ class ProductController extends BaseController {
 
     public function postShowRemainingModels() {
         $models = array();
-        $products = array();
 
         $itemsOnPage = Config::get('optimall.itemsOnPage');
         $params['disable'] = false;
@@ -153,26 +134,23 @@ class ProductController extends BaseController {
             $modelIdsToDisplay = array();
         }
 
-        foreach ($modelIdsToDisplay as $modelIds) {
-            $models[] = ProductModelView::find($modelIds);
-        }
-        foreach ($models as $model) {
-            //associate model id with all products under this model id
-            $products[$model->model_id] = $model->productViews;
+        foreach ($modelIdsToDisplay as $modelId) {
+            $models[] = ProductModelView::find($modelId);
         }
         $params['models'] = $models;
-        $params['products'] = $products;
 
         return View::make('components.product-page.ajax-load-product-cards', $params);
     }
 
     private function recordViewHistory($modelId) {
         if (Auth::check()) {
-            $count = ViewItemHistory::where('member', '=', Auth::id())->where('model', '=', $modelId)->count();
+            $count = ViewItemHistory::where('member_id', '=', Auth::id())
+                    ->where('model_id', '=', $modelId)
+                    ->count();
             if ($count == 0) {
                 $viewhistory = new ViewItemHistory;
-                $viewhistory->member = Auth::id();
-                $viewhistory->model = $modelId;
+                $viewhistory->member_id = Auth::id();
+                $viewhistory->model_id = $modelId;
                 $viewhistory->save();
             }
         }
@@ -181,13 +159,11 @@ class ProductController extends BaseController {
     private function getAlsoBuyModels ($cuurentModelId) {
         $baseModels = OrderLineItemView::viewThisAlsoBuy($cuurentModelId)->take(5)->get();
         $models = array();
-        $products = array();
         foreach ($baseModels as $baseModel){
             $model = ProductModelView::find($baseModel->model);
             $models[] = $model;
-            $products[$baseModel->model] = $model->productViews;
         }
-        return array('models'=>$models, 'products'=>$products);
+        return array('models'=>$models);
     }
 
 }

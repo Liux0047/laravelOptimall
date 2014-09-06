@@ -50,7 +50,7 @@ class PrescriptionController extends BaseController {
             $prescription->$prescriptionName = Input::get($prescriptionName);
         }
         $prescription->name = Input::get('prescription_name');
-        $prescription->member = Auth::id();
+        $prescription->member_id = Auth::id();
         $prescription->save();
     }
 
