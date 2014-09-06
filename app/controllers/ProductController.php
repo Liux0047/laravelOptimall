@@ -43,11 +43,11 @@ class ProductController extends BaseController {
 
     public function getIndex() {
         $wideModelIds = array();
-
+        
         foreach (self::$eminentModels as $labelName => $labelValue) {
             //use variable variable name to form model groups of diffrent featured labels
             $modelGroupName = $labelName . 'Models';
-            $$modelGroupName = ProductModelView::where('label', '=', $labelValue['id'])
+            $$modelGroupName = ProductModelView::where('product_label_id', '=', $labelValue['id'])
                             ->orderBy('num_items_sold_display', 'DESC')->take(4)->get();
             $params[$modelGroupName] = $$modelGroupName;
             $wideModelIds[$labelName] = $labelValue['wideModelId'];

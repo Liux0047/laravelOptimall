@@ -49,7 +49,7 @@ class PlacedOrder extends Eloquent {
      * Dynamic scope of undispatched orders
      */
     public function scopeUndispatched ($query) {
-        return $query->where('order_status','<=',2);
+        return $query->where('order_status_id','<=',2);
     } 
 
     /*

@@ -24,7 +24,7 @@
             <a href="{{ URL::to('product/'.$model->model_id) }}" id="small-view-{{ $model->model_id }}">
                 <span class="img-valign-helper"></span>
                 <img src="{{ asset('images/lazyload-holder.png') }}" 
-                data-original="{{ asset('images/gallery/'.$model->model_id.'/'.$products[0]->product_id.'/medium-view-3.jpg') }}" 
+                data-original="{{ asset('images/gallery/'.$model->model_id.'/'.$model->productViews()->first()->product_id.'/medium-view-3.jpg') }}" 
                 class="lazy">
             </a>
         </div>

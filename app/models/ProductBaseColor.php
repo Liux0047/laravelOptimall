@@ -14,7 +14,7 @@ class ProductBaseColor  extends Eloquent{
 	protected $table = 'product_base_color';
         
         //primary ID
-        protected $primaryKey = 'base_color_id';
+        protected $primaryKey = 'product_base_color_id';
 
 	/**
 	 * The attributes excluded from the model's JSON form.
