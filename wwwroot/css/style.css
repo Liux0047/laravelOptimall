@@ -149,11 +149,26 @@ div.vertical-divider {
     font-size: 12px;
 }
 
+/* modal modification 
+* http://codepen.io/anon/pen/LeBlm
+*/
+.modal-dialog {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+.modal-footer {
+    margin-top: 0;
+}
+
 @media (max-width: 767px) {
     .modal-dialog {
         width: 100%;
     }
-} 
+}
+
+
 /* nav tab modification */
 .tab-content .tab-pane-bordered{
     border-left: 1px solid #dddddd;

@@ -61,7 +61,7 @@ Route::group(array('before' => 'auth'), function() {
     /*
      * Route to add item into cart
      */
-    Route::post('shopping-cart/add-item', 'ShoppingCartController@postAddItem');
+    Route::get('shopping-cart/add-item', 'ShoppingCartController@getAddItem');
     /*
      * Route to update prescription
      */

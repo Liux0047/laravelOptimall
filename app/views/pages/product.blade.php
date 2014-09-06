@@ -31,7 +31,7 @@
                 </small>                        
             </h3>
 
-            {{ Form::open(array('action' => 'ShoppingCartController@postAddItem', 'class'=>'form')) }}
+            {{ Form::open(array('action' => 'ShoppingCartController@getAddItem', 'class'=>'form','method'=>'GET')) }}
             <table class="view-item-table">
                 <thead>
                     <tr>

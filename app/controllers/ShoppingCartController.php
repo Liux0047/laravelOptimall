@@ -93,7 +93,7 @@ class ShoppingCartController extends BaseController {
         return View::make('pages.checkout', $params);
     }
 
-    public function postAddItem() {
+    public function getAddItem() {
         $item = new OrderLineItem;
         $item->product_id = Input::get('product_id');
         $item->lens_type_id = Input::get('lens_type');

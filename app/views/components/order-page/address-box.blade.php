@@ -26,12 +26,5 @@
 		</a>
 		{{ Form::close() }}		
 		@endif
-
-		@if($address->address_id==$selectedAddress->address_id)	
-		{{ Form::open(array('action' => 'AddressController@postUpdateAddress', 'id'=>'edit_address_form', 'class'=>'form-horizontal', 'novalidate'=>'novalidate')) }}
-		<input type="hidden" name="address_id" value="{{ $address->address_id }}">  
-		@include('components.order-page.address-modal', array('fieldPrefix'=>$modalAction, 'modalId'=>'address_modal_'.$address->address_id,'address'=>$address))
-		{{ Form::close() }}
-		@endif
 	</div>
 </div>

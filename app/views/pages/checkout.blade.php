@@ -15,17 +15,24 @@
 	<div class="row no-display" id="address_section">
 		@foreach ($addresses as $address)
 		<div class="col-md-4">
-			@include('components.order-page.address-box', array('modalAction'=>'edit', 'address'=>$address, 'selectedAddress'=>$selectedAddress))
+			@include('components.order-page.address-box', array('address'=>$address, 'selectedAddress'=>$selectedAddress))
 		</div>
 		@endforeach
 
 		<div class="col-md-4"><a href="#add_address_modal" data-toggle="modal">
 			<i class="fa fa-plus"></i> 添加新地址</a>
-		</div>        
-		{{ Form::open(array('action' => 'AddressController@postAddAddress', 'id'=>'add_address_form', 'class'=>'form-horizontal', 'novalidate'=>'novalidate')) }}
-		@include('components.order-page.address-modal', array('fieldPrefix'=>'add', 'modalId'=>'add_address_modal', 'address'=>$newAddress ))
-		{{ Form::close() }}		
+		</div>        		
 	</div>     
+	@if (isset($selectedAddress))
+	{{ Form::open(array('action' => 'AddressController@postUpdateAddress', 'id'=>'edit_address_form', 'class'=>'form-horizontal', 'novalidate'=>'novalidate')) }}
+	<input type="hidden" name="address_id" value="{{ $address->address_id }}">  
+	@include('components.order-page.address-modal', array('fieldPrefix'=>'edit', 'modalId'=>'address_modal_'.$selectedAddress->address_id,'address'=>$selectedAddress))
+	{{ Form::close() }}
+	@endif
+
+	{{ Form::open(array('action' => 'AddressController@postAddAddress', 'id'=>'add_address_form', 'class'=>'form-horizontal', 'novalidate'=>'novalidate')) }}
+	@include('components.order-page.address-modal', array('fieldPrefix'=>'add', 'modalId'=>'add_address_modal', 'address'=>$newAddress ))
+	{{ Form::close() }}		
 
 
 	<div class="checkbox">
