@@ -23,12 +23,19 @@ class OrderLineItem extends Eloquent {
      */
     //protected $hidden = array('password', 'remember_token');
 
-    public function Product() {
+    public function product() {
         return $this->belongsTo('Product', 'product');
     }
     
-    public function LensType() {
+    public function lensType() {
         return $this->belongsTo('LensType', 'lens_type');
+    }
+    
+    /*
+     * inverse of one to many relationship of PlacedOrder
+     */
+    public function placedOrder () {
+        return $this->belongsTo('PlacedOrder','order_id');
     }
     
     /*

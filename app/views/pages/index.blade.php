@@ -3,6 +3,7 @@
 @section('link-css')
 @parent
 {{ HTML::style('plugins/raty-2.7.0/jquery.raty.css') }}
+{{ HTML::style('css/animate.min.css'); }}
 @stop
 
 @section ('content')
@@ -198,22 +199,22 @@
 @parent
 <script type="text/javascript">
 
-    $('#index-carousel').carousel({
-        interval: 5000
-    });
-    $('#index-carousel').on('slid.bs.carousel', lazyLoadCarousel);
+$('#index-carousel').carousel({
+    interval: 5000
+});
+$('#index-carousel').on('slid.bs.carousel', lazyLoadCarousel);
 
-    
-    function lazyLoadCarousel() {
-        var $activeImage = $('#index-carousel .active.item img');
-        $activeImage.attr('src', $activeImage.data('lazy-load-src'));
-        var $nextImage = $('#index-carousel .active.item').next('.item').find('img');
-        $nextImage.attr('src', $nextImage.data('lazy-load-src'));
-    }
-    $(document).ready(function() {
-        lazyLoadCarousel();
-    });
-    
+
+function lazyLoadCarousel() {
+    var $activeImage = $('#index-carousel .active.item img');
+    $activeImage.attr('src', $activeImage.data('lazy-load-src'));
+    var $nextImage = $('#index-carousel .active.item').next('.item').find('img');
+    $nextImage.attr('src', $nextImage.data('lazy-load-src'));
+}
+$(document).ready(function() {
+    lazyLoadCarousel();
+});
+
 </script>
 @include('components.product-page.product-card-js')
 

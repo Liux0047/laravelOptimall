@@ -24,10 +24,25 @@ class PlacedOrder extends Eloquent {
     //protected $hidden = array('password', 'remember_token');
 
     /*
-     * query for orders belonging to this member
+     * One to many relationship with OrderLineItemViews
      */
-    public function scopeOfMember($query, $id) {
-        return $query->where('member', '=', $id);
+    public function orderLineItemViews() {
+        return $this->hasMany('OrderLineItemView','order_id');
+    }
+    
+    /*
+     * One to many relationship with OrderLineItems
+     */
+    public function orderLineItems() {
+        return $this->hasMany('OrderLineItem','order_id');
+    }
+
+    /*
+     * Inverse one to many relationship with member
+     */
+
+    public function member($query, $id) {
+        return $query->belongsTo('Member','member');
     }
 
     /*
@@ -39,7 +54,5 @@ class PlacedOrder extends Eloquent {
                         ->where('cambassador_relation.ambassador', '=', $id)
                         ->where('is_first_purchase', '=', 'true');
     }
-    
-    
 
 }

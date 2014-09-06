@@ -80,3 +80,19 @@ Route::filter('csrf', function() {
         throw new Illuminate\Session\TokenMismatchException;
     }
 });
+
+/*
+  |--------------------------------------------------------------------------
+  | Admin Filter
+  |--------------------------------------------------------------------------
+  |   
+  | Admin must log in 
+  |
+ */
+
+Route::filter('admin', function() {
+
+    if (!AdminController::isLoggedIn()) {
+        return Redirect::guest('admin/login');
+    }
+});

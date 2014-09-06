@@ -9,7 +9,7 @@
                     会员登录                        
                 </h4>
                 <hr> 
-                {{ Form::open(array('url' => 'login')) }}
+                {{ Form::open(array('action' => 'MemberController@postLogin')) }}
                 <div class="form-group">
                     <input type="text" class="form-control" id="email" name="email" placeholder="邮箱地址">
                 </div>

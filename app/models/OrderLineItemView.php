@@ -25,16 +25,17 @@ class OrderLineItemView extends Eloquent {
 
     
     /*
+     * inverse of one to many relationship of PlacedOrder
+     */
+    public function placedOrder () {
+        return $this->belongsTo('PlacedOrder','order_id');
+    }
+    
+    /*
      * dynmaic scope to get items belonging to a member ID
      */
     public function scopeOfMember($query, $id) {
         return $query->whereNull('order_id')->where('member','=',$id);
-    }
-    /*
-     * dynmaic scope to get items belonging to an order
-     */
-    public function scopeOfOrder($query, $orderId) {
-        return $query->where('order_id','=',$orderId);
     }
     
     /*

@@ -7,7 +7,6 @@
     @section('link-css')
     {{ HTML::style('css/bootstrap.min.css'); }}
     {{ HTML::style('plugins/font-awesome/css/font-awesome.min.css'); }}
-    {{ HTML::style('css/animate.min.css'); }}
     {{ HTML::style('css/yamm.css'); }}        
     <link rel='shortcut icon' type="image/x-icon" href="{{ asset('images/favicon.ico') }}"> 
     @show
@@ -63,7 +62,7 @@ function auth_login() {
     }
     $.ajax({
         type: "POST",
-        url: "{{ URL::to('login') }}",
+        url: "{{ action('MemberController@postLogin') }}",
         data: {email: email, password: password, remember_me: remember_me}
     }).done(function(data) {
         //if successfully logged in

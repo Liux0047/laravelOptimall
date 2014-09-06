@@ -32,6 +32,27 @@ class Member extends Eloquent implements UserInterface, RemindableInterface {
     public function ambassadorInfo() {
         return $this->hasOne('AmbassadorInfo','member');
     }
+    
+    /*
+     * One to many relationship with PlacedOrder
+     */
+    public function placedOrders() {
+        return $this->hasMany('PlacedOrder','member');
+    }
+    
+    /*
+     * One to many relationship with orderLineItemView
+     */
+    public function orderLineItemViews() {
+        return $this->hasMany('OrderLineItemView','member');
+    }
+    
+    /*
+     * One to many relationship with orderLineItem
+     */
+    public function orderLineItems() {
+        return $this->hasMany('OrderLineItem','member');
+    }
 
     /*
      * Dynamic scope to get member ID given ambassador code

@@ -25,17 +25,17 @@ Route::get('product/{modelId}', 'ProductController@getProduct')
 /*
  * Route to login page
  */
-Route::get('login', 'MemberController@showLoginPage');
+Route::get('login', 'MemberController@getLogin');
 
 /*
  * Route to process login
  */
-Route::post('login', 'MemberController@login');
+Route::post('login', 'MemberController@postLogin');
 
 /*
  * Route to sign up
  */
-Route::get('sign-up', 'MemberController@signUp');
+Route::get('sign-up', 'MemberController@getSignUp');
 
 /*
  * Route to process sign up form submit
@@ -52,7 +52,7 @@ Route::group(array('before' => 'auth'), function() {
     /*
      * Route to logout
      */
-    Route::get('logout', 'MemberController@logout');
+    Route::get('logout', 'MemberController@getLogout');
 
     /*
      * Route to shopping cart controler
@@ -163,6 +163,20 @@ Route::controller('help', 'HelpController');
 Route::controller('password-remind', 'RemindersController');
 
 
+
+/*
+ * Route to admin account controller
+ */
+Route::controller('admin', 'AdminController');
+
+Route::group(array('before' => 'admin'), function() {
+    /*
+     * Route to admin function controller
+     */
+    Route::controller('admin-dashboard', 'AdminFunctionController');
+});
+
+
 //all routes sent via a post http request will use the csrf filter
 Route::when('shopping-cart/*', 'csrf', array('post'));
 Route::when('coupon/*', 'csrf', array('post'));
@@ -171,6 +185,7 @@ Route::when('member/*', 'csrf', array('post'));
 Route::when('ambassador/*', 'csrf', array('post'));
 Route::when('review/*', 'csrf', array('post'));
 Route::when('alipay/*', 'csrf', array('post'));
+Route::when('admin/*', 'csrf', array('post'));
 
 /*
  * View composer to add number of shopping cart items into top banner

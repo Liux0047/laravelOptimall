@@ -7,7 +7,7 @@
  */
 class MemberController extends BaseController {
 
-    public function login() {        
+    public function postLogin() {        
         $email = Input::get('email');
         $password = Input::get('password');
         $rememberMe = Input::get('remember_me');
@@ -22,11 +22,11 @@ class MemberController extends BaseController {
         }
     }
     
-    public function showLoginPage() {
+    public function getLogin() {
         return View::make('pages.login');
     }
 
-    public function signUp() {
+    public function getSignUp() {
         $params['pageTitle'] = "注册成为目光之城会员";
         return View::make('pages.sign-up', $params);
     }
@@ -95,7 +95,7 @@ class MemberController extends BaseController {
         return View::make('pages.verify-registration-result', $params);
     }
     
-    public function logout () {
+    public function getLogout () {
         Auth::logout();
         return Redirect::to('/');
     }

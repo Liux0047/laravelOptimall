@@ -12,12 +12,12 @@ class MemberAccountController extends BaseController {
 
         $params['prescriptionNames'] = PrescriptionController::getPrescriptionNames();
 
-        $orders = PlacedOrder::ofMember(Auth::id())->orderBy('created_at', 'DESC')->get();
+        $orders = Auth::user()->placedOrders()->orderBy('created_at', 'DESC')->get();
         $params['orders'] = $orders;
 
         $items = array();
         foreach ($orders as $order) {
-            $items[$order->order_id] = OrderLineItemView::ofOrder($order->order_id)->get();
+            $items[$order->order_id] = $order->orderLineItemViews;
         }
         $params['items'] = $items;
         return View::make('pages.member.shopping-history', $params);
