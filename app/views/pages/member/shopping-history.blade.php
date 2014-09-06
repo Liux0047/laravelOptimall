@@ -18,7 +18,7 @@
             @include('components.page-frame.message-bar')
             @if (count($orders))
             @foreach ($orders as $order)
-            @include('components.member-account.item-info', array('order'=>$order, 'items'=>$items[$order->order_id],'prescriptionNames'=>$prescriptionNames))
+            @include('components.member-account.item-info', array('order'=>$order, 'items'=>$order->orderLineItemViews,'prescriptionNames'=>$prescriptionNames))
             @endforeach    
             @else
             您还没有购买任何商品

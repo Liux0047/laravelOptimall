@@ -15,9 +15,7 @@
 		<div class="shop-items-container">
 			<div class="container">
 				<div class="panel panel-default" id="options">
-					<div class="panel-heading">					
-						
-
+					<div class="panel-heading">		
 						<a class="sorting-option @if ($sortOrder == 'num_items_sold_display') selected-sorting-option @endif" href="javascript:submitSortOrder('num_items_sold_display', 1);">
 							销量优先
 						</a> 
@@ -34,7 +32,7 @@
 
 					<div class="panel-body" id="product_cards_container">
 						@foreach ($models as $model)
-						@include('components.product-page.product-card', array('model' => $model, 'products' => $products[$model->model_id]))
+						@include('components.product-page.product-card', array('model' => $model)
 						@endforeach
 					</div>
 

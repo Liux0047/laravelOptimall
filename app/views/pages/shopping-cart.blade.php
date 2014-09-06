@@ -12,7 +12,7 @@
     <div class="page-header">
         @include('components.page-frame.message-bar')
 
-        @if(count($items))
+        @if($items->count())
         <div class="page-header-btn-group">
             <a href="{{ URL::to('gallery') }}" class="btn btn-default btn-sm">
                 接着逛逛
@@ -33,7 +33,7 @@
         <h1>我的购物车 <small>Subtext for header</small></h1>                     
     </div>
 
-    @if(count($items))
+    @if($items->count())
     <div class="panel panel-default">
         <table class="table shopping-cart-table">
             <thead>

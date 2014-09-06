@@ -31,7 +31,7 @@
                 </small>                        
             </h3>
 
-            {{ Form::open(array('action' => 'ShoppingCartController@postAddItem', 'class'=>'form', 'id'=>'')) }}
+            {{ Form::open(array('action' => 'ShoppingCartController@postAddItem', 'class'=>'form')) }}
             <table class="view-item-table">
                 <thead>
                     <tr>
@@ -63,7 +63,7 @@
                             </div>
                             <div class="reivew-count-container">
                                 <a href="#" id="review_count_button" >
-                                    (点击查看 {{ count($reviews) }} 条评论)
+                                    (点击查看 {{ $reviews->count() }} 条评论)
                                 </a>
                             </div>                        
                             @else
@@ -102,9 +102,9 @@
                     <tr>
                         <td><span class="font-grey">选择颜色</span></td>
                         <td>
-                            @for ($i=0; $i<count($products); $i++)
+                            @for ($i=0; $i<$products->count(); $i++)
                             <div class="selection-box color-selection-box @if ($i == 0) selected @endif" id="color_{{ $products[$i]->product_id }}" onclick='changeColor({{ $products[$i]->product_id }});' >
-                                <img src="{{ asset('images/color/color-'.$products[$i]->color.'.png') }}">
+                                <img src="{{ asset('images/color/color-'.$products[$i]->product_color_id.'.png') }}">
                                 {{ $products[$i]->color_name_cn }}
                                 <i class='fa fa-check'></i>
                             </div>
@@ -117,7 +117,7 @@
                     <tr>
                         <td><span class="font-grey">选择镜片</span></td>
                         <td>
-                            @for ($i=0; $i<count($lensTypes); $i++)
+                            @for ($i=0; $i<$lensTypes->count(); $i++)
                             <div class="lens-selection-container">
                                 <div class="selection-box lens-selection-box @if ($i == 0) selected @endif" id="lens_{{ $lensTypes[$i]->lens_type_id }}" onclick="changeLens({{ $lensTypes[$i]->lens_type_id }}, {{ $lensTypes[$i]->price }}, {{ $model->price }}, {{ $model->price * 1.5 }});" > 
                                     {{ $lensTypes[$i]->title_cn }} 
@@ -160,7 +160,7 @@
                         <td width="60%" id="also_buy_{{ $alsoBuyModel->model_id }}" class="also-buy-img-cell">
                             <a href="{{ action('ProductController@getProduct', [$alsoBuyModel->model_id]) }}" class="thumbnail-link">
                                 <img src="{{ asset('images/lazyload-holder.png') }}" 
-                                data-original="{{ asset('images/gallery/'.$alsoBuyModel->model_id.'/'.$alsoBuys['products'][$alsoBuyModel->model_id][0]->product_id.'/medium-view-3.jpg') }}" 
+                                data-original="{{ asset('images/gallery/'.$alsoBuyModel->model_id.'/'.$alsoBuyModel->productViews()->first()->product_id.'/medium-view-3.jpg') }}" 
                                 class="lazy">
                             </a>
                             <h5 class="model-title"><strong>{{ $alsoBuyModel->model_name_cn }}</strong></h5>
@@ -176,9 +176,9 @@
                                 <span class="market-price"><del>¥{{ $alsoBuyModel->price + 300 }}</del></span>                                    
                             </p>
                             <p>                                    
-                                @foreach($alsoBuys['products'][$alsoBuyModel->model_id] as $product)
+                                @foreach($alsoBuyModel->productViews as $product)
                                 <span onclick="changeAlsoBuyImg({{ $alsoBuyModel->model_id }}, {{ $product->product_id }});"  class="color-icon-link"> 
-                                    <img src="{{ asset('images/color/color-'.$product->color.'.png') }}" class="color-icon">
+                                    <img src="{{ asset('images/color/color-'.$product->product_color_id.'.png') }}" class="color-icon">
                                 </span>
                                 @endforeach
                             </p>

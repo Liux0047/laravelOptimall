@@ -2,12 +2,12 @@
     <td class="col-md-4">
         <div class="row">
             <div class="col-md-6">
-                {{ HTML::image('images/gallery/'.$item->model.'/'.$item->product.'/medium-view-3.jpg', "Product Image", array('class' => 'shopping-cart-img')) }}
+                {{ HTML::image('images/gallery/'.$item->model_id.'/'.$item->product_id.'/medium-view-3.jpg', "Product Image", array('class' => 'shopping-cart-img')) }}
             </div>
             <div class="col-md-6 shopping-cart-item-info">
                 <h4><strong>{{ $item->model_name_cn }}</strong></h4>
                 <p>颜色:
-                    {{ HTML::image('images/color/color-'.$item->color.'.png') }}
+                    {{ HTML::image('images/color/color-'.$item->product_color_id.'.png') }}
                     {{ $item->color_name_cn }} 
                     <br>
                     镜片: {{ $item->lens_title_cn }}
@@ -49,6 +49,9 @@
                         使用平光镜
                     </a>
                 </li>
+                {{ Form::open(array('action' => 'ShoppingCartController@postSetPlano', 'id'=>'plano_form_'.$item->order_line_item_id)) }}
+                {{ Form::hidden('order_line_item_id',$item->order_line_item_id) }}
+                {{ Form::close() }}
                 @foreach($storedPrescriptions as $storedPrescription)
                 <li>
                     <a href="javascript:$('#stored_pres_form_{{ $storedPrescription->prescription_id }} form').submit();"
@@ -59,7 +62,7 @@
                 </li>        
                 {{-- generate the form to be submitted --}}
                 <div id="stored_pres_form_{{ $storedPrescription->prescription_id }}" class="hidden">
-                    {{ Form::open(array('url' => 'shopping-cart/update-prescription')) }}
+                    {{ Form::open(array('action' => 'ShoppingCartController@postUpdatePrescription')) }}
                     {{ Form::hidden('order_line_item_id', $item->order_line_item_id) }}
                     @foreach ($prescriptionNames['O_S_LEFTNames'] as $O_S_LEFTName)
                     {{ Form::hidden( $O_S_LEFTName, $storedPrescription->$O_S_LEFTName) }}
@@ -80,14 +83,12 @@
                     </a>
                 </li>
             </ul>
-            {{ Form::open(array('url' => url('shopping-cart/set-plano'), 'id'=>'plano_form_'.$item->order_line_item_id)) }}
-            {{ Form::hidden('order_line_item_id',$item->order_line_item_id) }}
-            {{ Form::close() }}
+            
         </div>
         @endif
 
         @if($isPrescriptionRequired[$item->order_line_item_id])
-        {{ Form::open(array('url' => url('shopping-cart/update-prescription'), 'id'=>'prescription_form_'.$item->order_line_item_id, 
+        {{ Form::open(array('action' => 'ShoppingCartController@postUpdatePrescription', 'id'=>'prescription_form_'.$item->order_line_item_id, 
         'novalidate'=>'novalidate', 'class'=>'form-horizontal', 'role'=>'form')) }}                            
         {{ Form::hidden('order_line_item_id', $item->order_line_item_id)}}
         @include('components.order-page.prescription-modal', array('order_line_item_id' => $item->order_line_item_id,'prescriptionNames'=>$prescriptionNames,'prescriptionOptions' => $prescriptionOptions))
@@ -112,12 +113,12 @@
         </span>
     </td>
     <td class="col-md-1">
-        {{ Form::open(array('url' => url('shopping-cart/remove-item'), 'id'=>'remove_'.$item->order_line_item_id)) }}        
+        {{ Form::open(array('action' => 'ShoppingCartController@postRemoveItem', 'id'=>'remove_'.$item->order_line_item_id)) }}        
         {{ Form::hidden('order_line_item_id', $item->order_line_item_id) }}
-        <a data-toggle="modal" href="#confirm-remove-{{ $item->order_line_item_id }}">
+        <a data-toggle="modal" href="#confirm_remove_{{ $item->order_line_item_id }}">
             <i class="fa fa-trash-o fa-lg"></i>
         </a>
-        <div class="modal fade" id="confirm-remove-{{ $item->order_line_item_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal fade" id="confirm_remove_{{ $item->order_line_item_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">

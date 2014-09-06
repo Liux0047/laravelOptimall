@@ -88,7 +88,7 @@
                 @foreach ($order->orderLineItemViews as $item)
                 <tr>
                     <td>
-                        {{ HTML::image('images/gallery/'.$item->model.'/'.$item->product.'/medium-view-3.jpg','', array('class'=>'item-small-view')) }}
+                        {{ HTML::image('images/gallery/'.$item->model_id.'/'.$item->product_id.'/medium-view-3.jpg','', array('class'=>'item-small-view')) }}
                     </td>
                     <td>{{ $item->model_name_cn }}</td>
                     <td>{{ $item->model_code }}</td>
@@ -100,7 +100,7 @@
                     <td>¥{{ number_format($item->price+$item->lens_price, 2) }}</td>
                     <td>{{ $item->quantity }}</td>
                     <td>
-                        @if ($item->lens_type == 1)
+                        @if ($item->lens_type_id == 1)
                         <p>无镜片</p>
                         @elseif($item->is_plano)
                         <p>平光镜</p>
@@ -133,7 +133,7 @@
             </tbody>
         </table>
         <div class="panel-footer align-right">
-            @if ($order->order_status == 2)
+            @if ($order->order_status_id == 2)
             {{ Form::open(array('action'=>'AdminFunctionController@postDispatchOrder', 'onsubmit'=>'return confirmDispatch();')) }}
             {{ Form::hidden('order_id', $order->order_id)}}
             {{ Form::submit('确认发货', array('class'=>'btn btn-warning btn-sm'))}}

@@ -2,12 +2,12 @@
 	<td class="col-md-4">
 		<div class="row">
 			<div class="col-md-6">
-				{{ HTML::image('images/gallery/'.$item->model.'/'.$item->product.'/medium-view-3.jpg','item picture', array('class' => 'shopping-cart-img')) }}
+				{{ HTML::image('images/gallery/'.$item->model_id.'/'.$item->product_id.'/medium-view-3.jpg','item picture', array('class' => 'shopping-cart-img')) }}
 			</div>
 			<div class="col-md-6 shopping-cart-item-info">
 				<h4><strong>{{ $item->model_name_cn }}</strong></h4>
 				<p>颜色:  
-					{{ HTML::image('images/color/color-'.$item->color.'.png') }}
+					{{ HTML::image('images/color/color-'.$item->product_color_id.'.png') }}
 					{{ $item->color_name_cn }} 
 					<br>镜片: {{ $item->lens_title_cn }} 
 					<br>单价: ¥{{ number_format($item->price, 2) }}

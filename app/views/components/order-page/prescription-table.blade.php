@@ -28,7 +28,7 @@
                 @foreach($prescriptionNames['CommonNames'] as $CommonName)
                 <td valign="middle">{{ $prescription->$CommonName }}</td>
                 @endforeach
-                <td></td><td></td><td></td>
+                <td colspan="3"></td>
             </tr>            
         </tbody>
     </table>       

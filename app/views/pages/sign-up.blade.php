@@ -15,7 +15,7 @@
             {{ HTML::image('images/registration.jpg') }}
         </div>
         <div class="col-md-8">
-            {{ Form::open(array('url' => 'sign-up', 'role'=>'form', 'id'=>'registration_form', 
+            {{ Form::open(array('action' => 'MemberController@postSignUp', 'role'=>'form', 'id'=>'registration_form', 
             'novalidate'=>'novalidate', 'class'=>'form-horizontal')) }}            
             <div class="form-group">
                 <label for="nickname" class="col-md-2 control-label">昵称*</label>

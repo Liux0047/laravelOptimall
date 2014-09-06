@@ -10,18 +10,18 @@
             </div>
             <div class="col-md-2">
                 订单状态: 
-                @if ($order->order_status == 1)
+                @if ($order->order_status_id == 1)
                 订单已提交
-                @elseif ($order->order_status == 2)
+                @elseif ($order->order_status_id == 2)
                 已付款
-                @elseif ($order->order_status == 3)
+                @elseif ($order->order_status_id == 3)
                 已发货
-                @elseif ($order->order_status == 4)
+                @elseif ($order->order_status_id == 4)
                 确认收货
                 @endif
             </div>
             <div class="col-md-1"> 
-                @if ($order->order_status == 1)
+                @if ($order->order_status_id == 1)
                 {{ Form::open(array('action'=>'OrderController@postReSubmitPayment'))}}
                 {{ Form::hidden('order_id', $order->order_id)}}
                 {{ Form::submit('去付款', array('class'=>'btn btn-warning btn-xs')) }}
@@ -70,7 +70,7 @@
                             <td>¥{{ number_format($item->price+$item->lens_price, 2) }}</td>
                             <td>{{ $item->quantity }}</td>
                             <td>
-                                @if ($item->lens_type == 1)
+                                @if ($item->lens_type_id == 1)
                                 <p>无镜片</p>
                                 @elseif($item->is_plano)
                                 <p>平光镜</p>
@@ -99,7 +99,7 @@
                                 @endif
 
                                 {{-- enable review and refund modal if status more than paid --}}
-                                @if($order->order_status > 1)
+                                @if($order->order_status_id > 1)
                                 @if(!isset($item->review))       
                                 <p>
                                     <a data-toggle="modal" href="#add_review_{{ $item->order_line_item_id }}">
@@ -113,7 +113,7 @@
                                 @else
                                 @endif
 
-                                @if(!isset($item->refund))
+                                @if(!isset($item->refund_id))
                                 <p>
                                     <a href="#" data-toggle="modal" data-target="#refund_{{ $item->order_line_item_id }}" >
                                         <i class="fa fa-yen"></i> 申请退款

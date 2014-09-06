@@ -42,10 +42,10 @@
                 <div class="pull-right">
                     {{ Form::open(array('action'=>'MemberAccountController@postDeletePrescription')) }}
                     {{ Form::hidden('prescription_id', $prescription->prescription_id) }}
-                    <a data-toggle="modal" href="#confirm-remove-{{ $prescription->prescription_id }}">
+                    <a data-toggle="modal" href="#confirm_remove_{{ $prescription->prescription_id }}">
                         <i class="fa fa-times"></i> 删除此验光单
                     </a>        
-                    <div class="modal fade align-center" id="confirm-remove-{{ $prescription->prescription_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal fade align-center" id="confirm_remove_{{ $prescription->prescription_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">

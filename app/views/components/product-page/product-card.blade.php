@@ -1,14 +1,14 @@
 <div class="col-md-3 col-sm-6 col-xs-6 padding-narrow">
     <div class="shop-item">
-        @if ($model->label == 0)
+        @if ($model->product_label_id == 0)
         <span class="item-badge promotion-badge"></span>
-        @elseif ($model->label == 1)
+        @elseif ($model->product_label_id == 1)
         <span class="item-badge best-seller-badge"></span>
-        @elseif ($model->label == 2)
+        @elseif ($model->product_label_id == 2)
         <span class="item-badge new-arrival-badge"></span>
-        @elseif ($model->label == 3)
+        @elseif ($model->product_label_id == 3)
         <span class="item-badge featured-badge"></span>
-        @elseif ($model->label == 4)
+        @elseif ($model->product_label_id == 4)
         <span class="item-badge classical-badge"></span>
         @endif
         <div class="shop-item-label">
@@ -31,9 +31,9 @@
         <div class="shop-item-details">
             <h5>{{ $model->model_name_cn }}</h5>
             <p>
-                @foreach($products as $product)
+                @foreach( $model->productViews as $product)
                 <span onclick="changeSmallImg({{ $model->model_id }}, {{ $product->product_id }});" class="color-icon-link"> 
-                    <img src="{{ asset('images/color/color-'.$product->color.'.png') }}" class="color-icon">
+                    <img src="{{ asset('images/color/color-'.$product->product_color_id.'.png') }}" class="color-icon">
                 </span>
                 @endforeach
             </p>
@@ -45,7 +45,7 @@
                     @if (($model->average_design_rating + $model->average_comfort_rating + $model->average_quality_rating) > 0)
                     data-score="{{ ($model->average_design_rating + $model->average_comfort_rating + $model->average_quality_rating) / 3 }}",
                     @else
-                    data-score="4.5" 
+                    data-score="5" 
                     @endif
                     >                         
                 </div>
