@@ -1246,11 +1246,6 @@ input.jq-validate-error{
     text-align: center;   
     vertical-align: top;
 }
-.order-summary-table .active td, .order-summary-table .active th{
-    text-align: left;   
-    vertical-align: top;
-    border: 0px; 
-}
 .order-summary-table .modal td, .order-summary-table .modal th{
     text-align: center;   
 }

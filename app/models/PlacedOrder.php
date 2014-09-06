@@ -41,15 +41,22 @@ class PlacedOrder extends Eloquent {
      * Inverse one to many relationship with member
      */
 
-    public function member($query, $id) {
-        return $query->belongsTo('Member','member');
+    public function member() {
+        return $this->belongsTo('Member','member');
     }
+    
+    /*
+     * Dynamic scope of undispatched orders
+     */
+    public function scopeUndispatched ($query) {
+        return $query->where('order_status','<=',2);
+    } 
 
     /*
      * query for first-time orders belonging to this ambassador
      */
 
-    public function ofAmbassadorFirstOrder($query, $id) {
+    public function scopeOfAmbassadorFirstOrder($query, $id) {
         return $query->join('ambassador_relation', 'ambassador_relation.invited_member', '=', ' orders_placed.member')
                         ->where('cambassador_relation.ambassador', '=', $id)
                         ->where('is_first_purchase', '=', 'true');

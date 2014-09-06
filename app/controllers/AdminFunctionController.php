@@ -6,19 +6,36 @@
  * @author Allen
  */
 class AdminFunctionController extends BaseController {
-        
+
     public function getIndex() {
-        return $this->getUndispatchedOrders();        
+        return $this->getUndispatchedOrders();
     }
-    
-    public function getUndispatchedOrders () {
+
+    public function getUndispatchedOrders() {
         $params['pageTitle'] = "未发货的订单";
-        $orders = PlacedOrder::where('order_status','=',1)->paginate(15);
+        $ordersAll = PlacedOrder::undispatched()->get();
+        $orders = PlacedOrder::undispatched()->orderBy('created_at')->paginate(10);
         $params['orders'] = $orders;
         $params['items'] = array();
-        foreach($orders as $order) {
-           $params['items'][$order->order_id] = OrderLineItemView::ofOrder($order->order_id)->get();
+        $params['members'] = array();
+        foreach ($ordersAll as $order) {
+            $params['items'][$order->order_id] = $order->orderLineItemViews;
+            $params['members'][$order->order_id] = $order->member()->first();
         }
-        return View::make('pages.admin.order-management', $params);
+        $params['prescriptionNames'] = PrescriptionController::getPrescriptionNames();
+        return View::make('pages.admin.undispatched-orders', $params);
     }
+
+    public function postDispatchOrder() {
+        $order = PlacedOrder::findOrFail(Input::get('order_id'));
+        if ($order->order_status == 2) {
+            $order->order_status = 3;
+            $order->save();
+            return Redirect::back()->with('status', '确认发货成功');
+        }
+        else {
+            return Redirect::back()->with('error', '无法发货，须买家付款之后');;
+        }
+    }
+
 }
