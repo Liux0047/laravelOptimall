@@ -160,7 +160,7 @@ class ProductController extends BaseController {
         $baseModels = OrderLineItemView::viewThisAlsoBuy($cuurentModelId)->take(5)->get();
         $models = array();
         foreach ($baseModels as $baseModel){
-            $model = ProductModelView::find($baseModel->model);
+            $model = ProductModelView::find($baseModel->model_id);
             $models[] = $model;
         }
         return array('models'=>$models);

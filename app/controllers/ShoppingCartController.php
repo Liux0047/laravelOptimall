@@ -107,6 +107,7 @@ class ShoppingCartController extends BaseController {
     public function postUpdatePrescription() {
         $prescriptionNames = PrescriptionController::getPrescriptionNameArray();
         $orderLineItem = $this->getItemsFromPost();
+        $orderLineItem->is_plano = 0;
         foreach ($prescriptionNames as $prescriptionName) {
             $orderLineItem->$prescriptionName = Input::get($prescriptionName);
         }

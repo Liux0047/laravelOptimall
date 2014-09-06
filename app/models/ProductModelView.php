@@ -32,7 +32,7 @@ class ProductModelView extends Eloquent {
      */
 
     public function scopeOfStyles($query, $styles) {
-        return $query->whereIn('style', $styles);
+        return $query->whereIn('product_style_id', $styles);
     }
 
     /*
@@ -40,7 +40,7 @@ class ProductModelView extends Eloquent {
      */
 
     public function scopeOfCategories($query, $categories) {
-        return $query->whereIn('category', $categories);
+        return $query->whereIn('product_category_id', $categories);
     }
 
     /*
@@ -48,7 +48,7 @@ class ProductModelView extends Eloquent {
      */
 
     public function scopeOfShapes($query, $shapes) {
-        return $query->whereIn('shape', $shapes);
+        return $query->whereIn('product_shape_id', $shapes);
     }
 
     /*
@@ -56,7 +56,7 @@ class ProductModelView extends Eloquent {
      */
 
     public function scopeOfMaterials($query, $materials) {
-        return $query->whereIn('material', $materials);
+        return $query->whereIn('product_material_id', $materials);
     }
 
     /*
@@ -64,7 +64,7 @@ class ProductModelView extends Eloquent {
      */
 
     public function scopeOfGenders($query, $genders) {
-        return $query->whereIn('gender', $genders);
+        return $query->whereIn('product_gender_id', $genders);
     }
 
     /*
@@ -72,7 +72,7 @@ class ProductModelView extends Eloquent {
      */
 
     public function scopeOfFrames($query, $frames) {
-        return $query->whereIn('frame', $frames);
+        return $query->whereIn('product_frame_id', $frames);
     }
 
     /*

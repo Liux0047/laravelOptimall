@@ -31,7 +31,7 @@ class Member extends Eloquent implements UserInterface, RemindableInterface {
      */
 
     public function ambassadorInfo() {
-        return $this->hasOne('AmbassadorInfo', 'member');
+        return $this->hasOne('AmbassadorInfo', 'member_id');
     }
 
     /*

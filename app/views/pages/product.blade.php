@@ -164,7 +164,7 @@
                                 class="lazy">
                             </a>
                             <h5 class="model-title"><strong>{{ $alsoBuyModel->model_name_cn }}</strong></h5>
-                            <a href="{{ action('ProductController@getProduct', [$alsoBuyModel->model_id]) }}">
+                            <a href="{{ action('ProductController@getProduct', array($alsoBuyModel->model_id)) }}">
                                 去围观
                             </a>
                         </td>

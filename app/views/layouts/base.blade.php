@@ -35,11 +35,11 @@
 {{ HTML::script('js/script.js') }}
 @show
 
+
 @section('script')
-@incluide('components.page-frame.login-dropdown-js')
+@include('components.page-frame.login-dropdown-js')
+
 <script type="text/javascript">
-
-
 //lazy load fade in effect
 $("img.lazy").lazyload({
     effect : "fadeIn",

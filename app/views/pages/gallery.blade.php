@@ -32,7 +32,7 @@
 
 					<div class="panel-body" id="product_cards_container">
 						@foreach ($models as $model)
-						@include('components.product-page.product-card', array('model' => $model)
+						@include('components.product-page.product-card', array('model' => $model))
 						@endforeach
 					</div>
 

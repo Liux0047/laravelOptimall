@@ -35,7 +35,7 @@ class OrderLineItemView extends Eloquent {
      * dynmaic scope to get items belonging to a member ID
      */
     public function scopeCartItems($query, $id) {
-        return $query->whereNull('order_id')->where('member','=',$id);
+        return $query->whereNull('order_id')->where('member_id','=',$id);
     }
     
     /*

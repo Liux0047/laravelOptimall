@@ -87,7 +87,7 @@
         </div>
         @endif
 
-        @if($isPrescriptionRequired[$item->order_line_item_id])
+        @if($isPrescriptionRequired[$item->order_line_item_id] || $item->is_plano)
         {{ Form::open(array('action' => 'ShoppingCartController@postUpdatePrescription', 'id'=>'prescription_form_'.$item->order_line_item_id, 
         'novalidate'=>'novalidate', 'class'=>'form-horizontal', 'role'=>'form')) }}                            
         {{ Form::hidden('order_line_item_id', $item->order_line_item_id)}}

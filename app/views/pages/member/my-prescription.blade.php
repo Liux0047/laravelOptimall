@@ -15,6 +15,10 @@
 
             @include('components.page-frame.message-bar')
 
+            @if($prescriptions->count() == 0) 
+            您目前还没有保存任何验光单
+            @else
+
             <div class="row prescription-chart-container">
                 <div class="col-md-5">                    
                     <h4>度数</h4>
@@ -66,7 +70,8 @@
                     {{ Form::close() }}
                 </div>
             </div>                
-            @endforeach      
+            @endforeach    
+            @endif  
         </div>
     </div>
 </div>
