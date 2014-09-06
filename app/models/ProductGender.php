@@ -14,7 +14,7 @@ class ProductGender extends Eloquent {
      */
     protected $table = 'product_gender';
     //primary ID
-    protected $primaryKey = 'gender_id';
+    protected $primaryKey = 'product_gender_id';
 
     /**
      * The attributes excluded from the model's JSON form.

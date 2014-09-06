@@ -24,11 +24,11 @@ class OrderLineItem extends Eloquent {
     //protected $hidden = array('password', 'remember_token');
 
     public function product() {
-        return $this->belongsTo('Product', 'product');
+        return $this->belongsTo('Product', 'product_id');
     }
     
     public function lensType() {
-        return $this->belongsTo('LensType', 'lens_type');
+        return $this->belongsTo('LensType', 'lens_type_id');
     }
     
     /*
@@ -41,7 +41,7 @@ class OrderLineItem extends Eloquent {
     /*
      * dynmaic scope to get items belonging to a member ID
      */
-    public function scopeOfMember($query, $id) {
+    public function scopeCartItem($query, $id) {
         return $query->whereNull('order_id')->where('member','=',$id);
     }
 

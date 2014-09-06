@@ -14,7 +14,7 @@ class ProductFrame extends Eloquent {
      */
     protected $table = 'product_frame';
     //primary ID
-    protected $primaryKey = 'frame_id';
+    protected $primaryKey = 'product_frame_id';
 
     /**
      * The attributes excluded from the model's JSON form.

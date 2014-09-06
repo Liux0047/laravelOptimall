@@ -24,7 +24,10 @@ class Address extends Eloquent {
      */
     //protected $hidden = array('password', 'remember_token');
     
-    public function scopeOfMember ($query, $id) {
-        return $query->where('member','=',$id);
+    /*
+     * Inverse one to many relationship with member
+     */
+    public function member() {
+        return $this->belongsTo('Member','member_id');
     }
 }

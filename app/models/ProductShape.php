@@ -14,7 +14,7 @@ class ProductShape extends Eloquent {
      */
     protected $table = 'product_shape';
     //primary ID
-    protected $primaryKey = 'shape_id';
+    protected $primaryKey = 'product_shape_id';
 
     /**
      * The attributes excluded from the model's JSON form.

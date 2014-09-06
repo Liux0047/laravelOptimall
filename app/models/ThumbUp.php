@@ -30,10 +30,10 @@ class ThumbUp extends Eloquent {
     //protected $hidden = array('password', 'remember_token');
     
     /*
-     * Dynamic scope to get all thumbups by a member
+     * Inverse one to many relationship with member
      */
-    public function scopeOfMember ($query, $memberId) {
-        return $query->where('member','=',$memberId);
+    public function member() {
+        return $this->belongsTo('Member','member_id');
     }
 }
 

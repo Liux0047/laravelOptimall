@@ -14,7 +14,7 @@ class ProductMaterial extends Eloquent {
      */
     protected $table = 'product_material';
     //primary ID
-    protected $primaryKey = 'material_id';
+    protected $primaryKey = 'product_material_id';
 
     /**
      * The attributes excluded from the model's JSON form.

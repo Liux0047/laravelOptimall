@@ -37,21 +37,28 @@ class Member extends Eloquent implements UserInterface, RemindableInterface {
      * One to many relationship with PlacedOrder
      */
     public function placedOrders() {
-        return $this->hasMany('PlacedOrder','member');
+        return $this->hasMany('PlacedOrder','member_id');
     }
     
     /*
      * One to many relationship with orderLineItemView
      */
     public function orderLineItemViews() {
-        return $this->hasMany('OrderLineItemView','member');
+        return $this->hasMany('OrderLineItemView','member_id');
     }
     
     /*
      * One to many relationship with orderLineItem
      */
     public function orderLineItems() {
-        return $this->hasMany('OrderLineItem','member');
+        return $this->hasMany('OrderLineItem','member_id');
+    }
+    
+    /*
+     * One to many relationship with Prescription
+     */
+    public function prescriptions() {
+        return $this->hasMany('Prescription', 'member_id');
     }
 
     /*

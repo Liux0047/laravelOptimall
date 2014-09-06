@@ -14,7 +14,7 @@ class ProductCategory extends Eloquent {
      */
     protected $table = 'product_category';
     //primary ID
-    protected $primaryKey = 'category_id';
+    protected $primaryKey = 'product_category_id';
 
     /**
      * The attributes excluded from the model's JSON form.

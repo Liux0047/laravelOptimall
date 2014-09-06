@@ -13,15 +13,8 @@ class AdminFunctionController extends BaseController {
 
     public function getUndispatchedOrders() {
         $params['pageTitle'] = "未发货的订单";
-        $ordersAll = PlacedOrder::undispatched()->get();
         $orders = PlacedOrder::undispatched()->orderBy('created_at')->paginate(10);
         $params['orders'] = $orders;
-        $params['items'] = array();
-        $params['members'] = array();
-        foreach ($ordersAll as $order) {
-            $params['items'][$order->order_id] = $order->orderLineItemViews;
-            $params['members'][$order->order_id] = $order->member()->first();
-        }
         $params['prescriptionNames'] = PrescriptionController::getPrescriptionNames();
         return View::make('pages.admin.undispatched-orders', $params);
     }

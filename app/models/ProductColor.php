@@ -14,7 +14,7 @@ class ProductColor extends Eloquent {
      */
     protected $table = 'product_color';
     //primary ID
-    protected $primaryKey = 'color_id';
+    protected $primaryKey = 'product_color_id';
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -27,6 +27,6 @@ class ProductColor extends Eloquent {
      * One to many relationship with base color mapping
      */
     public function productColorMapping() {
-        return $this->hasMany('ProductColorMapping', 'product_color');
+        return $this->hasMany('ProductColorMapping', 'product_color_id');
     }
 }

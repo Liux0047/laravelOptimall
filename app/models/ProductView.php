@@ -27,7 +27,7 @@ class ProductView extends Eloquent {
      * Inverse One to many relationship with color
      */
     public function productColor() {
-        return $this->belongsTo('productColor', 'color');
+        return $this->belongsTo('ProductColor', 'product_color_id');
     }
 
 }

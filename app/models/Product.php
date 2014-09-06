@@ -27,11 +27,11 @@ class Product extends Eloquent {
      * inverse one to many relationship 
      */
     public function productModel() {
-        return $this->belongsTo('ProductModel', 'model');
+        return $this->belongsTo('ProductModel', 'model_id');
     }
     
     public function productModelView() {
-        return $this->belongsTo('ProductModelView', 'model');
+        return $this->belongsTo('ProductModelView', 'model_id');
     }
 
 }

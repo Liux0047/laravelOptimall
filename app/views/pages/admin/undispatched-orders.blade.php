@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <p>
-                        订货会员: {{ $members[$order->order_id]->nickname }} ({{ $members[$order->order_id]->email }})
+                        订货会员: {{ $order->member()->first()->nickname }} ({{ $order->member()->first()->email }})
                     </p>
                     <p>
                         订单总额: {{ $order->total_transaction_amount }} {{ $order->currency_code }} 
@@ -85,7 +85,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($items[$order->order_id] as $item)
+                @foreach ($order->orderLineItemViews as $item)
                 <tr>
                     <td>
                         {{ HTML::image('images/gallery/'.$item->model.'/'.$item->product.'/medium-view-3.jpg','', array('class'=>'item-small-view')) }}

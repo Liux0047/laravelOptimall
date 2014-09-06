@@ -24,17 +24,9 @@ class ProductModelView extends Eloquent {
     //protected $hidden = array('password', 'remember_token');
 
     public function productViews() {
-        return $this->hasMany('ProductView', 'model');
+        return $this->hasMany('ProductView', 'model_id');
     }
-
-    /*
-     * dynmaic scope to get styles belonging to a member ID
-     */
-
-    public function scopeOfMember($query, $id) {
-        return $query->whereNull('order_id')->where('member', '=', $id);
-    }
-
+    
     /*
      * dynmaic scope to get models of certain styles
      */
@@ -88,9 +80,9 @@ class ProductModelView extends Eloquent {
      */
 
     public function scopeOfBaseColors($query, $baseColors) {
-        return $query->join('product', 'model_view.model_id', '=', 'product.model')
-                        ->join('product_color_mapping', 'product_color_mapping.product_color', '=', 'product.color')
-                        ->whereIn('product_color_mapping.product_base_color', $baseColors)
+        return $query->join('product', 'model_view.model_id', '=', 'product.model_id')
+                        ->join('product_color_mapping', 'product_color_mapping.product_color_id', '=', 'product.product_color_id')
+                        ->whereIn('product_color_mapping.product_base_color_id', $baseColors)
                         ->groupBy('model_view.model_id');
     }
 

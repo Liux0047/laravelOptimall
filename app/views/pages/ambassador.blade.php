@@ -1,7 +1,7 @@
 @extends ('layouts.base')
 
 @section('content')
-<div class="container content-container content-no-header">	
+<div class="container content-container">	
 	<a href="{{ action('MemberAccountController@getAmbassadorPanel') }}">
 		{{ HTML::image('images/ambassador/call-to-action.jpg') }}
 	</a>

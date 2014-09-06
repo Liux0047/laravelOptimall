@@ -14,7 +14,7 @@ class ProductStyle extends Eloquent {
      */
     protected $table = 'product_style';
     //primary ID
-    protected $primaryKey = 'style_id';
+    protected $primaryKey = 'product_style_id';
 
     /**
      * The attributes excluded from the model's JSON form.

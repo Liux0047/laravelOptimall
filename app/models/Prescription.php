@@ -25,10 +25,10 @@ class Prescription extends Eloquent {
     //protected $hidden = array('password', 'remember_token');
     
     /*
-     * dynmaic scope to get prescription of a member ID
+     * Inverse one to many relationship with member
      */
-    public function scopeOfMember($query, $id) {
-        return $query->where('member','=',$id);
+    public function member() {
+        return $this->belongsTo('Member','member_id');
     }
     
 }

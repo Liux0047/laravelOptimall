@@ -24,7 +24,7 @@ class ProductModel extends Eloquent {
     //protected $hidden = array('password', 'remember_token');
 
     public function productViews() {
-        return $this->hasMany('ProductView','model');
+        return $this->hasMany('ProductView','model_id');
     }
 
 }
