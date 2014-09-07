@@ -73,7 +73,7 @@ class ProductController extends BaseController {
         Session::forget('remainingModels');
         $params['checkedValues'] = array();
 
-        $models = ProductModelView::active()->distinct();
+        $models = ProductModelView::active();
         foreach ($filters as $filter) {
             if (Input::has($filter['filterName']) && count(Input::get($filter['filterName']))) {
                 $models = $models->$filter['functionName'](Input::get($filter['filterName']));
