@@ -102,9 +102,62 @@ div.vertical-divider {
     height: 90%;
     border-right: 1px solid #909090;
 }
-.modal#terms_modal .modal-body {
-    max-height: 420px;
-    overflow-y: auto;
+
+/* row and col modification */
+.row.row-narrow {
+    margin-left: -5px;
+    margin-right: -5px;
+}
+.col-.col-xs-1.col-narrow, 
+.col-sm-1.col-narrow, 
+.col-md-1.col-narrow, 
+.col-lg-1.col-narrow, 
+.col-xs-2.col-narrow, 
+.col-sm-2.col-narrow, 
+.col-md-2.col-narrow, 
+.col-lg-2.col-narrow, 
+.col-xs-3.col-narrow, 
+.col-sm-3.col-narrow, 
+.col-md-3.col-narrow, 
+.col-lg-3.col-narrow, 
+.col-xs-4.col-narrow, 
+.col-sm-4.col-narrow, 
+.col-md-4.col-narrow, 
+.col-lg-4.col-narrow, 
+.col-xs-5.col-narrow, 
+.col-sm-5.col-narrow, 
+.col-md-5.col-narrow, 
+.col-lg-5.col-narrow, 
+.col-xs-6.col-narrow, 
+.col-sm-6.col-narrow, 
+.col-md-6.col-narrow, 
+.col-lg-6.col-narrow, 
+.col-xs-7.col-narrow, 
+.col-sm-7.col-narrow, 
+.col-md-7.col-narrow, 
+.col-lg-7.col-narrow, 
+.col-xs-8.col-narrow, 
+.col-sm-8.col-narrow, 
+.col-md-8.col-narrow, 
+.col-lg-8.col-narrow, 
+.col-xs-9.col-narrow, 
+.col-sm-9.col-narrow, 
+.col-md-9.col-narrow, 
+.col-lg-9.col-narrow, 
+.col-xs-10.col-narrow, 
+.col-sm-10.col-narrow, 
+.col-md-10.col-narrow, 
+.col-lg-10.col-narrow, 
+.col-xs-11.col-narrow, 
+.col-sm-11.col-narrow, 
+.col-md-11.col-narrow, 
+.col-lg-11.col-narrow, 
+.col-xs-12.col-narrow, 
+.col-sm-12.col-narrow, 
+.col-md-12.col-narrow, 
+.col-lg-12.col-narrow {
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 /* table modification */
@@ -221,11 +274,12 @@ div.vertical-divider {
 * shop item
 * aka. product card
 */
-.shop-items-container .shop-item, .shop-items-container .shop-item-large{
+.shop-items-container .shop-item{
     position: relative;
     background: #fff;
     border: 1px solid #f2f2f2;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
+    min-height: 262px;
 }
 .shop-items-container .shop-item {
     height: auto;    
@@ -308,9 +362,6 @@ div.vertical-divider {
     text-align: center; 
     overflow:hidden;
     min-height: 118px;
-}
-.shop-items-container .shop-item-image.wide-home-display {
-    min-height: 255px;
 }
 .shop-items-container .shop-item-image.item-image-single img {
     width: 210px;
@@ -1023,6 +1074,12 @@ footer a {
     border-color: #dd3b5e;
     width: 150px;
     color: white;
+}
+
+/* sign up */
+.modal#terms_modal .modal-body {
+    max-height: 420px;
+    overflow-y: auto;
 }
 
 

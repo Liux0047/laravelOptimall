@@ -1,4 +1,4 @@
-<div class="col-md-3 col-sm-6 col-xs-6">
+<div class="col-md-3 col-sm-6 col-xs-6 col-narrow">
     <div class="shop-item">
         @if ($model->product_label_id == 0)
         <span class="item-badge promotion-badge"></span>

@@ -60,14 +60,14 @@
                 </span>
                 <span class="divider"></span>
             </h1>
-            <div class="row">
+            <div class="row row-narrow">
                 @include('components.product-page.product-card-wide', array('wideModelId' => $wideModelIds['promotion'][0]))
 
                 @for ($i=0; $i<2; $i++)
                 @include('components.product-page.product-card', array('model' => $promotionModels[$i] ))
                 @endfor
             </div>
-            <div class="row">
+            <div class="row row-narrow">
                 @include('components.product-page.product-card-wide', array('wideModelId' => $wideModelIds['promotion'][1]))
 
                 @for ($i=2; $i<4; $i++)
@@ -87,7 +87,7 @@
                 </span>
                 <span class="divider"></span>
             </h1>
-            <div class="row">                
+            <div class="row row-narrow">                
                 @for ($i=0; $i<2; $i++)
                 @include('components.product-page.product-card', array('model' => $bestSellerModels[$i]))
                 @endfor
@@ -95,7 +95,7 @@
                 @include('components.product-page.product-card-wide', array('wideModelId' => $wideModelIds['bestSeller'][0]))
 
             </div>
-            <div class="row">               
+            <div class="row row-narrow">               
                 @for ($i=2; $i<4; $i++)
                 @include('components.product-page.product-card', array('model' => $bestSellerModels[$i]))
                 @endfor
@@ -115,14 +115,14 @@
                 </span>
                 <span class="divider"></span>
             </h1>
-            <div class="row">
+            <div class="row row-narrow">
                 @include('components.product-page.product-card-wide', array('wideModelId' => $wideModelIds['newArrival'][0]))
 
                 @for ($i=0; $i<2; $i++)
                 @include('components.product-page.product-card', array('model' => $newArrivalModels[$i] ))
                 @endfor
             </div>
-            <div class="row">
+            <div class="row row-narrow">
                 @include('components.product-page.product-card-wide', array('wideModelId' => $wideModelIds['newArrival'][1]))
 
                 @for ($i=2; $i<4; $i++)
@@ -142,7 +142,7 @@
                 </span>
                 <span class="divider"></span>
             </h1>
-            <div class="row">                
+            <div class="row row-narrow">                
                 @for ($i=0; $i<2; $i++)
                 @include('components.product-page.product-card', array('model' => $featuredModels[$i] ))
                 @endfor
@@ -150,7 +150,7 @@
                 @include('components.product-page.product-card-wide', array('wideModelId' => $wideModelIds['featured'][0]))
 
             </div>
-            <div class="row">               
+            <div class="row row-narrow">               
                 @for ($i=2; $i<4; $i++)
                 @include('components.product-page.product-card', array('model' => $featuredModels[$i] ))
                 @endfor
@@ -170,14 +170,14 @@
                 </span>
                 <span class="divider"></span>
             </h1>
-            <div class="row">
+            <div class="row row-narrow">
                 @include('components.product-page.product-card-wide', array('wideModelId' => $wideModelIds['classical'][0]))
 
                 @for ($i=0; $i<2; $i++)
                 @include('components.product-page.product-card', array('model' => $classicalModels[$i] ))
                 @endfor
             </div>
-            <div class="row">
+            <div class="row row-narrow">
                 @include('components.product-page.product-card-wide', array('wideModelId' => $wideModelIds['classical'][1]))
 
                 @for ($i=2; $i<4; $i++)
