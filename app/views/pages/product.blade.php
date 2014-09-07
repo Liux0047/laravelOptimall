@@ -2,12 +2,12 @@
 
 @section('link-css')
 @parent
-{{ HTML::style('plugins/fotorama-4.5.2/fotorama.css') }}
+{{ HTML::style('plugins/fotorama-4.6.2/fotorama.css') }}
 @stop
 
 @section ('content')
 
-<div class="container content-container content-no-header">
+<div class="container content-container">
     @include('components.product-page.progress-tracker', array('progtrckrStep' => 1))
     <br>
     <div class="row">    
@@ -150,44 +150,7 @@
         <div class="col-md-9">
             @include('components.product-page.product-info', array('model' => $model, 'reviews'=>$reviews,'thumbedList'=>$thumbedList, 'hasReview'=>$hasReview))
         </div>
-        <div class="col-md-3">
-            <div class="panel panel-default also-buy-container">
-                <div class="panel-heading">猜你喜欢的</div>                    
-
-                <table class="table">
-                    @foreach($alsoBuys['models'] as $alsoBuyModel)
-                    <tr>
-                        <td width="60%" id="also_buy_{{ $alsoBuyModel->model_id }}" class="also-buy-img-cell">
-                            <a href="{{ action('ProductController@getProduct', [$alsoBuyModel->model_id]) }}" class="thumbnail-link">
-                                <img src="{{ asset('images/lazyload-holder.png') }}" 
-                                data-original="{{ asset('images/gallery/'.$alsoBuyModel->model_id.'/'.$alsoBuyModel->productViews()->first()->product_id.'/medium-view-3.jpg') }}" 
-                                class="lazy">
-                            </a>
-                            <h5 class="model-title"><strong>{{ $alsoBuyModel->model_name_cn }}</strong></h5>
-                            <a href="{{ action('ProductController@getProduct', array($alsoBuyModel->model_id)) }}">
-                                去围观
-                            </a>
-                        </td>
-                        <td>        
-                            <p> 
-                                <span class="discount-price">
-                                    ¥{{ number_format($alsoBuyModel->price, 0) }} 
-                                </span>
-                                <span class="market-price"><del>¥{{ $alsoBuyModel->price + 300 }}</del></span>                                    
-                            </p>
-                            <p>                                    
-                                @foreach($alsoBuyModel->productViews as $product)
-                                <span onclick="changeAlsoBuyImg({{ $alsoBuyModel->model_id }}, {{ $product->product_id }});"  class="color-icon-link"> 
-                                    <img src="{{ asset('images/color/color-'.$product->product_color_id.'.png') }}" class="color-icon">
-                                </span>
-                                @endforeach
-                            </p>
-                        </td>
-                    </tr>
-                    @endforeach
-                </table>
-            </div>
-        </div>
+        @include('components.product-page.also-buy', array('alsoBuyModels'=>$alsoBuys['models']))
     </div>
 </div>
 @stop
@@ -195,7 +158,7 @@
 @section("link-script")
 @parent
 {{ HTML::script('plugins/raty-2.7.0/jquery.raty.js') }}
-{{ HTML::script('plugins/fotorama-4.5.2/fotorama.js') }}
+{{ HTML::script('plugins/fotorama-4.6.2/fotorama.js') }}
 {{ HTML::script('plugins/jQuery-Knob/jquery.knob.min.js') }}
 @stop
 
@@ -212,7 +175,7 @@ var fotoramaInit = function() {
         navposition: 'bottom',
         autoplay: true,
         thumbwidth: 96,
-        thumbheight: 64
+        thumbheight: 54
     });
 }
 fotoramaInit();
@@ -291,6 +254,10 @@ $('#review_count_button').click(function(e) {
 
 //thumb up Ajax
 function thumbUp(reviewId){
+    $('#thumb_btn_' + reviewId + ' a').remove();
+    $('#thumb_btn_' + reviewId).prepend(
+        "<a href='javascript:removeThumbUp(" + reviewId + ")' class='thumbed'><i class='fa fa-thumbs-up fa-lg'></i></a> <span>我和</span> "
+        );
     $.ajax({
         type: "POST",
         url: "{{ action('ReviewController@postThumbUp') }}",
@@ -301,10 +268,7 @@ function thumbUp(reviewId){
             return request.setRequestHeader('X-CSRF-Token', $("meta[name='token']").attr('content'));
         }
     }).done(function (data){
-        $('#thumb_btn_' + reviewId + ' a').remove();
-        $('#thumb_btn_' + reviewId).prepend(
-            "<a href='javascript:removeThumbUp(" + reviewId + ")' class='thumbed'><i class='fa fa-thumbs-up fa-lg'></i></a> <span>我和</span> "
-            );
+
     }).fail(function() {
         //if the connection to database failed
         alert("connection to database has failed");
@@ -314,6 +278,11 @@ function thumbUp(reviewId){
 }
 //remove thumb up Ajax
 function removeThumbUp(reviewId){
+    $('#thumb_btn_' + reviewId + ' a').remove();
+    $('#thumb_btn_' + reviewId + ' span').remove();
+    $('#thumb_btn_' + reviewId).prepend(
+        "<a href='javascript:thumbUp(" + reviewId + ")'><i class='fa fa-thumbs-o-up fa-lg'></i></a> "
+        );
     $.ajax({
         type: "POST",
         url: "{{ action('ReviewController@postRemoveThumbUp') }}",
@@ -324,11 +293,7 @@ function removeThumbUp(reviewId){
             return request.setRequestHeader('X-CSRF-Token', $("meta[name='token']").attr('content'));
         }
     }).done(function (data){
-        $('#thumb_btn_' + reviewId + ' a').remove();
-        $('#thumb_btn_' + reviewId + ' span').remove();
-        $('#thumb_btn_' + reviewId).prepend(
-            "<a href='javascript:thumbUp(" + reviewId + ")'><i class='fa fa-thumbs-o-up fa-lg'></i></a> "
-            );
+
     }).fail(function() {
         //if the connection to database failed
         alert("connection to database has failed");

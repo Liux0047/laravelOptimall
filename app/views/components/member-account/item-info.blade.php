@@ -59,9 +59,15 @@
                         @foreach ($items as $item)
                         <tr>
                             <td>
-                                {{ HTML::image('images/gallery/'.$item->model_id.'/'.$item->product_id.'/medium-view-3.jpg','', array('class'=>'item-small-view')) }}
+                                <a href="{{ action('ProductController@getProduct', [$item->model_id]) }}">
+                                    {{ HTML::image('images/gallery/'.$item->model_id.'/'.$item->product_id.'/medium-view-3.jpg','', array('class'=>'item-small-view')) }}
+                                </a>
                             </td>
-                            <td>{{ $item->model_name_cn }}</td>
+                            <td>
+                                <a href="{{ action('ProductController@getProduct', [$item->model_id]) }}">
+                                    {{ $item->model_name_cn }}
+                                </a>
+                            </td>
                             <td> 
                                 {{ HTML::image('images/color/color-'.$item->product_color_id.'.png') }}
                                 {{ $item->color_name_cn }}
@@ -100,7 +106,7 @@
 
                                 {{-- enable review and refund modal if status more than paid --}}
                                 @if($order->order_status_id > 1)
-                                @if(!isset($item->review))       
+                                @if(!isset($item->review_id))       
                                 <p>
                                     <a data-toggle="modal" href="#add_review_{{ $item->order_line_item_id }}">
                                         <i class="fa fa-pencil"></i> 添加评论
