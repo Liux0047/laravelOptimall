@@ -267,10 +267,12 @@ div.vertical-divider {
 .navbar-inverse .dropdown-menu>li>a{
     color: rgb(87, 81, 81);
 }
-.navbar-inverse .navbar-nav>li>a, 
+.navbar-inverse .navbar-nav>li>a {
+    color: #B31C3D;
+}
 .navbar-inverse .navbar-nav>li>a:focus {
+    color: #B31C3D;
     background-color: #ffffff;
-    color: #B31C3D
 }
 .navbar-inverse .navbar-nav>.open>a,
 .navbar-inverse .navbar-nav>.open>a:hover, 
@@ -279,17 +281,9 @@ div.vertical-divider {
 .navbar-inverse .navbar-nav .open .dropdown-menu>li>a:hover,
 .navbar-inverse .navbar-nav .open .dropdown-menu>li>a:focus,
 .navbar-inverse .dropdown-menu>li>a:hover,
-.navbar-inverse .navbar-header a.navbar-brand:hover,
-.navbar-nav>li>a.hovered{
+.navbar-inverse .navbar-header a.navbar-brand:hover{
     color: #fff;
     background-color:  #B31C3D;
-}
-.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
-    border-color: #dd3b5e;
-}
-.dropdown{
-    /* font-family: "XiHei", Helvetica, sans-serif;  */
-    font-family: Helvetica, sans-serif;
 }
 #nav.affix{
     position: fixed;
@@ -298,18 +292,34 @@ div.vertical-divider {
     margin:auto;
     z-index: 998;    
     background-color: #333333;
+    color: white;
     transition: background-color 1s, color 1s;
     -webkit-transition: background-color 1s, color 1s;    
     border-bottom: 0px;
 }
-#nav.affix .navbar-nav>li>a, #nav.affix .navbar-brand{
-    color: white;
+#nav.affix .navbar-nav>li>a{
+    color: #ffffff;
 }
-.yamm-content .row-category {
-    width: 300px;
+#nav.affix .navbar-nav>li>a:focus {
+    color: #ffffff;
+    background-color: #333333;
 }
-.yamm-content .row-union {
-    width: 800px;
+#nav.affix .navbar-nav>.open>a,
+#nav.affix .navbar-nav>.open>a:hover, 
+#nav.affix .navbar-nav>.open>a:focus,
+#nav.affix .navbar-nav>li>a:hover,
+#nav.affix .navbar-nav .open .dropdown-menu>li>a:hover,
+#nav.affix .navbar-nav .open .dropdown-menu>li>a:focus,
+#nav.affix .dropdown-menu>li>a:hover,
+#nav.affix .navbar-header a.navbar-brand:hover{
+    color: #fff;
+    background-color:  #B31C3D;
+}
+#nav.affix .navbar-brand{
+    color: #ffffff;
+}
+#nav.affix .yamm-content {
+    color: #222;
 }
 /* login dropdown */
 .yamm .nav.navbar-right .login-dropdown {
