@@ -114,7 +114,7 @@ class OrderController extends BaseController {
     public function insertOrder($items, $paymentMethod, $amount, $address, $couponId) {
         $order = new PlacedOrder;
         $order->member_id = Auth::id();
-        $order->coupon = $couponId;
+        $order->coupon_id = $couponId;
         $order->payment_method = $paymentMethod;
         $order->total_transaction_amount = $amount;
         $order->currency_code = 'RMB';
@@ -132,7 +132,7 @@ class OrderController extends BaseController {
             $order->coupon_id = $couponId;
         }
         // check if this is the first purchase
-        if (PlacedOrder::ofMember(Auth::id())->count() == 0) {
+        if (Auth::user()->placedOrders()->count() == 0) {
             $order->is_first_purchase = true;
         }
 

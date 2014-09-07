@@ -42,7 +42,7 @@ class PlacedOrder extends Eloquent {
      */
 
     public function member() {
-        return $this->belongsTo('Member','member');
+        return $this->belongsTo('Member','member_id');
     }
     
     /*

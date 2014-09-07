@@ -59,11 +59,11 @@
                         @foreach ($items as $item)
                         <tr>
                             <td>
-                                {{ HTML::image('images/gallery/'.$item->model.'/'.$item->product.'/medium-view-3.jpg','', array('class'=>'item-small-view')) }}
+                                {{ HTML::image('images/gallery/'.$item->model_id.'/'.$item->product_id.'/medium-view-3.jpg','', array('class'=>'item-small-view')) }}
                             </td>
                             <td>{{ $item->model_name_cn }}</td>
                             <td> 
-                                {{ HTML::image('images/color/color-'.$item->color.'.png') }}
+                                {{ HTML::image('images/color/color-'.$item->product_color_id.'.png') }}
                                 {{ $item->color_name_cn }}
                             </td>
                             <td>{{ $item->lens_title_cn }}</td>

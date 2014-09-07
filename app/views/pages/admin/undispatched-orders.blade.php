@@ -49,7 +49,7 @@
                 </div>
                 <div class="col-md-4">
 
-                    @if ($order->order_status == 2)
+                    @if ($order->order_status_id == 2)
                     <p>
                         支付方式： {{ $order->peyment_method }}
                     </p>
@@ -93,7 +93,7 @@
                     <td>{{ $item->model_name_cn }}</td>
                     <td>{{ $item->model_code }}</td>
                     <td> 
-                        {{ HTML::image('images/color/color-'.$item->color.'.png') }}
+                        {{ HTML::image('images/color/color-'.$item->product_color_id.'.png') }}
                         {{ $item->color_name_cn }}
                     </td>
                     <td>{{ $item->lens_title_cn }}</td>

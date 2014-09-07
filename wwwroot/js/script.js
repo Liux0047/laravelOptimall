@@ -64,6 +64,13 @@ function adjustModalMaxHeightAndPosition(){
 };
 $(window).resize(adjustModalMaxHeightAndPosition).trigger("resize");
 
+/*
+ * This code will prevent unexpected menu close when using some components (like accordion, forms, etc)
+ */
+$(document).on('click', '.yamm .dropdown-menu', function(e) {
+  e.stopPropagation()
+})
+
 
 //auto calculate the top banner height
 $('.navbar').affix({
