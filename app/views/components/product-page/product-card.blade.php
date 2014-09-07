@@ -1,15 +1,15 @@
 <div class="col-md-3 col-sm-6 col-xs-6 col-narrow">
     <div class="shop-item">
         @if ($model->product_label_id == 0)
-        <span class="item-badge promotion-badge"></span>
+        <span class="shop-item-badge promotion-badge"></span>
         @elseif ($model->product_label_id == 1)
-        <span class="item-badge best-seller-badge"></span>
+        <span class="shop-item-badge best-seller-badge"></span>
         @elseif ($model->product_label_id == 2)
-        <span class="item-badge new-arrival-badge"></span>
+        <span class="shop-item-badge new-arrival-badge"></span>
         @elseif ($model->product_label_id == 3)
-        <span class="item-badge featured-badge"></span>
+        <span class="shop-item-badge featured-badge"></span>
         @elseif ($model->product_label_id == 4)
-        <span class="item-badge classical-badge"></span>
+        <span class="shop-item-badge classical-badge"></span>
         @endif
         <div class="shop-item-label">
             <div class="pull-left">

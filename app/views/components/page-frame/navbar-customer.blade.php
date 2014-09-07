@@ -1,143 +1,154 @@
-<div class="navbar yamm navbar-default navbar-inverse" id="nav">
+<div class="navbar navbar-default yamm navbar-inverse" id="nav">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="{{ asset('/') }}">目光之城</a> 
-                </div>
-                <div id="navbar-collapse-1" class="navbar-collapse navbar-responsive-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <!-- Classic list -->
-                        <li class="dropdown dropdown-hover"><a href="#" data-toggle="dropdown" class="dropdown-toggle">所有宝贝</a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <!-- Content container to add padding -->
-                                    <div class="yamm-content">
-                                        <div class="row row-union">
-                                            <div class="col-sm-3"><a href="#" class="thumbnail"><img alt="150x190" src="http://placekitten.com/150/190/"></a></div>
-                                            <ul class="col-sm-3 list-unstyled">
-
-                                                <p><strong>材质</strong></p>
-                                                <!--古代圣贤然后还有各个专业 加图片-->
-
-                                                <li><a href="#">质感金属</a></li>
-                                                <li><a href="#">超轻板材</a></li>
-                                                <li><a href="#">轻盈钨钢</a></li>
-                                                <li><a href="#">TR-90</a></li>
-
-                                            </ul>
-                                            <div class="col-xs-6 col-sm-3"><a href="#" class="thumbnail"><img alt="150x190" src="http://placekitten.com/150/190/"></a></div>
-                                            <ul class="col-sm-3 list-unstyled">
-
-                                                <p><strong>风格</strong></p>
-
-
-                                                <li><a href="#">商务精英</a></li>
-                                                <li><a href="#">休闲品位</a></li>
-                                                <li><a href="#">潮流时尚</a></li>
-                                                <li><a href="#">体验一下</a></li>
-                                            </ul>
-
+        <div class="navbar-header">
+            <button type="button" data-toggle="collapse" data-target="#navbar-collapse-2" class="navbar-toggle">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#" class="navbar-brand">目光之城</a>
+        </div>
+        <div id="navbar-collapse-2" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <!-- Media Example -->
+                <li class="dropdown dropdown-hover">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">Media<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <div class="yamm-content">
+                                <ul class="media-list">
+                                    <li class="media"><a href="#" class="pull-right"><img src="http://placekitten.com/64/64/" alt="64x64" class="media-object"></a>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">Media heading</h4>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante.
                                         </div>
-                                    </div>
-                                </li>
-                            </ul>
+                                    </li>
+                                    <li class="media"><a href="#" class="pull-right"><img src="http://placekitten.com/64/64/" alt="64x64" class="media-object"></a>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">Media heading</h4>
+                                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque.
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
-
-
-                        <!-- Classic dropdown -->
-                        <li class="dropdown dropdown-hover"><a href="#" data-toggle="dropdown" class="dropdown-toggle">配镜需知</a>
-                            <ul role="menu" class="dropdown-menu">
-                                <li><a tabindex="-1" href="#"><i class="fa fa-bolt"> </i>  关于商品 </a></li>
-                                <li><a tabindex="-1" href="#"><i class="fa fa-rocket"> </i> 关于配送 </a></li>
-                                <li><a tabindex="-1" href="#"><i class="fa fa-check-square"> </i> 关于订单 </a></li>
-                                <li><a tabindex="-1" href="#"><i class="fa fa-trophy"> </i> 售后政策 </a></li>
-                                <li><a tabindex="-1" href="#"><i class="fa fa-eraser"> </i> 退换商品 </a></li>
-                                <li><a tabindex="-1" href="#"><i class="fa fa-location-arrow"> </i> 售后地址 </a></li>
-                                <li><a tabindex="-1" href="#"><i class="fa fa-ticket"> </i> 关于发票 </a></li>
-                                <li><a tabindex="-1" href="#"><i class="fa fa-tachometer"> </i> 眼镜保养 </a></li>
-                                <li><a tabindex="-1" href="#"><i class="fa fa-tachometer"> </i> FAQ </a></li>
-                            </ul>
+                    </ul>
+                </li>
+                <!-- Tables -->
+                <li class="dropdown yamm-fullwidth dropdown-hover">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">Tables<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <div class="yamm-content">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Username</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Username</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td colspan="2">Larry the Bird</td>
+                                            <td>@twitter</td>
+                                            <td colspan="2">Larry the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </li>
-
-
-
-
-
-                        <li class="dropdown dropdown-hover"><a href="#" data-toggle="dropdown" class="dropdown-toggle">特惠分享</a>
-                            <ul role="menu" class="dropdown-menu">
-                                <li><a tabindex="-1" href="#"><i class="fa fa-bolt"> </i>  今日特惠  </a></li>
-                                <li><a tabindex="-1" href="#"><i class="fa fa-bolt"> </i>  开学活动 </a></li>
-                                <li><a tabindex="-1" href="#"><i class="fa fa-rocket"> </i> 验光补贴 </a></li>
-                            </ul>
-                        </li>
-
-                        <!-- Accordion demo -->
-                        <li class="dropdown dropdown-hover"><a href="#" data-toggle="dropdown" class="dropdown-toggle">联系我们</a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <div class="yamm-content">
-                                        <div class="row">
-                                            <div id="accordion" class="panel-group">
-                                                <div class="panel panel-default">
-                                                    <div class="panel-heading">
-                                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">电子邮箱</a></h4>
-                                                    </div>
-                                                    <div id="collapseOne" class="panel-collapse collapse in">
-                                                        <div class="panel-body">客服customer service：service@mgzc.net </div>
-                                                    </div>
-                                                </div>
-                                                <div class="panel panel-default">
-                                                    <div class="panel-heading">
-                                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">公共主页</a></h4>
-                                                    </div>
-                                                    <div id="collapseTwo" class="panel-collapse collapse">
-                                                        <div class="panel-body"><p>微信公共主页：123213133232</p><p> 人人公共主页：目光之城 </p></div>
-                                                    </div>
-                                                </div>
-                                                <div class="panel panel-default">
-                                                    <div class="panel-heading">
-                                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">墙外观众</a></h4>
-                                                    </div>
-                                                    <div id="collapseThree" class="panel-collapse collapse">
-                                                        <div class="panel-body"><p> Facebook: </p> <p>Twitter</p><p>Pinterest</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                    </ul>
+                </li>
+                <!-- Thumbnails demo -->
+                <li class="dropdown dropdown-hover">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">Thumbnails<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <div class="yamm-content">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="thumbnail"><img alt="260x130" src="http://placekitten.com/260/130/">
+                                            <div class="caption">
+                                                <h3>Thumb Label</h3>
+                                                <p>Mazagran doppio half and half aftertaste organic, rich doppio</p>
+                                                <p><a href="#" class="btn btn-primary">Action</a> <a href="#" class="btn btn-default">Action</a></p>
                                             </div>
                                         </div>
                                     </div>
-                                </li>
-                            </ul>
+                                    <div class="col-sm-4">
+                                        <div class="thumbnail"><img alt="260x130" src="http://placekitten.com/260/130/">
+                                            <div class="caption">
+                                                <h3>Thumb Label</h3>
+                                                <p>Black latte cinnamon, cultivar trifecta crema cappuccino</p>
+                                                <p><a href="#" class="btn btn-primary">Action</a> <a href="#" class="btn btn-default">Action</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="thumbnail"><img alt="260x130" src="http://placekitten.com/260/130/">
+                                            <div class="caption">
+                                                <h3>Thumb Label</h3>
+                                                <p>Bar roast et, as latte café au lait, mocha aromatic robusta</p>
+                                                <p><a href="#" class="btn btn-primary">Action </a> <a href="#" class="btn btn-default">Action </a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </li>
                     </ul>
-
-                    <ul class="nav navbar-nav navbar-right">
-                        @if(Auth::check())
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                @if(Auth::check())
+                <li>
+                    <a href="{{ URL::action('MemberAccountController@getShoppingHistory'); }}">
+                        欢迎, {{ Auth::user()->nickname }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ URL::to('logout') }}">退出</a>
+                </li>
+                @else
+                <!-- Forms -->
+                <li class="dropdown">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle"onclick="enableSubmit();">
+                        登录 <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu login-dropdown">
                         <li>
-                            <a href="{{ URL::action('MemberAccountController@getShoppingHistory'); }}">
-                                欢迎, {{ Auth::user()->nickname }}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ URL::to('logout') }}">退出</a>
-                        </li>
-                        @else
-                        <li class="dropdown" id="login_dropdown_control">
-                            <a href="#" data-toggle="dropdown" class="dropdown-toggle" onclick="enableSubmit();">登录</a>
-                            <div class="dropdown-menu dropdown-login">
+                            <div class="yamm-content">
                                 <form role="form" id="login_form">
                                     <h4>会员登录
                                         <small>(或<a href="{{ URL::to('sign-up') }}">创建账号)</a></small> 
                                     </h4>
                                     <hr>                    
                                     <div id="login_fail_container" class="no-display">
-                                        <div class="alert alert-danger" id="login_fail_alert">                            
+                                        <div class="alert alert-danger" id="login_fail_alert">
                                             登陆账号或密码不正确，请重新尝试                        
                                         </div>
                                     </div>
@@ -170,14 +181,15 @@
                                         </button>          
                                     </div>
                                     <div class="clearfix"></div>    
-                                </form>      
-                            </div>            
-                        </li>
-                        <li><a href="{{ URL::to('sign-up') }}">注册</a></li>
-                        @endif
-                    </ul>    
-                </div><!-- /.nav-collapse -->
-            </div><!-- /.navbar -->
-        </div>
-    </div>
-</div>
+                                </form>   
+                            </div>
+                        </li>                        
+                    </ul>
+                </li>
+                <li><a href="{{ URL::to('sign-up') }}">注册</a></li>
+                @endif
+            </ul><!-- .nav .nav-right -->
+        </div><!-- .nav-collpase -->
+    </div><!-- container -->
+</div><!-- .navbar -->
+

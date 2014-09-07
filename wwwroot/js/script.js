@@ -11,11 +11,11 @@ $(document).ready(function() {
     //also add hovered class to hovered dropdown menu
     $('.navbar .dropdown-hover').hover(function() {
         $(this).find('.dropdown-menu').first().stop(true, true).delay(150).slideDown(200);
-        $(this).children("a").addClass("hovered");
-        $('.dropdown').removeClass("open");
+        $(this).addClass("open");
+        //$('.dropdown').removeClass("open");
     }, function() {
         $(this).find('.dropdown-menu').first().stop(true, true).delay(0).slideUp(1);
-        $(this).children("a").removeClass("hovered");
+        $(this).removeClass("open");
     });
 
     //enable lazy load
