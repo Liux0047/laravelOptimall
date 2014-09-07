@@ -82,7 +82,7 @@
                             <ul class="dropdown-menu">
                                 <li>
                                     <div class="yamm-content">
-                                        <div class="row row-category">
+                                        <div class="row">
                                             <div id="accordion" class="panel-group">
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading">

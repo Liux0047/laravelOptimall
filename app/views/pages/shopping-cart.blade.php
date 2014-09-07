@@ -269,43 +269,25 @@ var rule = {
 
     //enable popover
     $(document).ready(function() {
-        $('.SPH_popover a').popover({
-            trigger: 'hover',
-            placement: 'bottom',
-            html: true
-        });
-        $('.CYL_popover a').popover({
-            trigger: 'hover',
-            placement: 'bottom',
-            html: true
-        });
-        $('.AXIS_popover a').popover({
-            trigger: 'hover',
-            placement: 'bottom',
-            html: true
-        });
-        $('.ADD_popover a').popover({
-            trigger: 'hover',
-            placement: 'bottom',
-            html: true
-        });
-        $('.PD_popover a').popover({
-            trigger: 'hover',
-            placement: 'right',
-            html: true
+        $('.prescription_popover').each(function(){
+            $(this).popover({
+                trigger: 'hover',
+                placement: 'bottom',
+                html: true
+            });
         });
     });
 
     //enable popover of stored prescription
     @foreach($storedPrescriptions as $storedPrescription)
     $("#stored_pres_popover_{{ $storedPrescription->prescription_id }}").popover({
-       html : true,
-       title: "预览验光单详情",
-       content: function() {return $("#stored_pres_form_{{ $storedPrescription->prescription_id }}").html();},
-       trigger:"hover",
-       container:"body",          
-       placement:"right"          
-   });
+        html : true,
+        title: "预览验光单详情",
+        content: function() {return $("#stored_pres_form_{{ $storedPrescription->prescription_id }}").html();},
+        trigger:"hover",
+        container:"body",          
+        placement:"right"          
+    });
     @endforeach
 
 

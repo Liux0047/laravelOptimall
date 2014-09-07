@@ -1,4 +1,4 @@
-<div class="col-md-3 col-sm-6 col-xs-6 padding-narrow">
+<div class="col-md-3 col-sm-6 col-xs-6">
     <div class="shop-item">
         @if ($model->product_label_id == 0)
         <span class="item-badge promotion-badge"></span>
@@ -22,7 +22,6 @@
         </div>
         <div class="shop-item-image item-image-single">
             <a href="{{ URL::to('product/'.$model->model_id) }}" id="small-view-{{ $model->model_id }}">
-                <span class="img-valign-helper"></span>
                 <img src="{{ asset('images/lazyload-holder.png') }}" 
                 data-original="{{ asset('images/gallery/'.$model->model_id.'/'.$model->productViews()->first()->product_id.'/medium-view-3.jpg') }}" 
                 class="lazy">
