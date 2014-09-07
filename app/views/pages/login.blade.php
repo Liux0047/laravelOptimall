@@ -26,8 +26,8 @@
                         </a>
                     </p>
                 </div>
-                <div class="form-group">
-                    <label class="checkbox-inline">
+                <div class="checkbox">
+                    <label>
                         <input type="checkbox" id="remember_me" name="remember_me" value="1">
                         记住我                                
                     </label>

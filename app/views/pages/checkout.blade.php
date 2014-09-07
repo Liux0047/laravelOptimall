@@ -71,7 +71,7 @@
 			</div>
 			<div class="checkbox">
 				<label>
-					<input type="checkbox" id="is_invoice_required">需要发票
+					<input type="checkbox" id="is_invoice_required"> 需要发票
 				</label>
 			</div>
 			<div class="form-group">

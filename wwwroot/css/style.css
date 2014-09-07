@@ -196,11 +196,15 @@ div.vertical-divider {
 /* form control modification */
 .form-control {
     height:36px;    
-    font-size: 12px;
+    font-size: 14px;
 }
 .form-control-feedback {
     line-height: 36px;
-    font-size: 12px;
+    font-size: 14px;
+}
+label, .control-label, .help-block, .checkbox, .radio {
+    font-size: 14px;
+    font-weight: normal;
 }
 
 /* modal modification 

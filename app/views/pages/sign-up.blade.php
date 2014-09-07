@@ -54,9 +54,9 @@
             </div>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-4">
-                    <div class="checkbox">
-                        <input type="checkbox" name="agree_terms" id="agree_terms">
+                    <div class="checkbox">                        
                         <label for="agree_terms">
+                            <input type="checkbox" name="agree_terms" id="agree_terms">
                             我同意                                        
                             <a data-toggle="modal" data-target="#terms_modal">目光之城的协议和条款</a>
                         </label>

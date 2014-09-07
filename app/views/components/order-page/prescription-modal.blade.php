@@ -34,70 +34,68 @@
                                 <th width="21%">
                                     加光(ADD)
                                     <a href="#" class="prescription_popover" data-toggle="popover" data-content="加光的数值代表近距离用眼的度数。它的数值指在远用光度的基础上增加的度数，来解决远近看物体度数不一样的问题(仅适用于渐进眼镜片)。通常左右眼的加光是一样的，所以你的验光单如果只有一个加光，代表的是双眼。">
-                                    <i class="fa fa-info-circle fa-lg"></i>
-                                </a>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th valign="middle">左眼</th>
-                            @foreach($prescriptionNames['O_S_LEFTNames'] as $O_S_LEFTName)
-                            <td valign="middle">
-                                <select name="{{ $O_S_LEFTName }}" id="{{ $O_S_LEFTName }}" data-placeholder="请选择" class="chosen-select" style="width:100px;">
-                                    @foreach($prescriptionOptions[$O_S_LEFTName] as $prescriptionOption)
-                                    <option value="{{ $prescriptionOption }}" 
-                                    @if(isset($item->$O_S_LEFTName) && ($item->$O_S_LEFTName == $prescriptionOption) )
-                                    selected=true
-                                    @endif
-                                    >{{ $prescriptionOption }}</option>
-                                    @endforeach
-                                </select>
-                            </td>
-                            @endforeach
-                        </tr>
-                        <tr>
-                            <th valign="middle">左眼</th>
-                            @foreach($prescriptionNames['O_D_RIGHTNames'] as $O_D_RIGHTName)
-                            <td valign="middle">
-                                <select name="{{ $O_D_RIGHTName }}" id="{{ $O_D_RIGHTName }}" data-placeholder="请选择" class="chosen-select" style="width:100px;">
-                                    @foreach($prescriptionOptions[$O_D_RIGHTName] as $prescriptionOption)
-                                    <option value="{{ $prescriptionOption }}" 
-                                    @if(isset($item->$O_D_RIGHTName) && ($item->$O_D_RIGHTName == $prescriptionOption) )
-                                    selected=true
-                                    @endif
-                                    >{{ $prescriptionOption }}</option>
-                                    @endforeach
-                                </select>
-                            </td>
-                            @endforeach
-                        </tr>
-                        <tr class="PD_popover">
-                            <th valign="middle">瞳距(cm)
-                                <a href="#" class="prescription_popover" data-toggle="popover" data-content="瞳距是指左右眼瞳孔中心两点间的距离（以毫米为单位），一般验光单上的PD即表示瞳距。大多数人瞳距在54至74毫米之间。">
-                                <i class="fa fa-info-circle fa-lg"></i>
-                            </a>
-                        </th>
-
-                        @foreach($prescriptionNames['CommonNames'] as $CommonName)
-                        <td valign="middle">
-                            <select name="{{ $CommonName }}" id="{{ $CommonName }}" data-placeholder="请选择" class="chosen-select" style="width:100px;">
-                                @foreach($prescriptionOptions[$CommonName] as $prescriptionOption)
-                                <option value="{{ $prescriptionOption }}" 
-                                @if(isset($item->$CommonName) && ($item->$CommonName == $prescriptionOption) )
-                                selected=true
-                                @endif
-                                >{{ $prescriptionOption }}</option>
+                                        <i class="fa fa-info-circle fa-lg"></i>
+                                    </a>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th valign="middle">左眼</th>
+                                @foreach($prescriptionNames['O_S_LEFTNames'] as $O_S_LEFTName)
+                                <td valign="middle">
+                                    <select name="{{ $O_S_LEFTName }}" id="{{ $O_S_LEFTName }}" data-placeholder="请选择" class="chosen-select" style="width:100px;">
+                                        @foreach($prescriptionOptions[$O_S_LEFTName] as $prescriptionOption)
+                                        <option value="{{ $prescriptionOption }}" 
+                                        @if(isset($item->$O_S_LEFTName) && ($item->$O_S_LEFTName == $prescriptionOption) )
+                                        selected=true
+                                        @endif
+                                        >{{ $prescriptionOption }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
                                 @endforeach
-                            </select>
-                        </td>
-                        @endforeach
-                    </tr>
-                </tbody>
-            </table>
-        </div><!-- .panel -->
-        <div class="form-group">
-            <div class="col-md-12">
+                            </tr>
+                            <tr>
+                                <th valign="middle">左眼</th>
+                                @foreach($prescriptionNames['O_D_RIGHTNames'] as $O_D_RIGHTName)
+                                <td valign="middle">
+                                    <select name="{{ $O_D_RIGHTName }}" id="{{ $O_D_RIGHTName }}" data-placeholder="请选择" class="chosen-select" style="width:100px;">
+                                        @foreach($prescriptionOptions[$O_D_RIGHTName] as $prescriptionOption)
+                                        <option value="{{ $prescriptionOption }}" 
+                                        @if(isset($item->$O_D_RIGHTName) && ($item->$O_D_RIGHTName == $prescriptionOption) )
+                                        selected=true
+                                        @endif
+                                        >{{ $prescriptionOption }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                                @endforeach
+                            </tr>
+                            <tr class="PD_popover">
+                                <th valign="middle">瞳距(cm)
+                                    <a href="#" class="prescription_popover" data-toggle="popover" data-content="瞳距是指左右眼瞳孔中心两点间的距离（以毫米为单位），一般验光单上的PD即表示瞳距。大多数人瞳距在54至74毫米之间。">
+                                        <i class="fa fa-info-circle fa-lg"></i>
+                                    </a>
+                                </th>
+
+                                @foreach($prescriptionNames['CommonNames'] as $CommonName)
+                                <td valign="middle">
+                                    <select name="{{ $CommonName }}" id="{{ $CommonName }}" data-placeholder="请选择" class="chosen-select" style="width:100px;">
+                                        @foreach($prescriptionOptions[$CommonName] as $prescriptionOption)
+                                        <option value="{{ $prescriptionOption }}" 
+                                        @if(isset($item->$CommonName) && ($item->$CommonName == $prescriptionOption) )
+                                        selected=true
+                                        @endif
+                                        >{{ $prescriptionOption }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                                @endforeach
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><!-- .panel -->
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" name="remember_prescription" id="remember_prescription" value="1" onchange="togglePresName({{ $order_line_item_id }});">
@@ -107,21 +105,18 @@
                         </p>
                     </label>
                 </div>
+                <div class="form-group hidden" id="prescription_user_field">
+                    <label class="sr-only" for="prescription_user_field">请给这只验光单起个名字 (20字以内)</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="prescription_name" id="prescription_name" placeholder="请给这只验光单起个名字 (20字以内)">
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="form-group hidden" id="prescription_user_field">
-            <label class="sr-only" for="prescription_user_field">请给这只验光单起个名字 (20字以内)</label>
-            <div class="col-md-6">
-                <input type="text" class="form-control" name="prescription_name" id="prescription_name" placeholder="请给这只验光单起个名字 (20字以内)">
+            <div class="modal-footer">
+                <a href="#" class="pull-left">如何填写验光单</a>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <input type="submit" class="btn btn-primary" value="确认">
             </div>
-        </div>
-
-    </div>
-    <div class="modal-footer">
-        <a href="#" class="pull-left">如何填写验光单</a>
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <input type="submit" class="btn btn-primary" value="确认">
-    </div>
-</div><!-- /.modal-content -->
-</div><!-- /.modal-dialog -->
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

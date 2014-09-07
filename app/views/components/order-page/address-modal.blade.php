@@ -1,6 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="{{ $modalId }}" 
-	tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="{{ $modalId }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -9,7 +8,7 @@
 			</div>
 			<div class="modal-body">
 				<div class="form-group">
-					<label for="province" class="col-md-2 control-label">选择所在地</label>
+					<label for="province" class="col-md-2 control-label">选择城市</label>
 					<div class="col-md-3">
 						<select name="province" id="{{ $fieldPrefix }}_province" class="form-control">                                        
 						</select>
@@ -40,7 +39,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="收货人姓名" class="col-md-2 control-label">收货人姓名</label>
+					<label for="收货人姓名" class="col-md-2 control-label">收货人</label>
 					<div class="col-md-4">
 						<input type="text" class="form-control" id="收货人姓名"  name="recipient_name"
 						placeholder="收货人姓名" 
@@ -62,4 +61,4 @@
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
+</div><!-- /.modal -->
