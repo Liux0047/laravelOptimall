@@ -53,10 +53,8 @@
         <div class="container">
             <h1 class="shelf-header">
                 <span class="title">
-                    <a href="#">
-                        促销 
-                        {{ HTML::image('images/section-tags/section-tag-1.png') }}
-                    </a>
+                    促销 
+                    {{ HTML::image('images/section-tags/section-tag-1.png') }}
                 </span>
                 <span class="divider"></span>
             </h1>
@@ -80,10 +78,8 @@
         <div class="container">
             <h1 class="shelf-header">
                 <span class="title">
-                    <a href="#">
-                        热卖 
-                        {{ HTML::image('images/section-tags/section-tag-2.png') }}
-                    </a>
+                    热卖 
+                    {{ HTML::image('images/section-tags/section-tag-2.png') }}
                 </span>
                 <span class="divider"></span>
             </h1>
@@ -108,10 +104,8 @@
         <div class="container">
             <h1 class="shelf-header">
                 <span class="title">
-                    <a href="#">
-                        新品 
-                        {{ HTML::image('images/section-tags/section-tag-3.png') }}
-                    </a>
+                    新品 
+                    {{ HTML::image('images/section-tags/section-tag-3.png') }}
                 </span>
                 <span class="divider"></span>
             </h1>
@@ -135,10 +129,8 @@
         <div class="container">
             <h1 class="shelf-header">
                 <span class="title">
-                    <a href="#">
-                        推荐 
-                        {{ HTML::image('images/section-tags/section-tag-4.png') }}
-                    </a>
+                    推荐 
+                    {{ HTML::image('images/section-tags/section-tag-4.png') }}
                 </span>
                 <span class="divider"></span>
             </h1>
@@ -163,10 +155,8 @@
         <div class="container">
             <h1 class="shelf-header">
                 <span class="title">
-                    <a href="#">
-                        经典 
-                        {{ HTML::image('images/section-tags/section-tag-5.png') }}
-                    </a>
+                    经典 
+                    {{ HTML::image('images/section-tags/section-tag-5.png') }}
                 </span>
                 <span class="divider"></span>
             </h1>
