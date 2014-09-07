@@ -1,5 +1,10 @@
 @extends ('layouts.base')
 
+@section('link-css')
+@parent
+{{ HTML::style('plugins/jQuery-mailtip/mailtip.css') }}
+@stop
+
 @section ('content')
 <div class="container content-container">
     <div class="row">
@@ -11,7 +16,7 @@
                 <hr> 
                 {{ Form::open(array('action' => 'MemberController@postLogin')) }}
                 <div class="form-group">
-                    <input type="text" class="form-control" id="email" name="email" placeholder="邮箱地址">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="邮箱地址">
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" id="password" name="password" placeholder="密码">
@@ -43,9 +48,13 @@
 </div>
 @stop
 
+@section('link-script')
+@parent
+{{ HTML::script('plugins/jQuery-mailtip/jquery.mailtip.js') }}
+@stop
+
+
 @section('script')
 @parent
-<script type="text/javascript">
-
-</script> 
+@include ('components.plugin.mailtip-js')
 @stop
