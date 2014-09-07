@@ -117,19 +117,9 @@ Route::group(array('before' => 'auth'), function() {
     Route::get('alipay-return/return', 'OrderController@getAlipayReturn');
 
     /*
-     * Route to process create ambassador
+     * RESTFUl route to ambassador controller
      */
-    Route::post('ambassador/create-ambassador', 'AmbassadorController@postCreateAmbassador');
-
-    /*
-     * Route to change alipay address
-     */
-    Route::post('ambassador/change-alipay-account', 'AmbassadorController@postChangeAlipayAccount');
-
-    /*
-     * Route to claim rewards
-     */
-    Route::post('ambassador/claim-rewards', 'AmbassadorController@postClaimRewards');
+    Route::controller('ambassador', 'AmbassadorController');
 
     /*
      * Route to handle review functions

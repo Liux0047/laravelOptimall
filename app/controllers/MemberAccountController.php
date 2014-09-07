@@ -73,7 +73,7 @@ class MemberAccountController extends BaseController {
             $params['ambassadorInfo'] = Auth::user()->ambassadorInfo;
             $orders = AmbassadorView::ofAmbassador(Auth::id())->get();
             $params['ambassadorOrders'] = $orders;
-            $reward = AmbassadorController::getRewards($orders);
+            $reward = AmbassadorController::calculateRewards($orders);
             $params['reward'] = $reward['reward'];
             $params['totalReward'] = $reward['totalReward'];
             $params['overdueOrders'] = $reward['overdueOrders'];

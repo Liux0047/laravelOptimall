@@ -38,23 +38,6 @@
 
 @section('script')
 @include('components.page-frame.login-dropdown-js')
-
-<script type="text/javascript">
-//lazy load fade in effect
-$("img.lazy").lazyload({
-    effect : "fadeIn",
-    failure_limit : 10
-});
-//trigger a fake scroll to lazy load image
-$(document).ready(function(){
-    $('body,html').scroll();
-
-    $('.nav-tabs li a').on('shown.bs.tab', function(e) {
-        $(window).trigger("scroll");
-    });
-})
-      
-</script>
 @show
 
 </html>

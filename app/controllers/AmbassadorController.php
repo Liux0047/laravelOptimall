@@ -22,7 +22,7 @@ class AmbassadorController extends BaseController {
         }
 
         //if member has not registered as ambassador
-        if (Auth::user()->ambassadorInfo()->count()== 0) {
+        if (Auth::user()->ambassadorInfo()->count() == 0) {
             $ambassadorInfo = new AmbassadorInfo;
             $code = $this->generateUniqueId();
             $ambassadorInfo->alipay_account = Input::get('alipay_account');
@@ -31,9 +31,9 @@ class AmbassadorController extends BaseController {
             $ambassadorInfo->ambassador_code = $code;
             $ambassadorInfo->member_id = Auth::id();
             $ambassadorInfo->save();
-            return Redirect::back()->with('status','成功注册为目光之星，请等待回复');
+            return Redirect::back()->with('status', '成功注册为目光之星，请等待回复');
         } else {
-            return Redirect::back()->with('warning','您已经是目光之星了');
+            return Redirect::back()->with('warning', '您已经是目光之星了');
         }
     }
 
@@ -44,7 +44,7 @@ class AmbassadorController extends BaseController {
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator);
         }
-        
+
         Auth::user()->ambassadorInfo->alipay_account = Input::get('alipay_account');
         Auth::user()->ambassadorInfo->save();
         return Redirect::back()->with('status', '成功更新支付宝账号');
@@ -52,7 +52,7 @@ class AmbassadorController extends BaseController {
 
     public function postClaimRewards() {
         $orders = AmbassadorView::ofAmbassador(Auth::id())->get();
-        $reward = self::getRewards($orders);
+        $reward = self::calculateRewards($orders);
         if (!$reward['isMinMet']) {
             return Redirect::back()->with('error', '没有到底最低返利要求');
         }
@@ -63,17 +63,21 @@ class AmbassadorController extends BaseController {
         }
         return Redirect::back()->with('status', '成功申请返利');
     }
-    
-    public function postSendInvitation () {
+
+    public function postSendInvitation() {
         $data['nickname'] = Auth::user()->nickname;
-        Mail::queue('emails.member.invitation', $data, function($message) {
-            $email = Input::get('email');
-            $message->to($email)->subject(Auth::user()->nickname.' 邀请了你去逛逛目光之城');
-        });
+        $data['couponCode'] = "WELCOME";
+        $emails = preg_split("/[\s,;；，]+/", Input::get('emails'));
+        foreach ($emails as $email) {
+            Mail::queue('emails.member.invitation', $data, function($message) use ($email) {
+                $message->to($email)->subject(Auth::user()->nickname . ' 邀请了你去逛逛目光之城');
+            });
+        }
+        return Redirect::back()->with('status','成功发送邮件');
     }
 
     public static function createAmbassadorRelation($newMemberId, $code) {
-        $ambassadorRelation = new AmbassadorRelation;        
+        $ambassadorRelation = new AmbassadorRelation;
         if (Member::getAmbassador($code)->count() > 0) {    //if code belongs to a valid ambassador
             $ambassadorId = Member::getAmbassador($code)->first()->member_id;
             $ambassadorRelation->ambassador = $ambassadorId;
@@ -89,7 +93,7 @@ class AmbassadorController extends BaseController {
         return Member::getAmbassador($code)->count() > 0;
     }
 
-    public static function getRewards($orders) {
+    public static function calculateRewards($orders) {
         $rewardParam['totalReward'] = 0;
         $rewardParam['reward'] = array();
         $rewardParam['overdueOrders'] = array();
@@ -126,19 +130,20 @@ class AmbassadorController extends BaseController {
         );
         return Validator::make(Input::all(), $rules);
     }
-    
+
     private function validateAlipay() {
         $rules = array(
             'alipay_account' => 'required|max:45'
         );
         return Validator::make(Input::all(), $rules);
     }
-    
-    private function validateInvitaion () {
+
+    private function validateInvitaion() {
         $rules = array(
             'email' => 'required|email|max:45'
         );
         return Validator::make(Input::all(), $rules);
     }
+    
 
 }

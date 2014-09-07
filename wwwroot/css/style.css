@@ -196,14 +196,14 @@ div.vertical-divider {
 /* form control modification */
 .form-control {
     height:36px;    
-    font-size: 14px;
+    font-size: 12px;
 }
 .form-control-feedback {
     line-height: 36px;
-    font-size: 14px;
+    font-size: 12px;
 }
 label, .control-label, .help-block, .checkbox, .radio {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: normal;
 }
 
@@ -227,6 +227,9 @@ label, .control-label, .help-block, .checkbox, .radio {
 }
 
 /* button modification */
+.btn {
+    font-size: 12px;
+}
 .btn-primary {
     color: #ffffff;
     background-color: #2f88cc;

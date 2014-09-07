@@ -134,8 +134,26 @@
             <h4>您的申请我们已经收到, 请耐心等待客服的回复。</h4>
             {{ HTML::image('images/ambassador/waiting.jpg','',array('style'=>'margin:auto;'))}}
             @endif
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">给好友一个惊喜 </div>
+                <div class="panel-body">
+                    {{ Form::open(array('action'=>'AmbassadorController@postSendInvitation','role'=>'form'))}}
+                    <div class="form-group">
+                        <label class="sr-only" for="emails">好友邮箱</label>
+                        <input type="text" class="form-control"  name="emails" id="emails" placeholder="请输入您好友的邮箱">
+                        <p class="help-block">用分号（;）分开发送多人</p>
+                    </div>    
+                    {{ Form::submit('发送给好友', array('class'=>'btn btn-primary'))}}
+                    {{ Form::close()}}
+                </div>
+            </div>
         </div>
     </div>
+
+
+    
+
 </div>
 @stop
 
