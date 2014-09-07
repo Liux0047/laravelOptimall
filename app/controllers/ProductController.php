@@ -43,11 +43,12 @@ class ProductController extends BaseController {
 
     public function getIndex() {
         $wideModelIds = array();
-        
+
         foreach (self::$eminentModels as $labelName => $labelValue) {
             //use variable variable name to form model groups of diffrent featured labels
             $modelGroupName = $labelName . 'Models';
-            $$modelGroupName = ProductModelView::where('product_label_id', '=', $labelValue['id'])
+            $$modelGroupName = ProductModelView::active()
+                            ->where('product_label_id', '=', $labelValue['id'])
                             ->orderBy('num_items_sold_display', 'DESC')->take(4)->get();
             $params[$modelGroupName] = $$modelGroupName;
             $wideModelIds[$labelName] = $labelValue['wideModelId'];
@@ -71,8 +72,8 @@ class ProductController extends BaseController {
 
         Session::forget('remainingModels');
         $params['checkedValues'] = array();
-        
-        $models = ProductModelView::distinct();
+
+        $models = ProductModelView::active()->distinct();
         foreach ($filters as $filter) {
             if (Input::has($filter['filterName']) && count(Input::get($filter['filterName']))) {
                 $models = $models->$filter['functionName'](Input::get($filter['filterName']));
@@ -155,15 +156,15 @@ class ProductController extends BaseController {
             }
         }
     }
-    
-    private function getAlsoBuyModels ($cuurentModelId) {
+
+    private function getAlsoBuyModels($cuurentModelId) {
         $baseModels = OrderLineItemView::viewThisAlsoBuy($cuurentModelId)->take(5)->get();
         $models = array();
-        foreach ($baseModels as $baseModel){
+        foreach ($baseModels as $baseModel) {
             $model = ProductModelView::find($baseModel->model_id);
             $models[] = $model;
         }
-        return array('models'=>$models);
+        return array('models' => $models);
     }
 
 }

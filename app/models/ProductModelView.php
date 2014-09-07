@@ -28,6 +28,13 @@ class ProductModelView extends Eloquent {
     }
     
     /*
+     * live models are ones with  is_active = 1
+     */
+    public function scopeActive ($query){
+        return $query->where('is_active','=','1');
+    }
+    
+    /*
      * dynmaic scope to get models of certain styles
      */
 
