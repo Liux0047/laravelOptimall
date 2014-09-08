@@ -16,6 +16,7 @@
                 <th>数量</th>
                 <th>单价</th>
                 <th>折扣</th>
+                <th>退款金额</th>
                 <th>图片</th>
                 <th>操作</th>
             </tr>
@@ -48,6 +49,9 @@
                 @endif
             </td>
             <td>
+                {{ $refund->amount }}
+            </td>
+            <td>
                 <a href="#refund_image_{{ $refund->order_line_item_id }}" data-toggle="modal">
                     查看图片
                 </a>
@@ -73,6 +77,7 @@
                 {{ Form::open(array('action'=>'AdminFunctionController@postRefund', 'onsubmit'=>'return confirmChangeStatus();'))}}
                 {{ Form::hidden('refund_id', $refund->refund_id)}}
                 @if($refund->refund_status_id == 1)
+                <input type="number" name="amount">
                 {{ Form::submit('批准申请', array('class'=>'btn btn-warning')) }}
                 @elseif($refund->refund_status_id == 2)
                 {{ Form::submit('确认收到退货', array('class'=>'btn btn-warning')) }}

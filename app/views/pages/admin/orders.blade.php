@@ -133,8 +133,15 @@
         </table>
         <div class="panel-footer align-right">
             @if ($order->order_status_id == 2)
-            {{ Form::open(array('action'=>'AdminFunctionController@postDispatchOrder', 'onsubmit'=>'return confirmDispatch();')) }}
+            {{ Form::open(array('action'=>'AdminFunctionController@postDispatchOrder', 'class'=>'form-inline', 'onsubmit'=>'return confirmDispatch();')) }}
             {{ Form::hidden('order_id', $order->order_id)}}
+            <div class="form-group">
+                <label class="sr-only" for="shipping_track_num">物流公司运单号</label>
+                <input type="text" class="form-control" id="shipping_track_num" name='shipping_track_num' placeholder="物流公司运单号">
+            </div>
+            <select class="form-control" name="shipping_company">
+                <option value="Shun Feng">顺丰</option>
+            </select>
             {{ Form::submit('确认发货', array('class'=>'btn btn-warning btn-sm'))}}
             {{ Form::close() }}
             @elseif($order->order_status_id >= 3)
@@ -146,7 +153,7 @@
 
     {{  $orders->links() }}
 
-    
+
 </div>
 @stop
 

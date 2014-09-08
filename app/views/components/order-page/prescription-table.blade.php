@@ -1,5 +1,5 @@
 <div class="panel panel-default" id="prescription-panel">
-    <table class="table table-condensed">
+    <table class="table table-condensed prescription-table">
         <thead>
             <tr class="active">
                 <th>

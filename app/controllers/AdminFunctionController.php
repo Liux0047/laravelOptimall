@@ -33,6 +33,9 @@ class AdminFunctionController extends BaseController {
             $order->order_status_id = 3;
             $order->dispatched_at = (new DateTime)->format('Y-m-d H:i:s');
             $order->dispatched_by = Session::get('admin.username');
+            $order->shipping_company = Input::get('shipping_company');
+            $order->shipping_track_num = Input::get('shipping_track_num');
+            $order->dispatched_by = Session::get('admin.username');
             $order->save();
             return Redirect::back()->with('status', '确认发货成功');
         } else {
@@ -55,6 +58,7 @@ class AdminFunctionController extends BaseController {
     public function postRefund() {
         $refund = Refund::findOrFail(Input::get('refund_id'));
         if ($refund->refund_status_id == 1) {
+            $refund->amount = Input::get('amount');
             $refund->refund_status_id = 2;
         } else if ($refund->refund_status_id == 2) {
             $refund->refund_status_id = 3;

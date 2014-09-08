@@ -917,6 +917,9 @@ ol.progtrckr li.progtrckr-todo:before {
 #prescription-table th, #prescription-table td { 
     border-top: none; 
 }
+.prescription-table tr>td, .prescription-table tr>th {
+    color:#222222;
+}
 
 /* chosen-select */
 .chosen-container-single .chosen-single{
