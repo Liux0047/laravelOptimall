@@ -21,7 +21,7 @@ class AdminFunctionController extends BaseController {
     
     public function getDispatchedOrders() {
         $params['pageTitle'] = "已发货的订单";
-        $orders = PlacedOrder::dispatched()->orderBy('created_at')->paginate(10);
+        $orders = PlacedOrder::dispatched()->orderBy('created_at','DESC')->paginate(10);
         $params['orders'] = $orders;
         $params['prescriptionNames'] = PrescriptionController::getPrescriptionNames();
         return View::make('pages.admin.orders', $params);

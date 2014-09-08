@@ -46,6 +46,13 @@ class PlacedOrder extends Eloquent {
     }
     
     /*
+     * inverse of one to many relationship with coupon
+     */
+    public function coupon () {
+        return $this->belongsTo('Coupon','coupon_id');
+    }
+    
+    /*
      * scope of undispatched orders
      */
     public function scopeUndispatched ($query) {

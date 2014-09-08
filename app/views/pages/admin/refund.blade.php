@@ -32,21 +32,53 @@
                 {{ $refund->quantity }}
             </td>
             <td>
-                {{ $refund->orderLineItemView->price + $refund->orderLineItemView->lens_price }}
+                {{ $refund->orderLineItemView->price }} + {{ $refund->orderLineItemView->lens_price }}(镜片)
             </td>
             <td>
-                {{ HTML::image('images/uploads/refund/'.$refund->order_line_item_id.'.jpg') }}
+                @if($refund->orderLineItemView->placedOrder->coupon()->count())
+                {{ $refund->orderLineItemView->placedOrder->coupon->coupon_code }} <br>
+                @if ($refund->orderLineItemView->placedOrder->coupon->discount_type_id == 1)
+                减金额
+                @elseif($refund->orderLineItemView->placedOrder->coupon->discount_type_id == 2)
+                打折
+                @else
+                无效
+                @endif
+                {{ $refund->orderLineItemView->placedOrder->coupon->discount_value }}
+                @endif
             </td>
-            <td></td>
-        </tr>
+            <td>
+                <a href="#refund_image_{{ $refund->order_line_item_id }}" data-toggle="modal">
+                    查看图片
+                </a>
+                <div class="modal fade" id="refund_image_{{ $refund->order_line_item_id }}">
+                    <div class="modal-dialog"> 
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title">退款申请人上传的图片</h4>
+                            </div>
+                            <div class="modal-body">
+                                {{ HTML::image('images/uploads/refunds/'.$refund->order_line_item_id.'.jpg') }}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+        
+    </td>
+    <td></td>
+</tr>
 
-        @endforeach
-    </table>
+@endforeach
+</table>
 
-    {{  $refunds->links() }}
-    
+{{  $refunds->links() }}
 
-    
+
+
 </div>
 @stop
 

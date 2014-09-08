@@ -202,9 +202,12 @@ div.vertical-divider {
     line-height: 36px;
     font-size: 12px;
 }
-label, .control-label, .help-block, .checkbox, .radio {
+label, .control-label, .help-block {
     font-size: 12px;
     font-weight: normal;
+}
+.checkbox, .radio {
+    font-size: 14px;
 }
 
 /* modal modification 

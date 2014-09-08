@@ -31,6 +31,8 @@ class OrderLineItemView extends Eloquent {
         return $this->belongsTo('PlacedOrder','order_id');
     }
     
+    
+    
     /*
      * dynmaic scope to get items belonging to a member ID
      */
