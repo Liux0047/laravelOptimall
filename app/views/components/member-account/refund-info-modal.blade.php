@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
                 <ol class="progtrckr" data-progtrckr-steps="4">    
-                    <li class='progtrckr-done'>提交申请</li>@if ( $item->is_approved)<li class='progtrckr-done'>@else <li class='progtrckr-todo'>@endif 客服确认</li>@if ( $item->is_goods_returned)<li class='progtrckr-done'>@else <li class='progtrckr-todo'>@endif 寄回商品</li>@if ( $item->is_refunded)<li class='progtrckr-done'>@else <li class='progtrckr-todo'> @endif 收货退款</li>    
+                    <li class='progtrckr-done'>提交申请</li>@if( $item->refund->refund_status_id>=2)<li class='progtrckr-done'>@else<li class='progtrckr-todo'>@endif客服确认</li>@if( $item->refund->refund_status_id>=3)<li class='progtrckr-done'>@else<li class='progtrckr-todo'>@endif寄回商品</li>@if( $item->refund->refund_status_id==4)<li class='progtrckr-done'>@else<li class='progtrckr-todo'>@endif收货退款</li>    
                 </ol>
                 <br>
                 <p>退货数量: {{ $item->refund_quantity }}</p>

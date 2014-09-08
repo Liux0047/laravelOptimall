@@ -31,6 +31,20 @@ class OrderLineItemView extends Eloquent {
         return $this->belongsTo('PlacedOrder','order_id');
     }
     
+    /*
+     * one to one relationship with refund
+     */
+    public function refund () {
+        return $this->hasOne('Refund','order_line_item_id');
+    }
+    
+    /*
+     * one to one relationship with review
+     */
+    public function review () {
+        return $this->hasOne('Review','order_line_item_id');
+    }
+    
     
     
     /*
