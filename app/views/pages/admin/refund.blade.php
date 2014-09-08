@@ -67,17 +67,30 @@
                         </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->
                 </div><!-- /.modal -->
-        
-    </td>
-    <td></td>
-</tr>
 
-@endforeach
-</table>
+            </td>
+            <td>
+                {{ Form::open(array('action'=>'AdminFunctionController@postRefund', 'onsubmit'=>'return confirmChangeStatus();'))}}
+                {{ Form::hidden('refund_id', $refund->refund_id)}}
+                @if($refund->refund_status_id == 1)
+                {{ Form::submit('批准申请', array('class'=>'btn btn-warning')) }}
+                @elseif($refund->refund_status_id == 2)
+                {{ Form::submit('确认收到退货', array('class'=>'btn btn-warning')) }}
+                @elseif ($refund->refund_status_id == 3)
+                {{ Form::submit('确认退款成功', array('class'=>'btn btn-warning')) }}
+                @elseif ($refund->refund_status_id == 4)
+                退款成功
+                @else
+                Invalid order_status_id
+                @endif
+                {{ Form::close() }}
+            </td>
+        </tr>
 
-{{  $refunds->links() }}
+        @endforeach
+    </table>
 
-
+    {{  $refunds->links() }}
 
 </div>
 @stop
@@ -85,8 +98,8 @@
 @section('script')
 @parent
 <script type="text/javascript">
-function confirmDispatch () {
-    return confirm('确认发货?');
+function confirmChangeStatus () {
+    return confirm('确认改变状态?');
 }
 
 </script> 

@@ -104,7 +104,7 @@ class MemberAccountController extends BaseController {
             $quantity = $item->quantity;
         }
         $refund->quantity = $quantity;
-
+        
         if (Input::hasFile('photo') && Input::file('photo')->isValid()) {
             if (Input::file('photo')->getSize() < 2 * pow(2, 20)) {
                 $path = public_path();
@@ -114,6 +114,7 @@ class MemberAccountController extends BaseController {
             }
         }
         
+        $refund->refund_status_id = 1;
         $refund->order_line_item_id = $item->order_line_item_id;
         $refund->save();
         return Redirect::back()->with('status', '退款申请提交成功');
