@@ -5,7 +5,7 @@
     <div class="page-header">
         @include('components.page-frame.message-bar')
         <h1>
-            未发货订单
+            {{ $pageTitle }}
         </h1>
     </div>
     @foreach($orders as $order)
@@ -48,8 +48,7 @@
                     </p>                    
                 </div>
                 <div class="col-md-4">
-
-                    @if ($order->order_status_id == 2)
+                    @if ($order->order_status_id >= 2)
                     <p>
                         支付方式： {{ $order->peyment_method }}
                     </p>
@@ -138,6 +137,8 @@
             {{ Form::hidden('order_id', $order->order_id)}}
             {{ Form::submit('确认发货', array('class'=>'btn btn-warning btn-sm'))}}
             {{ Form::close() }}
+            @elseif($order->order_status_id >= 3)
+            发货于: {{ $order->dispatched_at }} ( 由 {{ $order->dispatched_by }} 确认发货) 
             @endif
         </div>
     </div>

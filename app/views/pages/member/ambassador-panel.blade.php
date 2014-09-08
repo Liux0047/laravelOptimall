@@ -135,19 +135,29 @@
             {{ HTML::image('images/ambassador/waiting.jpg','',array('style'=>'margin:auto;'))}}
             @endif
 
-            <div class="panel panel-primary">
-                <div class="panel-heading">给好友一个惊喜 </div>
-                <div class="panel-body">
-                    {{ Form::open(array('action'=>'AmbassadorController@postSendInvitation','role'=>'form'))}}
-                    <div class="form-group">
-                        <label class="sr-only" for="emails">好友邮箱</label>
-                        <input type="text" class="form-control"  name="emails" id="emails" placeholder="请输入您好友的邮箱">
-                        <p class="help-block">用分号（;）分开发送多人</p>
-                    </div>    
-                    {{ Form::submit('发送给好友', array('class'=>'btn btn-primary'))}}
-                    {{ Form::close()}}
+
+            <div class="page-header">
+                <h4>
+                    邀请您的好友             
+                    <small>给他（她）一个惊喜</small>
+                </h4>
+            </div>
+            {{ Form::open(array('action'=>'AmbassadorController@postSendInvitation','role'=>'form', 'class'=>'form-horizontal'))}}
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="emails">好友邮箱</label>
+                <div class="col-md-6">                  
+                    <input type="text" class="form-control"  name="emails" id="emails" placeholder="请输入您好友的邮箱">
+                    <p class="help-block">用分号（;）分开发送多人</p>
+                </div>
+                
+            </div>    
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    {{ Form::submit('立即发送给您好友', array('class'=>'btn btn-primary'))}}
                 </div>
             </div>
+            {{ Form::close()}}
+            
         </div>
     </div>
 

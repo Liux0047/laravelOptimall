@@ -46,10 +46,17 @@ class PlacedOrder extends Eloquent {
     }
     
     /*
-     * Dynamic scope of undispatched orders
+     * scope of undispatched orders
      */
     public function scopeUndispatched ($query) {
         return $query->where('order_status_id','<=',2);
+    } 
+    
+    /*
+     * Dynamic scope of dispatched orders
+     */
+    public function scopeDispatched ($query) {
+        return $query->where('order_status_id','>',2);
     } 
 
     /*
