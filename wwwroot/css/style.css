@@ -1216,6 +1216,8 @@ input.jq-validate-error{
     text-align:center;
 }
 .also-buy-container .discount-price {
+    color: #d32a0e;
+    font-weight: bold;
     padding-left: 2px;
     font-size: 16px;
 }

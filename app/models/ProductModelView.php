@@ -39,7 +39,8 @@ class ProductModelView extends Eloquent {
      */
 
     public function scopeOfStyles($query, $styles) {
-        return $query->whereIn('product_style_id', $styles);
+        return $query->join('product_style_mapping','product_style_mapping.model_id','=','model_view.model_id')
+                ->whereIn('product_style_id', $styles);
     }
 
     /*
