@@ -267,7 +267,8 @@ label, .control-label, .help-block {
 
 .navbar-container{
     height:37px;
-    background-color: #333;
+    background-color: #222;
+    opacity: 0.8;
 }
 .navbar-nav>li>a, .navbar-brand {
     padding-top: 8px;
@@ -287,24 +288,20 @@ label, .control-label, .help-block {
     font-size: 1.0em;
 }
 .navbar-inverse .dropdown-menu {
-    background-color: rgb(238, 238, 238);
-    border-bottom: 3px solid  #B31C3D;
-    border-left: 3px solid  #B31C3D;
-    border-right: 3px solid #B31C3D;
-    border-top: 3px solid #B31C3D;
+    background-color: #f5f5f5;
 }
 
 .navbar-inverse .navbar-brand {
-    color: #B31C3D;
+    color: #ee4054;
 }
 .navbar-inverse .dropdown-menu>li>a{
     color: rgb(87, 81, 81);
 }
 .navbar-inverse .navbar-nav>li>a {
-    color: #B31C3D;
+    color: #ee4054;
 }
 .navbar-inverse .navbar-nav>li>a:focus {
-    color: #B31C3D;
+    color: #ee4054;
     background-color: #ffffff;
 }
 .navbar-inverse .navbar-nav>.open>a,
@@ -315,8 +312,9 @@ label, .control-label, .help-block {
 .navbar-inverse .navbar-nav .open .dropdown-menu>li>a:focus,
 .navbar-inverse .dropdown-menu>li>a:hover,
 .navbar-inverse .navbar-header a.navbar-brand:hover{
-    color: #fff;
-    background-color:  #B31C3D;
+    color: #F0F0F0;
+    background-color:  #000000;
+    opacity: 0.9;
 }
 #nav.affix{
     position: fixed;
@@ -331,10 +329,10 @@ label, .control-label, .help-block {
     border-bottom: 0px;
 }
 #nav.affix .navbar-nav>li>a{
-    color: #ffffff;
+    color: #E8E8E8;
 }
 #nav.affix .navbar-nav>li>a:focus {
-    color: #ffffff;
+    color: #E8E8E8;
     background-color: #333333;
 }
 #nav.affix .navbar-nav>.open>a,
@@ -345,19 +343,36 @@ label, .control-label, .help-block {
 #nav.affix .navbar-nav .open .dropdown-menu>li>a:focus,
 #nav.affix .dropdown-menu>li>a:hover,
 #nav.affix .navbar-header a.navbar-brand:hover{
-    color: #fff;
-    background-color:  #B31C3D;
+    color: #E8E8E8;
+    background-color:  #ee4054;
 }
 #nav.affix .navbar-brand{
     color: #ffffff;
 }
 #nav.affix .yamm-content {
-    color: #222;
+    color: #E8E8E8;
+}
+.navbar .dropdown-menu {
+    box-shadow: none;   
+    -webkit-box-shadow: none;
+    background-color: #000000;
+    opacity: 0.9;
 }
 /* login dropdown */
 .yamm .nav.navbar-right .login-dropdown {
     width: 400px;
     right: 15px; //to compensate the 15px margin of container
+}
+.yamm .yamm-content {    
+    color: #E8E8E8 ;
+    padding: 20px 10px;
+}
+.yamm-content ul {
+    padding-left: 20px;
+}
+.yamm-content ul>li {
+    list-style: none;
+    padding: 5px 0px; 
 }
 
 /*

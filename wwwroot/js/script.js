@@ -10,11 +10,11 @@ $(document).ready(function() {
     //enable dropdown on hover
     //also add hovered class to hovered dropdown menu
     $('.navbar .dropdown-hover').hover(function() {
-        $(this).find('.dropdown-menu').first().stop(true, true).delay(150).slideDown(200);
+        $(this).find('.yamm-content').first().stop(true, true).delay(150).slideDown(200);
         $(this).addClass("open");
         //$('.dropdown').removeClass("open");
     }, function() {
-        $(this).find('.dropdown-menu').first().stop(true, true).delay(0).slideUp(1);
+        $(this).find('.yamm-content').first().stop(true, true).delay(0).slideUp(1);
         $(this).removeClass("open");
     });
 

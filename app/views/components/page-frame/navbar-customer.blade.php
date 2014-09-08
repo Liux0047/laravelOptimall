@@ -10,6 +10,73 @@
         </div>
         <div id="navbar-collapse-2" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
+                <li class="dropdown dropdown-hover yamm-fw">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">所有产品<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <div class="yamm-content">
+                                <div class="row row-narrow">
+                                    <div class="col-md-1 col-narrow">
+                                        <ul>
+                                            <li>
+                                                <strong>材料</strong>
+                                            </li>
+                                            <li>
+                                                超韧钨钢                                                
+                                            </li>
+                                            <li>
+                                                质感板材
+                                            </li>
+                                            <li>
+                                                轻柔TR                                                
+                                            </li>
+                                            <li>
+                                                商务金属                                                
+                                            </li>
+                                            <li>
+                                                手造原木                                               
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-1 col-narrow">
+                                        <ul>
+                                            <li>
+                                                <strong>风格</strong>
+                                            </li>
+                                            <li>
+                                                英伦学院                                                
+                                            </li>
+                                            <li>
+                                                户外阳光
+                                            </li>
+                                            <li>
+                                                商务休闲                                                
+                                            </li>
+                                            <li>
+                                                复刻经典                                                
+                                            </li>
+                                            <li>
+                                                特立独行                                               
+                                            </li>
+                                            <li>
+                                                摩登时代
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-4">
+                                        {{ HTML::image('images/navbar/1.jpg')}}
+                                    </div>
+                                    <div class="col-md-4">
+                                        {{ HTML::image('images/navbar/2.jpg')}}
+                                    </div>
+                                    <div class="col-md-2">
+                                        {{ HTML::image('images/navbar/3.jpg')}}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
                 <!-- Media Example -->
                 <li class="dropdown dropdown-hover">
                     <a href="#" data-toggle="dropdown" class="dropdown-toggle">Media<b class="caret"></b></a>
