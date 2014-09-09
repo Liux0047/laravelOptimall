@@ -6,7 +6,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="#" class="navbar-brand">目光之城</a>
+            <a href="{{ URL::to('/') }}" class="navbar-brand">首页</a>
         </div>
         <div id="navbar-collapse-2" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
