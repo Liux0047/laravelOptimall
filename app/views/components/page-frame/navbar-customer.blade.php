@@ -79,7 +79,7 @@
                 </li>
                 <!-- Media Example -->
                 <li class="dropdown dropdown-hover">
-                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">Media<b class="caret"></b></a>
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">中文<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <div class="yamm-content">
@@ -102,7 +102,7 @@
                 </li>
                 <!-- Tables -->
                 <li class="dropdown yamm-fullwidth dropdown-hover">
-                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">Tables<b class="caret"></b></a>
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">中文<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <div class="yamm-content">
@@ -152,7 +152,7 @@
                 </li>
                 <!-- Thumbnails demo -->
                 <li class="dropdown dropdown-hover">
-                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">Thumbnails<b class="caret"></b></a>
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">中文<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <div class="yamm-content">

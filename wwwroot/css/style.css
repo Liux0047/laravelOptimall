@@ -274,6 +274,7 @@ label, .control-label, .help-block {
     padding-bottom: 8px;
 }
 .navbar-brand {
+    font-size: 14px;
     height:37px;
 }
 .navbar {

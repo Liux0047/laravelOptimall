@@ -8,11 +8,11 @@
 class ProductController extends BaseController {
 
     public static $eminentModels = array(
-        'promotion' => array('id' => 0, 'wideModelId' => array(1001, 1005)),
-        'newArrival' => array('id' => 1, 'wideModelId' => array(3001, 3004)),
-        'bestSeller' => array('id' => 2, 'wideModelId' => array(2004, 3010)),
-        'featured' => array('id' => 3, 'wideModelId' => array(2007, 3002)),
-        'classical' => array('id' => 4, 'wideModelId' => array(2002, 3009))
+        'promotion' => array('id' => 1, 'wideModelId' => array(1001, 1005)),
+        'newArrival' => array('id' => 2, 'wideModelId' => array(3001, 3004)),
+        'bestSeller' => array('id' => 3, 'wideModelId' => array(2004, 3010)),
+        'featured' => array('id' => 4, 'wideModelId' => array(2007, 3002)),
+        'classical' => array('id' => 5, 'wideModelId' => array(2002, 3009))
     );
 
     public function getProduct($modelId = 1001) {
