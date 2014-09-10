@@ -11,6 +11,7 @@
     <table class="table">
         <thead>
             <tr>
+                <th>申请人</th>
                 <th>申请时间</th>
                 <th>理由</th>
                 <th>数量</th>
@@ -19,10 +20,15 @@
                 <th>退款金额</th>
                 <th>图片</th>
                 <th>操作</th>
+                <th>驳回申请</th>
             </tr>
         </thead>
         @foreach($refunds as $refund)
         <tr>
+            <td>
+                {{ $refund->orderLineItemView->member->nickname}} <br>
+                {{ $refund->orderLineItemView->member->email}}
+            </td>
             <td>
                 {{ $refund->created_at }}
             </td>
@@ -74,10 +80,11 @@
 
             </td>
             <td>
+                @if ($refund->is_rejected == 0)
                 {{ Form::open(array('action'=>'AdminFunctionController@postRefund', 'onsubmit'=>'return confirmChangeStatus();'))}}
                 {{ Form::hidden('refund_id', $refund->refund_id)}}
                 @if($refund->refund_status_id == 1)
-                <input type="number" name="amount">
+                退款金额： <input type="number" name="amount">
                 {{ Form::submit('批准申请', array('class'=>'btn btn-warning')) }}
                 @elseif($refund->refund_status_id == 2)
                 {{ Form::submit('确认收到退货', array('class'=>'btn btn-warning')) }}
@@ -89,6 +96,24 @@
                 Invalid order_status_id
                 @endif
                 {{ Form::close() }}
+                @else
+                已驳回
+                @endif
+                <br>
+            </td>
+            <td>
+                @if ($refund->is_rejected == 0)
+                @if ($refund->refund_status_id == 4)
+                已退款
+                @else
+                {{ Form::open(array('action'=>'AdminFunctionController@postRejectRefund', 'onsubmit'=>'return confirmChangeStatus();'))}}
+                {{ Form::hidden('refund_id', $refund->refund_id)}}
+                {{ Form::submit('驳回申请', array('class'=>'btn btn-danger')) }}
+                {{ Form::close() }}
+                @endif
+                @else
+                已驳回
+                @endif
             </td>
         </tr>
 

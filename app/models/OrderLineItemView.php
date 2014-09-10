@@ -46,6 +46,14 @@ class OrderLineItemView extends Eloquent {
     }
     
     
+    /*
+     * inverse one to many relationship with member
+     */
+    public function member () {
+        return $this->belongsTo('Member','member_id');
+    }
+    
+    
     
     /*
      * dynmaic scope to get items belonging to a member ID

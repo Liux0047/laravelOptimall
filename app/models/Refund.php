@@ -29,14 +29,18 @@ class Refund extends Eloquent {
     public function orderLineItemView(){
         return $this->belongsTo('OrderLineItemView', 'order_line_item_id');
     }
-    
+        
     
     public function scopePending($query) {
-        return $query->where('refund_status_id','<','4');
+        return $query->where('refund_status_id','<','4')->where('is_rejected','=','0');
     }
     
     public function scopeRefunded ($query) {
         return $query->where('refund_status_id','=','4');
+    }
+    
+    public function scopeRejected($query) {
+        return $query->where('is_rejected','=','1');
     }
 
 

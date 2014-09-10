@@ -26,6 +26,7 @@
 					<ul class = "dropdown-menu" role = "menu">
 						<li><a href = "{{ action('AdminFunctionController@getPendingRefundClaims') }}">未退款</a></li>
 						<li><a href = "{{ action('AdminFunctionController@getRefundedClaims')}}">已退款</a></li>
+						<li><a href = "{{ action('AdminFunctionController@getRejectedClaims')}}">已驳回</a></li>
 					</ul>
 				</li>
 				<li><a href = "#">Link</a></li>

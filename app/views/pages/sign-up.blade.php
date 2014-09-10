@@ -25,13 +25,13 @@
             <div class="form-group">
                 <label for="nickname" class="col-md-2 control-label">昵称*</label>
                 <div class="col-md-6">
-                    <input type="text" class="form-control" id="nickname" name="nickname" placeholder="昵称">
+                    <input type="text" class="form-control" id="nickname" name="nickname" placeholder="昵称" value="{{ Input::old('nickname') }}">
                 </div>
             </div>
             <div class="form-group">
                 <label for="email" class="col-md-2 control-label">邮箱*</label>
                 <div class="col-md-6">
-                    <input type="email" class="form-control" id="email" name="email" placeholder="邮箱">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="邮箱" value="{{ Input::old('email') }}">
                 </div>
             </div>
             <div class="form-group">
@@ -49,7 +49,7 @@
             <div class="form-group">
                 <label for="ambassador_code" class="col-md-2 control-label">邀请码</label>
                 <div class="col-md-6">
-                    <input type="text" class="form-control" id="ambassador_code" name="ambassador_code" placeholder="请输入对方提供的邀请码">
+                    <input type="text" class="form-control" id="ambassador_code" name="ambassador_code" placeholder="请输入对方提供的邀请码" {{ Input::old('ambassador_code') }}>
                 </div>
             </div>
             <div class="form-group">
