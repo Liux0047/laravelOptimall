@@ -81,6 +81,7 @@ class Member extends Eloquent implements UserInterface, RemindableInterface {
     public function thumbUps() {
         return $this->hasMany('ThumbUp', 'member_id');
     }
+    
 
     /*
      * Dynamic scope to get member ID given ambassador code

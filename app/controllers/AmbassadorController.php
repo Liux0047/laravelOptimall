@@ -76,16 +76,11 @@ class AmbassadorController extends BaseController {
         return Redirect::back()->with('status','成功发送邮件');
     }
 
-    public static function createAmbassadorRelation($newMemberId, $code) {
-        $ambassadorRelation = new AmbassadorRelation;
+    public static function findAmbassadorRelation($code) {        
         if (Member::getAmbassador($code)->count() > 0) {    //if code belongs to a valid ambassador
-            $ambassadorId = Member::getAmbassador($code)->first()->member_id;
-            $ambassadorRelation->ambassador = $ambassadorId;
-            $ambassadorRelation->invited_member = $newMemberId;
-            $ambassadorRelation->save();
-            return true;
+            return Member::getAmbassador($code)->first()->member_id;
         } else {
-            return false;
+            return null;
         }
     }
 

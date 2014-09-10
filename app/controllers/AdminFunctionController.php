@@ -54,7 +54,7 @@ class AdminFunctionController extends BaseController {
         $params['refunds'] = Refund::refunded()->orderBy('created_at', 'DESC')->paginate(10);
         return View::make('pages.admin.refund', $params);
     }
-    
+
     public function getRejectedClaims() {
         $params['pageTitle'] = "已经驳回退款";
         $params['refunds'] = Refund::rejected()->orderBy('created_at', 'DESC')->paginate(10);
@@ -67,7 +67,7 @@ class AdminFunctionController extends BaseController {
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator);
         }
-        
+
         $refund = Refund::findOrFail(Input::get('refund_id'));
         if ($refund->refund_status_id == 1) {
             $refund->amount = Input::get('amount');
@@ -77,19 +77,24 @@ class AdminFunctionController extends BaseController {
         } else if ($refund->refund_status_id == 3) {
             $refund->refund_status_id = 4;
         }
+        $refund->processed_by = Session::get('admin.username');
         $refund->save();
         return Redirect::back()->with('status', '成功处理退款申请');
     }
-    
+
     public function postRejectRefund() {
         $refund = Refund::findOrFail(Input::get('refund_id'));
-        $refund->is_rejected = 1 ;
+        $refund->is_rejected = 1;
+        $refund->processed_by = Session::get('admin.username');
         $refund->save();
         return Redirect::back()->with('status', '成功驳回退款申请');
     }
 
     public function getAmbassadorClaim() {
-        
+        $params['pageTitle'] = "目光之星返利申请";
+        $params['claims'] = AmbassadorView::ambassadorRewardClaims()->paginate(10);
+        $params['rewards'] = AmbassadorController::calculateRewards($params['claims']);
+        return View::make('pages.admin.ambassador-claim', $params);
     }
 
     public function postAmbassadorClaim() {
@@ -103,7 +108,7 @@ class AdminFunctionController extends BaseController {
     public function postAmbassadorApproval() {
         
     }
-    
+
     private function validateClaimRefund() {
         $rules = array(
             'amount' => 'required|numeric'

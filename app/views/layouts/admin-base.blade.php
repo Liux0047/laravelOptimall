@@ -23,6 +23,7 @@
 @section('link-script')
 {{ HTML::script('js/jquery.min.js') }}
 {{ HTML::script('js/bootstrap.min.js') }}
+{{ HTML::script('js/jquery.lazyload.min.js') }}
 {{ HTML::script('js/script.js') }}
 @show
 

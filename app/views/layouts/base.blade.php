@@ -8,6 +8,7 @@
     {{ HTML::style('css/bootstrap.min.css'); }}
     {{ HTML::style('plugins/font-awesome/css/font-awesome.min.css'); }}
     {{ HTML::style('css/yamm.css'); }}        
+    {{ HTML::style('plugins/jQuery-mailtip/mailtip.css') }}
     <link rel='shortcut icon' type="image/x-icon" href="{{ asset('images/favicon.ico') }}"> 
     @show
     {{ HTML::style('css/style.css'); }}
@@ -32,12 +33,14 @@
 {{ HTML::script('js/jquery.min.js') }}
 {{ HTML::script('js/bootstrap.min.js') }}
 {{ HTML::script('js/jquery.lazyload.min.js') }}
+{{ HTML::script('plugins/jQuery-mailtip/jquery.mailtip.js') }}
 {{ HTML::script('js/script.js') }}
 @show
 
 
 @section('script')
 @include('components.page-frame.login-dropdown-js')
+@include ('components.plugin.mailtip-js')
 @show
 
 </html>

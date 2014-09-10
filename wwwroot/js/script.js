@@ -18,10 +18,6 @@ $(document).ready(function() {
         $(this).removeClass("open");
     });
 
-    //enable lazy load
-    $("img.lazy").lazyload({
-        effect: "fadeIn"
-    });
 });
 
 /*
@@ -88,6 +84,7 @@ $("img.lazy").lazyload({
     effectspeed: 600,
     failure_limit: 15
 });
+
 //trigger a fake scroll to lazy load image
 $(document).ready(function() {
     $('body,html').scroll();

@@ -2,7 +2,6 @@
 
 @section('link-css')
 @parent
-{{ HTML::style('plugins/jQuery-mailtip/mailtip.css') }}
 @stop
 
 @section ('content')
@@ -145,7 +144,6 @@
 @parent
 {{ HTML::script('plugins/jQuery-Validation/jquery.validate.min.js') }}
 {{ HTML::script('js/jQuery-Validation-customize.js') }}
-{{ HTML::script('plugins/jQuery-mailtip/jquery.mailtip.js') }}
 @stop
 
 @section("script")
@@ -235,5 +233,4 @@ $('#terms_modal').on('show.bs.modal', function() {
 });
 
 </script>
-@include ('components.plugin.mailtip-js')
 @stop

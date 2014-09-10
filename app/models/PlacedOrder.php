@@ -27,14 +27,15 @@ class PlacedOrder extends Eloquent {
      * One to many relationship with OrderLineItemViews
      */
     public function orderLineItemViews() {
-        return $this->hasMany('OrderLineItemView','order_id');
+        return $this->hasMany('OrderLineItemView', 'order_id');
     }
-    
+
     /*
      * One to many relationship with OrderLineItems
      */
+
     public function orderLineItems() {
-        return $this->hasMany('OrderLineItem','order_id');
+        return $this->hasMany('OrderLineItem', 'order_id');
     }
 
     /*
@@ -42,29 +43,41 @@ class PlacedOrder extends Eloquent {
      */
 
     public function member() {
-        return $this->belongsTo('Member','member_id');
+        return $this->belongsTo('Member', 'member_id');
     }
-    
+
     /*
      * inverse of one to many relationship with coupon
      */
-    public function coupon () {
-        return $this->belongsTo('Coupon','coupon_id');
+
+    public function coupon() {
+        return $this->belongsTo('Coupon', 'coupon_id');
     }
-    
+
     /*
      * scope of undispatched orders
      */
-    public function scopeUndispatched ($query) {
-        return $query->where('order_status_id','<=',2);
-    } 
+
+    public function scopeUndispatched($query) {
+        return $query->where('order_status_id', '<=', 2);
+    }
+
+    /*
+     * scope of dispatched orders
+     */
+
+    public function scopeDispatched($query) {
+        return $query->where('order_status_id', '>', 2);
+    }
     
     /*
-     * Dynamic scope of dispatched orders
+     * scope of claimed ambassador rewards
      */
-    public function scopeDispatched ($query) {
-        return $query->where('order_status_id','>',2);
-    } 
+
+    public function scopeAmbassadorRewardProcessed($query) {
+        return $query->where('is_ambassador_reward_claimed', '=', '1')
+                        ->where('is_ambassador_reward_processed', '=', '0');
+    }
 
     /*
      * query for first-time orders belonging to this ambassador

@@ -29,6 +29,12 @@
 						<li><a href = "{{ action('AdminFunctionController@getRejectedClaims')}}">已驳回</a></li>
 					</ul>
 				</li>
+				<li class = "dropdown">
+					<a href = "#" class = "dropdown-toggle" data-toggle = "dropdown">目光之星 <span class = "caret"></span></a>
+					<ul class = "dropdown-menu" role = "menu">
+						<li><a href = "{{ action('AdminFunctionController@getAmbassadorClaim') }}">返利申请</a></li>
+					</ul>
+				</li>
 				<li><a href = "#">Link</a></li>
 			</ul>
 			<ul class = "nav navbar-nav navbar-right">

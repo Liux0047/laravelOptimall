@@ -2,7 +2,6 @@
 
 @section('link-css')
 @parent
-{{ HTML::style('plugins/jQuery-mailtip/mailtip.css') }}
 @stop
 
 @section ('content')
@@ -50,11 +49,9 @@
 
 @section('link-script')
 @parent
-{{ HTML::script('plugins/jQuery-mailtip/jquery.mailtip.js') }}
 @stop
 
 
 @section('script')
 @parent
-@include ('components.plugin.mailtip-js')
 @stop

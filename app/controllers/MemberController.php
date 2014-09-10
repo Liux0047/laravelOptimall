@@ -38,6 +38,7 @@ class MemberController extends BaseController {
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator);
         }
+        Input::flash();
 
         $nickname = Input::get('nickname');
         $email = Input::get('email');
@@ -62,12 +63,13 @@ class MemberController extends BaseController {
         $member->email = $email;
         $member->password = Hash::make($password);
         $member->reg_code = $this->generateGUID();
-        $member->save();
 
         //create ambassador relationship
         if (Input::has('ambassador_code')) {
-            AmbassadorController::createAmbassadorRelation($member->member_id, Input::get('ambassador_code'));
+            $member->invited_by = AmbassadorController::findAmbassadorRelation(Input::get('ambassador_code'));
         }
+        
+        $member->save();
 
         //send email
         $data['email'] = $email;
