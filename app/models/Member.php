@@ -87,9 +87,17 @@ class Member extends Eloquent implements UserInterface, RemindableInterface {
      */
 
     public function scopeNewAmbassadorApplication($query) {
-        return $query->select('ambassador_plan', 'mobile_phone', 'alipay_account', 'ambassador_info.created_at', 'member.email', 'member.nickname','member.member_id')
-                        ->join('ambassador_info', 'ambassador_info.member_id','=', 'member.member_id')
+        return $this->ambassadorFields($query)
                         ->where('is_approved_ambassador', '=', 0);
+    }
+
+    /*
+     * scope of approved ambassador
+     */
+
+    public function scopeApprovedAmbassadorApplication($query) {
+        return $this->ambassadorFields($query)
+                        ->where('is_approved_ambassador', '=', 1);
     }
 
     /*
@@ -101,6 +109,11 @@ class Member extends Eloquent implements UserInterface, RemindableInterface {
                         ->join('ambassador_info', 'ambassador_info.member_id', '=', 'member.member_id')
                         ->where('ambassador_info.ambassador_code', '=', $code)
                         ->where('member.is_approved_ambassador', '=', '1');
+    }
+
+    private function ambassadorFields($query) {
+        return $query->select('ambassador_plan', 'mobile_phone', 'alipay_account', 'ambassador_info.created_at', 'member.email', 'member.nickname', 'member.member_id', 'member.is_approved_ambassador')
+                        ->join('ambassador_info', 'ambassador_info.member_id', '=', 'member.member_id');
     }
 
 }

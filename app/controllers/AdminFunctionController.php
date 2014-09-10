@@ -125,6 +125,12 @@ class AdminFunctionController extends BaseController {
         $params['applications'] = Member::newAmbassadorApplication()->paginate(10);
         return View::make('pages.admin.ambassador-application', $params);
     }
+    
+    public function getApprovedAmbassadorApplication() {
+        $params['pageTitle'] = "目光之星注册申请成功";
+        $params['applications'] = Member::approvedAmbassadorApplication()->paginate(10);
+        return View::make('pages.admin.ambassador-application', $params);
+    }
 
     public function postAmbassadorApplication() {
         if(Input::has('member_id')){

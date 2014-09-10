@@ -35,6 +35,7 @@
 						<li><a href = "{{ action('AdminFunctionController@getAmbassadorClaim') }}">返利申请</a></li>
 						<li><a href = "{{ action('AdminFunctionController@getProcessedAmbassadorClaim') }}">已返利</a></li>
 						<li><a href = "{{ action('AdminFunctionController@getAmbassadorApplication') }}">注册申请</a></li>
+						<li><a href = "{{ action('AdminFunctionController@getApprovedAmbassadorApplication') }}">申请成功</a></li>
 					</ul>
 				</li>
 				<li><a href = "#">Link</a></li>
