@@ -21,9 +21,7 @@
             </tr>
         </thead>
         @foreach($applications as $application)
-        <tr>
-            <td>
-            </td>        
+        <tr>     
             <td>                
                 {{ $application->nickname }}<br>
                 {{ $application->email }}
@@ -39,12 +37,16 @@
             </td>
             <td >
                 {{ $application->ambassador_plan }}
-            </td>`
+            </td>
             <td>
+                @if(!$application->is_approved_ambassador)
                 {{ Form::open(array('action'=>'AdminFunctionController@postAmbassadorApplication', 'onsubmit' =>'return confirmChangeStatus();' ))}}    
                 {{ Form::hidden('member_id', $application->member_id)}}
                 {{ Form::submit('同意申请', array('class'=>'btn btn-primary')) }}
                 {{ Form::close()}}
+                @else
+                已批准
+                @endif
             </td>
         </tr>
 
