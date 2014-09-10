@@ -24,7 +24,7 @@
             <div class="form-group">
                 <label for="nickname" class="col-md-2 control-label">昵称*</label>
                 <div class="col-md-6">
-                    <input type="text" class="form-control" id="nickname" name="nickname" placeholder="昵称" value="{{ Input::old('nickname') }}">
+                    <input type="text" class="form-control mailtip" id="nickname" name="nickname" placeholder="昵称" value="{{ Input::old('nickname') }}">
                 </div>
             </div>
             <div class="form-group">

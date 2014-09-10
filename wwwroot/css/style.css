@@ -219,6 +219,9 @@ label, .control-label, .help-block {
     top: 50%;
     left: 50%;
 }
+.modal-content {
+    overflow-y: auto;
+}
 .modal-footer {
     margin-top: 0;
 }
@@ -355,7 +358,7 @@ label, .control-label, .help-block {
     box-shadow: 0 3px 6px rgba(0,0,0,0.175);;
 }
 /* login dropdown */
-.yamm .nav.navbar-right .login-dropdown {
+.yamm #login-dropdown .dropdown-menu {
     padding: 10px 20px;
     width: 400px;
     right: 15px; //to compensate the 15px margin of container

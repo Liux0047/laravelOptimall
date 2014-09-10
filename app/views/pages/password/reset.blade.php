@@ -14,7 +14,7 @@
             <div class="form-group">
                 <label for="email" class="col-md-2 control-label">您的邮箱</label>
                 <div class="col-md-4">
-                    <input type="email" class="form-control" id="email" name="email" placeholder="您的邮箱">
+                    <input type="email" class="form-control mailtip" id="email" name="email" placeholder="您的邮箱">
                 </div>
             </div>                       
             <div class="form-group">

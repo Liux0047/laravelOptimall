@@ -202,11 +202,11 @@
                 </li>
                 @else
                 <!-- Forms -->
-                <li class="dropdown">
+                <li class="dropdown" id="login-dropdown">
                     <a href="#" data-toggle="dropdown" class="dropdown-toggle"onclick="enableSubmit();">
                         登录 <b class="caret"></b>
                     </a>
-                    <ul class="dropdown-menu login-dropdown">
+                    <ul class="dropdown-menu">
                         <li>
                             <div class="yamm-content">
                                 <form role="form" id="login_form">
@@ -222,7 +222,7 @@
                                     <div class="form-group">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-envelope fa-fw fa-lg"></i></span>
-                                            <input type="email" class="form-control" id="login_email" onkeyup="enableSubmit();" name="login_email" placeholder="邮箱地址">
+                                            <input type="text" class="form-control" id="login_email" onkeyup="enableSubmit();" name="login_email" placeholder="邮箱地址">
                                         </div>
                                     </div>
                                     <div class="form-group">
