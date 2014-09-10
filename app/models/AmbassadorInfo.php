@@ -21,5 +21,5 @@ class AmbassadorInfo extends Eloquent {
      * @var array
      */
     //protected $hidden = array('password', 'remember_token');
-
+    
 }

@@ -120,12 +120,21 @@ class AdminFunctionController extends BaseController {
         }
     }
 
-    public function getAmbassadorApproval() {
-        
+    public function getAmbassadorApplication() {
+        $params['pageTitle'] = "目光之星注册申请";
+        $params['applications'] = Member::newAmbassadorApplication()->paginate(10);
+        return View::make('pages.admin.ambassador-application', $params);
     }
 
-    public function postAmbassadorApproval() {
-        
+    public function postAmbassadorApplication() {
+        if(Input::has('member_id')){
+            $member = Member::findOrFail(Input::get('member_id'));
+            $member->is_approved_ambassador = 1;
+            $member->save();
+            return Redirect::back()->with('status', '成功批准申请');
+        } else {
+            return Redirect::back()->with('error', '申请无效');
+        }
     }
 
     private function validateClaimRefund() {

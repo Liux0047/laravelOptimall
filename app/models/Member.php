@@ -73,7 +73,7 @@ class Member extends Eloquent implements UserInterface, RemindableInterface {
     public function prescriptions() {
         return $this->hasMany('Prescription', 'member_id');
     }
-    
+
     /*
      * One to many relationship with ThumbUp
      */
@@ -81,7 +81,16 @@ class Member extends Eloquent implements UserInterface, RemindableInterface {
     public function thumbUps() {
         return $this->hasMany('ThumbUp', 'member_id');
     }
-    
+
+    /*
+     * scope to query new ambassador applications
+     */
+
+    public function scopeNewAmbassadorApplication($query) {
+        return $query->select('ambassador_plan', 'mobile_phone', 'alipay_account', 'ambassador_info.created_at', 'member.email', 'member.nickname','member.member_id')
+                        ->join('ambassador_info', 'ambassador_info.member_id','=', 'member.member_id')
+                        ->where('is_approved_ambassador', '=', 0);
+    }
 
     /*
      * Dynamic scope to get member ID given ambassador code

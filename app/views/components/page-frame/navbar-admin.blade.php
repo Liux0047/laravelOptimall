@@ -34,6 +34,7 @@
 					<ul class = "dropdown-menu" role = "menu">
 						<li><a href = "{{ action('AdminFunctionController@getAmbassadorClaim') }}">返利申请</a></li>
 						<li><a href = "{{ action('AdminFunctionController@getProcessedAmbassadorClaim') }}">已返利</a></li>
+						<li><a href = "{{ action('AdminFunctionController@getAmbassadorApplication') }}">注册申请</a></li>
 					</ul>
 				</li>
 				<li><a href = "#">Link</a></li>
