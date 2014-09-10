@@ -94,11 +94,30 @@ class AdminFunctionController extends BaseController {
         $params['pageTitle'] = "目光之星返利申请";
         $params['claims'] = AmbassadorView::ambassadorRewardClaims()->paginate(10);
         $params['rewards'] = AmbassadorController::calculateRewards($params['claims']);
+        $params['formRequired'] = true;
+        return View::make('pages.admin.ambassador-claim', $params);
+    }
+    
+    public function getProcessedAmbassadorClaim() {
+        $params['pageTitle'] = "目光之星返利申请";
+        $params['claims'] = AmbassadorView::ambassadorRewardProcessed()->paginate(10);
+        $params['rewards'] = AmbassadorController::calculateRewards($params['claims']);
+        $params['formRequired'] = false;
         return View::make('pages.admin.ambassador-claim', $params);
     }
 
     public function postAmbassadorClaim() {
-        
+        if (Input::has('orders')) {
+            $orderIds = Input::get('orders');
+            foreach ($orderIds as $orderId) {
+                $order = PlacedOrder::findOrFail($orderId);
+                $order->is_ambassador_reward_processed = 1;
+                $order->save();
+            }
+            return Redirect::back()->with('status', '成功确认返利');
+        } else {
+            return Redirect::back()->with('error', '没有选择任何订单');
+        }
     }
 
     public function getAmbassadorApproval() {

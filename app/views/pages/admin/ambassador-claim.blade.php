@@ -8,7 +8,9 @@
             {{ $pageTitle }}
         </h1>
     </div>
-    {{ Form::open(array('action'=>'AdminFunctionController@postAmbassadorClaim'))}}
+    @if ($formRequired)
+    {{ Form::open(array('action'=>'AdminFunctionController@postAmbassadorClaim', 'onsubmit' =>'return confirmChangeStatus();' ))}}
+    @endif
     <table class="table table-hover">
         <thead>
             <tr>
@@ -26,7 +28,9 @@
         @foreach($claims as $claim)
         <tr class="reward-row">
             <td>
+                @if ($formRequired)
                 <input type="checkbox" name="orders[]" value="{{ $claim->order_id }}" onchange="calculateTotal()">
+                @endif
             </td>        
             <td>                
                 {{ $claim->ambassador->nickname }}<br>
@@ -62,11 +66,13 @@
 
         @endforeach
     </table>
+    @if($formRequired)
     <h5>总计： <span id="reward_total">0.00</span></h5>
     <div class="pull-right">
-        {{ Form::submit('确认已经返利', array('onsubmit' =>'confirmChangeStatus', 'class'=>'btn btn-primary')) }}
+        {{ Form::submit('确认已经返利', array('class'=>'btn btn-primary')) }}
     </div>
     {{ Form::close()}}
+    @endif
 
     {{  $claims->links() }}
 
