@@ -22,7 +22,7 @@
                                                 <strong>材料</strong>
                                             </li>
                                             <li>
-                                                超韧钨钢                                                
+                                                <a href="#">超韧钨钢</a>                                                
                                             </li>
                                             <li>
                                                 质感板材
@@ -73,6 +73,20 @@
                                         {{ HTML::image('images/navbar/3.jpg')}}
                                     </div>
                                 </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown dropdown-hover">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">配镜须知<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <div class="yamm-content">
+                                <ul>
+                                    <li>
+
+                                    </li>
+                                </ul>
                             </div>
                         </li>
                     </ul>
