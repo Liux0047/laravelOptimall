@@ -53,12 +53,7 @@ class ProductController extends BaseController {
                             ->orderBy('num_items_sold_display', 'DESC')->take(4)->get();
             $params[$modelGroupName] = $$modelGroupName;
             $wideModelIds[$labelName] = $labelValue['wideModelId'];
-        }
-        
-        
-        if(!Cookie::has('internalTestWarning')){
-            Cookie::queue('internalTestWarning', 1 , 60 * 24);
-        }      
+        }        
 
         $params['wideModelIds'] = $wideModelIds;
 

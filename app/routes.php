@@ -140,7 +140,7 @@ Route::group(array('before' => 'auth'), function() {
 /*
  * Route to about page
  */
-Route::controller('help', 'InfoController');
+Route::controller('info', 'InfoController');
 
 /*
  * Route to remind password controller
