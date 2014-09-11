@@ -366,17 +366,43 @@ label, .control-label, .help-block {
     width: 400px;
     right: 15px; //to compensate the 15px margin of container
 }
+.yamm .dropdown-menu {
+    min-width: 80px;
+}
 .yamm .yamm-content {       
     color: #222222 ;
-    padding: 20px 10px;
+    padding: 20px 30px;
+}
+.yamm .yamm-content.content-narrow {       
+    color: #222222 ;
+    padding: 15px 10px;
 }
 .yamm-content ul {
-    padding-left: 20px;
+    padding-left: 0px;
 }
 .yamm-content ul>li {
     list-style: none;
-    padding: 5px 0px; 
 }
+.yamm-content ul>li a {
+    display: block;
+    padding: 8px 10px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+}
+.yamm-content ul>li a:hover, 
+.yamm-content ul>li a:focus {
+    color: #ee4054;
+    text-decoration: none;
+}
+.dropdown-menu .divider {
+    width: 100%;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
 
 /*
 * Pagination modification

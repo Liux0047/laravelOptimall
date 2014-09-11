@@ -81,10 +81,49 @@
                     <a href="#" data-toggle="dropdown" class="dropdown-toggle">配镜须知<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <div class="yamm-content">
+                            <div class="yamm-content content-narrow">
                                 <ul>
                                     <li>
-
+                                        <a href="#">
+                                            <i class="fa fa-bullhorn fa-fw"></i> 
+                                            新手指南
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-credit-card fa-fw"></i> 
+                                            支付相关
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-truck fa-fw"></i> 
+                                            配送相关
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-gift fa-fw"></i> 
+                                            关于商品
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-edit fa-fw"></i> 
+                                            关于发票
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-phone fa-fw"></i> 
+                                            售后服务
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-question-circle fa-fw"></i> 
+                                            退换须知
+                                        </a>
                                     </li>
                                 </ul>
                             </div>

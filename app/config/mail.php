@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'mgzcecommerce@163.com', 'name' => '目光之城客服'),
+	'from' => array('address' => 'mgzcecommerce@163.com', 'name' => '目光之城客服中心'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -120,5 +120,6 @@ return array(
 	*/
 
 	'pretend' => false,
+    
 
 );
