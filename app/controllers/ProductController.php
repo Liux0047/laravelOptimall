@@ -36,6 +36,7 @@ class ProductController extends BaseController {
                 $params['thumbedList'][] = $thumbUp->review_id;
             }
         }
+        $params['sequence'] = array(3,1,4,2,);
         $params['alsoBuys'] = $this->getAlsoBuyModels($modelId);
         $this->recordViewHistory($modelId);
         return View::make('pages.product', $params);
@@ -53,6 +54,11 @@ class ProductController extends BaseController {
             $params[$modelGroupName] = $$modelGroupName;
             $wideModelIds[$labelName] = $labelValue['wideModelId'];
         }
+        
+        
+        if(!Cookie::has('internalTestWarning')){
+            Cookie::queue('internalTestWarning', 1 , 60 * 24);
+        }      
 
         $params['wideModelIds'] = $wideModelIds;
 

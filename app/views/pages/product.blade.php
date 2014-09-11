@@ -13,10 +13,10 @@
     <div class="row">    
         <div class="col-md-8" id="product_pic_container">   
             <div class="fotorama"  data-allowfullscreen="native"  data-auto="false">
-                @for ($i = 1; $i <= 4; $i++)
+                @foreach ($sequence as $i)
                 <a href="{{ asset('images/gallery/'.$model->model_id.'/'.$product->product_id.'/medium-view-'.$i.'.jpg') }}" data-thumb="{{ asset('images/gallery/'.$model->model_id.'/'.$product->product_id.'/medium-view-'.$i.'.jpg') }}"  data-full="{{ asset('images/gallery/'.$model->model_id.'/'.$product->product_id.'/large-view-'.$i.'.jpg') }}">           
                 </a>  
-                @endfor      
+                @endforeach   
             </div>
         </div>
         <div class="col-md-4">
