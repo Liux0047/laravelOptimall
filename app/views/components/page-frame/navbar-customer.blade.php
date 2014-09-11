@@ -19,54 +19,147 @@
                                     <div class="col-md-1 col-narrow">
                                         <ul>
                                             <li>
-                                                <strong>材料</strong>
+                                                <span class="category-header">材料</span>
                                             </li>
                                             <li>
                                                 <a href="#">超韧钨钢</a>                                                
                                             </li>
                                             <li>
-                                                质感板材
+                                                <a href="#">质感板材</a> 
                                             </li>
                                             <li>
-                                                轻柔TR                                                
+                                                <a href="#">轻柔TR</a>                                           
                                             </li>
                                             <li>
-                                                商务金属                                                
+                                                <a href="#">商务金属</a>                                              
                                             </li>
                                             <li>
-                                                手造原木                                               
+                                                <a href="#">手造原木</a>                                           
                                             </li>
                                         </ul>
                                     </div>
                                     <div class="col-md-1 col-narrow">
                                         <ul>
                                             <li>
-                                                <strong>风格</strong>
+                                                <span class="category-header">风格</span>
                                             </li>
                                             <li>
-                                                英伦学院                                                
+                                                <a href="#">英伦学院</a>
                                             </li>
                                             <li>
-                                                户外阳光
+                                                <a href="#">户外阳光</a>
                                             </li>
                                             <li>
-                                                商务休闲                                                
+                                                <a href="#">商务休闲</a>
                                             </li>
                                             <li>
-                                                复刻经典                                                
+                                                <a href="#">复刻经典</a>
                                             </li>
                                             <li>
-                                                特立独行                                               
+                                                <a href="#">特立独行</a>                                             
                                             </li>
                                             <li>
-                                                摩登时代
+                                                <a href="#">摩登时代</a>
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="col-md-4">
-                                        {{ HTML::image('images/navbar/1.jpg')}}
+                                    <div class="col-md-2">
+                                        <ul>
+                                            <li>
+                                                <span class="category-header">颜色</span>
+                                            </li>
+                                        </ul>
+                                        <div class="row row-narrow">
+                                            <div class="col-md-6 col-narrow">
+                                                <ul>
+                                                    <li>
+                                                        <a href="#">
+                                                            {{ HTML::image('images/color/color-2.png','', array('class'=>'color-icon')) }}
+                                                            黑色  
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            {{ HTML::image('images/color/color-13.png','', array('class'=>'color-icon')) }}
+                                                            蓝色
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            {{ HTML::image('images/color/color-20.png','', array('class'=>'color-icon')) }}
+                                                            黄色
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            {{ HTML::image('images/color/color-24.png','', array('class'=>'color-icon')) }}
+                                                            红色
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            {{ HTML::image('images/color/color-18.png','', array('class'=>'color-icon')) }}
+                                                            豹纹
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            {{ HTML::image('images/color/color-21.png','', array('class'=>'color-icon')) }}
+                                                            棕色
+                                                        </a>                                             
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            {{ HTML::image('images/color/color-46.png','', array('class'=>'color-icon')) }}
+                                                            灰色
+                                                        </a>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
+                                            <div class="col-md-6 col-narrow">
+                                                <ul>
+                                                    <li>
+                                                        <a href="#">
+                                                            {{ HTML::image('images/color/color-47.png','', array('class'=>'color-icon')) }}
+                                                            渐变
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            {{ HTML::image('images/color/color-52.png','', array('class'=>'color-icon')) }}
+                                                            粉色
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            {{ HTML::image('images/color/color-58.png','', array('class'=>'color-icon')) }}
+                                                            绿色
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            {{ HTML::image('images/color/color-59.png','', array('class'=>'color-icon')) }}
+                                                            紫色
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            {{ HTML::image('images/color/color-60.png','', array('class'=>'color-icon')) }}
+                                                            白色
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            {{ HTML::image('images/color/color-64.png','', array('class'=>'color-icon')) }}
+                                                            金色
+                                                        </a>                                             
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         {{ HTML::image('images/navbar/2.jpg')}}
                                     </div>
                                     <div class="col-md-2">

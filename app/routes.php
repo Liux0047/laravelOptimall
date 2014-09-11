@@ -23,6 +23,16 @@ Route::get('product/{modelId}', 'ProductController@getProduct')
         ->where('modelId', '[0-9]+');
 
 /*
+ * Route to prodct gallery page
+ */
+Route::get('gallery', 'ProductController@getGallery');
+
+/*
+ * Route to ajax load more products in gallery page
+ */
+Route::post('gallery/load-more-products', 'ProductController@postShowRemainingModels');
+
+/*
  * Route to login page
  */
 Route::get('login', 'MemberController@getLogin');
@@ -132,15 +142,6 @@ Route::group(array('before' => 'auth'), function() {
  */
 Route::get('ambassador/intro', 'AmbassadorController@getIntro');
 
-/*
- * Route to prodct gallery page
- */
-Route::get('gallery', 'productController@getGallery');
-
-/*
- * Route to ajax load more products in gallery page
- */
-Route::post('gallery/load-more-products', 'ProductController@postShowRemainingModels');
 
 /*
  * Route to about page

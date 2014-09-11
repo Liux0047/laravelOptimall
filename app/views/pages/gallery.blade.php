@@ -7,7 +7,7 @@
 
 @section ('content')
 <div class="container content-container content-no-header">
-	{{ Form::open(array('action'=>'productController@getGallery', 'method' => 'get', 'id'=>'product_gallery_form')) }}
+	{{ Form::open(array('action'=>'ProductController@getGallery', 'method' => 'get', 'id'=>'product_gallery_form')) }}
 
 	@include('components.product-page.gallery-filter', array('styles'=>$styles, 'categories'=>$categories, 'shapes'=>$shapes, 'materials'=>$materials,'genders'=>$genders, 'frames'=>$frames,'colors'=>$colors, 'checkedValues'=>$checkedValues))
 
