@@ -97,7 +97,7 @@ class AdminFunctionController extends BaseController {
         $params['formRequired'] = true;
         return View::make('pages.admin.ambassador-claim', $params);
     }
-    
+
     public function getProcessedAmbassadorClaim() {
         $params['pageTitle'] = "目光之星返利申请";
         $params['claims'] = AmbassadorView::ambassadorRewardProcessed()->paginate(10);
@@ -125,7 +125,7 @@ class AdminFunctionController extends BaseController {
         $params['applications'] = Member::newAmbassadorApplication()->paginate(10);
         return View::make('pages.admin.ambassador-application', $params);
     }
-    
+
     public function getApprovedAmbassadorApplication() {
         $params['pageTitle'] = "目光之星注册申请成功";
         $params['applications'] = Member::approvedAmbassadorApplication()->paginate(10);
@@ -133,10 +133,14 @@ class AdminFunctionController extends BaseController {
     }
 
     public function postAmbassadorApplication() {
-        if(Input::has('member_id')){
+        if (Input::has('member_id')) {
             $member = Member::findOrFail(Input::get('member_id'));
             $member->is_approved_ambassador = 1;
             $member->save();
+            $data['nickname'] = $member->nickname;
+            Mail::queue('emails.member.ambassador-approval', $data, function($message) use ($member) {
+                $message->to($member->email)->subject('恭喜您成为目光之星');
+            });
             return Redirect::back()->with('status', '成功批准申请');
         } else {
             return Redirect::back()->with('error', '申请无效');

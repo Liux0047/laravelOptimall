@@ -138,15 +138,9 @@ Route::group(array('before' => 'auth'), function() {
 });
 
 /*
- * Route to ambassador introduction page
- */
-Route::get('ambassador/intro', 'AmbassadorController@getIntro');
-
-
-/*
  * Route to about page
  */
-Route::controller('help', 'HelpController');
+Route::controller('help', 'InfoController');
 
 /*
  * Route to remind password controller

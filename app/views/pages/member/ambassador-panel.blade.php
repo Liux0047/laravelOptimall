@@ -131,7 +131,6 @@
             </div>
             
             @else 
-            <h4>您的申请我们已经收到, 请耐心等待客服的回复。</h4>
             {{ HTML::image('images/ambassador/waiting.jpg','',array('style'=>'margin:auto;'))}}
             @endif
 

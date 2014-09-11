@@ -6,27 +6,10 @@ and open the template in the editor.
 -->
 <html>
 <head>
-    <title>您的好友邀请了你去逛逛目光之城</title>
+    <title>目光之星申请提交成功</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width">
     <style>
-    #poster-container {
-        position: relative;
-    }
-    #poster-container img {
-        width: 684px;
-        height: 1017px;
-    }
-    #poster-container #text-area{
-        position: absolute;
-        width: 40%;
-        right: 45%;
-        top: 60%;
-        text-align:left;
-    }
-    #poster-container #text-area h1 {
-
-    }
     .btn {
         display: inline-block;
         margin-bottom: 0;
@@ -57,23 +40,18 @@ and open the template in the editor.
     </style>
 </head>
 <body>
-    <div id="poster-container">
-        <img src="{{ $message->embed('images/ambassador/invitation.jpg') }}">
-        <div id="text-area">
-            <h1>您被邀请了</h1>
-            <h4>
-                您的好友{{ $nickname or '' }} 邀请了你去逛逛
-                <a href="{{ URL::to('/') }}">目光之城</a>
-            </h4>
-            <h4>
-                您获得了购物卷: {{ $couponCode or '' }}
-            </h4>
-            <h4>
-                <a href="{{ URL::to('/') }}" class="btn btn-warning">
-                    现在就去看看
-                </a>
-            </h4>
-        </div>
-    </div>
+    <p>
+        亲爱的 {{ $nickname }}，
+    </p>
+    <p>
+        您申请成为目光之星的信息我们已经收到，请耐心等待2-3个工作日。我们的客服会尽快与您取得联系。
+    </p>
+    <p>
+        谢谢您的支持！
+    </p>
+    <p>
+        目光之城
+    </p>
 </body>
+
 </html>

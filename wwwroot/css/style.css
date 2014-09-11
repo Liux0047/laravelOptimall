@@ -417,6 +417,9 @@ label, .control-label, .help-block {
 .yamm-content ul>li a:focus .color-icon {
     border: none    
 }
+.yamm-content .navbar-poster{
+    padding-top: 8px;
+}
 
 
 /*
@@ -725,12 +728,8 @@ label, .control-label, .help-block {
 .top-banner .optimall-promises {
     font-family: "Helvetica", Arial, sans-serif;
     color: white;
-    padding-left: 20px;
-}
-.top-banner .optimall-promises i{
-    position: absolute;
-    left: 0px;
-    padding-top: 2px;
+    padding-top: 15px;
+    vertical-align: baseline;
 }
 .top-banner .cart-icon-ontainer{
     text-align: right;
@@ -991,27 +990,30 @@ input.jq-validate-error{
 
 
 /* login page */
-.login-container {
+#login_container {
+    background-image: url('../images/login.jpg');
+}
+.login-form-container {
     background: rgba(6, 7, 7, 0.56);
     margin-top: 40px;
     border-radius: 5px;
     padding: 25px;
     width: 468px;
 }
-.login-container hr {
+.login-form-container hr {
     margin-top: 5px;
     border-top: 1px solid #1abc9c;    
 }
-.login-container h4 {
+.login-form-container h4 {
     font-size: 40px;
     color: #1abc9c;
     margin-bottom:0px;
     padding-left: 0px;
 }
-.login-container a{
+.login-form-container a{
     color: #1abc9c;
 }
-.login-container .btn-green{
+.login-form-container .btn-green{
     background: #1abc9c;
     border-color: #1abc9c;
     width: 150px;
@@ -1019,7 +1021,7 @@ input.jq-validate-error{
     float: right;
     color: white;
 }
-.login-container .btn-orange{
+.login-form-container .btn-orange{
     background: #dd3b5e;
     border-color: #dd3b5e;
     width: 150px;

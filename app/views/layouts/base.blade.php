@@ -2,7 +2,8 @@
 <html lang='zh-Hans'>
 <head>
     <meta charset="UTF-8">
-    <meta name='keywords' content='Optimall' />
+    <meta name='keywords' content='目光之城，眼镜商城，网上配镜，在线配镜，眼镜，隐形眼镜，淘宝眼镜，天猫眼镜，眼镜团购，买眼镜' />
+    <meta name='description' content="目光之城是全中国最IN的正品潮流眼镜网络商城，致力于为年轻人提供最时尚，最具性价比的眼镜以及最完美的网络配镜用户体验. 目光之城有海量超值眼镜和配镜相关的活动与信息，详情请登录目光之城官网：mgzc.net">    
     <meta name='token' content='{{ csrf_token() }}'/>
     @section('link-css')
     {{ HTML::style('css/bootstrap.min.css'); }}
@@ -12,7 +13,7 @@
     <link rel='shortcut icon' type="image/x-icon" href="{{ asset('images/favicon.ico') }}"> 
     @show
     {{ HTML::style('css/style.css'); }}
-    <title>{{{ $pageTitle or '目光之城眼镜商城'}}}</title>
+    <title>{{{ $pageTitle or '目光之城 - 中国最IN的正品潮流眼镜商城，年轻潮人最爱，超高性价比，最佳网络配镜体验！'}}}</title>
 </head>        
 
 

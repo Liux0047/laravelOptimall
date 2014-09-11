@@ -1,6 +1,12 @@
 <?php
 
-class HelpController extends BaseController {
+class InfoController extends BaseController {
+    
+    
+    public function getAmbassadorIntro() {
+        $params['pageTitle'] = "目光之星";
+        return View::make('pages.ambassador', $params);
+    }
     
     public function getHelp() {
         $params['pageTitle'] = "目光之城帮助";

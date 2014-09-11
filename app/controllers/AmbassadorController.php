@@ -7,11 +7,6 @@
  */
 class AmbassadorController extends BaseController {
 
-    public function getIntro() {
-        $params['pageTitle'] = "目光之星";
-        return View::make('pages.ambassador', $params);
-    }
-
     public function postCreateAmbassador() {
         $params['pageTitle'] = "目光之星";
 
@@ -31,6 +26,10 @@ class AmbassadorController extends BaseController {
             $ambassadorInfo->ambassador_code = $code;
             $ambassadorInfo->member_id = Auth::id();
             $ambassadorInfo->save();
+            $data['nickname'] = Auth::user()->nickname;
+            Mail::queue('emails.member.ambassador-application', $data, function($message) {
+                $message->to(Auth::user()->email)->subject('目光之星申请提交成功');
+            });
             return Redirect::back()->with('status', '成功注册为目光之星，请等待回复');
         } else {
             return Redirect::back()->with('warning', '您已经是目光之星了');

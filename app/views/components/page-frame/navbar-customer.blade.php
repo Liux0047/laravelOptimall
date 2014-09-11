@@ -159,10 +159,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 col-narrow navbar-poster">
                                         {{ HTML::image('images/navbar/2.jpg')}}
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-2 col-narrow navbar-poster">
                                         {{ HTML::image('images/navbar/3.jpg')}}
                                     </div>
                                 </div>
@@ -223,6 +223,7 @@
                         </li>
                     </ul>
                 </li>
+                <li><a href="{{ action('InfoController@getAmbassadorIntro') }}">目光之星</a></li>
                 <!-- Media Example -->
                 <li class="dropdown dropdown-hover">
                     <a href="#" data-toggle="dropdown" class="dropdown-toggle">中文<b class="caret"></b></a>
@@ -344,7 +345,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ URL::to('logout') }}">退出</a>
+                    <a href="{{ action('MemberController@getLogout') }}">退出</a>
                 </li>
                 @else
                 <!-- Forms -->
@@ -399,7 +400,7 @@
                         </li>                        
                     </ul>
                 </li>
-                <li><a href="{{ URL::to('sign-up') }}">注册</a></li>
+                <li><a href="{{ action('MemberController@getSignUp') }}">注册</a></li>
                 @endif
             </ul><!-- .nav .nav-right -->
         </div><!-- .nav-collpase -->
