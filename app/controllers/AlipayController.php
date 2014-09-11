@@ -35,13 +35,6 @@ class AlipayController extends BaseController {
         
     }
 
-    /*
-     * transform an order ID into Alipay trade number
-     */
-
-    public function generateTradeNumber($orderId) {
-        return 'CN' . str_pad($orderId, Config::get('optimall.orderCodeLength'), "0", STR_PAD_LEFT);
-    }
 
     /*
      * generate a HTML form and submit with params

@@ -43,7 +43,7 @@ class OrderController extends BaseController {
         if (!isset($order->order_id)) {
             die("Order not created");
         }
-        $tradeNumber = $alipayController->generateTradeNumber($order->order_id);
+        $tradeNumber = $this->generateTradeNumber($order->order_id);
 
         //send email
         $params['orderNumber'] = $tradeNumber;
@@ -72,7 +72,7 @@ class OrderController extends BaseController {
             return Redirect::back()->with('error','订单号有误');
         }
         $price = $order->total_transaction_amount;
-        $tradeNumber = $alipayController->generateTradeNumber($orderId);
+        $tradeNumber = $this->generateTradeNumber($orderId);
         $address = new Address;
         $address->recipient_name = $order->recipient_name;
         $address->receive_zip = $order->receive_zip;
@@ -102,11 +102,13 @@ class OrderController extends BaseController {
                 //如果有做过处理，不执行商户的业务程序
                 $this->recordPayment($out_trade_no, $trade_no);
             }
-            $params['verifyResult'] = "Verify success";
+            $params['isPaymentSuccessful'] = true;
+            $params['totalAmount'] = Input::get('total_fee');
+            $params['orderId'] = $out_trade_no;
         } else {
             //验证失败
             //如要调试，请看alipay_notify.php页面的verifyReturn函数
-            $params['verifyResult'] = "Verify fails";
+            $params['isPaymentSuccessful'] = false;
         }
         return View::make('pages.alipay-result', $params);
     }
@@ -149,6 +151,7 @@ class OrderController extends BaseController {
     }
 
     private function recordPayment($out_trade_no, $trade_no) {
+        //take the 3rd number onwards as order ID
         $order = PlacedOrder::find(substr($out_trade_no, 2));
         if (!isset($order->payment_ref_no) && $order->order_status == 1) {
             $order->payment_ref_no = $trade_no;
@@ -171,6 +174,9 @@ class OrderController extends BaseController {
                 $order->receive_phone = Input::get('receive_mobile');
             }
             $order->save();
+            return true;
+        } else {
+            return false;
         }
     }
     
@@ -185,6 +191,15 @@ class OrderController extends BaseController {
         );
         return Validator::make(Input::all(), $rules);
         
+    }
+    
+    
+    /*
+     * transform an order ID into Alipay trade number
+     */
+
+    public function generateTradeNumber($orderId) {
+        return 'CN' . str_pad($orderId, Config::get('optimall.orderCodeLength'), "0", STR_PAD_LEFT);
     }
 
 }
