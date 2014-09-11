@@ -63,8 +63,8 @@
 		</table>
 	</div>
 
-	<div class="row">
-		{{ Form::open(array('action'=>'OrderController@postSubmitOrder', 'onsubmit'=>'alertIfNoAddress();', 'id'=>'order_submit_form', 'role'=>'form')) }}   
+	{{ Form::open(array('action'=>'OrderController@postSubmitOrder', 'onsubmit'=>'alertIfNoAddress();', 'id'=>'order_submit_form', 'role'=>'form')) }}   
+	<div class="row">		
 		<div class="col-md-6">
 			<div class="form-group">
 				<textarea class="form-control" name="message_to_seller" rows="2" placeholder="买家留言(45字以内)"></textarea>
@@ -121,8 +121,8 @@
 				</div>
 			</div><!-- .panel -->                            
 		</div>
-		{{ Form::close() }}
-	</div><!-- .row -->                
+	</div><!-- .row -->       	
+	{{ Form::close() }}         
 </div>
 @stop
 

@@ -8,13 +8,13 @@
 class OrderController extends BaseController {
 
     public function postSubmitOrder() {
-        
+
         $validator = $this->validateAddress();
-        
+
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator);
         }
-        
+
         //redirect to home page if no items pending
         $items = OrderLineItem::cartItems(Auth::id())->get();
         if (count($items) == 0) {
@@ -69,7 +69,7 @@ class OrderController extends BaseController {
         $orderId = Input::get('order_id');
         $order = PlacedOrder::findOrFail($orderId);
         if ($order->member_id != Auth::id()) {
-            return Redirect::back()->with('error','订单号有误');
+            return Redirect::back()->with('error', '订单号有误');
         }
         $price = $order->total_transaction_amount;
         $tradeNumber = $this->generateTradeNumber($orderId);
@@ -179,7 +179,7 @@ class OrderController extends BaseController {
             return false;
         }
     }
-    
+
     private function validateAddress() {
         $rules = array(
             'recipient_name' => 'max:45',
@@ -190,10 +190,8 @@ class OrderController extends BaseController {
             'message_to_seller' => 'max:45'
         );
         return Validator::make(Input::all(), $rules);
-        
     }
-    
-    
+
     /*
      * transform an order ID into Alipay trade number
      */

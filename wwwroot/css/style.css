@@ -209,26 +209,8 @@ label, .control-label, .help-block {
     font-size: 12px;
     font-weight: normal;
 }
-.checkbox, .radio {
-    font-size: 14px;
-
-}
-.radio-inline, .checkbox-inline {
-    position: relative;
-}
 .radio label, .checkbox label {
     display: block;
-    padding-left: 20px;
-    margin-bottom: 0;
-    font-weight: normal;
-    cursor: pointer;
-
-}
-.radio input[type="radio"], .checkbox input[type="checkbox"]{
-    top: 7px; 
-}
-.radio-inline input[type="radio"], .checkbox-inline input[type="checkbox"] {
-    top: -2px; 
 }
 
 /* modal modification 
