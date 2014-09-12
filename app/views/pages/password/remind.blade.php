@@ -18,7 +18,7 @@
 		<div class="form-group">
 			<div class="input-group">
 				<span class="input-group-addon"><i class="fa fa-envelope fa-fw fa-lg"></i></span>
-				<input type="email" class="form-control mailtip" id="email" name="email" placeholder="邮箱地址">
+				<input type="email" class="form-control mailtip-input" id="email" name="email" placeholder="邮箱地址">
 			</div>
 		</div>
 		<input type="submit" class="btn btn-primary btn-sm pull-right" value="发送至此邮箱"> 

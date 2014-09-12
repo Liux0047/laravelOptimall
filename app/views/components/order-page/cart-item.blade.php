@@ -2,10 +2,16 @@
     <td class="col-md-4">
         <div class="row">
             <div class="col-md-6">
-                {{ HTML::image('images/gallery/'.$item->model_id.'/'.$item->product_id.'/medium-view-3.jpg', "Product Image", array('class' => 'shopping-cart-img')) }}
+                <a href="{{ action('ProductController@getProduct', array($item->model_id)) }}">
+                    {{ HTML::image('images/gallery/'.$item->model_id.'/'.$item->product_id.'/medium-view-3.jpg', "Product Image", array('class' => 'shopping-cart-img')) }}
+                </a>
             </div>
             <div class="col-md-6 shopping-cart-item-info">
-                <h4><strong>{{ $item->model_name_cn }}</strong></h4>
+                <h4>
+                    <a href="{{ action('ProductController@getProduct', array($item->model_id)) }}">
+                        <strong class="font-black">{{ $item->model_name_cn }}</strong>
+                    </a>
+                </h4>
                 <p>颜色:
                     {{ HTML::image('images/color/color-'.$item->product_color_id.'.png') }}
                     {{ $item->color_name_cn }} 
@@ -24,21 +30,27 @@
         <h5><strong>平光镜 </strong></h5>
         <br>
         <a class="" data-toggle="modal" href="#prescription_modal_{{ $item->order_line_item_id }}">
-            <span class="fa fa-edit fa-lg"></span> 
+            <i class="fa fa-edit fa-lg"></i> 
             修改验光单
         </a> 
         @else
-        <h5><strong>无镜片 </strong></h5>
+        <h5><strong>无镜片(送衬片) </strong></h5>
         @endif        
         @elseif($isPrescriptionEntered[$item->order_line_item_id])
         @include('components.order-page.prescription-table', array('prescription' => $item, 'prescriptionNames'=>$prescriptionNames))
+        <a class="pull-left" data-toggle="modal" href="javascript:document.getElementById('plano_form_{{ $item->order_line_item_id }}').submit();">
+            使用平光镜
+        </a>
+        {{ Form::open(array('action' => 'ShoppingCartController@postSetPlano', 'id'=>'plano_form_'.$item->order_line_item_id)) }}
+        {{ Form::hidden('order_line_item_id',$item->order_line_item_id) }}
+        {{ Form::close() }}
         <a class="pull-right" data-toggle="modal" href="#prescription_modal_{{ $item->order_line_item_id }}">
-            <span class="fa fa-edit fa-lg"></span> 修改验光单
+            <i class="fa fa-edit fa-lg"></i> 修改验光单
         </a>
         @else
         <div class="btn-group">
             <a class="btn btn-primary btn-sm" data-toggle="modal" href="#prescription_modal_{{ $item->order_line_item_id }}">
-                <span class="fa fa-edit fa-lg"></span> 填写验光单
+                <i class="fa fa-edit fa-lg"></i> 填写验光单
             </a>
             <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
                 <span class="caret"></span>

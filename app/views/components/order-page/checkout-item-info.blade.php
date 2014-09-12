@@ -22,7 +22,7 @@
 		@if ($item->is_plano)
 		<h5><strong>平光镜 </strong></h5>
 		@else
-		<h5><strong>无镜片 </strong></h5>
+		<h5><strong>无镜片(送衬片) </strong></h5>
 		@endif
 		@else
 		@include('components.order-page.prescription-table', array( 'prescription' => $item, 'prescriptionNames'=>$prescriptionNames)) 

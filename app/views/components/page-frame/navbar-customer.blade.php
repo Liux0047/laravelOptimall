@@ -349,7 +349,7 @@
                 </li>
                 @else
                 <!-- Forms -->
-                <li class="dropdown" id="login-dropdown">
+                <li class="dropdown" id="login_dropdown">
                     <a href="#" data-toggle="dropdown" class="dropdown-toggle"onclick="enableSubmit();">
                         登录 <b class="caret"></b>
                     </a>

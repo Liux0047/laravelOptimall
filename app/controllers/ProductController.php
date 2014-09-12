@@ -161,9 +161,13 @@ class ProductController extends BaseController {
     private function getAlsoBuyModels($cuurentModelId) {
         $baseModels = OrderLineItemView::viewThisAlsoBuy($cuurentModelId)->take(5)->get();
         $models = array();
-        foreach ($baseModels as $baseModel) {
-            $model = ProductModelView::find($baseModel->model_id);
-            $models[] = $model;
+        $count = 0;
+        foreach ($baseModels as $baseModel) {            
+            $models[] = ProductModelView::find($baseModel->model_id);
+            $count++;
+        }
+        for ($i = $count; $i<5; $i++){
+            $models[] = ProductModelView::find(3000 + $i);
         }
         return array('models' => $models);
     }

@@ -64,7 +64,8 @@ class ProductModelView extends Eloquent {
      */
 
     public function scopeOfMaterials($query, $materials) {
-        return $query->whereIn('product_material_id', $materials);
+        return $query->join('product_material_mapping','product_material_mapping.model_id','=','model_view.model_id')
+                ->whereIn('product_material_id', $materials);
     }
 
     /*

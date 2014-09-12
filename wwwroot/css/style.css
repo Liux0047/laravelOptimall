@@ -69,6 +69,9 @@ img {
 .font-green {
     color: #43ac6a;
 }
+.font-black {
+    color: #222222;
+}
 .font-lg{
     font-size: 1.3em;
 }
@@ -361,7 +364,7 @@ label, .control-label, .help-block {
     box-shadow: 0 3px 6px rgba(0,0,0,0.175);;
 }
 /* login dropdown */
-.yamm #login-dropdown .dropdown-menu {
+.yamm #login_dropdown .dropdown-menu {
     padding: 10px 20px;
     width: 400px;
     right: 15px; //to compensate the 15px margin of container

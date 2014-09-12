@@ -3,10 +3,14 @@ $("#login_form").submit(function(e) {
     e.preventDefault();
 });
 
-$('#login-dropdown').on('shown.bs.dropdown', function () {
+$('#login_dropdown').on('shown.bs.dropdown', function () {
     $('#login_email').mailtip({
         mails: ['@163.com','@qq.com', '@sina.com',  '@sina.cn', '@126.com', '@hotmail.com', '@outlook.com', '@yahoo.com', '@gmail.com', '@sogou.com'], // email autocomple list
         zindex: 1000
+    });
+
+    $("#login_dropdown").bind('click', function (e){
+        $('ul.mailtip').hide();
     });
 })
 
