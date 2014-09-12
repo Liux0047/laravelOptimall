@@ -12,7 +12,7 @@
         <span class="shop-item-badge classical-badge"></span>
         @endif
         <div class="shop-item-label">
-            <div class="pull-left">
+            <div class="price-label">
                 <span class="discount-price">
                     {{ number_format($model->price, 0) }} 
                 </span>
