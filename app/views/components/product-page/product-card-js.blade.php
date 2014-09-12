@@ -28,10 +28,11 @@
     });
 
     $(".wide-home-display").hover(function(){
-        $(this).find(".img-salient").addClass("lift-up-full");
-
+        $(this).find(".card-salient").addClass("lift-up-full");
+        $(this).find(".card-hidden").addClass("lift-up-full");
+        $(window).scroll();
     }, function(){
-        $(this).find(".img-salient").removeClass("lift-up-full");
-
+        $(this).find(".card-salient").removeClass("lift-up-full");
+        $(this).find(".card-hidden").removeClass("lift-up-full");
     });
 </script>

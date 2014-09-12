@@ -22,6 +22,14 @@ class ProductController extends BaseController {
         'featured' => array(2007, 3002),
         'classical' => array(2002, 3009)
     );
+    
+    public static $eminentModelQuote = array (
+        1001 => "[炫彩夏威夷]<br> 缤纷夏日狂欢， 有你有我", 1005 => "【文艺.复兴】<br>在平凡的世界中不平凡",
+        3001 => "[沁心]<br> Samatha", 3004 => "【雅皮士Yuppies】<br>你的爱羡为我加冕",
+        2004 => "【极简主义】<br> Simply Elegant", 3010 => "[摩登时代】<br> Timeless Classic",
+        2007 => "【原木物语】<br>匠心独具<br>原木打造<br>徒手文化", 3002 => "[豆蔻.年华] <br>荏苒岁月，海枯石烂谁伴",
+        2002 => "【潮人】<br>Glitterati", 3009 => "[罗曼蒂克]<br> Romantic"
+    );
 
     public function getProduct($modelId = 1001) {
 
@@ -65,7 +73,7 @@ class ProductController extends BaseController {
                 $params['wideModels'][$key][] = ProductModelView::find($eminentModelId);
             }
         }
-        
+        $params['wideModelQuote'] = self::$eminentModelQuote;
         return View::make('pages.index', $params);
     }
 

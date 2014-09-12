@@ -59,14 +59,14 @@
                 <span class="divider"></span>
             </h1>
             <div class="row row-narrow">
-                @include('components.product-page.product-card-wide', array('wideModel' => $wideModels['promotion'][0]))
+                @include('components.product-page.product-card-wide', array('quote'=>$wideModelQuote, 'wideModel' => $wideModels['promotion'][0]))
 
                 @for ($i=0; $i<2; $i++)
                 @include('components.product-page.product-card', array('model' => $promotionModels[$i] ))
                 @endfor
             </div>
             <div class="row row-narrow">
-                @include('components.product-page.product-card-wide', array('wideModel' => $wideModels['promotion'][1]))
+                @include('components.product-page.product-card-wide', array('quote'=>$wideModelQuote, 'wideModel' => $wideModels['promotion'][1]))
 
                 @for ($i=2; $i<4; $i++)
                 @include('components.product-page.product-card', array('model' => $promotionModels[$i] ))
@@ -88,7 +88,7 @@
                 @include('components.product-page.product-card', array('model' => $bestSellerModels[$i]))
                 @endfor
 
-                @include('components.product-page.product-card-wide', array('wideModel' => $wideModels['bestSeller'][0]))
+                @include('components.product-page.product-card-wide', array('quote'=>$wideModelQuote, 'wideModel' => $wideModels['bestSeller'][0]))
 
             </div>
             <div class="row row-narrow">               
@@ -96,7 +96,7 @@
                 @include('components.product-page.product-card', array('model' => $bestSellerModels[$i]))
                 @endfor
 
-                @include('components.product-page.product-card-wide', array('wideModel' => $wideModels['bestSeller'][1]))
+                @include('components.product-page.product-card-wide', array('quote'=>$wideModelQuote, 'wideModel' => $wideModels['bestSeller'][1]))
             </div>
         </div>
     </div>
@@ -110,14 +110,14 @@
                 <span class="divider"></span>
             </h1>
             <div class="row row-narrow">
-                @include('components.product-page.product-card-wide', array('wideModel' => $wideModels['newArrival'][0]))
+                @include('components.product-page.product-card-wide', array('quote'=>$wideModelQuote, 'wideModel' => $wideModels['newArrival'][0]))
 
                 @for ($i=0; $i<2; $i++)
                 @include('components.product-page.product-card', array('model' => $newArrivalModels[$i] ))
                 @endfor
             </div>
             <div class="row row-narrow">
-                @include('components.product-page.product-card-wide', array('wideModel' => $wideModels['newArrival'][1]))
+                @include('components.product-page.product-card-wide', array('quote'=>$wideModelQuote, 'wideModel' => $wideModels['newArrival'][1]))
 
                 @for ($i=2; $i<4; $i++)
                 @include('components.product-page.product-card', array('model' => $newArrivalModels[$i] ))
@@ -139,7 +139,7 @@
                 @include('components.product-page.product-card', array('model' => $featuredModels[$i] ))
                 @endfor
 
-                @include('components.product-page.product-card-wide', array('wideModel' => $wideModels['featured'][0]))
+                @include('components.product-page.product-card-wide', array('quote'=>$wideModelQuote, 'wideModel' => $wideModels['featured'][0]))
 
             </div>
             <div class="row row-narrow">               
@@ -147,7 +147,7 @@
                 @include('components.product-page.product-card', array('model' => $featuredModels[$i] ))
                 @endfor
 
-                @include('components.product-page.product-card-wide', array('wideModel' => $wideModels['featured'][1]))
+                @include('components.product-page.product-card-wide', array('quote'=>$wideModelQuote, 'wideModel' => $wideModels['featured'][1]))
             </div>
         </div>
     </div>
@@ -161,14 +161,14 @@
                 <span class="divider"></span>
             </h1>
             <div class="row row-narrow">
-                @include('components.product-page.product-card-wide', array('wideModel' => $wideModels['classical'][0]))
+                @include('components.product-page.product-card-wide', array('quote'=>$wideModelQuote, 'wideModel' => $wideModels['classical'][0]))
 
                 @for ($i=0; $i<2; $i++)
                 @include('components.product-page.product-card', array('model' => $classicalModels[$i] ))
                 @endfor
             </div>
             <div class="row row-narrow">
-                @include('components.product-page.product-card-wide', array('wideModel' => $wideModels['classical'][1]))
+                @include('components.product-page.product-card-wide', array('quote'=>$wideModelQuote, 'wideModel' => $wideModels['classical'][1]))
 
                 @for ($i=2; $i<4; $i++)
                 @include('components.product-page.product-card', array('model' => $classicalModels[$i] ))
