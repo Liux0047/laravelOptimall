@@ -6,13 +6,21 @@
  * @author Allen
  */
 class ProductController extends BaseController {
+    
+    public static $productLabels = array(
+        'promotion' => 1,
+        'newArrival' => 2,
+        'bestSeller' => 3,
+        'featured' => 4,
+        'classical' => 5
+    );
 
     public static $eminentModels = array(
-        'promotion' => array('id' => 1, 'wideModelId' => array(1001, 1005)),
-        'newArrival' => array('id' => 2, 'wideModelId' => array(3001, 3004)),
-        'bestSeller' => array('id' => 3, 'wideModelId' => array(2004, 3010)),
-        'featured' => array('id' => 4, 'wideModelId' => array(2007, 3002)),
-        'classical' => array('id' => 5, 'wideModelId' => array(2002, 3009))
+        'promotion' => array(1001, 1005),
+        'newArrival' => array(3001, 3004),
+        'bestSeller' => array(2004, 3010),
+        'featured' => array(2007, 3002),
+        'classical' => array(2002, 3009)
     );
 
     public function getProduct($modelId = 1001) {
@@ -43,20 +51,21 @@ class ProductController extends BaseController {
     }
 
     public function getIndex() {
-        $wideModelIds = array();
-
-        foreach (self::$eminentModels as $labelName => $labelValue) {
+        foreach (self::$productLabels as $labelName => $labelValue) {
             //use variable variable name to form model groups of diffrent featured labels
             $modelGroupName = $labelName . 'Models';
             $$modelGroupName = ProductModelView::active()
-                            ->where('product_label_id', '=', $labelValue['id'])
+                            ->where('product_label_id', '=', $labelValue)
                             ->orderBy('num_items_sold_display', 'DESC')->take(4)->get();
             $params[$modelGroupName] = $$modelGroupName;
-            $wideModelIds[$labelName] = $labelValue['wideModelId'];
         }        
 
-        $params['wideModelIds'] = $wideModelIds;
-
+        foreach(self::$eminentModels as $key=>$eminentModelIds) {
+            foreach ($eminentModelIds as $eminentModelId){
+                $params['wideModels'][$key][] = ProductModelView::find($eminentModelId);
+            }
+        }
+        
         return View::make('pages.index', $params);
     }
 

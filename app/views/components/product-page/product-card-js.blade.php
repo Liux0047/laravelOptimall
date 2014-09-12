@@ -26,4 +26,12 @@
     $(document).ready(function() {
     	ratyInit();
     });
+
+    $(".wide-home-display").hover(function(){
+        $(this).find(".img-salient").addClass("lift-up-full");
+
+    }, function(){
+        $(this).find(".img-salient").removeClass("lift-up-full");
+
+    });
 </script>
