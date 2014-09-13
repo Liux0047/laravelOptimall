@@ -408,14 +408,14 @@ label, .control-label, .help-block {
 .yamm-content ul>li {
     list-style: none;
 }
-.yamm-content ul>li a, 
+.yamm-content ul>li>a, 
 .yamm-content ul>li .category-header {
     display: block;    
     padding: 8px 20px 8px 12px;
     line-height: 1.42857143;
     white-space: nowrap;
 }
-.yamm-content ul>li a {
+.yamm-content ul>li>a {
     clear: both;
     font-weight: 400;
     color: #333;

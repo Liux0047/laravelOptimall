@@ -230,31 +230,31 @@
                             <div class="yamm-content content-narrow">
                                 <ul>
                                     <li>
-                                        <a href="#">
+                                        <a href="{{ url('/'.'#promotion-section') }}">
                                             促销
                                             <span class="pill">{{ HTML::image('images/section-tags/section-tag-1.png') }}</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a href="{{ url('/'.'#best-seller-section') }}">
                                             热卖
                                             <span class="pill">{{ HTML::image('images/section-tags/section-tag-2.png') }}</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a href="{{ url('/'.'#new-arrival-section') }}">
                                             新品
                                             <span class="pill">{{ HTML::image('images/section-tags/section-tag-3.png') }}</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a href="{{ url('/'.'#featured-section') }}">
                                             推荐
                                             <span class="pill">{{ HTML::image('images/section-tags/section-tag-4.png') }}</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a href="{{ url('/'.'#classical-section') }}">
                                             经典
                                             <span class="pill">{{ HTML::image('images/section-tags/section-tag-5.png') }}</span>
                                         </a>
@@ -286,7 +286,7 @@
                     </ul>
                 </li>
                 <li><a href="{{ action('InfoController@getAmbassadorIntro') }}">目光之星</a></li>
-                <!-- Media Example -->
+                <!-- contact us -->
                 <li class="dropdown dropdown-hover">
                     <a href="#" data-toggle="dropdown" class="dropdown-toggle">联系我们<b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -294,101 +294,13 @@
                             <div class="yamm-content">
                                 <ul>
                                     <li>
-                                        <a href="http://weibo.com/u/5281852072">
-                                            目光之城
-                                            {{ HTML::image('images/icons/weibo_v.png')}}
-                                        </a>
+                                        <wb:follow-button uid="5281852072" type="red_3" width="100%" height="24" ></wb:follow-button>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        {{ HTML::image('images/icons/wechat.jpg') }}
                                     </li>
                                 </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-                <!-- Tables -->
-                <li class="dropdown yamm-fullwidth dropdown-hover">
-                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">中文<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <div class="yamm-content">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td colspan="2">Larry the Bird</td>
-                                            <td>@twitter</td>
-                                            <td colspan="2">Larry the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-                <!-- Thumbnails demo -->
-                <li class="dropdown dropdown-hover">
-                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">中文<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <div class="yamm-content">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <div class="thumbnail"><img alt="260x130" src="http://placekitten.com/260/130/">
-                                            <div class="caption">
-                                                <h3>Thumb Label</h3>
-                                                <p>Mazagran doppio half and half aftertaste organic, rich doppio</p>
-                                                <p><a href="#" class="btn btn-primary">Action</a> <a href="#" class="btn btn-default">Action</a></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="thumbnail"><img alt="260x130" src="http://placekitten.com/260/130/">
-                                            <div class="caption">
-                                                <h3>Thumb Label</h3>
-                                                <p>Black latte cinnamon, cultivar trifecta crema cappuccino</p>
-                                                <p><a href="#" class="btn btn-primary">Action</a> <a href="#" class="btn btn-default">Action</a></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="thumbnail"><img alt="260x130" src="http://placekitten.com/260/130/">
-                                            <div class="caption">
-                                                <h3>Thumb Label</h3>
-                                                <p>Bar roast et, as latte café au lait, mocha aromatic robusta</p>
-                                                <p><a href="#" class="btn btn-primary">Action </a> <a href="#" class="btn btn-default">Action </a></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </li>
                     </ul>

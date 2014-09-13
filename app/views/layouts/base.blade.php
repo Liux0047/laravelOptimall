@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang='zh-Hans'>
+<html lang='zh-Hans' xmlns:wb="http://open.weibo.com/wb">
 <head>
     <meta charset="UTF-8">
     <meta name='keywords' content='目光之城，眼镜商城，网上配镜，在线配镜，眼镜，隐形眼镜，淘宝眼镜，天猫眼镜，眼镜团购，买眼镜' />
@@ -13,7 +13,8 @@
     <link rel='shortcut icon' type="image/x-icon" href="{{ asset('images/favicon.ico') }}"> 
     @show
     {{ HTML::style('css/style.css'); }}
-    <title>{{{ $pageTitle or '目光之城 - 中国最IN的正品潮流眼镜商城，年轻潮人最爱，超高性价比，最佳网络配镜体验！'}}}</title>
+    <title>{{{ $pageTitle or '目光之城 - 中国最IN的正品潮流眼镜商城，年轻潮人最爱，超高性价比，最佳网络配镜体验！'}}}</title>    
+
 </head>        
 
 
@@ -51,6 +52,7 @@
 {{ HTML::script('js/jquery.lazyload.min.js') }}
 {{ HTML::script('plugins/jQuery-mailtip/jquery.mailtip.js') }}
 {{ HTML::script('js/script.js') }}
+<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
 @show
 
 

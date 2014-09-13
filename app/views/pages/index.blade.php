@@ -49,7 +49,7 @@
 
 
 <div class="container content-container">
-    <div class="shop-items-container">
+    <div class="shop-items-container" id="promotion-section">
         <div class="container">
             <h1 class="shelf-header">
                 <span class="title">
@@ -74,7 +74,7 @@
             </div>
         </div>
     </div>
-    <div class="shop-items-container">
+    <div class="shop-items-container" id="best-seller-section">
         <div class="container">
             <h1 class="shelf-header">
                 <span class="title">
@@ -100,7 +100,7 @@
             </div>
         </div>
     </div>
-    <div class="shop-items-container">
+    <div class="shop-items-container" id="new-arrival-section">
         <div class="container">
             <h1 class="shelf-header">
                 <span class="title">
@@ -125,7 +125,7 @@
             </div>
         </div>
     </div>
-    <div class="shop-items-container ">
+    <div class="shop-items-container"  id="featured-section">
         <div class="container">
             <h1 class="shelf-header">
                 <span class="title">
@@ -151,7 +151,7 @@
             </div>
         </div>
     </div>
-    <div class="shop-items-container ">
+    <div class="shop-items-container" id="classical-section">
         <div class="container">
             <h1 class="shelf-header">
                 <span class="title">
