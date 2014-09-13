@@ -223,6 +223,47 @@
                         </li>
                     </ul>
                 </li>
+                <li class="dropdown dropdown-hover">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">精选集<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <div class="yamm-content content-narrow">
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            促销
+                                            <span class="pill">{{ HTML::image('images/section-tags/section-tag-1.png') }}</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            热卖
+                                            <span class="pill">{{ HTML::image('images/section-tags/section-tag-2.png') }}</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            新品
+                                            <span class="pill">{{ HTML::image('images/section-tags/section-tag-3.png') }}</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            推荐
+                                            <span class="pill">{{ HTML::image('images/section-tags/section-tag-4.png') }}</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            经典
+                                            <span class="pill">{{ HTML::image('images/section-tags/section-tag-5.png') }}</span>
+                                        </a>
+                                    </li>                                   
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
                 <li><a href="{{ action('InfoController@getAmbassadorIntro') }}">目光之星</a></li>
                 <!-- Media Example -->
                 <li class="dropdown dropdown-hover">

@@ -177,6 +177,16 @@ div.vertical-divider {
 }
 
 
+/* panel metro */
+.panel-metro>.panel-heading {
+    color: #ffffff;
+    background-color: #18bc9c;
+    border-color: #128f76;
+}
+.panel-metro {
+    border-color: #128f76;
+}
+
 /* popover modification */
 .popover {     
     max-width: 468px;
@@ -259,6 +269,17 @@ label, .control-label, .help-block {
     color: #ffffff;
     background-color: #2977b3;
     border-color: #2977b3;
+}
+.btn-metro {
+    background-color: #18bc9c;
+    color: #ffffff;
+}
+.btn-metro:hover,
+.btn-metro:focus,
+.btn-metro:active,
+.btn-metro.active {
+    color: #ffffff;
+    background-color: #128f76;
 }
 
 
@@ -390,7 +411,7 @@ label, .control-label, .help-block {
 .yamm-content ul>li a, 
 .yamm-content ul>li .category-header {
     display: block;    
-    padding: 8px 30px 8px 12px;
+    padding: 8px 20px 8px 12px;
     line-height: 1.42857143;
     white-space: nowrap;
 }
@@ -424,7 +445,9 @@ label, .control-label, .help-block {
 .yamm-content .navbar-poster{
     padding-top: 8px;
 }
-
+.yamm-content .pill img {
+    height: 20px;
+}
 
 /*
 * Pagination modification
@@ -1087,7 +1110,7 @@ input.jq-validate-error{
 .login-form-container a{
     color: #1abc9c;
 }
-.login-form-container .btn-green{
+.login-form-container .btn-metro{
     background: #1abc9c;
     border-color: #1abc9c;
     width: 150px;
@@ -1114,10 +1137,11 @@ input.jq-validate-error{
     font-size: 12px;
     padding: 6px 10px;
     border-right: 1px solid #C0C0C0;
+    color: #128f76;
 }
 .selected-sorting-option, .selected-sorting-option:hover {
-    background-color: #008cba;
-    color: #FFFFFF;
+    background-color: #18bc9c;
+    color: #ffffff;
 }
 
 

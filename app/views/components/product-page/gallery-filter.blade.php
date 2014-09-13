@@ -1,5 +1,5 @@
 <div class="shop-items blocky">
-	<div class="panel panel-primary">
+	<div class="panel panel-metro">
 		<div class="panel-heading">优化您的搜索</div>
 		<table class="table table-condensed">
 			<thead>
