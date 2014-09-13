@@ -295,6 +295,7 @@
                                 <ul>
                                     <li>
                                         <a href="http://weibo.com/u/5281852072">
+                                            目光之城
                                             {{ HTML::image('images/icons/weibo_v.png')}}
                                         </a>
                                     </li>
