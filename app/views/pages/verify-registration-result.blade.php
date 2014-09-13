@@ -10,11 +10,22 @@
     </div>
     <p>
         @if ($isSuccessful)
-        成功验证邮箱
+        成功验证邮箱，页面将在5秒后自动跳转到主页
         @else
         验证失败
         @endif
-
     </p>
 </div>
+@stop
+
+@section('script')
+@parent
+@if ($isSuccessful)
+<script type="text/javascript">
+var delay = 3000; //Your delay in milliseconds
+setTimeout(function(){ 
+    window.location = "{{ url('/') }}"
+}, delay);
+</script>
+@endif
 @stop

@@ -53,6 +53,11 @@ Route::get('sign-up', 'MemberController@getSignUp');
 Route::post('sign-up', 'MemberController@postSignUp');
 
 /*
+ * Route to resend verification email
+ */
+Route::get('sign-up/resend-verify-email', 'MemberController@getResendVerifyEmail');
+
+/*
  * Route to verify registration
  */
 Route::get('sign-up/verify/{email}/{reg_code}', 'MemberController@verifyRegistration');

@@ -70,10 +70,11 @@ class MemberController extends BaseController {
         }
         
         $member->save();
+        Session::put('memberRegistered', $member->member_id);
 
         //send email
         $data['email'] = $email;
-        $data['link'] = URL::to('sign-up/verify' . '/' . $email . '/' . $member->reg_code);
+        $data['link'] = action('MemberController@verifyRegistration', array($email, $member->reg_code ));
         Mail::queue('emails.auth.verify-registration', $data, function($message) {
             $nickname = Input::get('nickname');
             $email = Input::get('email');
@@ -82,6 +83,19 @@ class MemberController extends BaseController {
 
         return View::make('pages.verify-registration', array('email' => $email));
     }
+    
+    public function getResendVerifyEmail() {
+        $member = Member::findOrFail(Session::get('memberRegistered'));
+        //send email
+        $data['email'] = $member->email;
+        $data['link'] = action('MemberController@verifyRegistration', array($member->email, $member->reg_code ));
+        Mail::queue('emails.auth.verify-registration', $data, function($message) use ($member) {
+            $nickname = $member->nickname;
+            $email = $member->email;
+            $message->to($email, $nickname)->subject('请验证注册信息');
+        });
+        return View::make('pages.verify-registration', array('email' => $member->email))->with('status','邮件发送成功，请查收');
+    }
 
     public function verifyRegistration($email, $comCode) {
         $member = Member::where('email', '=', $email)->firstOrFail();
@@ -89,6 +103,8 @@ class MemberController extends BaseController {
         if ($member->reg_code == $comCode) {
             $member->reg_code = null;
             $member->save();
+            Auth::loginUsingId($member->member_id); //login this user
+            Session::forget('memberRegistered');
             $params['isSuccessful'] = true;
         } else {
             $params['isSuccessful'] = false;

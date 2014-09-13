@@ -14,5 +14,9 @@
     <p>
         请进入您注册的邮箱进行验证
     </p>
+    <p>
+        未收到邮件？
+        <a href="{{ action('MemberController@getResendVerifyEmail') }}">点此重新发送</a>
+    </p>
 </div>
 @stop
