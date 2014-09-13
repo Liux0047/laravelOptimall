@@ -1,14 +1,14 @@
 <div class="col-md-{{ $colSpan or '3' }} col-sm-{{ $colSpan or '3' }} col-xs-6 col-narrow">
     <div class="shop-item">
-        @if ($model->product_label_id == 0)
+        @if ($model->product_label_id == 1)
         <span class="shop-item-badge promotion-badge"></span>
-        @elseif ($model->product_label_id == 1)
-        <span class="shop-item-badge best-seller-badge"></span>
         @elseif ($model->product_label_id == 2)
-        <span class="shop-item-badge new-arrival-badge"></span>
+        <span class="shop-item-badge best-seller-badge"></span>
         @elseif ($model->product_label_id == 3)
-        <span class="shop-item-badge featured-badge"></span>
+        <span class="shop-item-badge new-arrival-badge"></span>
         @elseif ($model->product_label_id == 4)
+        <span class="shop-item-badge featured-badge"></span>
+        @elseif ($model->product_label_id == 5)
         <span class="shop-item-badge classical-badge"></span>
         @endif
         <div class="shop-item-label">

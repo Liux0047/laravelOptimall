@@ -35,4 +35,4 @@
         $(this).find(".card-salient").removeClass("lift-up-full");
         $(this).find(".card-hidden").removeClass("lift-up-full");
     });
-</script>
+    </script>

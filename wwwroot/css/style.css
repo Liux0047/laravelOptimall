@@ -667,20 +667,7 @@ label, .control-label, .help-block {
         bottom: 100%;
         -webkit-animation: lift-up-full 0.5s;
         -moz-animation: lift-up-full 0.5s;
-        animation: lift-up-full 0.5s;
-    }
-    /* Chrome, Safari, Opera */
-    @-webkit-keyframes lift-up-full {
-        from { bottom: 0%; }
-        to { bottom: 100%; }
-    }
-    @-moz-keyframes lift-up-full {
-        from { bottom: 0%; }
-        to { bottom: 100%; }
-    }
-    @keyframes lift-up-full {
-        from { bottom: 0%; }
-        to { bottom: 100%; }
+        animation: lift-up-full 0.5s
     }
 
     .wide-home-display .card-hidden .shop-item {
@@ -706,6 +693,19 @@ label, .control-label, .help-block {
         font-size: 1.5em;
         height: 220px;
     }
+}
+/* Chrome, Safari, Opera */
+@-webkit-keyframes lift-up-full {
+    from { bottom: 0%; }
+    to { bottom: 100%; }
+}
+@-moz-keyframes lift-up-full {
+    from { bottom: 0%; }
+    to { bottom: 100%; }
+}
+@keyframes lift-up-full {
+    from { bottom: 0%; }
+    to { bottom: 100%; }
 }
 .color-icon{
     width: 16px;
