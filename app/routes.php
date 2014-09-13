@@ -105,12 +105,12 @@ Route::group(array('before' => 'auth'), function() {
     Route::controller('coupon', 'CouponController');
 
     /*
-     * Route to address controller
+     * RESTFUL Route to address controller
      */
     Route::controller('address', 'AddressController');
 
     /*
-     * Route to member account functions
+     * RESTFUL Route to member account functions
      */
     Route::controller('member', 'MemberAccountController');
 
@@ -132,12 +132,12 @@ Route::group(array('before' => 'auth'), function() {
     Route::get('alipay-return/return', 'OrderController@getAlipayReturn');
 
     /*
-     * RESTFUl route to ambassador controller
+     * RESTFUL Route to ambassador controller
      */
     Route::controller('ambassador', 'AmbassadorController');
 
     /*
-     * Route to handle review functions
+     * RESTFUL Route to handle review functions
      */
     Route::controller('review', 'ReviewController');
 });

@@ -184,7 +184,7 @@ class ProductController extends BaseController {
             $count++;
         }
         for ($i = $count; $i<5; $i++){
-            $models[] = ProductModelView::find(3000 + $i);
+            $models[] = ProductModelView::find(3001 + $i);
         }
         return array('models' => $models);
     }

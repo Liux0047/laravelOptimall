@@ -64,7 +64,7 @@
             </div>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <button type="submit" class="btn btn-primary">注册</button>
+                    <button type="submit" class="btn btn-primary">注册会员</button>
                 </div>
             </div>
             {{ Form::close() }}

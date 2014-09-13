@@ -192,8 +192,8 @@
 $('#index-carousel').carousel({
     interval: 5000
 });
-$('#index-carousel').on('slid.bs.carousel', lazyLoadCarousel);
 
+$('#index-carousel').on('slid.bs.carousel', lazyLoadCarousel);
 
 function lazyLoadCarousel() {
     var $activeImage = $('#index-carousel .active.item img');
@@ -201,8 +201,11 @@ function lazyLoadCarousel() {
     var $nextImage = $('#index-carousel .active.item').next('.item').find('img');
     $nextImage.attr('src', $nextImage.data('lazy-load-src'));
 }
+
 $(document).ready(function() {
     lazyLoadCarousel();
+    //fix height of the carousel
+    $("#index-carousel").css("height", $(this).find(".carousel-inner .item").height());
 });
 
 </script>

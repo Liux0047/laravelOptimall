@@ -213,6 +213,7 @@ label, .control-label, .help-block {
     font-weight: normal;
 }
 .radio label, .checkbox label {
+    font-size: 14px;
     display: block;
 }
 
