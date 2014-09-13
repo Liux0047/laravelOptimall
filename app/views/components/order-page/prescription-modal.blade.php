@@ -41,23 +41,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <th valign="middle">左眼</th>
-                                @foreach($prescriptionNames['O_S_LEFTNames'] as $O_S_LEFTName)
-                                <td valign="middle">
-                                    <select name="{{ $O_S_LEFTName }}" id="{{ $O_S_LEFTName }}" data-placeholder="请选择" class="chosen-select" style="width:100px;">
-                                        @foreach($prescriptionOptions[$O_S_LEFTName] as $prescriptionOption)
-                                        <option value="{{ $prescriptionOption }}" 
-                                        @if(isset($item->$O_S_LEFTName) && ($item->$O_S_LEFTName == $prescriptionOption) )
-                                        selected=true
-                                        @endif
-                                        >{{ $prescriptionOption }}</option>
-                                        @endforeach
-                                    </select>
-                                </td>
-                                @endforeach
-                            </tr>
-                            <tr>
-                                <th valign="middle">左眼</th>
+                                <th valign="middle">右眼</th>
                                 @foreach($prescriptionNames['O_D_RIGHTNames'] as $O_D_RIGHTName)
                                 <td valign="middle">
                                     <select name="{{ $O_D_RIGHTName }}" id="{{ $O_D_RIGHTName }}" data-placeholder="请选择" class="chosen-select" style="width:100px;">
@@ -72,6 +56,22 @@
                                 </td>
                                 @endforeach
                             </tr>
+                            <tr>
+                                <th valign="middle">左眼</th>
+                                @foreach($prescriptionNames['O_S_LEFTNames'] as $O_S_LEFTName)
+                                <td valign="middle">
+                                    <select name="{{ $O_S_LEFTName }}" id="{{ $O_S_LEFTName }}" data-placeholder="请选择" class="chosen-select" style="width:100px;">
+                                        @foreach($prescriptionOptions[$O_S_LEFTName] as $prescriptionOption)
+                                        <option value="{{ $prescriptionOption }}" 
+                                        @if(isset($item->$O_S_LEFTName) && ($item->$O_S_LEFTName == $prescriptionOption) )
+                                        selected=true
+                                        @endif
+                                        >{{ $prescriptionOption }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                                @endforeach
+                            </tr>                            
                             <tr class="PD_popover">
                                 <th valign="middle">瞳距(cm)
                                     <a href="#" class="prescription_popover" data-toggle="popover" data-content="瞳距是指左右眼瞳孔中心两点间的距离（以毫米为单位），一般验光单上的PD即表示瞳距。大多数人瞳距在54至74毫米之间。">

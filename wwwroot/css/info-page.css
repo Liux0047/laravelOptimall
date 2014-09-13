@@ -1,0 +1,44 @@
+.about-product-section {
+    padding-top: 50px;          
+    min-height: 500px;
+}
+.about-product-section .section-title {
+    
+}
+.about-product-section .section-title img {
+    display: block;
+    margin: auto;
+}
+.about-product-section .section-element-container {    
+    position: relative;        
+}
+.about-product-section .section-element-container img{
+    display: block; 
+    margin: auto;    
+    min-height: 200px;
+}
+
+.about-product-section .section-transition {
+    width: 100%;
+}
+
+#muguangzhicheng {
+    background: #fef5e4;
+}
+#shihuiduoduo {
+    background: #ffeac5;
+}
+#gaopingzhizuo {
+    background: #ffae9b;
+}
+#gouwubaozhang-1 {
+    background: #fef5e4;
+}
+#gouwubaozhang-2 {
+    background: #ffeac5;
+}
+
+
+#tips-container {
+    background-color: #f4ebce;
+}

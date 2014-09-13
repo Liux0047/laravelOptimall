@@ -8,19 +8,13 @@ class InfoController extends BaseController {
         return View::make('pages.ambassador', $params);
     }
     
-    public function getHelp() {
-        $params['pageTitle'] = "目光之城帮助";
-        return View::make('pages.help', $params);
-    }
-    
     public function getAboutProducts() {
         $params['pageTitle'] = "关于目光之城";
-        return View::make('pages.help.about-products', $params);
+        return View::make('pages.info.about-products', $params);
     }
     
-    public function getAboutShopping() {
-        $params['pageTitle'] = "关于目光之城";
-        return View::make('pages.help.about-shopping', $params);
+    public function getTips () {
+        return View::make('pages.info.tips');
     }
 
 }

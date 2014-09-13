@@ -264,24 +264,39 @@
                         </li>
                     </ul>
                 </li>
+                <li class="dropdown dropdown-hover">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">眼镜知识<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <div class="yamm-content content-narrow">
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            如何测量瞳距
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            选择合适的镜框
+                                        </a>
+                                    </li>                                   
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
                 <li><a href="{{ action('InfoController@getAmbassadorIntro') }}">目光之星</a></li>
                 <!-- Media Example -->
                 <li class="dropdown dropdown-hover">
-                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">中文<b class="caret"></b></a>
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">联系我们<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <div class="yamm-content">
-                                <ul class="media-list">
-                                    <li class="media"><a href="#" class="pull-right"><img src="http://placekitten.com/64/64/" alt="64x64" class="media-object"></a>
-                                        <div class="media-body">
-                                            <h4 class="media-heading">Media heading</h4>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante.
-                                        </div>
-                                    </li>
-                                    <li class="media"><a href="#" class="pull-right"><img src="http://placekitten.com/64/64/" alt="64x64" class="media-object"></a>
-                                        <div class="media-body">
-                                            <h4 class="media-heading">Media heading</h4>
-                                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque.
-                                        </div>
+                                <ul>
+                                    <li>
+                                        <a href="http://weibo.com/u/5281852072">
+                                            {{ HTML::image('images/icons/weibo_v.png')}}
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
