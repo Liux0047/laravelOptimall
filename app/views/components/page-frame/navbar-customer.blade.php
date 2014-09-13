@@ -287,7 +287,7 @@
                 </li>
                 <li><a href="{{ action('InfoController@getAmbassadorIntro') }}">目光之星</a></li>
                 <!-- contact us -->
-                <li class="dropdown dropdown-hover">
+                <li class="dropdown">
                     <a href="#" data-toggle="dropdown" class="dropdown-toggle">联系我们<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
@@ -298,6 +298,9 @@
                                     </li>
                                     <li class="divider"></li>
                                     <li>
+                                        <h6>
+                                            <i class="fa fa-weixin fa-lg font-green"></i> 微信公共平台
+                                        </h6>
                                         {{ HTML::image('images/icons/wechat.jpg') }}
                                     </li>
                                 </ul>

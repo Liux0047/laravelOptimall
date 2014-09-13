@@ -175,6 +175,16 @@
                 @endfor
             </div>
         </div>
+    </div>
+
+    <div class="row style-icon-container">
+        @for($i=1; $i<=6; $i++)
+        <div class="col-md-2">
+            <img src="{{ asset('images/lazyload-holder.png') }}" 
+                data-original="{{ asset('images/styles/style-'.$i.'.jpg') }}" 
+                class="lazy style-icon">
+        </div>
+        @endfor
     </div>            
 </div>
 @stop
@@ -204,8 +214,6 @@ function lazyLoadCarousel() {
 
 $(document).ready(function() {
     lazyLoadCarousel();
-    //fix height of the carousel
-    $("#index-carousel").css("height", $(this).find(".carousel-inner .item").height());
 });
 
 </script>

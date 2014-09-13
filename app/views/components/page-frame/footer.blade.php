@@ -11,17 +11,17 @@
                 <div class="post">
                     <img src="{{ asset('images/member.png') }}" class="circular">
                     <a href="#" class="title">注册会员</a>
-                    <p>享受会员独享积分现金返利，每月优惠抽奖</p>
+                    <p>加入目光之城，最IN最潮流的时尚眼镜平台</p>
                 </div>
                 <div class="post">
                     <img src="{{ asset('images/member.png') }}" class="circular">
-                    <a href="#" class="title">最新活动</a>
-                    <p>聚划算优惠活动，每天精彩放松，团购帮你一省再省</p>
+                    <a href="#" class="title">购物流程</a>
+                    <p>最佳用户体验，轻松购物流程, Click. Click. Done!</p>
                 </div>
                 <div class="post">
                     <img src="{{ asset('images/member.png') }}" class="circular">
-                    <a href="#" class="title">优惠券说明</a></li
-                    <p>输入优惠券，轻松享受优惠券折扣</p>
+                    <a href="#" class="title">常见问题</a>
+                    <p>为您解惑，为您服务</p>
                 </div>
 
             </div>
@@ -29,15 +29,15 @@
                 <div class="post">
                     <img src="{{ asset('images/item.png') }}">
                     <h3 class="footer_header">
-                        网购详细
+                        配镜须知
                     </h3>
                 </div>
                 <ul>
-                    <li><a href="#">网购流程</a></li>
-                    <li><a href="#">关于验光单</a></li>
-                    <li><a href="#">支付方式</a></li>
-                    <li><a href="#">快递费用及时间</a></li>
-                    <li><a href="#">退换货保障</a></li>
+                    <li><a href="#">支付相关</a></li>
+                    <li><a href="#">配送相关</a></li>
+                    <li><a href="#">关于商品</a></li>
+                    <li><a href="#">售后服务</a></li>
+                    <li><a href="#">退货须知</a></li>
                     <li><a href="#">关于发票</a></li>
                 </ul>
             </div>
@@ -47,21 +47,28 @@
                     <h3 class="footer_header ">
                         关于我们
                     </h3>
+                </div>                
+                <div class="post">
+
+                    <a href="#" class="title">
+                        <i class="fa fa-envelope fa-2x"></i> 
+                        邮箱
+                    </a>
+                    <p>mgzcecommerce@163.com</p>
                 </div>
                 <div class="post">
-                    <img src="{{ asset('images/member.png') }}" class="circular">   
-                    <a href="#" class="title">关于目光之城</a>
-                    <p>全中国全最时尚的眼镜网络平台</p>
+                    <a href="#" class="title">
+                        <i class="fa fa-weibo fa-2x"></i> 
+                        目光之城官微 
+                    </a>
+                    <p><a href="http://www.weibo.com/u/5281852072">点击关注</a></p>
                 </div>
                 <div class="post">
-                    <img src="{{ asset('images/member.png') }}" class="circular">
-                    <a href="#" class="title">质量保障</a>
-                    <p>镜架600天质保，超清镜片</p>
-                </div>
-                <div class="post">
-                    <img src="{{ asset('images/member.png') }}" class="circular">
-                    <a href="#" class="title">联系我们</a>
-                    <p>Email.QQ.微博.微信</p>
+                    <a href="#" class="title">
+                        <i class="fa fa-weixin fa-2x"></i> 
+                        微信公共平台
+                    </a>
+                    <p></p>
                 </div>
             </div>
             <div class="col-sm-3 testimonials">
@@ -72,11 +79,11 @@
                     </h3>
                 </div>
                 <ul>
-                    <li><a href="#">美丽，搭配出时尚</a></li>
-                    <li><a href="#">眼镜小知识</a></li>
-                    <li><a href="#">护理保养</a></li>
-                    <li><a href="#">隐形美瞳</a></li>
-                    <li><a href="#">潮流太阳镜</a></li>
+                    <li><a href="#">成为目光之星</a></li>
+                    <li><a href="#">如何测量瞳距</a></li>
+                    <li><a href="#">如何选择镜框</a></li>
+                    <li><a href="#">筛选眼镜</a></li>
+                    <li><a href="#">我的验光单</a></li>
                 </ul>
             </div>
 
@@ -117,7 +124,7 @@
                 </div>
                 <div class="row copyright">
                     <div class="col-md-12">
-                        © Copyright 2012-2014 All Rights Reserved. Designed by MuHen Ecommerce. 京ICP编号：123332323232
+                        © Copyright 2012-2014 All Rights Reserved. Designed by MuHen Ecommerce. 苏ICP编号：14006372号
                     </div>
                 </div>
             </div>            

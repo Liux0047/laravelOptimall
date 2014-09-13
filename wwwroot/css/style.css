@@ -87,8 +87,8 @@ img {
 .font-black{
     color:black;
 }
-.font-green {
-    color: #009900;
+.fa.fa-weixin.font-green {
+    color: #11d31d;
 }
 .no-display {    
     display: none;
@@ -837,8 +837,14 @@ label, .control-label, .help-block {
         display: none;
     }
 }
-
-
+.style-icon-container {
+    margin-top: 50px;
+}
+.style-icon {
+    display:block;
+    margin: auto;
+    width: 100px;
+}
 /* Footer
 -------------------------------------------------- */
 #footer {
@@ -847,8 +853,9 @@ label, .control-label, .help-block {
     color: #b5b5b6;
     padding-top: 35px; 
 }
-footer a {
+footer a , #footer a:hover{
     border-bottom: none;
+    color: #b5b5b6;
 }
 #footer .footer_header {
     color: #c4c4c4;
@@ -856,6 +863,9 @@ footer a {
     font-size: 25px;
     margin-bottom: 40px;
     margin-left: 15px; 
+}
+#footer .wechat-code {
+    width: 80px;
 }
 #footer .recent_posts,  #footer .contact .post {
     margin-left: 0px; 
@@ -1089,6 +1099,9 @@ input.jq-validate-error{
 /* login page */
 #login_container {
     background-image: url('../images/login.jpg');
+    background-size:cover;
+    background-position:50% 50%;
+    min-height: 400px;
 }
 .login-form-container {
     background: rgba(6, 7, 7, 0.56);
