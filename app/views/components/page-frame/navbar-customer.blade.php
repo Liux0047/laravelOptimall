@@ -214,7 +214,7 @@
                                     </li>
                                     <li>
                                         <a href="#">
-                                            <i class="fa fa-question-circle fa-fw"></i> 
+                                            <i class="fa fa-refresh fa-fw"></i> 
                                             退换须知
                                         </a>
                                     </li>

@@ -5,7 +5,7 @@ class InfoController extends BaseController {
     
     public function getAmbassadorIntro() {
         $params['pageTitle'] = "目光之星";
-        return View::make('pages.ambassador', $params);
+        return View::make('pages.info.ambassador', $params);
     }
     
     public function getAboutProducts() {

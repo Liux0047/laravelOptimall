@@ -1,32 +1,32 @@
 <footer id="footer">
     <div class="container">
         <div class="row sections">
-            <div class="col-sm-3 recent_posts">
+            <div class="col-sm-3">
                 <div class="post">                    
-                    <img src="{{ asset('images/guaranty.png') }}">
+                    <img src="{{ asset('images/lazyload-holder.png') }}" data-original="{{ asset('images/icons/crossroads.png') }}" class="lazy">
                     <h3 class="footer-header">
                         购物指南
                     </h3>
                 </div>
                 <div class="post">
-                    <img src="{{ asset('images/lazyload-holder.png') }}" data-original="{{ asset('images/icons/users.png') }}" class="lazy style-icon">
+                    <i class="fa fa-users fa-3x fa-fw"></i> 
                     <a href="#" class="title">注册会员</a>
-                    <p>加入目光之城，最IN最潮流的时尚眼镜平台</p>
+                    <p>加入最IN最潮流的时尚眼镜平台</p>
                 </div>
                 <div class="post">
-                    <img src="{{ asset('images/lazyload-holder.png') }}" data-original="{{ asset('images/icons/packaging.png') }}" class="lazy style-icon">
+                    <i class="fa fa-gift fa-3x fa-fw"></i> 
                     <a href="#" class="title">购物流程</a>
-                    <p>最佳用户体验，轻松购物流程, Click. Click. Done!</p>
+                    <p>最佳用户体验， Click. Click. Done!</p>
                 </div>
                 <div class="post">
-                    <img src="{{ asset('images/lazyload-holder.png') }}" data-original="{{ asset('images/icons/FAQs.png') }}" class="lazy style-icon">
+                    <i class="fa fa-question-circle fa-3x fa-fw"></i> 
                     <a href="#" class="title">常见问题</a>
                     <p>为您解惑，为您服务</p>
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="post">
-                    <img src="{{ asset('images/item.png') }}">
+                    <img src="{{ asset('images/lazyload-holder.png') }}" data-original="{{ asset('images/icons/compose.png') }}" class="lazy">
                     <h3 class="footer-header">
                         配镜须知
                     </h3>
@@ -64,7 +64,7 @@
                     </li>
                     <li>
                         <a href="#">
-                            <i class="fa fa-question-circle fa-fw"></i> 
+                            <i class="fa fa-refresh fa-fw"></i> 
                             退货须知
                         </a>
                     </li>
@@ -72,27 +72,27 @@
             </div>
             <div class="col-sm-3">
                 <div class="post">
-                    <img src="{{ asset('images/item.png') }}">
+                    <img src="{{ asset('images/lazyload-holder.png') }}" data-original="{{ asset('images/icons/smartphone.png') }}" class="lazy">
                     <h3 class="footer-header ">
                         关于我们
                     </h3>
                 </div>                                
                 <div class="post">                    
-                    <i class="fa fa-envelope fa-3x"></i> 
+                    <i class="fa fa-envelope fa-3x fa-fw"></i> 
                     <a href="#" class="title">
                         邮箱
                     </a>
                     <p>mgzcecommerce@163.com</p>
                 </div>
                 <div class="post">
-                    <i class="fa fa-weibo fa-3x"></i> 
+                    <i class="fa fa-weibo fa-3x fa-fw"></i> 
                     <a href="#" class="title">                        
                         目光之城官微 
                     </a>
                     <p><a href="http://www.weibo.com/u/5281852072">点击关注</a></p>
                 </div>
                 <div class="post">                    
-                    <i class="fa fa-weixin fa-3x"></i> 
+                    <i class="fa fa-weixin fa-3x fa-fw"></i> 
                     <a href="#" class="title">
                         微信公共平台
                     </a>
@@ -101,7 +101,7 @@
             </div>
             <div class="col-sm-3">
                 <div class="post">
-                    <img src="{{ asset('images/guaranty.png') }}">
+                    <img src="{{ asset('images/lazyload-holder.png') }}" data-original="{{ asset('images/icons/lightbulb.png') }}" class="lazy">
                     <h3 class="footer-header">
                         时尚周边
                     </h3>

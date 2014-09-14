@@ -96,6 +96,9 @@ img {
 .space-right{
     margin-right: 20px;
 }
+.padding-40 {
+    padding: 40px;
+}
 .ajax-preloader{
     width: 20px;
     height: 20px;
@@ -853,34 +856,34 @@ label, .control-label, .help-block {
     min-height: 260px;
     background-color: #252528;
     color: #b5b5b6;
-    padding-top: 35px; 
+    padding-top: 20px; 
 }
-footer a , #footer a:hover{
+#footer a{
     border-bottom: none;
     color: #b5b5b6;
 }
-#footer .footer_header {
-    color: #c4c4c4;
-    font-weight: 300;
-    font-size: 25px;
-    margin-bottom: 40px;
-    margin-left: 15px; 
+#footer a:hover {
+    color: #ffffff;
 }
-#footer .recent_posts,  #footer .contact .post {
+#footer .contact .post {
     margin-left: 0px; 
 }
 #footer .post {
     margin-bottom: 30px;
     width: 93%; 
 }
-#footer .post img, #footer .post>.fa {
+#footer .post>img {
+    width: 48px;
+}
+#footer .post>.fa {    
+    border-radius: 50%;
+}
+#footer .post>img, #footer .post>.fa {
     float: left;
     margin-right: 10px;
-    border-radius: 7px;
-    width: 40px;
 }
 #footer ul{
-    padding-left: 0px;
+    padding-left: 30px;
 }
 #footer .title{
     display: block;
@@ -895,7 +898,8 @@ footer a , #footer a:hover{
 }
 #footer .footer-header {
     margin-left: 30px; 
-    margin-bottom: 40px;
+    margin-bottom: 50px;    
+    padding-top: 10px;
 }
 #footer .credits {
     border-top: 1px solid #343437;
