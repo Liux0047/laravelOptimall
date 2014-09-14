@@ -845,6 +845,8 @@ label, .control-label, .help-block {
     margin: auto;
     width: 100px;
 }
+
+
 /* Footer
 -------------------------------------------------- */
 #footer {
@@ -864,9 +866,6 @@ footer a , #footer a:hover{
     margin-bottom: 40px;
     margin-left: 15px; 
 }
-#footer .wechat-code {
-    width: 80px;
-}
 #footer .recent_posts,  #footer .contact .post {
     margin-left: 0px; 
 }
@@ -874,61 +873,30 @@ footer a , #footer a:hover{
     margin-bottom: 30px;
     width: 93%; 
 }
-#footer .post img {
+#footer .post img, #footer .post>.fa {
     float: left;
     margin-right: 10px;
-    border-radius: 7px; 
+    border-radius: 7px;
+    width: 40px;
 }
-#footer .post .circular{
-    border-radius:25px;
+#footer ul{
+    padding-left: 0px;
 }
-#footer  .title{
+#footer .title{
     display: block;
     color: #b5b5b6;
     font-size: 14px;
 }
-#footer  li, #footer li a{
+#footer li, #footer li a{
     list-style-type:none;
     font-size: 14px;
     height: 37px;
-    color: #b5b5b6;
     padding:0px 1px 15px 1px;
 }
-#footer .testimonials .footer_header {
+#footer .footer-header {
     margin-left: 30px; 
+    margin-bottom: 40px;
 }
-#footer .testimonials .quote {
-    color: #bfbfc0; 
-}
-#footer .testimonials .quote span {
-    font-size: 32px;
-    font-style: italic;
-    position: relative;
-    top: 5px;
-    font-family: Open Sans;
-    float: left;
-    margin-right: 8px; 
-}
-#footer .testimonials .author {
-    margin-top: 40px; 
-}
-#footer .testimonials .author img {
-    float: left;
-    margin-right: 15px;
-    position: relative;
-    top: -6px; 
-}
-#footer .testimonials .name {
-    font-size: 13px;
-    font-weight: bold; }
-#footer .testimonials .info {
-    font-style: italic;
-    color: #ccc; }
-
-#footer .contact .footer_header {
-    text-align: left;
-    margin-left: 35px; }
-
 #footer .credits {
     border-top: 1px solid #343437;
     padding: 10px 0px 60px 0px; }
@@ -965,46 +933,20 @@ footer a , #footer a:hover{
     color: #a6a6a7;
     font-style: italic;
     text-align: center;
-    margin-top: 30px; }
-
+    margin-top: 30px; 
+}
 #footer .credits .socialicons {
     background: url("../images/socialicons.png") no-repeat;
     width: 265px;
-    height: 36px; }
+    height: 36px; 
+}
 
 #footer .credits .socialicons_h {
     background: url("../images/socialicons_h.png") no-repeat;
     width: 265px;
-    height: 36px; }
-
-#footer .info {
-    margin-bottom: 10px;
-    margin-left: 0; }
-
-#footer .info .residence {
-    margin-left: 0; }
-#footer .info ul {
-    margin: 0;
-    padding: 0; }
-#footer .info ul li {
-    list-style: none;
-    font-size: 16px;
-    color: #777E83;
-    line-height: 23px; }
-#footer .info ul a {
-    color: #777E83;
-    -webkit-transition: color .2s;
-    -moz-transition: color .2s;
-    -ms-transition: color .2s;
-    transition: color .2s; }
-#footer .info ul a:hover {
-    color: #A9B4BB; }
-#footer .info .touch {
-    float: right; }
-#footer .info .touch ul li {
-    display: inline-block;
-    margin-left: 22px; 
+    height: 36px; 
 }
+
 
 
 /* progress tracker */

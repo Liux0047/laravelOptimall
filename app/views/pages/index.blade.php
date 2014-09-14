@@ -180,9 +180,11 @@
     <div class="row style-icon-container">
         @for($i=1; $i<=6; $i++)
         <div class="col-md-2">
-            <img src="{{ asset('images/lazyload-holder.png') }}" 
+            <a href="{{ url('gallery?styles[]='.$i) }}">
+                <img src="{{ asset('images/lazyload-holder.png') }}" 
                 data-original="{{ asset('images/styles/style-'.$i.'.jpg') }}" 
                 class="lazy style-icon">
+            </a>
         </div>
         @endfor
     </div>            

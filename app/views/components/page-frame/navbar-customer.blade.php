@@ -288,7 +288,7 @@
                 <li><a href="{{ action('InfoController@getAmbassadorIntro') }}">目光之星</a></li>
                 <!-- contact us -->
                 <li class="dropdown">
-                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">联系我们<b class="caret"></b></a>
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">联系我们</a>
                     <ul class="dropdown-menu">
                         <li>
                             <div class="yamm-content">
@@ -323,7 +323,7 @@
                 <!-- Forms -->
                 <li class="dropdown" id="login_dropdown">
                     <a href="#" data-toggle="dropdown" class="dropdown-toggle"onclick="enableSubmit();">
-                        登录 <b class="caret"></b>
+                        登录 
                     </a>
                     <ul class="dropdown-menu">
                         <li>
