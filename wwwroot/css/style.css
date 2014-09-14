@@ -54,6 +54,10 @@ img {
 .align-center{
     text-align: center;
 }
+.img-center {
+    display: block;
+    margin: auto;
+}
 .list-style-none{
     list-style: none;
 }
@@ -901,54 +905,39 @@ label, .control-label, .help-block {
     margin-bottom: 50px;    
     padding-top: 10px;
 }
-#footer .credits {
-    border-top: 1px solid #343437;
-    padding: 10px 0px 60px 0px; }
-#footer .credits .social {
-    margin-top: 30px;
-    text-align: center; }
-#footer .credits .social a {
-    margin: 10px; }
-#footer .credits .social a span {
-    display: inline-block;
-    width: 33px;
-    height: 33px; }
-#footer .credits .social a span.ico1, #footer .credits .social a span.icoh {
-    background-position: 0px 0px; }
-#footer .credits .social a span.ico2, #footer .credits .social a span.ico2h {
-    background-position: -37px 0px; }
-#footer .credits .social a span.ico3, #footer .credits .social a span.ico3h {
-    background-position: -75px 0px; }
-#footer .credits .social a span.ico4, #footer .credits .social a span.ico4h {
-    background-position: -112px -1px; }
-#footer .credits .social a span.ico5, #footer .credits .social a span.ico5h {
-    background-position: -151px 0px; }
-#footer .credits .social a span.ico6, #footer .credits .social a span.ico6h {
-    background-position: -188px -1px; }
-#footer .credits .social a span.ico7, #footer .credits .social a span.ico7h {
-    background-position: -226px 0px; }
-#footer .credits .social a:hover span.socialicons {
-    display: none; }
-#footer .credits .social a:hover span.socialicons_h {
-    display: inline-block !important; }
-#footer .credits .social span.socialicons_h {
-    display: none; }
-#footer .credits .copyright {
-    color: #a6a6a7;
-    font-style: italic;
+#footer .social-icons {    
     text-align: center;
-    margin-top: 30px; 
+    margin-top: 20px; 
+    padding: 30px 0px;    
+    border-top: 1px solid #343437;
 }
-#footer .credits .socialicons {
-    background: url("../images/socialicons.png") no-repeat;
-    width: 265px;
-    height: 36px; 
+#footer .social-icons a>i.fa {
+    padding: 0px 12px;
+}
+#footer .social-icons a:hover>i.fa-weixin {
+    color: #11d31d;
+}
+#footer .social-icons a:hover>i.fa-weibo {
+    color: #ea1429;
+}
+#footer .social-icons a:hover>i.fa-qq {
+    color: #458fce;
+}
+#footer .social-icons a:hover>i.fa-renren {
+    color: #ffffff;
+}
+#footer .social-icons a:hover>i.fa-facebook-square {
+    color: #3b5998;
+}
+#footer .social-icons a:hover>i.fa-twitter {
+    color: #55acee;
 }
 
-#footer .credits .socialicons_h {
-    background: url("../images/socialicons_h.png") no-repeat;
-    width: 265px;
-    height: 36px; 
+#footer .copyright {    
+    text-align: center;
+    color: #a6a6a7;
+    font-style: italic;
+    margin-bottom: 30px;
 }
 
 

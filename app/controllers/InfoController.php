@@ -16,5 +16,9 @@ class InfoController extends BaseController {
     public function getTips () {
         return View::make('pages.info.tips');
     }
+    
+    public function getWechat() {
+        return View::make('pages.info.wechat-QR');
+    }
 
 }

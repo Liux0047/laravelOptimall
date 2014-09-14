@@ -86,17 +86,17 @@
                 </div>
                 <div class="post">
                     <i class="fa fa-weibo fa-3x fa-fw"></i> 
-                    <a href="#" class="title">                        
+                    <a href="http://www.weibo.com/u/5281852072" class="title">                        
                         目光之城官微 
                     </a>
                     <p><a href="http://www.weibo.com/u/5281852072">点击关注</a></p>
                 </div>
                 <div class="post">                    
                     <i class="fa fa-weixin fa-3x fa-fw"></i> 
-                    <a href="#" class="title">
+                    <a href="{{ action('InfoController@getWechat')}}" class="title">
                         微信公共平台
                     </a>
-                    <p></p>
+                    <p><a href="{{ action('InfoController@getWechat')}}">点击查看二维码</a></p>
                 </div>
             </div>
             <div class="col-sm-3">
@@ -136,46 +136,34 @@
             </div>
 
         </div>
-        <div class="row credits">
+        <div class="row social-icons">
             <div class="col-md-12">
-                <div class="row social">
-                    <div class="col-md-12">
-                        <a href="#" class="facebook">
-                            <span class="socialicons ico1"></span>
-                            <span class="socialicons_h ico1h"></span>
-                        </a>
-                        <a href="#" class="twitter">
-                            <span class="socialicons ico2"></span>
-                            <span class="socialicons_h ico2h"></span>
-                        </a>
-                        <a href="#" class="gplus">
-                            <span class="socialicons ico3"></span>
-                            <span class="socialicons_h ico3h"></span>
-                        </a>
-                        <a href="#" class="flickr">
-                            <span class="socialicons ico4"></span>
-                            <span class="socialicons_h ico4h"></span>
-                        </a>
-                        <a href="#" class="pinterest">
-                            <span class="socialicons ico5"></span>
-                            <span class="socialicons_h ico5h"></span>
-                        </a>
-                        <a href="#" class="dribble">
-                            <span class="socialicons ico6"></span>
-                            <span class="socialicons_h ico6h"></span>
-                        </a>
-                        <a href="#" class="behance">
-                            <span class="socialicons ico7"></span>
-                            <span class="socialicons_h ico7h"></span>
-                        </a>
-                    </div>
-                </div>
-                <div class="row copyright">
-                    <div class="col-md-12">
-                        © Copyright 2012-2014 All Rights Reserved. Designed by MuHen Ecommerce. 苏ICP编号：14006372号
-                    </div>
-                </div>
-            </div>            
+                <a href="{{ action('InfoController@getWechat')}}">
+                    <i class="fa fa-weixin fa-2x"></i>
+                </a>
+                <a href="http://www.weibo.com/u/5281852072">
+                    <i class="fa fa-weibo fa-2x"></i>
+                </a>
+                <a href="#">
+                    <i class="fa fa-qq fa-2x"></i>
+                </a>
+                <a href="#">
+                    <i class="fa fa-renren fa-2x"></i>
+                </a>
+                <a href="#">
+                    <i class="fa fa-facebook-square fa-2x"></i>
+                </a>
+                <a href="#">
+                    <i class="fa fa-twitter fa-2x"></i>
+                </a>
+            </div>
+        </div>
+
+
+        <div class="row copyright">
+            <div class="col-md-12">
+                © Copyright 2012-2014 All Rights Reserved. Designed by MuHen Ecommerce. 苏ICP编号：14006372号
+            </div>
         </div>
     </div>
 </footer>
