@@ -69,9 +69,7 @@ class ProductController extends BaseController {
         }        
 
         foreach(self::$eminentModels as $key=>$eminentModelIds) {
-            foreach ($eminentModelIds as $eminentModelId){
-                $params['wideModels'][$key][] = ProductModelView::find($eminentModelId);
-            }
+            $params['wideModels'][$key] = ProductModelView::whereIn('model_id' ,$eminentModelIds)->get();
         }
         $params['wideModelQuote'] = self::$eminentModelQuote;
         return View::make('pages.index', $params);

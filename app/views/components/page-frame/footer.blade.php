@@ -19,7 +19,7 @@
                     <p>最佳用户体验，轻松购物流程, Click. Click. Done!</p>
                 </div>
                 <div class="post">
-                    <img src="{{ asset('images/lazyload-holder.png') }}" data-original="{{ asset('images/icons/authentic.png') }}" class="lazy style-icon">
+                    <img src="{{ asset('images/lazyload-holder.png') }}" data-original="{{ asset('images/icons/FAQs.png') }}" class="lazy style-icon">
                     <a href="#" class="title">常见问题</a>
                     <p>为您解惑，为您服务</p>
                 </div>
@@ -109,7 +109,7 @@
                 <ul>
                     <li>
                         <a href="#">
-                            优雅地成为目光之星
+                            成为目光之星
                         </a>
                     </li>
                     <li>
