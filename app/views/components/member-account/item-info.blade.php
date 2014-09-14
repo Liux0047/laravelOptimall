@@ -154,8 +154,6 @@
                                                 <p>
                                                     退货的一些说明
                                                 </p>
-
-
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>

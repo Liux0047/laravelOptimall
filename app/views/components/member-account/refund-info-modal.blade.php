@@ -13,7 +13,7 @@
                 <p>退货数量: {{ $item->refund_quantity }}</p>
                 <p>退货原因: {{ $item->refund_reason }}</p>
                 <p>
-                    @if(file_exists('images/uploads/refunds/'.$item->order_line_item_id.'.jpg')) 
+                    @if(File::exists('images/uploads/refunds/'.$item->order_line_item_id.'.jpg')) 
                     {{ HTML::image('images/uploads/refunds/'.$item->order_line_item_id.'.jpg')}}
                     @else
                     没有图片上传

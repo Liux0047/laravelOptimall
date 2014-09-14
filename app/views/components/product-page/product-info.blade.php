@@ -25,7 +25,16 @@
 <div class="tab-content">
     <div class="tab-pane fade in active tab-pane-bordered" id="detailed_description">
         <div class="row">
-            <div class="col-md-12 img-size-limit">
+            <div class="col-md-12">
+
+                @for ($i=1; $i<=5; $i++)
+                @if (File::exists('images/gallery/'.$model->model_id.'/poster-'.$i.'.jpg'))
+                <img src="{{ asset('images/lazyload-holder.png') }}" 
+                data-original="{{ asset('images/gallery/'.$model->model_id.'/poster-'.$i.'.jpg') }}"
+                class="lazy poster">
+                @endif
+                @endfor
+
                 @for ($i=1; $i<=4; $i++)
                 <br>
                 <img src="{{ asset('images/lazyload-holder.png') }}" 
@@ -37,7 +46,7 @@
     </div>
     <div class="tab-pane fade tab-pane-bordered" id="lens_description">
         <div class="row">
-            <div class="col-md-12 img-size-limit">
+            <div class="col-md-12">
                 @for ($i=1; $i<=6; $i++)
                 <img src="{{ asset('images/lazyload-holder.png') }}" 
                 data-original="{{ asset('images/lens/poster-'.$i.'.jpg') }}"
