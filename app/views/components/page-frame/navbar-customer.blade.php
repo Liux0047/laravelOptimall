@@ -177,43 +177,43 @@
                             <div class="yamm-content content-narrow">
                                 <ul>
                                     <li>
-                                        <a href="#">
+                                        <a href="{{ url('info/beginner-guide') }}">
                                             <i class="fa fa-bullhorn fa-fw"></i> 
                                             新手指南
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
-                                            <i class="fa fa-credit-card fa-fw"></i> 
-                                            支付相关
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-truck fa-fw"></i> 
-                                            配送相关
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-gift fa-fw"></i> 
-                                            关于商品
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
+                                        <a href="{{ url('info/about-shoppings') }}">
                                             <i class="fa fa-edit fa-fw"></i> 
                                             关于发票
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a href="{{ url('info/about-shoppings#payment') }}">
+                                            <i class="fa fa-credit-card fa-fw"></i> 
+                                            支付相关
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('info/about-shoppings#delivery') }}">
+                                            <i class="fa fa-truck fa-fw"></i> 
+                                            配送相关
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('info/about-products') }}">
+                                            <i class="fa fa-gift fa-fw"></i> 
+                                            关于商品
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('info/about-products#gouwubaozhang-1') }}">
                                             <i class="fa fa-phone fa-fw"></i> 
                                             售后服务
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a href="{{ url('info/about-products#gouwubaozhang-2') }}">
                                             <i class="fa fa-refresh fa-fw"></i> 
                                             退换须知
                                         </a>

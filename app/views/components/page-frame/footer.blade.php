@@ -10,17 +10,17 @@
                 </div>
                 <div class="post">
                     <i class="fa fa-users fa-3x fa-fw"></i> 
-                    <a href="#" class="title">注册会员</a>
+                    <a href="{{ action('MemberController@getSignUp') }}" class="title">注册会员</a>
                     <p>加入最IN最潮流的时尚眼镜平台</p>
                 </div>
                 <div class="post">
                     <i class="fa fa-gift fa-3x fa-fw"></i> 
-                    <a href="#" class="title">购物流程</a>
+                    <a href"{{ url('info/beginner-guide') }}" class="title">购物流程</a>
                     <p>最佳用户体验， Click. Click. Done!</p>
                 </div>
                 <div class="post">
                     <i class="fa fa-question-circle fa-3x fa-fw"></i> 
-                    <a href="#" class="title">常见问题</a>
+                    <a href="{{ url('info/about-shoppings/faq') }}" class="title">常见问题</a>
                     <p>为您解惑，为您服务</p>
                 </div>
             </div>
@@ -33,37 +33,37 @@
                 </div>
                 <ul>
                     <li>
-                        <a href="#">
-                            <i class="fa fa-credit-card fa-fw"></i> 
-                            支付相关
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-truck fa-fw"></i> 
-                            配送相关
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-gift fa-fw"></i> 
-                            关于商品
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
+                        <a href="{{ url('info/about-shoppings') }}">
                             <i class="fa fa-edit fa-fw"></i> 
                             关于发票
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="{{ url('info/about-shoppings#payment') }}">
+                            <i class="fa fa-credit-card fa-fw"></i> 
+                            支付相关
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('info/about-shoppings#delivery') }}">
+                            <i class="fa fa-truck fa-fw"></i> 
+                            配送相关
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('info/about-products') }}">
+                            <i class="fa fa-gift fa-fw"></i> 
+                            关于商品
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('info/about-products#gouwubaozhang-1') }}">
                             <i class="fa fa-phone fa-fw"></i> 
                             售后服务
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="{{ url('info/about-products#gouwubaozhang-2') }}">
                             <i class="fa fa-refresh fa-fw"></i> 
                             退货须知
                         </a>
@@ -108,12 +108,12 @@
                 </div>
                 <ul>
                     <li>
-                        <a href="#">
+                        <a href="{{ action('InfoController@getAmbassadorIntro') }}">
                             成为目光之星
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="{{ action('InfoController@getTips') }}">
                             如何优雅地测量瞳距
                         </a>
                     </li>
@@ -128,7 +128,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="{{ action('MemberAccountController@getMyPrescription') }}">
                             我的验光单
                         </a>
                     </li>

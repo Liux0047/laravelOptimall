@@ -4,6 +4,9 @@ return array(
     /*
      * Optiamll site specific configs
      */
+    'lazyloadImg'=>'images/lazyload-holder.png',
+    
+    'smallViewImg'=>'medium-view-3.jpg',
 
     'orderCodeLength' => 8,
     
