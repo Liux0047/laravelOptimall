@@ -14,7 +14,7 @@
 
         @if($items->count())
         <div class="page-header-btn-group">
-            <a href="{{ URL::to('gallery') }}" class="btn btn-default btn-sm">
+            <a href="{{ action('ProductController@getGallery') }}" class="btn btn-default btn-sm">
                 接着逛逛
             </a> 
             @if ($isAllPrescriptionComplete)

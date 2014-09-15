@@ -52,7 +52,7 @@
         <div class="row">
             <div class="col-md-12">
                 @for ($i=1; $i<=7; $i++)
-                <img src="{{ asset('images/lazyload-holder.png') }}" 
+                <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" 
                 data-original="{{ asset('images/lens/lens-poster-'.$i.'.jpg') }}"
                 class="lazy poster">
                 <br>

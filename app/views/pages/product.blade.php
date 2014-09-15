@@ -48,7 +48,7 @@
                                     {{ number_format($model->price, 2) }}
                                 </span>      
                                 <span class='label label-danger'>促销</span> 
-                                (市场价 ¥<del id='market-price'>{{ number_format($model->price * 1.5, 2) }}</del>)   
+                                (市场价 ¥<del id='market-price'>{{ number_format($model->market_price, 2) }}</del>)   
                             </span>                               
                         </td>
                     </tr>

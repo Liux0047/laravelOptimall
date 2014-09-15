@@ -5,20 +5,24 @@ $(function() {
         e.stopPropagation();
     });
 });
-//enable dropdown
-$(document).ready(function() {
-    //enable dropdown on hover
-    //also add hovered class to hovered dropdown menu
-    $('.navbar .dropdown-hover').hover(function() {
-        $(this).find('.yamm-content').first().stop(true, true).delay(150).slideDown(200);
-        $(this).addClass("open");
-        //$('.dropdown').removeClass("open");
-    }, function() {
-        $(this).find('.yamm-content').first().stop(true, true).delay(0).slideUp(1);
-        $(this).removeClass("open");
-    });
 
-});
+/*
+ * retina image support
+ * http://www.sitepoint.com/css-techniques-for-retina-displays/
+ */
+var isRetina = (
+        window.devicePixelRatio > 1 ||
+        (window.matchMedia && window.matchMedia("(-webkit-min-device-pixel-ratio: 1.5),(-moz-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5)").matches)
+        );
+if (isRetina) {
+    var images = $('img.retina-alt.lazy');
+    images.each(function(i) {
+        var lowres = $(this).attr('data-original');
+        var highres = lowres.replace(".", "@2x.");
+        $(this).attr('data-original', highres);
+    });
+}
+
 
 /*
  * Modal modification to vertical align center
@@ -26,7 +30,7 @@ $(document).ready(function() {
  */
 function adjustModalMaxHeightAndPosition() {
     $('.modal').each(function() {
-        if ($(this).hasClass('in') == false) {
+        if (!$(this).hasClass('in')) {
             $(this).show();
         }
         ;
@@ -54,7 +58,7 @@ function adjustModalMaxHeightAndPosition() {
                 return -($(this).outerWidth() / 2);
             }
         });
-        if ($(this).hasClass('in') == false) {
+        if (!$(this).hasClass('in')) {
             $(this).hide();
         }
         ;
@@ -67,8 +71,8 @@ $(window).resize(adjustModalMaxHeightAndPosition).trigger("resize");
  * This code will prevent unexpected menu close when using some components (like accordion, forms, etc)
  */
 $(document).on('click', '.yamm .dropdown-menu', function(e) {
-    e.stopPropagation()
-})
+    e.stopPropagation();
+});
 
 
 //auto calculate the top banner height
@@ -78,21 +82,37 @@ $('.navbar').affix({
     }
 });
 
-//lazy load fade in effect
-$("img.lazy").lazyload({
-    effect: "fadeIn",
-    effectspeed: 600,
-    failure_limit: 15
-});
 
 //trigger a fake scroll to lazy load image
 $(document).ready(function() {
-    $('body,html').scroll();
 
     $('.nav-tabs li a').on('shown.bs.tab', function(e) {
         $(window).trigger("scroll");
     });
-})
+
+    //enable dropdown on hover
+    //also add hovered class to hovered dropdown menu
+    $('.navbar .dropdown-hover').hover(function() {
+        $(this).find('.yamm-content').first().stop(true, true).delay(150).slideDown(200);
+        $(this).addClass("open");
+        //$('.dropdown').removeClass("open");
+    }, function() {
+        $(this).find('.yamm-content').first().stop(true, true).delay(0).slideUp(1);
+        $(this).removeClass("open");
+    });
+
+
+    //lazy load fade in effect
+    $("img.lazy").lazyload({
+        effect: "fadeIn",
+        effectspeed: 600,
+        failure_limit: 15
+    });
+
+    //trigger a scroll to enable lazyload
+    $('body,html').scroll();
+
+});
 
 
 //baidu analytics

@@ -3,9 +3,9 @@
 		<div class="wide-home-display">
 			<div class="card-salient">
 				<a href="{{ action('ProductController@getProduct', array($wideModel->model_id)) }}">
-					<img src="{{ asset('images/lazyload-holder.png') }}" 
+					<img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" 
 					data-original="{{ asset('images/model-poster/'.$wideModel->model_id.'.jpg') }}" 
-					class="lazy">
+					class="lazy retina-alt">
 				</a>
 			</div>
 			<div class="card-hidden">

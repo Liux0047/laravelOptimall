@@ -3,7 +3,7 @@
         <div class="row sections">
             <div class="col-sm-3">
                 <div class="post">                    
-                    <img src="{{ asset('images/lazyload-holder.png') }}" data-original="{{ asset('images/icons/crossroads.png') }}" class="lazy">
+                    <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" data-original="{{ asset('images/icons/crossroads.png') }}" class="lazy">
                     <h3 class="footer-header">
                         购物指南
                     </h3>
@@ -26,7 +26,7 @@
             </div>
             <div class="col-sm-3">
                 <div class="post">
-                    <img src="{{ asset('images/lazyload-holder.png') }}" data-original="{{ asset('images/icons/compose.png') }}" class="lazy">
+                    <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" data-original="{{ asset('images/icons/compose.png') }}" class="lazy">
                     <h3 class="footer-header">
                         配镜须知
                     </h3>
@@ -72,7 +72,7 @@
             </div>
             <div class="col-sm-3">
                 <div class="post">
-                    <img src="{{ asset('images/lazyload-holder.png') }}" data-original="{{ asset('images/icons/smartphone.png') }}" class="lazy">
+                    <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" data-original="{{ asset('images/icons/smartphone.png') }}" class="lazy">
                     <h3 class="footer-header ">
                         关于我们
                     </h3>
@@ -101,7 +101,7 @@
             </div>
             <div class="col-sm-3">
                 <div class="post">
-                    <img src="{{ asset('images/lazyload-holder.png') }}" data-original="{{ asset('images/icons/lightbulb.png') }}" class="lazy">
+                    <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" data-original="{{ asset('images/icons/lightbulb.png') }}" class="lazy">
                     <h3 class="footer-header">
                         时尚周边
                     </h3>
