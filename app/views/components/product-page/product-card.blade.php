@@ -23,7 +23,7 @@
         <div class="shop-item-image item-image-single">
             <a href="{{ URL::to('product/'.$model->model_id) }}" id="small-view-{{ $model->model_id }}">
                 <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" 
-                data-original="{{ asset('images/gallery/'.$model->model_id.'/'.$model->productViews()->first()->product_id.'/medium-view-3.jpg') }}" 
+                data-original="{{ asset('images/gallery/'.$model->model_id.'/'.$model->productViews()->first()->product_id.'/'.Config::get('optimall.smallViewImg')) }}" 
                 class="lazy">
             </a>
         </div>

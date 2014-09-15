@@ -8,7 +8,7 @@
                 <td width="60%" id="also_buy_{{ $alsoBuyModel->model_id }}" class="also-buy-img-cell">
                     <a href="{{ action('ProductController@getProduct', [$alsoBuyModel->model_id]) }}" class="thumbnail-link">
                         <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" 
-                        data-original="{{ asset('images/gallery/'.$alsoBuyModel->model_id.'/'.$alsoBuyModel->productViews()->first()->product_id.'/medium-view-3.jpg') }}" 
+                        data-original="{{ asset('images/gallery/'.$alsoBuyModel->model_id.'/'.$alsoBuyModel->productViews()->first()->product_id.'/'.Config::get('optimall.smallViewImg') ) }}" 
                         class="lazy">
                     </a>
                     <h5 class="model-title"><strong>{{ $alsoBuyModel->model_name_cn }}</strong></h5>

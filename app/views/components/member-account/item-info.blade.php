@@ -60,7 +60,7 @@
                         <tr>
                             <td>
                                 <a href="{{ action('ProductController@getProduct', [$item->model_id]) }}">
-                                    {{ HTML::image('images/gallery/'.$item->model_id.'/'.$item->product_id.'/medium-view-3.jpg','', array('class'=>'item-small-view')) }}
+                                    {{ HTML::image('images/gallery/'.$item->model_id.'/'.$item->product_id.'/'.Config::get('optimall.smallViewImg'),'', array('class'=>'item-small-view')) }}
                                 </a>
                             </td>
                             <td>

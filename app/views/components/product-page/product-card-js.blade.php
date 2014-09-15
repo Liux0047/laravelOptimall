@@ -3,7 +3,7 @@
     function changeSmallImg(modelId, prodcutId) {
     	$("#small-view-" + modelId + " img").remove();
     	$("#small-view-" + modelId).append(
-    		"<img src='{{ asset('images/gallery') }}/" + modelId + "/" + prodcutId + "/medium-view-3.jpg'>");
+    		"<img src='{{ asset('images/gallery') }}/" + modelId + "/" + prodcutId + "/{{ Config::get('optimall.smallViewImg') }}'>");
     }
 
     var colorIconClickFunc = function() {

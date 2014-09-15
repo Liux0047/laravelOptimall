@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-6">
                 <a href="{{ action('ProductController@getProduct', array($item->model_id)) }}">
-                    {{ HTML::image('images/gallery/'.$item->model_id.'/'.$item->product_id.'/medium-view-3.jpg', "Product Image", array('class' => 'shopping-cart-img')) }}
+                    {{ HTML::image('images/gallery/'.$item->model_id.'/'.$item->product_id.'/'.Config::get('optimall.smallViewImg'), "Product Image", array('class' => 'shopping-cart-img')) }}
                 </a>
             </div>
             <div class="col-md-6 shopping-cart-item-info">

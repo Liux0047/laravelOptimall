@@ -306,7 +306,7 @@ function removeThumbUp(reviewId){
 function changeAlsoBuyImg(modelId, prodcutId) {
     $("#also_buy_" + modelId + " a.thumbnail-link img").remove();
     $("#also_buy_" + modelId + " a.thumbnail-link").append(
-        "<img src='{{ asset('images/gallery') }}/" + modelId + "/" + prodcutId + "/medium-view-3.jpg'>");
+        "<img src='{{ asset('images/gallery') }}/" + modelId + "/" + prodcutId + "/{{ Config::get('optimall.smallViewImg') }}'>");
 }
 
 </script>       

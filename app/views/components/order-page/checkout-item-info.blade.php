@@ -2,7 +2,7 @@
 	<td class="col-md-4">
 		<div class="row">
 			<div class="col-md-6">
-				{{ HTML::image('images/gallery/'.$item->model_id.'/'.$item->product_id.'/medium-view-3.jpg','item picture', array('class' => 'shopping-cart-img')) }}
+				{{ HTML::image('images/gallery/'.$item->model_id.'/'.$item->product_id.'/'.Config::get('optimall.smallViewImg'), 'item picture', array('class' => 'shopping-cart-img')) }}
 			</div>
 			<div class="col-md-6 shopping-cart-item-info">
 				<h4><strong>{{ $item->model_name_cn }}</strong></h4>
