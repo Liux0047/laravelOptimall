@@ -15,12 +15,12 @@
                 </div>
                 <div class="post">
                     <i class="fa fa-gift fa-3x fa-fw"></i> 
-                    <a href"{{ url('info/beginner-guide') }}" class="title">购物流程</a>
+                    <a href="{{ url('info/beginner-guide') }}" class="title">购物流程</a>
                     <p>最佳用户体验， Click. Click. Done!</p>
                 </div>
                 <div class="post">
                     <i class="fa fa-question-circle fa-3x fa-fw"></i> 
-                    <a href="{{ url('info/about-shoppings/faq') }}" class="title">常见问题</a>
+                    <a href="{{ url('info/about-shoppings#faq') }}" class="title">常见问题</a>
                     <p>为您解惑，为您服务</p>
                 </div>
             </div>

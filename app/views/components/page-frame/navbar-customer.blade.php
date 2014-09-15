@@ -36,6 +36,9 @@
                                             <li>
                                                 <a href="{{ url('gallery?materials[]=5') }}">手造原木</a>                                           
                                             </li>
+                                            <li>
+                                                <a href="{{ url('gallery?materials[]=6') }}">高雅尼龙</a>                                           
+                                            </li>
                                         </ul>
                                     </div>
                                     <div class="col-md-1 col-narrow">
@@ -160,10 +163,10 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-narrow navbar-poster">
-                                        {{ HTML::image('images/navbar/2.jpg')}}
+                                        {{ HTML::image('images/navbar/nav-poster-1.jpg')}}
                                     </div>
                                     <div class="col-md-2 col-narrow navbar-poster">
-                                        {{ HTML::image('images/navbar/3.jpg')}}
+                                        {{ HTML::image('images/navbar/nav-poster-2.jpg')}}
                                     </div>
                                 </div>
                             </div>

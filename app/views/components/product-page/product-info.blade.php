@@ -27,9 +27,13 @@
         <div class="row">
             <div class="col-md-12">
 
+                <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" 
+                data-original="{{ asset('images/gallery/'.$model->model_id.'/spec.jpg') }}"
+                class="lazy poster">
+
                 @for ($i=1; $i<=5; $i++)
                 @if (File::exists('images/gallery/'.$model->model_id.'/poster-'.$i.'.jpg'))
-                <img src="{{ asset('images/lazyload-holder.png') }}" 
+                <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" 
                 data-original="{{ asset('images/gallery/'.$model->model_id.'/poster-'.$i.'.jpg') }}"
                 class="lazy poster">
                 @endif
@@ -37,7 +41,7 @@
 
                 @for ($i=1; $i<=4; $i++)
                 <br>
-                <img src="{{ asset('images/lazyload-holder.png') }}" 
+                <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" 
                 data-original="{{ asset('images/gallery/'.$model->model_id.'/detail-'.$i.'.jpg') }}"
                 class="lazy poster">
                 @endfor
@@ -49,7 +53,7 @@
             <div class="col-md-12">
                 @for ($i=1; $i<=7; $i++)
                 <img src="{{ asset('images/lazyload-holder.png') }}" 
-                data-original="{{ asset('images/lens/poster-'.$i.'.jpg') }}"
+                data-original="{{ asset('images/lens/lens-poster-'.$i.'.jpg') }}"
                 class="lazy poster">
                 <br>
                 @endfor

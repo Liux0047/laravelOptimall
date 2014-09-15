@@ -16,7 +16,7 @@
 
     <div class="row">
         <div class="col-md-4">
-            {{ HTML::image('images/registration.jpg') }}
+            {{ HTML::image('images/background-images/registration.jpg') }}
         </div>
         <div class="col-md-8">
             {{ Form::open(array('action' => 'MemberController@postSignUp', 'role'=>'form', 'id'=>'registration_form', 
