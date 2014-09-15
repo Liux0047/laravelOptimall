@@ -18,22 +18,22 @@
     <!-- Carousel items -->
     <div class="carousel-inner">
         <div class="active animated fadeInRight item">
-            <a href="#">
+            <a href="{{ action('InfoController@getAboutProducts') }}">
                 <img src="{{ asset('images/carousel/index-carousel-cn-1.jpg') }}">
             </a>
         </div>
         <div class="item">
-            <a href="#">
+            <a href="{{ action('InfoController@getAmbassadorIntro') }}">
                 <img data-lazy-load-src="{{ asset('images/carousel/index-carousel-cn-2.jpg') }}">
             </a>
         </div>
         <div class="item">
-            <a href="#">
+            <a href="{{ action('ProductController@getProduct', array(3001)) }}">
                 <img data-lazy-load-src="{{ asset('images/carousel/index-carousel-cn-3.jpg') }}">
             </a>
         </div>
         <div class="item">
-            <a href="#">
+            <a href="{{ action('ProductController@getProduct', array(1009)) }}">
                 <img data-lazy-load-src="{{ asset('images/carousel/index-carousel-cn-4.jpg') }}">
             </a>
         </div>                            
