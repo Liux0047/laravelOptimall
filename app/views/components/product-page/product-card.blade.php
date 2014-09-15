@@ -24,7 +24,7 @@
             <a href="{{ URL::to('product/'.$model->model_id) }}" id="small-view-{{ $model->model_id }}">
                 <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" 
                 data-original="{{ asset('images/gallery/'.$model->model_id.'/'.$model->productViews()->first()->product_id.'/'.Config::get('optimall.smallViewImg')) }}" 
-                class="lazy">
+                class="lazy retina-alt">
             </a>
         </div>
         <div class="shop-item-details">

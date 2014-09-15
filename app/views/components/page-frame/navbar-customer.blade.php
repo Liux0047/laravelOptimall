@@ -163,10 +163,14 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-narrow navbar-poster">
-                                        {{ HTML::image('images/navbar/nav-poster-1.jpg')}}
+                                        <a href="{{ action('ProductController@getProduct', array(2008)) }}">
+                                            {{ HTML::image('images/navbar/nav-poster-1.jpg')}}
+                                        </a>
                                     </div>
                                     <div class="col-md-2 col-narrow navbar-poster">
-                                        {{ HTML::image('images/navbar/nav-poster-2.jpg')}}
+                                        <a href="{{ action('ProductController@getProduct', array(3004)) }}">
+                                            {{ HTML::image('images/navbar/nav-poster-2.jpg')}}
+                                        </a>
                                     </div>
                                 </div>
                             </div>

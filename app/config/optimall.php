@@ -6,7 +6,7 @@ return array(
      */
     'lazyloadImg'=>'images/lazyload-holder.png',
     
-    'smallViewImg'=>'medium-view-3.jpg',
+    'smallViewImg'=>'small-view.jpg',
 
     'orderCodeLength' => 8,
     
