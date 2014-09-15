@@ -557,22 +557,25 @@ label, .control-label, .help-block {
     width: 40px;
     height: 50px;
     overflow: hidden;    
+    background-image: url(../images/icons/badges.png);
+    background-repeat: no-repeat;
+    display: block;
 
 }
 .new-arrival-badge{
-    background: url(../images/badges/badge-2.png) no-repeat;    
+    background-position: -5px -5px;
 }
 .promotion-badge{
-    background: url(../images/badges/badge-4.png) no-repeat;    
+    background-position: -55px -5px;
 }
 .best-seller-badge{
-    background: url(../images/badges/badge-5.png) no-repeat;    
+    background-position: -105px -5px;  
 }
 .featured-badge{
-    background: url(../images/badges/badge-3.png) no-repeat;    
+    background-position: -155px -5px;
 }
 .classical-badge{
-    background: url(../images/badges/badge-1.png) no-repeat;    
+    background-position: -205px -5px;
 }
 .shop-items-container .shop-item .shop-item-label{
     height: 40px;
