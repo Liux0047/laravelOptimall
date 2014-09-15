@@ -33,10 +33,10 @@
                             记住我                                
                         </label>
                     </div>
-                    <a href="{{ URL::to('sign-up') }}" class="btn btn-danger pull-right">
+                    <input type="submit" class="btn btn-metro pull-right" value="登录">
+                    <a href="{{ URL::to('sign-up') }}" class="btn btn-danger">
                         注册                                    
-                    </a>
-                    <input type="submit" class="btn btn-metro" value="登录">
+                    </a>                    
                     {{ Form::close() }}
                 </div>
             </div><!--End Span6-->

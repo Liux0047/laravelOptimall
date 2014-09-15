@@ -1,4 +1,4 @@
-<div class="col-md-{{ $colSpan or '3' }} col-sm-{{ $colSpan or '3' }} col-xs-6 col-narrow">
+<div class="col-md-{{ $colMd or '3' }} col-sm-{{ $colSm or '6' }} col-xs-6 col-narrow">
     <div class="shop-item">
         @if ($model->product_label_id == 1)
         <span class="shop-item-badge promotion-badge"></span>

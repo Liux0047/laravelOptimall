@@ -1,5 +1,5 @@
 <!--detailed product info -->
-<ul class="nav nav-tabs" role="tablist">
+<ul class="nav nav-tabs product-info-tab" role="tablist">
     <li class="active">
         <a href="#detailed_description" role="tab" data-toggle="tab">
             详细描述
@@ -47,7 +47,7 @@
     <div class="tab-pane fade tab-pane-bordered" id="lens_description">
         <div class="row">
             <div class="col-md-12">
-                @for ($i=1; $i<=6; $i++)
+                @for ($i=1; $i<=7; $i++)
                 <img src="{{ asset('images/lazyload-holder.png') }}" 
                 data-original="{{ asset('images/lens/poster-'.$i.'.jpg') }}"
                 class="lazy poster">
@@ -59,8 +59,12 @@
     
     
     <div class="tab-pane fade tab-pane-bordered" id="prescription_guide">
-
+        <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" 
+        data-original="{{ asset('images/info/beginner-guide/guide.jpg') }}"
+        class="lazy poster">
     </div>
+
+
     <div class="tab-pane fade" id="user_review">
         <div class="panel panel-default">
             <div class="panel-body">

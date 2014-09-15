@@ -28,7 +28,7 @@
 							</p>
 						</div>						
 					</div>
-					@include('components.product-page.product-card', array('model' => $wideModel, 'colSpan'=>6 ))
+					@include('components.product-page.product-card', array('model' => $wideModel, 'colMd'=>6 ))
 				</div>
 			</div>
 		</div>

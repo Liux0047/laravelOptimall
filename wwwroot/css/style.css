@@ -1036,18 +1036,20 @@ input.jq-validate-error{
     position: relative;
     background-image: url('../images/login.jpg');
     background-size:cover;
-    background-position:50% 50%;
+    background-position: 0% 0%;
     min-height: 400px;
 }
 #login_container .alert {
+    float: left;
+    width: 100%;
     margin-top: 30px;
     border-radius: 5px;
     opacity: 0.85;
 }
 .login-form-container {
     background: rgba(6, 7, 7, 0.56);
-    margin-top: 30px;
-    margin-bottom: 60px;
+    margin-top: 100px;
+    margin-bottom: 90px;
     border-radius: 5px;
     padding: 25px;
     width: 100%;
@@ -1065,7 +1067,7 @@ input.jq-validate-error{
 .login-form-container .help-block a{
     color: #18bc9c;
 }
-.login-form-container .btn[type=submit]{
+.login-form-container .btn{
     padding-left: 40px;
     padding-right: 40px;
 }
@@ -1259,6 +1261,9 @@ input.jq-validate-error{
 .lens-img {
     width:250px;
 }
+.product-info-tab {
+    margin-top: 40px;
+}
 .tab-pane#detailed_description img {
     width: 100%
 }
@@ -1302,7 +1307,7 @@ input.jq-validate-error{
     100% { transform: scale(1); }
 }
 .also-buy-container {
-    margin-top:38px;
+    margin-top:78px;
 }
 .also-buy-container .model-title, .also-buy-container .also-buy-img-cell {
     text-align:center;

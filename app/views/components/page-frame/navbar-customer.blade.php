@@ -271,7 +271,7 @@
                             <div class="yamm-content content-narrow">
                                 <ul>
                                     <li>
-                                        <a href="#">
+                                        <a href="{{ action('InfoController@getTips') }}">
                                             如何测量瞳距
                                         </a>
                                     </li>
