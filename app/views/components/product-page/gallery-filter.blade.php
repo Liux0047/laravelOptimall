@@ -1,4 +1,4 @@
-<div class="shop-items blocky">
+<div class="gallery-filter-container">
 	<div class="panel panel-metro">
 		<div class="panel-heading">优化您的搜索</div>
 		<table class="table table-condensed">

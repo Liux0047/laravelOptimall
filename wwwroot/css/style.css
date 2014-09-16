@@ -1087,6 +1087,9 @@ input.jq-validate-error{
 
 
 /* Gallery page */
+.gallery-filter-container .table .checkbox-inline{
+    width: 70px;    
+}
 .sorting-option {
     font-size: 12px;
     padding: 6px 10px;
