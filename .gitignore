@@ -217,8 +217,15 @@ pip-log.txt
 ## images folder
 wwwroot/images/
 
-## vendor
-vendor/
+## laravel project
+/bootstrap/compiled.php
+/vendor
+composer.phar
+.env.*.php
+.env.php
+.DS_Store
+Thumbs.db
+
 
 ## NetBeans
 nbproject/
