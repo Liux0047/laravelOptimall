@@ -278,12 +278,12 @@
                             <div class="yamm-content content-narrow">
                                 <ul>
                                     <li>
-                                        <a href="{{ action('InfoController@getTips') }}">
+                                        <a href="{{ action('InfoController@getMeasurePupilDistance') }}">
                                             如何测量瞳距
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a href="{{ action('InfoController@getChooseFrame') }}">
                                             选择合适的镜框
                                         </a>
                                     </li>                                   

@@ -271,9 +271,7 @@ var rule = {
     $(document).ready(function() {
         $('.prescription_popover').each(function(){
             $(this).popover({
-                trigger: 'hover',
-                placement: 'bottom',
-                html: true
+                trigger: 'hover'
             });
         });
     });

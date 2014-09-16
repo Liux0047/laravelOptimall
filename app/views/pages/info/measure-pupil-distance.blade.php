@@ -8,7 +8,7 @@
 @section ('content')
 <div id="tips-container">
 	<div id="" class="container">
-		{{ HTML::image('images/info/tips/tips-1.jpg')}}
+		{{ HTML::image('images/info/tips/tip-1.jpg')}}
 	</div>
 </div>
 @stop

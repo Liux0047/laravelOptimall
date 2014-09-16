@@ -21,8 +21,12 @@ class InfoController extends BaseController {
         return View::make('pages.info.about-products', $params);
     }
     
-    public function getTips () {
-        return View::make('pages.info.tips');
+    public function getMeasurePupilDistance () {
+        return View::make('pages.info.measure-pupil-distance');
+    }
+    
+    public function getChooseFrame () {
+        return View::make('pages.info.choose-frame');
     }
     
     public function getWechat() {

@@ -15,25 +15,25 @@
                                 </th>
                                 <th width="21%">
                                     度数(SPH)
-                                    <a href="#" class="prescription_popover" data-toggle="popover" data-content="球镜度数指的是近视或者远视矫正度数。减号(-)代表近视，加号(+) 代表远视。 如果“PL”或者“Plano”写在你的验光单上，它代表相应眼镜是0度。">
+                                    <a href="#" class="prescription_popover" data-toggle="popover" data-content="球镜度数指的是近视或者远视矫正度数。减号(-)代表近视，加号(+) 代表远视。 如果“PL”或者“Plano”写在你的验光单上，它代表相应眼镜是0度。" data-placement="right">
                                         <i class="fa fa-info-circle fa-lg"></i>
                                     </a>
                                 </th>
                                 <th width="21%">
                                     散光(CYL)
-                                    <a href="#" class="prescription_popover" data-toggle="popover" data-content="散光指的是散光度数。它也可以是正数或者是负数。如果“DS” 或者“SPH” 出现在散光的空格内，说明您某眼没有散光。相应地，你在此处选择0.00，在后面相应的Axis也选择0。">
+                                    <a href="#" class="prescription_popover" data-toggle="popover" data-content="散光指的是散光度数。它也可以是正数或者是负数。如果“DS” 或者“SPH” 出现在散光的空格内，说明您某眼没有散光。相应地，你在此处选择0.00，在后面相应的Axis也选择0。" data-placement="right">
                                         <i class="fa fa-info-circle fa-lg"></i>
                                     </a>
                                 </th>
                                 <th width="21%">
                                     轴位(AXIS)
-                                    <a href="#" class="prescription_popover" data-toggle="popover" data-content="轴位代表散光的方向，数值介于1到180。如果一只眼睛有散光就一定有相对的轴位。如果散光是0，轴位也就相应是0。" >
+                                    <a href="#" class="prescription_popover" data-toggle="popover" data-content="轴位代表散光的方向，数值介于1到180。如果一只眼睛有散光就一定有相对的轴位。如果散光是0，轴位也就相应是0。" data-placement="left">
                                         <i class="fa fa-info-circle fa-lg"></i>
                                     </a>
                                 </th>
                                 <th width="21%">
                                     加光(ADD)
-                                    <a href="#" class="prescription_popover" data-toggle="popover" data-content="加光的数值代表近距离用眼的度数。它的数值指在远用光度的基础上增加的度数，来解决远近看物体度数不一样的问题(仅适用于渐进眼镜片)。通常左右眼的加光是一样的，所以你的验光单如果只有一个加光，代表的是双眼。">
+                                    <a href="#" class="prescription_popover" data-toggle="popover" data-content="加光的数值代表近距离用眼的度数。它的数值指在远用光度的基础上增加的度数，来解决远近看物体度数不一样的问题(仅适用于渐进眼镜片)。通常左右眼的加光是一样的，所以你的验光单如果只有一个加光，代表的是双眼。" data-placement="left">
                                         <i class="fa fa-info-circle fa-lg"></i>
                                     </a>
                                 </th>
@@ -74,7 +74,7 @@
                             </tr>                            
                             <tr class="PD_popover">
                                 <th valign="middle">瞳距(cm)
-                                    <a href="#" class="prescription_popover" data-toggle="popover" data-content="瞳距是指左右眼瞳孔中心两点间的距离（以毫米为单位），一般验光单上的PD即表示瞳距。大多数人瞳距在54至74毫米之间。">
+                                    <a href="#" class="prescription_popover" data-toggle="popover" data-content="瞳距是指左右眼瞳孔中心两点间的距离（以毫米为单位），一般验光单上的PD即表示瞳距。大多数人瞳距在54至74毫米之间。" data-placement="right">
                                         <i class="fa fa-info-circle fa-lg"></i>
                                     </a>
                                 </th>
@@ -95,7 +95,7 @@
                             </tr>
                         </tbody>
                     </table>
-                </div><!-- .panel -->
+                </div><!-- .panel -->  
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" name="remember_prescription" id="remember_prescription" value="1" onchange="togglePresName({{ $order_line_item_id }});">

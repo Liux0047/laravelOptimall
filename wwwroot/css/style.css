@@ -196,7 +196,7 @@ div.vertical-divider {
 
 /* popover modification */
 .popover {     
-    max-width: 468px;
+    max-width: 368px;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
     border-left-width: 0px;
@@ -242,9 +242,14 @@ label, .control-label, .help-block {
     position: absolute;
     top: 50%;
     left: 50%;
+    overflow-x: visible;
 }
 .modal-content {
     overflow-y: auto;
+    overflow-x: visible;
+}
+.modal-body {
+    overflow-x: visible;
 }
 .modal-footer {
     margin-top: 0;
@@ -1243,7 +1248,6 @@ input.jq-validate-error{
 .color-selection-box img {
     border: 1px darkgray solid;
 }
-
 .lens-selection-container{    
     margin-bottom: 16px;
 }
@@ -1263,7 +1267,7 @@ input.jq-validate-error{
 .lens-img {
     width:250px;
 }
-.product-info-tab {
+.product-info-container {    
     margin-top: 40px;
 }
 .tab-pane#detailed_description img {
@@ -1309,7 +1313,7 @@ input.jq-validate-error{
     100% { transform: scale(1); }
 }
 .also-buy-container {
-    margin-top:78px;
+    margin-top: 38px;
 }
 .also-buy-container .model-title, .also-buy-container .also-buy-img-cell {
     text-align:center;

@@ -113,12 +113,12 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ action('InfoController@getTips') }}">
+                        <a href="{{ action('InfoController@getMeasurePupilDistance') }}">
                             如何优雅地测量瞳距
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="{{ action('InfoController@getChooseFrame') }}">
                             如何优雅地选择镜框
                         </a>
                     </li>

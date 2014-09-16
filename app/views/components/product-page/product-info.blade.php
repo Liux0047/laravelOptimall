@@ -1,5 +1,5 @@
 <!--detailed product info -->
-<ul class="nav nav-tabs product-info-tab" role="tablist">
+<ul class="nav nav-tabs" role="tablist">
     <li class="active">
         <a href="#detailed_description" role="tab" data-toggle="tab">
             详细描述
@@ -60,8 +60,8 @@
             </div>
         </div>            
     </div>
-    
-    
+
+
     <div class="tab-pane fade tab-pane-bordered" id="prescription_guide">
         <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" 
         data-original="{{ asset('images/info/beginner-guide/guide.jpg') }}"
@@ -128,4 +128,3 @@
         </div>
     </div>
 </div>
-

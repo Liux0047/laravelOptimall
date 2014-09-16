@@ -146,11 +146,16 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-9">
-            @include('components.product-page.product-info', array('model' => $model, 'reviews'=>$reviews,'thumbedList'=>$thumbedList, 'hasReview'=>$hasReview))
+
+    <div class="product-info-container">
+        <div class="row">
+            <div class="col-md-9">
+                @include('components.product-page.product-info', array('model' => $model, 'reviews'=>$reviews,'thumbedList'=>$thumbedList, 'hasReview'=>$hasReview))
+            </div>
+            <div class="col-md-3">
+                @include('components.product-page.also-buy', array('alsoBuyModels'=>$alsoBuys['models']))
+            </div>
         </div>
-        @include('components.product-page.also-buy', array('alsoBuyModels'=>$alsoBuys['models']))
     </div>
 </div>
 @stop
