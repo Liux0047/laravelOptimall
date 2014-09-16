@@ -185,7 +185,7 @@ div.vertical-divider {
 
 
 /* panel metro */
-.panel-metro>.panel-heading {
+.panel-metro .panel-heading {
     color: #ffffff;
     background-color: #18bc9c;
     border-color: #128f76;
@@ -1087,8 +1087,20 @@ input.jq-validate-error{
 
 
 /* Gallery page */
-.gallery-filter-container .table .checkbox-inline{
-    width: 70px;    
+.gallery-filter-container .panel {
+    padding-bottom: 20px;
+}
+.gallery-filter-container .panel .checkbox label{
+    font-size: 14px;    
+}
+.gallery-filter-container .panel .panel-heading{
+    font-size: 1.2em;    
+    font-weight: bold;
+    padding-bottom: 0px;
+}
+.gallery-filter-container .panel .panel-body {
+    padding-top: 5px;    
+    padding-left: 18px;
 }
 .sorting-option {
     font-size: 12px;

@@ -16,7 +16,7 @@
                 <span class="discount-price">
                     {{ number_format($model->price, 0) }} 
                 </span>
-                <span class="market-price"><del>{{ $model->market_price }}</del>
+                <span class="market-price"><del>¥{{ $model->market_price }}</del>
                 </span>
             </div>
         </div>

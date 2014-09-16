@@ -24,8 +24,7 @@
                 <strong>{{ $model->model_name_cn }}</strong>
                 <small class="font-brown">
                     <i>                            
-                        {{ $model->style_name_cn }}
-                        {{ $model->material_name_cn }}
+                        {{ $model->shape_name_cn }}
                         {{ $model->frame_name_cn }}
                     </i>
                 </small>                        
