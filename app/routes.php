@@ -125,7 +125,7 @@ Route::group(array('before' => 'auth'), function() {
     /*
      * Route to Alipay notify URL
      */
-    Route::get('alipay-return/notify', 'AlipayController@getNotify');
+    Route::get('alipay-return/notify', 'OrderController@getAlipayNotfity');
     /*
      * Route to Alipay return
      */

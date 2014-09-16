@@ -29,6 +29,9 @@ return array(
     //安全检验码，以数字和字母组成的32位字符
     'key' => 'dwsmt7lowddbigw5vdso2mnyl5rcvvnk',
     
+    //seller's email, alipay account
+    'seller_email' => 'mgzcecommerce@163.com',
+    
     //签名方式 不需修改
     'sign_type' => 'MD5',
     
@@ -40,5 +43,5 @@ return array(
     'cacert' => public_path().'\cacert.pem',
     
     //访问模式,根据自己的服务器是否支持ssl访问，若支持请选择https；若不支持请选择http
-    'transport' => 'http'
+    'transport' => 'https'
 );

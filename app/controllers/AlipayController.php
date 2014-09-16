@@ -31,11 +31,6 @@ class AlipayController extends BaseController {
      */
     private $http_verify_url = 'http://notify.alipay.com/trade/notify_query.do?';
 
-    public function getNotfity() {
-        
-    }
-
-
     /*
      * generate a HTML form and submit with params
      */
@@ -47,13 +42,13 @@ class AlipayController extends BaseController {
         $payment_type = "1";
         //必填，不能修改
         //服务器异步通知页面路径
-        $notify_url = action('AlipayController@getNotify');
+        $notify_url = action('OrderController@getAlipayNotfity');
         //需http://格式的完整路径，不能加?id=123这类自定义参数
         //页面跳转同步通知页面路径
         $return_url = action('OrderController@getAlipayReturn');
         //需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
         //卖家支付宝帐户
-        $seller_email = '13861383782';
+        $seller_email = Config::get('alipay.seller_email');
         //必填
         //商户订单号
         $out_trade_no = $tradeNumber;
@@ -234,7 +229,7 @@ class AlipayController extends BaseController {
      * 针对notify_url验证消息是否是支付宝发出的合法消息
      * @return 验证结果
      */
-    private function verifyNotify() {
+    public function verifyNotify() {
         if (empty($_POST)) {//判断POST来的数组是否为空
             return false;
         } else {
@@ -282,6 +277,7 @@ class AlipayController extends BaseController {
             if (!empty($_GET["notify_id"])) {
                 $responseTxt = $this->getResponse($_GET["notify_id"]);
             }
+            
 
             //写日志记录
             //if ($isSign) {
@@ -296,6 +292,7 @@ class AlipayController extends BaseController {
             //验证
             //$responsetTxt的结果不是true，与服务器设置问题、合作身份者ID、notify_id一分钟失效有关
             //isSign的结果不是true，与安全校验码、请求时的参数格式（如：带自定义参数等）、编码格式有关
+            echo "isSign ". var_dump($isSign);
             if (preg_match("/true$/i", $responseTxt) && $isSign) {
                 return true;
             } else {
@@ -323,7 +320,7 @@ class AlipayController extends BaseController {
         $isSgin = false;
         switch (strtoupper(trim(Config::get('alipay.sign_type')))) {
             case "MD5" :
-                $isSgin = $this->md5Verify($prestr, $sign, Config::get('alipay.sign_type'));
+                $isSgin = $this->md5Verify($prestr, $sign, Config::get('alipay.key'));
                 break;
             default :
                 $isSgin = false;
@@ -351,7 +348,7 @@ class AlipayController extends BaseController {
             $veryfy_url = $this->http_verify_url;
         }
         $veryfy_url = $veryfy_url . "partner=" . $partner . "&notify_id=" . $notify_id;
-        $responseTxt = $this->getHttpResponseGET($veryfy_url, base_path().Config::get('alipay.cacert'));
+        $responseTxt = $this->getHttpResponseGET($veryfy_url, Config::get('alipay.cacert'));            
 
         return $responseTxt;
     }
@@ -480,9 +477,10 @@ class AlipayController extends BaseController {
         curl_setopt($curl, CURLOPT_POST, true); // post传输数据
         curl_setopt($curl, CURLOPT_POSTFIELDS, $para); // post传输数据
         $responseText = curl_exec($curl);
-        //var_dump( curl_error($curl) );//如果执行curl过程中出现异常，可打开此开关，以便查看异常内容
+        var_dump( curl_error($curl) );//如果执行curl过程中出现异常，可打开此开关，以便查看异常内容
         curl_close($curl);
 
+        echo "CURL : ".$responseText;
         return $responseText;
     }
 
@@ -503,8 +501,9 @@ class AlipayController extends BaseController {
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2); //严格认证
         curl_setopt($curl, CURLOPT_CAINFO, $cacert_url); //证书地址
         $responseText = curl_exec($curl);
-        //var_dump( curl_error($curl) );//如果执行curl过程中出现异常，可打开此开关，以便查看异常内容
-        curl_close($curl);
+        
+        var_dump( curl_error($curl) );//如果执行curl过程中出现异常，可打开此开关，以便查看异常内容
+        curl_close($curl);       
 
         return $responseText;
     }

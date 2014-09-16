@@ -286,6 +286,11 @@
                                         <a href="{{ action('InfoController@getChooseFrame') }}">
                                             选择合适的镜框
                                         </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ action('InfoController@getAboutPrescription') }}">
+                                            如何填写验光单
+                                        </a>
                                     </li>                                   
                                 </ul>
                             </div>

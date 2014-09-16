@@ -29,6 +29,10 @@ class InfoController extends BaseController {
         return View::make('pages.info.choose-frame');
     }
     
+    public function getAboutPrescription () {
+        return View::make('pages.info.about-prescription');
+    }
+    
     public function getWechat() {
         return View::make('pages.info.wechat-QR');
     }

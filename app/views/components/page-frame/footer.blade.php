@@ -123,8 +123,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            如何优雅地筛选眼镜
+                        <a href="{{ action('InfoController@getAboutPrescription') }}">
+                            如何填写验光单
                         </a>
                     </li>
                     <li>

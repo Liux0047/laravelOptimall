@@ -38,6 +38,7 @@
     @else
     <h1>
         支付失败
+        {{ var_dump($_GET) }}
     </h1>
     @endif
 </div>
