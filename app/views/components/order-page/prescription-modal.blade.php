@@ -7,7 +7,8 @@
                 <h4 class="modal-title" id="myModalLabel">填写验光单</h4>
             </div>
             <div class="modal-body">
-                <div class="panel panel-default">
+
+                <div class="panel panel-default">                    
                     <table class="table" id="prescription-table">
                         <thead>
                             <tr class="active">
@@ -43,7 +44,7 @@
                             <tr>
                                 <th valign="middle">右眼</th>
                                 @foreach($prescriptionNames['O_D_RIGHTNames'] as $O_D_RIGHTName)
-                                <td valign="middle">
+                                <td valign="middle">                                    
                                     <select name="{{ $O_D_RIGHTName }}" id="{{ $O_D_RIGHTName }}" data-placeholder="请选择" class="chosen-select" style="width:100px;">
                                         @foreach($prescriptionOptions[$O_D_RIGHTName] as $prescriptionOption)
                                         <option value="{{ $prescriptionOption }}" 
@@ -92,6 +93,15 @@
                                     </select>
                                 </td>
                                 @endforeach
+                                <td></td><td></td>
+                                <td>
+                                    <div class="checkbox">
+                                        <lable>
+                                            <input type="checkbox" id="enable_add_option" value="1" onchange="toggleAddPrescription({{ $order_line_item_id }});">
+                                            我有加光
+                                        </label>
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -100,9 +110,6 @@
                     <label>
                         <input type="checkbox" name="remember_prescription" id="remember_prescription" value="1" onchange="togglePresName({{ $order_line_item_id }});">
                         保存我的验光单 
-                        <p class="help-block">
-                            <small>保存这次填入的验光单以方便您下次使用</small>
-                        </p>
                     </label>
                 </div>
                 <div class="form-group hidden" id="prescription_user_field">

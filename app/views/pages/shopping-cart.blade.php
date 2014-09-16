@@ -168,6 +168,8 @@
 $("#prescription_modal_{{ $item->order_line_item_id }}").on("shown.bs.modal", function(e) {
     $("#prescription_modal_{{ $item->order_line_item_id }} .chosen-select")
     .chosen({width: "95%", no_results_text: "没有找到结果："});
+    $('#prescription_modal_{{ $item->order_line_item_id }} #O_S_ADD').next().addClass('chosen-disabled');
+    $('#prescription_modal_{{ $item->order_line_item_id }} #O_D_ADD').next().addClass('chosen-disabled');
 });
 @endforeach
 
@@ -187,6 +189,17 @@ function togglePresName(itemId) {
         $('#prescription_modal_' + itemId + ' #prescription_user_field').slideUp('fast', function() {
             $('#prescription_modal_' + itemId + ' #prescription_user_field').addClass('hidden').removeClass('no-display');
         });
+    }
+}
+
+function toggleAddPrescription (itemId) {
+    if($('#prescription_modal_' + itemId + ' #enable_add_option').is(':checked')) {
+        $('#prescription_modal_' + itemId + ' #O_S_ADD').next().removeClass('chosen-disabled');
+        $('#prescription_modal_' + itemId + ' #O_D_ADD').next().removeClass('chosen-disabled');
+    }
+    else {
+        $('#prescription_modal_' + itemId + ' #O_S_ADD').next().addClass('chosen-disabled');
+        $('#prescription_modal_' + itemId + ' #O_D_ADD').next().addClass('chosen-disabled');
     }
 }
 
@@ -264,17 +277,15 @@ var rule = {
         @foreach($items as $item)
         $('#prescription_form_{{ $item->order_line_item_id }}').validate(rule);
         @endforeach
-    });
 
-
-    //enable popover
-    $(document).ready(function() {
+        //enable popover
         $('.prescription_popover').each(function(){
             $(this).popover({
                 trigger: 'hover'
             });
         });
     });
+
 
     //enable popover of stored prescription
     @foreach($storedPrescriptions as $storedPrescription)

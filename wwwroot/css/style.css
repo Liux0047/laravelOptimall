@@ -245,7 +245,6 @@ label, .control-label, .help-block {
     overflow-x: visible;
 }
 .modal-content {
-    overflow-y: auto;
     overflow-x: visible;
 }
 .modal-body {
@@ -1148,8 +1147,11 @@ input.jq-validate-error{
 .prescription-modal .modal-footer {
     margin-top: 0px;
 }
-.prescription-modal .modal-dialog th, .prescription-modal .modal-dialog td{
+.prescription-modal .modal-content th, .prescription-modal .modal-content td{
     text-align: left; 
+}
+.prescription-modal .modal-content td .checkbox{
+    padding-left: 20px;
 }
 .shopping-cart-table .quantity-cell{
     padding: 0px 10px;
