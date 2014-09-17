@@ -8,7 +8,7 @@
 <div id="login_container">
     <div class="container" >
         <div class="row">
-            <div class="col-md-4 col-md-offset-4">
+            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
                 @include('components.page-frame.message-bar')
                 <div class="login-form-container">
                     <h4>
@@ -34,7 +34,7 @@
                         </label>
                     </div>
                     <input type="submit" class="btn btn-metro pull-right" value="登录">
-                    <a href="{{ URL::to('sign-up') }}" class="btn btn-danger">
+                    <a href="{{ action('MemberController@getSignUp') }}" class="btn btn-danger">
                         注册                                    
                     </a>                    
                     {{ Form::close() }}

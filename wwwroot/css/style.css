@@ -458,6 +458,11 @@ label, .control-label, .help-block {
 .yamm-content .pill img {
     height: 20px;
 }
+.yamm-content .WB_widget .follow_text {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
 
 /*
 * Pagination modification
@@ -1076,6 +1081,9 @@ input.jq-validate-error{
 .login-form-container .btn{
     padding-left: 40px;
     padding-right: 40px;
+}
+.login-form-container  .control-label{
+    color: white;
 }
 
 /* sign up */

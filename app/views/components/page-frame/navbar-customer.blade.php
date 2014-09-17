@@ -39,6 +39,12 @@
                                             <li>
                                                 <a href="{{ url('gallery?materials[]=6') }}">高雅尼龙</a>                                           
                                             </li>
+                                            <li>
+                                                <a href="{{ url('gallery') }}">
+                                                    <i class="fa fa-angle-double-right"></i> 
+                                                    更多
+                                                </a>                                                    
+                                            </li>
                                         </ul>
                                     </div>
                                     <div class="col-md-1 col-narrow">
@@ -63,6 +69,12 @@
                                             </li>
                                             <li>
                                                 <a href="{{ url('gallery?styles[]=6') }}">摩登时代</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ url('gallery') }}">
+                                                    <i class="fa fa-angle-double-right"></i> 
+                                                    更多
+                                                </a>                                                    
                                             </li>
                                         </ul>
                                     </div>

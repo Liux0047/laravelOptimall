@@ -13,8 +13,7 @@
     <link rel='shortcut icon' type="image/x-icon" href="{{ asset('images/favicon.ico') }}"> 
     @show
     {{ HTML::style('css/style.css'); }}
-    <title>{{{ $pageTitle or '目光之城 - 中国最IN的正品潮流眼镜商城，年轻潮人最爱，超高性价比，最佳网络配镜体验！'}}}</title>    
-
+    <title>{{{ $pageTitle or '目光之城 - 中国最IN的正品潮流眼镜商城，年轻潮人最爱，超高性价比，最佳网络配镜体验！'}}}</title>  
 </head>        
 
 

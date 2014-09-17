@@ -34,7 +34,9 @@
 		<div class="tab-pane fade in active tab-pane-bordered" id="about_ambassador">
 			<div class="row">
 				<div class="col-md-12">     
-					<img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" data-original="{{ asset('images/ambassador/program-introduction.jpg') }}" class="lazy">
+					<a href="{{ action('MemberAccountController@getAmbassadorPanel') }}">
+						<img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" data-original="{{ asset('images/ambassador/program-introduction.jpg') }}" class="lazy">
+					</a>
 				</div>
 			</div> 
 		</div>
@@ -42,7 +44,9 @@
 		<div class="tab-pane fade tab-pane-bordered" id="how_it_works">
 			<div class="row">
 				<div class="col-md-12">     
-					<img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" data-original="{{ asset('images/ambassador/ambassador-illustration.jpg') }}" class="lazy">
+					<a href="{{ action('MemberAccountController@getAmbassadorPanel') }}">
+						<img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" data-original="{{ asset('images/ambassador/ambassador-illustration.jpg') }}" class="lazy">
+					</a>
 				</div>
 			</div>            
 		</div>

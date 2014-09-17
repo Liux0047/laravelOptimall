@@ -1,14 +1,14 @@
 <div class="top-banner">
     <div class="container">
         <div class="row">
-            <div class="col-md-3 col-sm-8 col-xs-8">
+            <div class="col-md-3 col-sm-4 col-xs-4">
                 <div class="logo">
                     <a href="{{ URL::to('/') }}" title="Return to the homepage">
                         {{ HTML::image('images/optimall.png', 'Optimall logo') }} 
                     </a>
                 </div>
             </div>
-            <div class="col-md-8 col-sm-8 col-xs-8">
+            <div class="col-md-8 col-sm-4 col-xs-4">
                 <div class="row row-narrow">
                     <div class="col-md-2 optimall-promises col-narrow">                                
                         <h6><i class="fa fa-check-square-o fa-lg"></i> 100%正品保障</h6>
@@ -27,7 +27,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-1 col-sm-1 col-xs-1 cart-icon-ontainer">
+            <div class="col-md-1 col-sm-4 col-xs-4 cart-icon-ontainer">
                 <a href="{{ action('ShoppingCartController@getMyCart') }}" >
                     {{ HTML::image('images/cart-icon.png', 'Cart Icon') }} 
                 </a>
