@@ -142,7 +142,7 @@ Route::group(array('before' => 'auth'), function() {
 /*
  * Route to Alipay notify URL
  */
-Route::get('alipay-return/notify', 'OrderController@getAlipayNotify');
+Route::post('alipay-return/notify', 'OrderController@postAlipayNotify');
 
 /*
  * Route to about page

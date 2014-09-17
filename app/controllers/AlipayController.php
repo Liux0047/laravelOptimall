@@ -42,7 +42,7 @@ class AlipayController extends BaseController {
         $payment_type = "1";
         //必填，不能修改
         //服务器异步通知页面路径
-        $notify_url = action('OrderController@getAlipayNotify');
+        $notify_url = action('OrderController@postAlipayNotify');
         //需http://格式的完整路径，不能加?id=123这类自定义参数
         //页面跳转同步通知页面路径
         $return_url = action('OrderController@getAlipayReturn');
@@ -236,12 +236,10 @@ class AlipayController extends BaseController {
             Log::info((new DateTime)->format('Y-m-d H:i:s').': POST has content');
             //生成签名结果
             $isSign = $this->getSignVeryfy($_POST, $_POST["sign"]);
-            Log::info((new DateTime)->format('Y-m-d H:i:s').': isSign 240- '.var_dump($isSign));
             //获取支付宝远程服务器ATN结果（验证是否是支付宝发来的消息）
             $responseTxt = 'true';
             if (!empty($_POST["notify_id"])) {
                 $responseTxt = $this->getResponse($_POST["notify_id"]);
-                Log::info((new DateTime)->format('Y-m-d H:i:s').': responseTxt 244- '.var_dump($responseTxt));
             }
 
             //写日志记录
@@ -258,10 +256,8 @@ class AlipayController extends BaseController {
             //$responsetTxt的结果不是true，与服务器设置问题、合作身份者ID、notify_id一分钟失效有关
             //isSign的结果不是true，与安全校验码、请求时的参数格式（如：带自定义参数等）、编码格式有关
             if (preg_match("/true$/i", $responseTxt) && $isSign) {
-                Log::info((new DateTime)->format('Y-m-d H:i:s').': preg_match true ');
                 return true;
             } else {
-                Log::info((new DateTime)->format('Y-m-d H:i:s').': preg_match false ');
                 return false;
             }
         }
@@ -481,7 +477,7 @@ class AlipayController extends BaseController {
         curl_setopt($curl, CURLOPT_POST, true); // post传输数据
         curl_setopt($curl, CURLOPT_POSTFIELDS, $para); // post传输数据
         $responseText = curl_exec($curl);
-        var_dump( curl_error($curl) );//如果执行curl过程中出现异常，可打开此开关，以便查看异常内容
+        //var_dump( curl_error($curl) );//如果执行curl过程中出现异常，可打开此开关，以便查看异常内容
         curl_close($curl);
 
         return $responseText;

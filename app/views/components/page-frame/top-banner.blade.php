@@ -29,7 +29,7 @@
             </div>
             <div class="col-md-1 col-sm-4 col-xs-4 cart-icon-ontainer">
                 <a href="{{ action('ShoppingCartController@getMyCart') }}" >
-                    {{ HTML::image('images/cart-icon.png', 'Cart Icon') }} 
+                    <i class="fa fa-shopping-cart fa-3x"></i> 
                 </a>
                 <span class="badge">{{ $numCartItems }}</span>  
             </div>

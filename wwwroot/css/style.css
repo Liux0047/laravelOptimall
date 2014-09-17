@@ -855,6 +855,9 @@ label, .control-label, .help-block {
         display: none;
     }
 }
+.top-banner .fa-shopping-cart{
+    color: #ffffff;
+}
 .style-icon-container {
     margin-top: 50px;
 }
