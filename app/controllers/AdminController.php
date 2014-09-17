@@ -8,7 +8,11 @@
 class AdminController extends BaseController {
 
     public function getLogin() {
-        return View::make('pages.admin.login');
+        if (Session::has('admin')) {
+            return Redirect::action('AdminFunctionController@getIndex');
+        } else {
+            return View::make('pages.admin.login');
+        }
     }
 
     public function postLogin() {
@@ -19,16 +23,15 @@ class AdminController extends BaseController {
         }
 
         $admin = Admin::where('username', '=', Input::get('username'))->first();
-        if (!isset($admin)){
-            return Redirect::back()->with('error','账号或者密码不对');
+        if (!isset($admin)) {
+            return Redirect::back()->with('error', '账号或者密码不对');
         }
-        if (Hash::check(Input::get('password'), $admin->password)){            
-            Session::put('admin.username',$admin->username);
-            Session::put('admin.priviledge',$admin->priviledge);
+        if (Hash::check(Input::get('password'), $admin->password)) {
+            Session::put('admin.username', $admin->username);
+            Session::put('admin.priviledge', $admin->priviledge);
             return Redirect::intended('admin-dashboard');
-        }
-        else {
-            return Redirect::back()->with('error','账号或者密码不对');
+        } else {
+            return Redirect::back()->with('error', '账号或者密码不对');
         }
     }
 

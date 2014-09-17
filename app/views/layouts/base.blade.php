@@ -58,12 +58,17 @@
 @section('script')
 @include('components.page-frame.login-dropdown-js')
 @include ('components.plugin.mailtip-js')
-@if(App::environment() != 'local' && !Cookie::has('internalTestWarning') )    
 <script type="text/javascript">
+@if(App::environment() != 'local' && !Cookie::has('internalTestWarning'))    
 $(document).ready(function() {
     $("#internal_test_warning").modal('show');
 });
 @endif
+
+//baidu analytics
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F97599e376911217c874380e476e60e0c' type='text/javascript'%3E%3C/script%3E"));
+
 </script>
 @show
 
