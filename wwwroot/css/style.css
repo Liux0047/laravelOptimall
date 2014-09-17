@@ -1337,9 +1337,6 @@ input.jq-validate-error{
 .product-info-container {    
     margin-top: 40px;
 }
-.tab-pane#detailed_description img {
-    width: 100%
-}
 #baisc_property {
     text-align: center;
 }
