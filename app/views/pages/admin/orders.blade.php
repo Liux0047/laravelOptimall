@@ -50,16 +50,16 @@
                 <div class="col-md-4">
                     @if ($order->order_status_id >= 2)
                     <p>
-                        支付方式： {{ $order->peyment_method }}
+                        支付方式： {{ $order->payment_method }}
                     </p>
                     <p>
-                        支付时间： {{ $order->peyment_time }}
+                        支付时间： {{ $order->payment_time }}
                     </p>
                     <p>
-                        付款总额: {{ $order->peyment_method }}
+                        付款总额: {{ $order->payment_amount }}
                     </p>
                     <p>
-                        交易号: {{ $order->peyment_ref_no }}
+                        交易号: {{ $order->payment_ref_no }}
                     </p>
                     @else
                     <span class="font-orange">未付款</span>

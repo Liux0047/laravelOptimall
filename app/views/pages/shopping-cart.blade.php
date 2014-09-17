@@ -30,7 +30,7 @@
             @endif
         </div>      
         @endif
-        <h2>我的购物车 <small>Subtext for header</small></h2>                     
+        <h2>我的购物车 <small>轻松管理我的订单</small></h2>                     
     </div>
 
     @if($items->count())
