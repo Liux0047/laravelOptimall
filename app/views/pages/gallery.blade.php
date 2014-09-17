@@ -34,9 +34,13 @@
 					</div>
 
 					<div class="panel-body" id="product_cards_container">
+						@if($models->count())
 						@foreach ($models as $model)
 						@include('components.product-page.product-card', array('model' => $model, 'colMd' => 4))
 						@endforeach
+						@else
+						很抱歉，没有找到符合条件的眼镜，请尝试减少一些筛选条件
+						@endif
 					</div>
 
 					<div class="panel-footer">

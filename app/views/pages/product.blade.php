@@ -118,7 +118,7 @@
                         <td>
                             @for ($i=0; $i<$lensTypes->count(); $i++)
                             <div class="lens-selection-container">
-                                <div class="selection-box lens-selection-box @if ($i == 0) selected @endif" id="lens_{{ $lensTypes[$i]->lens_type_id }}" onclick="changeLens({{ $lensTypes[$i]->lens_type_id }}, {{ $lensTypes[$i]->price }}, {{ $model->price }}, {{ $model->price * 1.5 }});" > 
+                                <div class="selection-box lens-selection-box @if ($i == 0) selected @endif" id="lens_{{ $lensTypes[$i]->lens_type_id }}" onclick="changeLens({{ $lensTypes[$i]->lens_type_id }}, {{ $lensTypes[$i]->price }}, {{ $model->price }}, {{ $model->market_price }});" > 
                                     {{ $lensTypes[$i]->title_cn }} 
                                     (套餐价:<strong>¥{{ number_format($lensTypes[$i]->price, 2) }}</strong>)
                                     <i class='fa fa-check'></i>                                

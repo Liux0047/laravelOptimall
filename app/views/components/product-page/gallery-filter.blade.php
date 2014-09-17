@@ -62,7 +62,7 @@
 						@else
 						<input type="checkbox" name="shapes[]" value="{{ $shape->product_shape_id }}" onchange="this.form.submit();"> 
 						@endif							
-						{{ HTML::image('images/shapes/shape-'.$shape->product_shape_id.'.png') }}
+						{{ HTML::image('images/shapes/shape-'.$shape->product_shape_id.'.jpg') }}
 						{{ $shape->shape_name_cn }}
 					</label>
 				</div>
