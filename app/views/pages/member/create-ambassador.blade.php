@@ -12,6 +12,8 @@
 		@include('components.member-account.side-nav', array('entry'=>4))
 
 		<div class="col-md-10">			
+			@include('components.page-frame.message-bar')
+
 			{{ Form::open(array('action'=>'AmbassadorController@postCreateAmbassador', 'role'=>'form', 'id'=>'ambassador_form', 'class'=>'form-horizontal'))}}
 			<div class="form-group">
 				<label for="alipay_account" class="col-sm-2 control-label">支付宝账号</label>
@@ -33,7 +35,7 @@
 			</div>			
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					{{ Form::submit('立即成为目光之星', array('class'=>'btn btn-primary'))}}
+					{{ Form::submit('立即申请为目光之星', array('class'=>'btn btn-primary'))}}
 				</div>
 			</div>			
 			{{ Form::close() }}

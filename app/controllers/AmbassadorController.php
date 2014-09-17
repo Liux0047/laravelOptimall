@@ -30,7 +30,7 @@ class AmbassadorController extends BaseController {
             Mail::queue('emails.member.ambassador-application', $data, function($message) {
                 $message->to(Auth::user()->email)->subject('目光之星申请提交成功');
             });
-            return Redirect::back()->with('status', '成功注册为目光之星，请等待回复');
+            return Redirect::back()->with('status', '目光之星申请提交成功，请等待回复');
         } else {
             return Redirect::back()->with('warning', '您已经是目光之星了');
         }
