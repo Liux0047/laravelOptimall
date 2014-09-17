@@ -122,10 +122,7 @@ Route::group(array('before' => 'auth'), function() {
      * Route to re-submit the payment
      */
     Route::post('alipay/re-submit-payment', 'OrderController@postReSubmitPayment');
-    /*
-     * Route to Alipay notify URL
-     */
-    Route::get('alipay-return/notify', 'OrderController@getAlipayNotfity');
+
     /*
      * Route to Alipay return
      */
@@ -141,6 +138,11 @@ Route::group(array('before' => 'auth'), function() {
      */
     Route::controller('review', 'ReviewController');
 });
+
+/*
+ * Route to Alipay notify URL
+ */
+Route::get('alipay-return/notify', 'OrderController@getAlipayNotify');
 
 /*
  * Route to about page

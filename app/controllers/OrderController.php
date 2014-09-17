@@ -112,7 +112,7 @@ class OrderController extends BaseController {
         return View::make('pages.alipay-result', $params);
     }
 
-    public function getAlipayNotfity() {
+    public function getAlipayNotify() {
         //计算得出通知验证结果
         $AlipayController = new AlipayController();
         $verify_result = $AlipayController->verifyNotify();
