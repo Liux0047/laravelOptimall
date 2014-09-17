@@ -39,7 +39,31 @@
 						@else
 						<input type="checkbox" name="colors[]" value="{{ $color->product_base_color_id }}" onchange="this.form.submit();">
 						@endif
+						{{ HTML::image('images/color/base-color-icons/base-color-'.$color->product_base_color_id.'.png', '', array('class'=>'color-icon')) }}
 						{{ $color->base_color_name_cn }}
+					</label>
+				</div>
+				@endforeach			
+			</div>
+		</div>
+
+		<a data-toggle="collapse" href="#shape_filters">
+			<div class="panel-heading">
+				<i class="fa fa-caret-right fa-fw"></i> 形状				
+			</div>
+		</a>
+		<div id="shape_filters" class="panel-collapse collapse @if(isset($checkedValues['shapes'])) in @endif">
+			<div class="panel-body">
+				@foreach($shapes as $shape)
+				<div class="checkbox">
+					<label>
+						@if(isset($checkedValues['shapes']) && in_array($shape->product_shape_id, $checkedValues['shapes']))
+						<input type="checkbox" name="shapes[]" value="{{ $shape->product_shape_id }}" onchange="this.form.submit();" checked> 
+						@else
+						<input type="checkbox" name="shapes[]" value="{{ $shape->product_shape_id }}" onchange="this.form.submit();"> 
+						@endif							
+						{{ HTML::image('images/shapes/shape-'.$shape->product_shape_id.'.png') }}
+						{{ $shape->shape_name_cn }}
 					</label>
 				</div>
 				@endforeach			
@@ -65,28 +89,6 @@
 					</label>
 				</div>
 				@endforeach		
-			</div>
-		</div>
-
-		<a data-toggle="collapse" href="#shape_filters">
-			<div class="panel-heading">
-				<i class="fa fa-caret-right fa-fw"></i> 形状				
-			</div>
-		</a>
-		<div id="shape_filters" class="panel-collapse collapse @if(isset($checkedValues['shapes'])) in @endif">
-			<div class="panel-body">
-				@foreach($shapes as $shape)
-				<div class="checkbox">
-					<label>
-						@if(isset($checkedValues['shapes']) && in_array($shape->product_shape_id, $checkedValues['shapes']))
-						<input type="checkbox" name="shapes[]" value="{{ $shape->product_shape_id }}" onchange="this.form.submit();" checked> 
-						@else
-						<input type="checkbox" name="shapes[]" value="{{ $shape->product_shape_id }}" onchange="this.form.submit();"> 
-						@endif							
-						{{ $shape->shape_name_cn }}
-					</label>
-				</div>
-				@endforeach			
 			</div>
 		</div>
 

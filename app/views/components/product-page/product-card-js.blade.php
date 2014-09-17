@@ -4,6 +4,7 @@
     	$("#small-view-" + modelId + " img").remove();
     	$("#small-view-" + modelId).append(
     		"<img src='{{ asset('images/gallery') }}/" + modelId + "/" + prodcutId + "/{{ Config::get('optimall.smallViewImg') }}'>");
+        renderRetinaImg("#small-view-" + modelId + " img");
     }
 
     var colorIconClickFunc = function() {

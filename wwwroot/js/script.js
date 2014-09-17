@@ -18,9 +18,21 @@ if (isRetina) {
     var images = $('img.retina-alt.lazy');
     images.each(function(i) {
         var lowres = $(this).attr('data-original');
-        var highres = lowres.replace(".", "@2x.");
+        var highres = replaceRetinaImg(lowres);
         $(this).attr('data-original', highres);
     });
+}
+function renderRetinaImg(element) {
+    if (isRetina) {
+        var lowres = $(element).attr('src');
+        var highres = replaceRetinaImg(lowres);
+        $(element).attr('src', highres);
+    }
+}
+function replaceRetinaImg(lowresPath) {
+    var suffix = lowresPath.substring(lowresPath.lastIndexOf('.'));
+    var prefix = lowresPath.substring(0, lowresPath.lastIndexOf('.'));
+    return prefix + "@2x" + suffix;
 }
 
 

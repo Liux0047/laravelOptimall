@@ -1092,6 +1092,10 @@ input.jq-validate-error{
 .gallery-filter-container .panel .checkbox label{
     font-size: 14px;    
 }
+
+.gallery-filter-container .panel .panel-heading {
+    color: #18bc9c;
+}
 .gallery-filter-container .panel .panel-heading{
     font-size: 1.2em;    
     font-weight: bold;

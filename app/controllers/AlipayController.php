@@ -292,7 +292,6 @@ class AlipayController extends BaseController {
             //验证
             //$responsetTxt的结果不是true，与服务器设置问题、合作身份者ID、notify_id一分钟失效有关
             //isSign的结果不是true，与安全校验码、请求时的参数格式（如：带自定义参数等）、编码格式有关
-            echo "isSign ". var_dump($isSign);
             if (preg_match("/true$/i", $responseTxt) && $isSign) {
                 return true;
             } else {
@@ -480,7 +479,6 @@ class AlipayController extends BaseController {
         var_dump( curl_error($curl) );//如果执行curl过程中出现异常，可打开此开关，以便查看异常内容
         curl_close($curl);
 
-        echo "CURL : ".$responseText;
         return $responseText;
     }
 

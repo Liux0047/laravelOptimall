@@ -77,43 +77,43 @@
                                                 <ul>
                                                     <li>
                                                         <a href="{{ url('gallery?colors[]=1') }}">
-                                                            {{ HTML::image('images/color/color-2.png','', array('class'=>'color-icon')) }}
+                                                            {{ HTML::image('images/color/base-color-icons/base-color-1.png','', array('class'=>'color-icon')) }}
                                                             黑色  
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="{{ url('gallery?colors[]=2') }}">
-                                                            {{ HTML::image('images/color/color-13.png','', array('class'=>'color-icon')) }}
+                                                            {{ HTML::image('images/color/base-color-icons/base-color-2.png','', array('class'=>'color-icon')) }}
                                                             蓝色
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="{{ url('gallery?colors[]=3') }}">
-                                                            {{ HTML::image('images/color/color-20.png','', array('class'=>'color-icon')) }}
+                                                            {{ HTML::image('images/color/base-color-icons/base-color-3.png','', array('class'=>'color-icon')) }}
                                                             黄色
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="{{ url('gallery?colors[]=4') }}">
-                                                            {{ HTML::image('images/color/color-24.png','', array('class'=>'color-icon')) }}
+                                                            {{ HTML::image('images/color/base-color-icons/base-color-4.png','', array('class'=>'color-icon')) }}
                                                             红色
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="{{ url('gallery?colors[]=5') }}">
-                                                            {{ HTML::image('images/color/color-18.png','', array('class'=>'color-icon')) }}
-                                                            豹纹
+                                                            {{ HTML::image('images/color/base-color-icons/base-color-5.png','', array('class'=>'color-icon')) }}
+                                                            豹斑
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="{{ url('gallery?colors[]=6') }}">
-                                                            {{ HTML::image('images/color/color-21.png','', array('class'=>'color-icon')) }}
+                                                            {{ HTML::image('images/color/base-color-icons/base-color-6.png','', array('class'=>'color-icon')) }}
                                                             棕色
                                                         </a>                                             
                                                     </li>
                                                     <li>
                                                         <a href="{{ url('gallery?colors[]=7') }}">
-                                                            {{ HTML::image('images/color/color-46.png','', array('class'=>'color-icon')) }}
+                                                            {{ HTML::image('images/color/base-color-icons/base-color-7.png','', array('class'=>'color-icon')) }}
                                                             灰色
                                                         </a>
                                                     </li>
@@ -124,38 +124,44 @@
                                                 <ul>
                                                     <li>
                                                         <a href="{{ url('gallery?colors[]=8') }}">
-                                                            {{ HTML::image('images/color/color-47.png','', array('class'=>'color-icon')) }}
+                                                            {{ HTML::image('images/color/base-color-icons/base-color-8.png','', array('class'=>'color-icon')) }}
                                                             渐变
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="{{ url('gallery?colors[]=9') }}">
-                                                            {{ HTML::image('images/color/color-52.png','', array('class'=>'color-icon')) }}
+                                                            {{ HTML::image('images/color/base-color-icons/base-color-9.png','', array('class'=>'color-icon')) }}
                                                             粉色
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="{{ url('gallery?colors[]=10') }}">
-                                                            {{ HTML::image('images/color/color-58.png','', array('class'=>'color-icon')) }}
+                                                            {{ HTML::image('images/color/base-color-icons/base-color-10.png','', array('class'=>'color-icon')) }}
                                                             绿色
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="{{ url('gallery?colors[]=11') }}">
-                                                            {{ HTML::image('images/color/color-59.png','', array('class'=>'color-icon')) }}
+                                                            {{ HTML::image('images/color/base-color-icons/base-color-11.png','', array('class'=>'color-icon')) }}
                                                             紫色
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="{{ url('gallery?colors[]=12') }}">
-                                                            {{ HTML::image('images/color/color-60.png','', array('class'=>'color-icon')) }}
+                                                            {{ HTML::image('images/color/base-color-icons/base-color-12.png','', array('class'=>'color-icon')) }}
                                                             白色
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="{{ url('gallery?colors[]=13') }}">
-                                                            {{ HTML::image('images/color/color-64.png','', array('class'=>'color-icon')) }}
+                                                            {{ HTML::image('images/color/base-color-icons/base-color-13.png','', array('class'=>'color-icon')) }}
                                                             金色
+                                                        </a>                                             
+                                                    </li>
+                                                    <li>
+                                                        <a href="{{ url('gallery?colors[]=13') }}">
+                                                            {{ HTML::image('images/color/base-color-icons/base-color-14.png','', array('class'=>'color-icon')) }}
+                                                            豹纹
                                                         </a>                                             
                                                     </li>
                                                 </ul>
