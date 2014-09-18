@@ -93,7 +93,8 @@ class AdminFunctionController extends BaseController {
     public function getAmbassadorClaim() {
         $params['pageTitle'] = "目光之星返利申请";
         $params['claims'] = AmbassadorView::ambassadorRewardClaims()->paginate(10);
-        $params['rewards'] = AmbassadorController::calculateRewards($params['claims']);
+        $ambassadorController = new AmbassadorController();
+        $params['rewards'] = $ambassadorController->calculateRewards($params['claims']);
         $params['formRequired'] = true;
         return View::make('pages.admin.ambassador-claim', $params);
     }
@@ -101,7 +102,8 @@ class AdminFunctionController extends BaseController {
     public function getProcessedAmbassadorClaim() {
         $params['pageTitle'] = "目光之星返利申请";
         $params['claims'] = AmbassadorView::ambassadorRewardProcessed()->paginate(10);
-        $params['rewards'] = AmbassadorController::calculateRewards($params['claims']);
+        $ambassadorController = new AmbassadorController();
+        $params['rewards'] = $ambassadorController->calculateRewards($params['claims']);
         $params['formRequired'] = false;
         return View::make('pages.admin.ambassador-claim', $params);
     }

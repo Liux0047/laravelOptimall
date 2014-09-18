@@ -17,7 +17,13 @@ return array(
     'ambassadorFirstReward'=> 0.2,
     
     //the percentage of ambassador rewards for subsequent purchase
-    'ambassadorSubsequentReward'=> 0.1,
+    'ambassadorSubsequentReward'=> 0.1,    
+    
+    //the percentage off for an invited member by ambassador
+    'ambassadorInvitedReward'=> 0.15,    
+    
+    //single order reward cap
+    'ambassadorRewardCap'=> 50,
     
     //the ambassador subsequent reward period (in days)
     'ambassadorSubsequentPeriod'=> 60,
@@ -30,5 +36,5 @@ return array(
     
     //the minimum amount that an ambassador can claim
     'minAmbassadorClaim'=> 80,
-    
+        
 );

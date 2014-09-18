@@ -10,6 +10,10 @@ and open the template in the editor.
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width">
     <style>
+    body {
+        width: 700px;
+        height: 1100px;
+    }
     #poster-container {
         position: relative;
     }
@@ -19,8 +23,8 @@ and open the template in the editor.
     }
     #poster-container #text-area{
         position: absolute;
-        width: 40%;
-        right: 45%;
+        width: 60%;
+        right: 25%;
         top: 60%;
         text-align:left;
     }
@@ -47,9 +51,10 @@ and open the template in the editor.
         user-select: none;
     }
     .btn-warning {
-        color: #ffffff;
+        color: #ffffff !important;
         background-color: #e99002;
         border-color: #d08002;
+        text-decoration: none;
     }
     .btn {
         padding: 8px 12px;
@@ -66,13 +71,20 @@ and open the template in the editor.
                 <a href="{{ URL::to('/') }}">目光之城</a>
             </h4>
             <h4>
-                您获得了购物卷: {{ $couponCode or '' }}
+                您获得了购物卷: {{ $couponCode or '' }} <br>                
+                立刻享受 {{ $discount }}% 的优惠吧
             </h4>
             <h4>
                 <a href="{{ URL::to('/') }}" class="btn btn-warning">
                     现在就去看看
                 </a>
             </h4>
+            @if(isset($invitatonCode))
+            <p>
+                *请在注册时使用他（她）的邀请码: <br>
+                <strong>{{ $invitatonCode }}</strong>
+            </p>
+            @endif
         </div>
     </div>
 </body>

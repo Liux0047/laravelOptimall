@@ -60,7 +60,7 @@
                 @endif                
             </td>
             <td class="amount">
-                <span>{{ $rewards['reward'][$claim->order_id]}}</span>
+                <span>{{ $rewards[$claim->order_id]['amount'] }}</span>
             </td>
         </tr>
 

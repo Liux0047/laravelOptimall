@@ -7,6 +7,16 @@
  */
 class AmbassadorController extends BaseController {
 
+    private $rewards;
+    private $totalRewards;
+    private $qualifiedOrders;
+
+    public function __construct() {
+        $this->rewards = array();
+        $this->qualifiedOrders = array();
+        $this->totalRewards = 0;
+    }
+
     public function postCreateAmbassador() {
         $params['pageTitle'] = "目光之星";
 
@@ -51,11 +61,11 @@ class AmbassadorController extends BaseController {
 
     public function postClaimRewards() {
         $orders = AmbassadorView::ofAmbassador(Auth::id())->get();
-        $reward = self::calculateRewards($orders);
-        if (!$reward['isMinMet']) {
+        $this->calculateRewards($orders);
+        if (!$this->isMinRewardMet()) {
             return Redirect::back()->with('error', '没有到底最低返利要求');
         }
-        foreach ($orders as $order) {
+        foreach ($this->qualifiedOrders as $order) {
             $placedOrder = PlacedOrder::find($order->order_id);
             $placedOrder->is_ambassador_reward_claimed = true;
             $placedOrder->save();
@@ -66,16 +76,20 @@ class AmbassadorController extends BaseController {
     public function postSendInvitation() {
         $data['nickname'] = Auth::user()->nickname;
         $data['couponCode'] = "WELCOME";
+        if(Auth::user()->is_approved_ambassador){
+            $data['invitatonCode'] = Auth::user()->ambassadorInfo->ambassador_code;
+            $data['discount'] = Config::get('optimall.ambassadorInvitedReward')  * 100;
+        }        
         $emails = preg_split("/[\s,;；，]+/", Input::get('emails'));
         foreach ($emails as $email) {
             Mail::queue('emails.member.invitation', $data, function($message) use ($email) {
                 $message->to($email)->subject(Auth::user()->nickname . ' 邀请了你去逛逛目光之城');
             });
         }
-        return Redirect::back()->with('status','成功发送邮件');
+        return Redirect::back()->with('status', '成功发送邮件');
     }
 
-    public static function findAmbassadorRelation($code) {        
+    public static function findAmbassadorRelation($code) {
         if (Member::getAmbassador($code)->count() > 0) {    //if code belongs to a valid ambassador
             return Member::getAmbassador($code)->first()->member_id;
         } else {
@@ -87,29 +101,65 @@ class AmbassadorController extends BaseController {
         return Member::getAmbassador($code)->count() > 0;
     }
 
-    public static function calculateRewards($orders) {
-        $rewardParam['totalReward'] = 0;
-        $rewardParam['reward'] = array();
-        $rewardParam['overdueOrders'] = array();
-        $dateNow = new DateTime();
+    public function calculateRewards($orders) {
         foreach ($orders as $order) {
             if ($order->is_first_purchase) {
-                $rewardParam['reward'][$order->order_id] = $order->total_transaction_amount * Config::get('optimall.ambassadorFirstReward');
+                //first purchase
+                $this->rewards[$order->order_id]['amount'] = $order->total_transaction_amount * Config::get('optimall.ambassadorFirstReward');
             } else {
-                $rewardParam['reward'][$order->order_id] = $order->total_transaction_amount * Config::get('optimall.ambassadorSubsequentReward');
+                //subsequent purchase within ambassadorSubsequentPeriod days
+                $this->rewards[$order->order_id]['amount'] = $order->total_transaction_amount * Config::get('optimall.ambassadorSubsequentReward');
             }
-            $dateDiff = abs($dateNow->diff(new DateTime($order->order_created_at))->days);
-            //if not claimed and not overdue
+
+            //if reward exceeds max reward claimable
+            if ($this->rewards[$order->order_id]['amount'] > Config::get('optimall.ambassadorRewardCap')) {
+                $this->rewards[$order->order_id]['amount'] = Config::get('optimall.ambassadorRewardCap');
+            }
+
             if (!$order->is_ambassador_reward_claimed) {
-                if ($dateDiff > Config::get('optimall.ambassadorClaimDuration')) {
-                    $rewardParam['overdueOrders'][] = $order->order_id;
-                } else {
-                    $rewardParam['totalReward'] += $rewardParam['reward'][$order->order_id];
+                $isOverdue = $this->isRewardOverDue($order);
+                $isNotConfirmed = $this->isRewardNotConfirmed($order);
+                $this->rewards[$order->order_id]['isRewardOverDue'] = $isOverdue;
+                $this->rewards[$order->order_id]['isRewardNotConfirmed'] = $isNotConfirmed;
+                if (!$isOverdue && !$isNotConfirmed) {
+                    $this->totalRewards += $this->rewards[$order->order_id]['amount'];
+                    $this->qualifiedOrders[] = $order;
                 }
             }
         }
-        $rewardParam['isMinMet'] = $rewardParam['totalReward'] >= Config::get('optimall.minAmbassadorClaim');
-        return $rewardParam;
+        return $this->rewards;
+    }
+
+    public function isMinRewardMet() {
+        return $this->totalRewards >= Config::get('optimall.minAmbassadorClaim');
+    }
+
+    public function getTotalRewards() {
+        return $this->totalRewards;
+    }
+
+    /*
+     * test whehter this order for ambassador reward is overdue
+     */
+
+    private function isRewardOverDue($order) {
+        $daysOrderCreated = $this->getDaysDiff($order->order_created_at);
+        return $daysOrderCreated > Config::get('optimall.ambassadorClaimDuration');
+    }
+
+    /*
+     * test whehter this order for ambassador reward is NOT confirmed, 
+     * ie. not after refund period expires
+     */
+
+    private function isRewardNotConfirmed($order) {
+        $daysOrderCreated = $this->getDaysDiff($order->order_created_at);
+        return $daysOrderCreated < Config::get('optimall.ambassadorOrderConfirmation');
+    }
+
+    private function getDaysDiff($date) {
+        $dateNow = new DateTime();
+        return abs($dateNow->diff(new DateTime($date))->days);
     }
 
     private function generateUniqueId() {
@@ -138,6 +188,5 @@ class AmbassadorController extends BaseController {
         );
         return Validator::make(Input::all(), $rules);
     }
-    
 
 }

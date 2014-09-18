@@ -209,6 +209,15 @@ div.vertical-divider {
     border-color: #2f88cc;
 }
 
+/* panel modification */
+.panel-primary>.panel-heading {
+    color: #ffffff;
+    background-color: #2f88cc;
+    border-color: #2f88cc;
+}
+.panel-primary {
+    border-color: #2f88cc;
+}
 
 /* panel metro */
 .panel-metro .panel-heading {
@@ -336,11 +345,9 @@ label, .control-label, .help-block {
     border-bottom: 1px solid #dddddd;
 }
 
-
 /*
 * Navbar modification
 */
-
 .navbar-container{
     height:37px;
     background-color: #ffffff;;

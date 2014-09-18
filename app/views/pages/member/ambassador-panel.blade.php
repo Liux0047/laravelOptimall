@@ -41,7 +41,7 @@
                     </thead>
                     <tbody>
                         @foreach ($ambassadorOrders as $order)
-                        <tr @if($order->is_ambassador_reward_claimed || in_array($order->order_id, $overdueOrders)) class="obscure" @endif>
+                        <tr @if($order->is_ambassador_reward_claimed || $rewards[$order->order_id]['isRewardOverDue'] || $rewards[$order->order_id]['isRewardNotConfirmed']) class="obscure" @endif>
                             <td>{{ $order->nickname }}</td>
                             <td>{{ $order->email }}</td>
                             <td>{{ $order->order_created_at }}</td>
@@ -60,16 +60,23 @@
                                 {{ Config::get('optimall.ambassadorSubsequentReward')*100 }}%
                                 @endif
                             </td>
-                            <td>¥{{ number_format($reward[$order->order_id], 2) }}</td>
+                            <td>
+                                ¥{{ number_format($rewards[$order->order_id]['amount'], 2) }}
+                                @if($rewards[$order->order_id]['amount'] == 50)
+                                (单笔订单最高返现50)
+                                @endif
+                            </td>
                             <td>
                                 @if($order->is_ambassador_reward_claimed)      
                                 @if ($order->is_ambassador_reward_processed)
-                                已领取
+                                已成功领取
                                 @else
                                 已申请领取
                                 @endif
-                                @elseif (in_array($order->order_id, $overdueOrders))      
+                                @elseif ($rewards[$order->order_id]['isRewardOverDue'])      
                                 已过期 
+                                @elseif ($rewards[$order->order_id]['isRewardNotConfirmed'])    
+                                订单确认 {{ Config::get('optimall.ambassadorOrderConfirmation') }} 天后生效
                                 @else                 
                                 可领取
                                 @endif
@@ -81,7 +88,7 @@
                 <div class="panel-footer">
                     <div class="align-right">
                         总计可返利: 
-                        <span class="font-orange"><strong>¥{{ number_format($totalReward, 2) }}</strong></span>
+                        <span class="font-orange"><strong>¥{{ number_format($totalRewards, 2) }}</strong></span>
                     </div>
                 </div>
             </div>

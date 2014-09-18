@@ -73,11 +73,10 @@ class MemberAccountController extends BaseController {
             $params['ambassadorInfo'] = Auth::user()->ambassadorInfo;
             $orders = AmbassadorView::ofAmbassador(Auth::id())->get();
             $params['ambassadorOrders'] = $orders;
-            $reward = AmbassadorController::calculateRewards($orders);
-            $params['reward'] = $reward['reward'];
-            $params['totalReward'] = $reward['totalReward'];
-            $params['overdueOrders'] = $reward['overdueOrders'];
-            $params['isMinMet'] = $reward['isMinMet'];
+            $ambassadorController = new AmbassadorController();
+            $params['rewards'] = $ambassadorController->calculateRewards($orders);
+            $params['totalRewards'] = $ambassadorController->getTotalRewards();
+            $params['isMinMet'] = $ambassadorController->isMinRewardMet();
             return View::make('pages.member.ambassador-panel', $params);
         }
         else {

@@ -10,7 +10,7 @@
 	@include('components.product-page.progress-tracker', array('progtrckrStep' => 3))
 	<div class="page-header">
 		@include('components.page-frame.message-bar')
-		<h2>选择收货地址 <small>Subtext for header</small></h2>
+		<h2>选择收货地址 </h2>
 	</div>      
 	<div class="row no-display" id="address_section">
 		@foreach ($addresses as $address)
@@ -43,7 +43,7 @@
 	</div>
 
 	<div class="page-header">
-		<h2>确认订单详情 <small>Subtext for header</small></h2>
+		<h2>确认订单详情 </h2>
 	</div>                
 	<div class="panel panel-default">
 		<table class="table shopping-cart-table">

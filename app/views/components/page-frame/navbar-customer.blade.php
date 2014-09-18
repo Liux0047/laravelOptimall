@@ -392,6 +392,7 @@
                                     </div>
                                     <div class="pull-right">
                                         {{ HTML::image('images/preloader.gif','', array('id'=>'login_preloader_img', 'class'=>'ajax-preloader no-display')) }}
+                                             
                                         <button onclick="auth_login()" class="btn btn-primary btn-sm" id="login_submit" disabled="true">                   
                                             登录                    
                                         </button>          
