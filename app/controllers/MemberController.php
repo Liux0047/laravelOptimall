@@ -118,6 +118,7 @@ class MemberController extends BaseController {
 
     public function getLogout() {
         Auth::logout();
+        Session::flush();
         return Redirect::to('/');
     }
 

@@ -83,8 +83,16 @@ class AdminFunctionController extends BaseController {
     }
 
     public function postRejectRefund() {
+        
+        $validator = $this->validateRejectRefund();
+
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator);
+        }
+        
         $refund = Refund::findOrFail(Input::get('refund_id'));
         $refund->is_rejected = 1;
+        $refund->rejection_reason = Input::get('rejection_reason');
         $refund->processed_by = Session::get('admin.username');
         $refund->save();
         return Redirect::back()->with('status', '成功驳回退款申请');
@@ -152,6 +160,13 @@ class AdminFunctionController extends BaseController {
     private function validateClaimRefund() {
         $rules = array(
             'amount' => 'required|numeric'
+        );
+        return Validator::make(Input::all(), $rules);
+    }
+    
+    private function validateRejectRefund() {
+        $rules = array(
+            'rejection_reason' => 'required|max:200'
         );
         return Validator::make(Input::all(), $rules);
     }

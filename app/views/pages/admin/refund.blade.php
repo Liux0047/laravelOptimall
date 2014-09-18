@@ -69,7 +69,7 @@
                                 <h4 class="modal-title">退款申请人上传的图片</h4>
                             </div>
                             <div class="modal-body">
-                                {{ HTML::image('images/uploads/refunds/'.$refund->order_line_item_id.'.jpg') }}
+                                {{ HTML::image('images/uploads/refunds/'.$refund->refund_id.'.jpg') }}
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -106,9 +106,30 @@
                 @if ($refund->refund_status_id == 4)
                 已退款
                 @else
-                {{ Form::open(array('action'=>'AdminFunctionController@postRejectRefund', 'onsubmit'=>'return confirmChangeStatus();'))}}
-                {{ Form::hidden('refund_id', $refund->refund_id)}}
-                {{ Form::submit('驳回申请', array('class'=>'btn btn-danger')) }}
+                {{ Form::open(array('action'=>'AdminFunctionController@postRejectRefund'))}}
+                {{ Form::hidden('refund_id', $refund->refund_id)}}                
+                <a class="btn btn-danger" data-toggle="modal" data-target="#rejection_modal_{{ $refund->refund_id }}">
+                    驳回申请
+                </a>
+                <div class="modal fade" id="rejection_modal_{{ $refund->refund_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title">填写驳回理由</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <textarea class="form-control" rows="4" name="rejection_reason"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                {{ Form::submit('驳回申请', array('class'=>'btn btn-danger')) }}
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
                 {{ Form::close() }}
                 @endif
                 @else

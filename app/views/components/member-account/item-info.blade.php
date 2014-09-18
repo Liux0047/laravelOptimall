@@ -152,8 +152,17 @@
                                                     {{ Form::file('photo') }}
                                                 </div>                                                
                                                 <p>
-                                                    退货的一些说明
+                                                    注：
                                                 </p>
+                                                <ol>
+                                                    <li>一个订单只享受一次退换货服务，所以为了确保您的权益，请您谨慎考虑后与我们联系。</li>
+                                                    <li>优惠促销产品退货时,我们将按照该商品优惠后实际支付金额退款。</li>
+                                                    <li>
+                                                        收到您的退货，客服人员会在1-2个工作日内为您办理退换，并及时通知您。<br><br>
+                                                        **更多详细信息请看<a href="{{ url('info/about-products#gouwubaozhang-2') }}">《目光之城退换货条例》</a>
+                                                    </li>
+                                                </ol>
+                                                
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>

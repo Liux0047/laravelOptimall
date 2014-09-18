@@ -10,7 +10,7 @@ class CouponController extends BaseController {
     
     public function postApplyCoupon() {
         $coupon = Coupon::validCoupon(Input::get('coupon_code'))->first();
-        if (isset($coupon)) {    //if a valid coupon was found
+        if (isset($coupon) && $this->isEligibleForCoupon($coupon)) {    //if a valid coupon was found
             if ($coupon->couponUsages()->where('member_id', '=', Auth::id())->count() > 0) {
                 //if this coupon has been used
                 return Redirect::back()->with('error', '消费卷已经被使用');
@@ -46,6 +46,25 @@ class CouponController extends BaseController {
         }
         else {
             return null;
+        }
+    }
+    
+    public function isEligibleForCoupon ($coupon) {
+        if(!isset($coupon->coupon_rule_id)){
+            //if no more additional rule, eligible
+            return true;
+        }
+        switch ($coupon->coupon_rule_id){
+            case '1':   //rule 1: must be an ambassador
+                return Auth::user()->is_approved_ambassador;
+            case '2':   //must have been invited by an ambassador
+                if (!isset(Auth::user()->invited_by)){
+                    return false;
+                } else {
+                    return Member::find(Auth::user()->invited_by)->is_approved_ambassador;
+                }                
+            default:
+                return false;
         }
     }
     

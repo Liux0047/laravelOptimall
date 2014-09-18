@@ -103,19 +103,20 @@ class MemberAccountController extends BaseController {
             $quantity = $item->quantity;
         }
         $refund->quantity = $quantity;
+        $refund->refund_status_id = 1;
+        $refund->order_line_item_id = $item->order_line_item_id;
+        $refund->save();
         
+        //save refund claim picture uploaded by user
         if (Input::hasFile('photo') && Input::file('photo')->isValid()) {
             if (Input::file('photo')->getSize() < 2 * pow(2, 20)) {
                 $path = public_path();
-                Input::file('photo')->move($path . '/images/uploads/refunds/', $item->order_line_item_id . ".jpg");
+                Input::file('photo')->move($path . '/images/uploads/refunds/', $refund->refund_id . ".jpg");
             } else {
                 return Redirect::action('MemberAccountController@getShoppingHistory')->with('error', '文件尺寸过大，请重新上传');
             }
         }
         
-        $refund->refund_status_id = 1;
-        $refund->order_line_item_id = $item->order_line_item_id;
-        $refund->save();
         return Redirect::back()->with('status', '退款申请提交成功');
     }
 
