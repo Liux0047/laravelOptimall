@@ -10,6 +10,7 @@
 <div class="container content-container">
     @include('components.product-page.progress-tracker', array('progtrckrStep' => 1))
     <br>
+    @include('components.page-frame.message-bar')
     <div class="row">    
         <div class="col-md-8" id="product_pic_container">   
             <div class="fotorama"  data-allowfullscreen="native"  data-auto="false">
@@ -251,6 +252,19 @@ $('#review_count_button').click(function(e) {
         scrollTop: ($('.nav-tabs').offset().top) - 100
     }, 1000);
     return false;
+});
+
+//toggle submit button for review reply
+$(".review-reply-content").each(function(){
+    $(this).on('input', function(){
+        value = $(this).val();
+        if(value.length > 0 && value.length <= 200){            
+            $(this).parent().parent().find('input[type=submit]').prop('disabled',false);
+        }
+        else {
+            $(this).parent().parent().find('input[type=submit]').prop('disabled',true);
+        }
+    });
 });
 
 

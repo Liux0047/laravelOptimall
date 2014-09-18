@@ -91,9 +91,35 @@
                 @if ($hasReview)
                 @foreach($reviews as $review)
                 <hr>
+                @if (Auth::check())      
+                {{ Form::open(array('action'=>'ReviewController@postReplyReview'))}}
+                {{ Form::hidden('review_id', $review->review_id)}}
+                <a class="pull-right" data-toggle="modal" href="#review_reply_{{ $review->review_id }}">回复此评论</a>                
+                <!-- Modal -->
+                <div class="modal fade" id="review_reply_{{ $review->review_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title" id="myModalLabel">回复此评论</h4>
+                            </div>
+                            <div class="modal-body">
+                                <textarea class="form-control review-reply-content" rows="3" name="content" placeholder="请添加您的回复（200字以内哦）"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                {{ Form::submit('回复', array('class'=>'btn btn-primary', 'disabled'=>'true')) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{ Form::close() }}
+                @endif
+
                 <h4>{{ $review->title }}
                     <small> {{ $review->nickname }} 于 {{ $review->created_at }} 发布 </small>                  
                 </h4>            
+
                 <p>
                     <div class="raty-star" id="star_id_{{ $model->model_id }}" 
                         data-score="{{ ($review->design_rating + $review->comfort_rating + $review->quality_rating) / 3 }}">
@@ -119,6 +145,17 @@
                         @endif  
                     </span>           
                 </p>
+
+                {{-- Review replies --}}
+                @foreach($review->reviewReplies as $reply)
+                <div class="review-reply-container">
+                    <p> 
+                        {{ $reply->member->nickname }} 
+                        <span class="font-grey">于 {{ $reply->created_at }} 回复：</span>
+                        {{$reply->content}}
+                    </p>
+                </div>                
+                @endforeach
                 @endforeach
                 @else
                 <hr>

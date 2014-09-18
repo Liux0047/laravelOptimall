@@ -24,6 +24,13 @@ class Review extends Eloquent {
     //protected $hidden = array('password', 'remember_token');
     
     /*
+     * one to many relationship with ReivewReplay
+     */
+    public function reviewReplies() {
+        return $this->hasMany('ReviewReply', 'review_id');
+    }
+    
+    /*
      * Dynamic scope to query for reviews belonging to a model
      */
     public function scopeOfModel ($query, $modelId) {

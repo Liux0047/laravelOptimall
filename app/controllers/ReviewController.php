@@ -62,9 +62,33 @@ class ReviewController extends BaseController {
         }
     }
     
+    public function postReplyReview () {
+        
+        $validator = $this->validateReviewReply();
+        
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator);
+        }
+        
+        $reviewReply = new ReviewReply;
+        $reviewReply->review_id = Input::get('review_id');
+        $reviewReply->member_id = Auth::id();
+        $reviewReply->content = Input::get('content');
+        $reviewReply->save();
+        return Redirect::back()->with('status', '评论回复成功');
+    }
+    
     private function validateReview() {
         $rules = array(
             'title' => 'required|max:45',
+            'content' => 'required|max:200'
+        );
+        return Validator::make(Input::all(), $rules);
+        
+    }
+    
+    private function validateReviewReply() {
+        $rules = array(
             'content' => 'required|max:200'
         );
         return Validator::make(Input::all(), $rules);
