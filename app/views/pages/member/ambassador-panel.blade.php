@@ -44,7 +44,7 @@
                         <tr @if($order->is_ambassador_reward_claimed || $rewards[$order->order_id]['isRewardOverDue'] || $rewards[$order->order_id]['isRewardNotConfirmed']) class="obscure" @endif>
                             <td>{{ $order->nickname }}</td>
                             <td>{{ $order->email }}</td>
-                            <td>{{ $order->order_created_at }}</td>
+                            <td>{{ formateDateTime($order->order_created_at) }}</td>
                             <td>¥{{ number_format($order->total_transaction_amount, 2) }}</td>
                             <td>
                                 @if($order->is_first_purchase)

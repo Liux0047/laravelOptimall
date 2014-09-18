@@ -178,10 +178,3 @@ Route::when('ambassador/*', 'csrf', array('post'));
 Route::when('review/*', 'csrf', array('post'));
 Route::when('alipay/*', 'csrf', array('post'));
 Route::when('admin/*', 'csrf', array('post'));
-
-/*
- * View composer to add number of shopping cart items into top banner
- */
-View::composer('components.page-frame.top-banner', function($view) {
-    $view->with('numCartItems', ShoppingCartController::getNumberOfItems());
-});

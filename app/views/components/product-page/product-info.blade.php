@@ -117,7 +117,7 @@
                 @endif
 
                 <h4>{{ $review->title }}
-                    <small> {{ $review->nickname }} 于 {{ $review->created_at }} 发布 </small>                  
+                    <small> {{ $review->nickname }} 于 {{ formateDateTime($review->created_at) }} 发布 </small>                  
                 </h4>            
 
                 <p>
@@ -151,7 +151,7 @@
                 <div class="review-reply-container">
                     <p> 
                         {{ $reply->member->nickname }} 
-                        <span class="font-grey">于 {{ $reply->created_at }} 回复：</span>
+                        <span class="font-grey">于 {{ formateDateTime($reply->created_at) }} 回复：</span>
                         {{$reply->content}}
                     </p>
                 </div>                

@@ -24,7 +24,7 @@
                         订单总额: {{ $order->total_transaction_amount }} {{ $order->currency_code }} 
                     </p>
                     <p>
-                        订货时间: {{ $order->created_at }}
+                        订货时间: {{ formateDateTime($order->created_at) }}
                     </p>
                     <p>
                         发票抬头: {{ $order->invoice_header }}

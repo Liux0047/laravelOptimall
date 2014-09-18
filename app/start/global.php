@@ -84,12 +84,14 @@ App::before(function($request) {
 
 
 App::missing(function($exception) {
-    $modelIds = array (3001, 3002, 3004, 3005);
+    $modelIds = array(3001, 3002, 3004, 3005);
     foreach ($modelIds as $id) {
         $params['models'][] = ProductModelView::find($id);
-    }    
+    }
     return View::make('pages.not-found', $params);
 });
 
 
 require app_path() . '/filters.php';
+require app_path() . '/helpers.php';
+require app_path() . '/composers.php';
