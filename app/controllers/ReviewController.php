@@ -88,8 +88,7 @@ class ReviewController extends BaseController {
         }
         else {
             return Redirect::back()->with('status', '评论回复成功');
-        }
-        
+        }        
     }
     
     private function validateReview() {

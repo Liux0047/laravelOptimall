@@ -150,7 +150,7 @@
 
                     {{-- Review replies --}}
                     <div class="review-reply-container">
-                        @foreach($review->reviewReplies as $reply)
+                        @foreach($review->reviewReplies()->orderBy('created_at')->get() as $reply)
                         <p> 
                             {{ $reply->member->nickname }} 
                             <span class="font-grey">于 {{ formatDateTime($reply->created_at) }} 回复：</span>

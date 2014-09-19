@@ -322,6 +322,7 @@ function removeThumbUp(reviewId){
 // post review reply Ajax
 function postReviewReply(reviewId){
     var content = $("#review_reply_" + reviewId + " textarea.review-reply-content").val();
+    $("#review_reply_" + reviewId + " .review-reply-btn").prop('disabled', true);
     $.ajax({
         type: "POST",
         url: "{{ action('ReviewController@postReviewReply') }}",
@@ -340,6 +341,7 @@ function postReviewReply(reviewId){
     }).always(function() {
         $("#review_reply_" + reviewId + " textarea.review-reply-content").val("");
         $("#review_reply_" + reviewId).modal('hide');
+        $("#review_reply_" + reviewId + " .review-reply-btn").prop('disabled', false);
     });
 }
 

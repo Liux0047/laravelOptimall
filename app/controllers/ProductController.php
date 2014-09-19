@@ -41,7 +41,7 @@ class ProductController extends BaseController {
         $params['product'] = $model->productViews()->firstOrFail();
         $params['products'] = $model->productViews;
         $params['lensTypes'] = LensType::all();
-        $reviews = Review::ofModel($modelId)->get();
+        $reviews = Review::ofModel($modelId)->orderBy('created_at','DESC')->get();
         $params['reviews'] = $reviews;
         //invalid review collection if contains only one entry withoug review_id
         $params['hasReview'] = !($reviews->count() == 1 && !isset($reviews[0]->review_id));
