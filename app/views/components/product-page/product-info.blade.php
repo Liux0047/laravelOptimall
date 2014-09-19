@@ -17,7 +17,7 @@
     </li>
     <li>
         <a href="#user_review" role="tab" data-toggle="tab" id="user_review_tab">
-            评价
+            用户评价
         </a>
     </li>
 </ul>
@@ -90,72 +90,76 @@
                 </table>
                 @if ($hasReview)
                 @foreach($reviews as $review)
-                <hr>
-                @if (Auth::check())      
-                {{ Form::open(array('action'=>'ReviewController@postReplyReview'))}}
-                {{ Form::hidden('review_id', $review->review_id)}}
-                <a class="pull-right" data-toggle="modal" href="#review_reply_{{ $review->review_id }}">回复此评论</a>                
-                <!-- Modal -->
-                <div class="modal fade" id="review_reply_{{ $review->review_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                <h4 class="modal-title" id="myModalLabel">回复此评论</h4>
-                            </div>
-                            <div class="modal-body">
-                                <textarea class="form-control review-reply-content" rows="3" name="content" placeholder="请添加您的回复（200字以内哦）"></textarea>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                {{ Form::submit('回复', array('class'=>'btn btn-primary', 'disabled'=>'true')) }}
+                <div id="review_{{ $review->review_id }}">
+
+                    <hr>
+                    @if (Auth::check())      
+                    <a class="pull-right" data-toggle="modal" href="#review_reply_{{ $review->review_id }}">
+                        <i class="fa fa-comment"></i>
+                        回复此评论
+                    </a> 
+                    <!-- Modal -->
+                    <div class="modal fade" id="review_reply_{{ $review->review_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">回复此评论</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <textarea class="form-control review-reply-content" rows="3" name="content" placeholder="请添加您的回复（200字以内哦）"></textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button class="btn btn-primary review-reply-btn" disabled onclick="postReviewReply({{ $review->review_id }});">回复</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                {{ Form::close() }}
-                @endif
+                    @endif
 
-                <h4>{{ $review->title }}
-                    <small> {{ $review->nickname }} 于 {{ formateDateTime($review->created_at) }} 发布 </small>                  
-                </h4>            
+                    <h4>{{ $review->title }}
+                        <small> {{ $review->nickname }} 于 {{ formatDateTime($review->created_at) }} 发布 </small>                  
+                    </h4>            
 
-                <p>
-                    <div class="raty-star" id="star_id_{{ $model->model_id }}" 
-                        data-score="{{ ($review->design_rating + $review->comfort_rating + $review->quality_rating) / 3 }}">
-                    </div>
-                </p>                
-                <p> {{ $review->content }}</p>
-                <p>                    
-                    <span id='thumb_btn_{{ $review->review_id }}' class='thumb-btn'>
-                        @if (Auth::check())                        
-                        @if (in_array($review->review_id, $thumbedList))
-                        <a href="javascript:removeThumbUp({{ $review->review_id }})" class='thumbed'>
-                            <i class='fa fa-thumbs-up fa-lg'></i> 
-                        </a>
-                        <span>我和</span> {{ $review->thumb_ups - 1 }} 人点赞
-                        @else                        
-                        <a href="javascript:thumbUp({{ $review->review_id }})">
-                            <i class='fa fa-thumbs-o-up fa-lg'></i>
-                        </a>
-                        {{ $review->thumb_ups }} 人点赞
-                        @endif  
-                        @else
-                        {{ $review->thumb_ups }} 人点赞
-                        @endif  
-                    </span>           
-                </p>
-
-                {{-- Review replies --}}
-                @foreach($review->reviewReplies as $reply)
-                <div class="review-reply-container">
-                    <p> 
-                        {{ $reply->member->nickname }} 
-                        <span class="font-grey">于 {{ formateDateTime($reply->created_at) }} 回复：</span>
-                        {{$reply->content}}
+                    <p>
+                        <div class="raty-star" id="star_id_{{ $model->model_id }}" 
+                            data-score="{{ ($review->design_rating + $review->comfort_rating + $review->quality_rating) / 3 }}">
+                        </div>
+                    </p>                
+                    <p> {{ $review->content }}</p>
+                    <p>                    
+                        <span id='thumb_btn_{{ $review->review_id }}' class='thumb-btn'>
+                            @if (Auth::check())                        
+                            @if (in_array($review->review_id, $thumbedList))
+                            <a href="javascript:removeThumbUp({{ $review->review_id }})" class='thumbed'>
+                                <i class='fa fa-thumbs-up fa-lg'></i> 
+                            </a>
+                            <span>我和</span> {{ $review->thumb_ups - 1 }} 人点赞
+                            @else                        
+                            <a href="javascript:thumbUp({{ $review->review_id }})">
+                                <i class='fa fa-thumbs-o-up fa-lg'></i>
+                            </a>
+                            {{ $review->thumb_ups }} 人点赞
+                            @endif  
+                            @else
+                            {{ $review->thumb_ups }} 人点赞
+                            @endif  
+                        </span>           
                     </p>
-                </div>                
-                @endforeach
+
+                    {{-- Review replies --}}
+                    <div class="review-reply-container">
+                        @foreach($review->reviewReplies as $reply)
+                        <p> 
+                            {{ $reply->member->nickname }} 
+                            <span class="font-grey">于 {{ formatDateTime($reply->created_at) }} 回复：</span>
+                            {{$reply->content}}
+                        </p>          
+                        @endforeach
+                    </div>      
+
+                </div>
                 @endforeach
                 @else
                 <hr>

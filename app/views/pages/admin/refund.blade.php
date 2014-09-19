@@ -30,7 +30,7 @@
                 {{ $refund->orderLineItemView->member->email}}
             </td>
             <td>
-                {{ formateDateTime($refund->created_at) }}
+                {{ formatDateTime($refund->created_at) }}
             </td>
             <td>
                 {{ $refund->reason }}

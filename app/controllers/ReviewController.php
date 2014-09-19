@@ -62,12 +62,17 @@ class ReviewController extends BaseController {
         }
     }
     
-    public function postReplyReview () {
+    public function postReviewReply () {
         
         $validator = $this->validateReviewReply();
         
         if ($validator->fails()) {
-            return Redirect::back()->withErrors($validator);
+            if (Request::ajax()){
+                return Response::json(array('success' => false));
+            }
+            else {
+                return Redirect::back()->withErrors($validator);
+            }            
         }
         
         $reviewReply = new ReviewReply;
@@ -75,7 +80,16 @@ class ReviewController extends BaseController {
         $reviewReply->member_id = Auth::id();
         $reviewReply->content = Input::get('content');
         $reviewReply->save();
-        return Redirect::back()->with('status', '评论回复成功');
+        if (Request::ajax()){
+            return Response::json(array(
+                'success' => true, 
+                'nickname'=>Auth::user()->nickname, 
+                'created_at' => formatDateTime($reviewReply->created_at)));
+        }
+        else {
+            return Redirect::back()->with('status', '评论回复成功');
+        }
+        
     }
     
     private function validateReview() {

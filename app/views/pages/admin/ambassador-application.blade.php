@@ -30,7 +30,7 @@
                 {{ $application->alipay_account }}
             </td>
             <td>
-                {{ formateDateTime($application->created_at) }}
+                {{ formatDateTime($application->created_at) }}
             </td>
             <td>
                 {{ $application->mobile_phone }}

@@ -44,10 +44,10 @@
                 {{ $claim->email }}
             </td>
             <td>
-                {{ formateDateTime($claim->ambassador_relation_created_at) }}
+                {{ formatDateTime($claim->ambassador_relation_created_at) }}
             </td>
             <td>
-                {{ formateDateTime($claim->order_created_at) }}
+                {{ formatDateTime($claim->order_created_at) }}
             </td>
             <td >
                 {{ $claim->total_transaction_amount }}

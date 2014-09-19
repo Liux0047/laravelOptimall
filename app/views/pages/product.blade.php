@@ -259,15 +259,13 @@ $(".review-reply-content").each(function(){
     $(this).on('input', function(){
         value = $(this).val();
         if(value.length > 0 && value.length <= 200){            
-            $(this).parent().parent().find('input[type=submit]').prop('disabled',false);
+            $(this).parent().parent().find('.review-reply-btn').prop('disabled',false);
         }
         else {
-            $(this).parent().parent().find('input[type=submit]').prop('disabled',true);
+            $(this).parent().parent().find('.review-reply-btn').prop('disabled',true);
         }
     });
 });
-
-
 
 
 //thumb up Ajax
@@ -317,6 +315,31 @@ function removeThumbUp(reviewId){
         alert("connection to database has failed");
     }).always(function() {
         //
+    });
+}
+
+
+// post review reply Ajax
+function postReviewReply(reviewId){
+    var content = $("#review_reply_" + reviewId + " textarea.review-reply-content").val();
+    $.ajax({
+        type: "POST",
+        url: "{{ action('ReviewController@postReviewReply') }}",
+        data: {review_id: reviewId, content: content
+        },
+        datatype: 'json',
+        beforeSend: function(request) {
+            return request.setRequestHeader('X-CSRF-Token', $("meta[name='token']").attr('content'));
+        }
+    }).done(function (data){
+        var element = "<p>" + data.nickname + "<span class='font-grey'>于 " + data.created_at + " 回复：</span> " + content + "</p>";
+        $(element).appendTo("#review_" + reviewId + " .review-reply-container").hide().show(500);
+    }).fail(function() {
+        //if the connection to database failed
+        alert("connection to database has failed");
+    }).always(function() {
+        $("#review_reply_" + reviewId + " textarea.review-reply-content").val("");
+        $("#review_reply_" + reviewId).modal('hide');
     });
 }
 

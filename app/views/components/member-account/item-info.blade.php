@@ -4,7 +4,7 @@
             <div class="col-md-4 font-blue">
                 <strong>订单号: CN{{ str_pad($order->order_id, 8, "0", STR_PAD_LEFT) }}</strong>
             </div>
-            <div class="col-md-3">成交时间: {{ formateDateTime($order->created_at) }}
+            <div class="col-md-3">成交时间: {{ formatDateTime($order->created_at) }}
             </div>
             <div class="col-md-2"> 合计: ¥{{ number_format($order->total_transaction_amount, 2) }}
             </div>
