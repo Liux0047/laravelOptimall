@@ -26,6 +26,14 @@ class AdminFunctionController extends BaseController {
         $params['prescriptionNames'] = PrescriptionController::getPrescriptionNames();
         return View::make('pages.admin.orders', $params);
     }
+    
+    public function getUnpaidOrders() {
+        $params['pageTitle'] = "未付款的订单";
+        $orders = PlacedOrder::unpaid()->orderBy('created_at', 'DESC')->paginate(10);
+        $params['orders'] = $orders;
+        $params['prescriptionNames'] = PrescriptionController::getPrescriptionNames();
+        return View::make('pages.admin.orders', $params);
+    }
 
     public function postDispatchOrder() {
         $order = PlacedOrder::findOrFail(Input::get('order_id'));

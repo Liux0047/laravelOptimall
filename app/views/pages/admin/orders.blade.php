@@ -12,7 +12,7 @@
     <div class="panel panel-primary">
         <!-- Default panel contents -->
         <div class="panel-heading">
-            订单号: {{ $order->order_id }}            
+            订单号: {{ generateTradeNumber($order->order_id) }}            
         </div>
         <div class="panel-body">
             <div class="row">

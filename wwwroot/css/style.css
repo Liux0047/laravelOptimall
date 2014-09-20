@@ -890,7 +890,7 @@ label, .control-label, .help-block {
 }
 .top-banner .cart-icon-ontainer{
     text-align: right;
-    padding-top: 10px;
+    padding-top: 20px;
 }
 @media (max-width: 991px){
     .top-banner .optimall-promises {

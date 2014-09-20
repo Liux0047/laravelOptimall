@@ -53,13 +53,21 @@ class PlacedOrder extends Eloquent {
     public function coupon() {
         return $this->belongsTo('Coupon', 'coupon_id');
     }
+    
+    /*
+     * scope of unpaid orders
+     */
+
+    public function scopeUnpaid($query) {
+        return $query->where('order_status_id', '=', 1);
+    }
 
     /*
      * scope of undispatched orders
      */
 
     public function scopeUndispatched($query) {
-        return $query->where('order_status_id', '<=', 2);
+        return $query->where('order_status_id', '=', 2);
     }
 
     /*

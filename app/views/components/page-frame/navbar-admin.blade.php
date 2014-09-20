@@ -19,6 +19,7 @@
 					<ul class = "dropdown-menu" role = "menu">
 						<li><a href = "{{ action('AdminFunctionController@getUndispatchedOrders') }}">未发货</a></li>
 						<li><a href = "{{ action('AdminFunctionController@getDispatchedOrders')}}">已发货</a></li>
+						<li><a href = "{{ action('AdminFunctionController@getUnpaidOrders') }}">未付款</a></li>
 					</ul>
 				</li>
 				<li class = "dropdown">

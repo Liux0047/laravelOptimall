@@ -37,17 +37,16 @@ class OrderController extends BaseController {
         $address->receive_zip = Input::get('receive_zip', '');
         $address->receive_phone = Input::get('receive_phone', '');
 
-        $orderController = new OrderController();
-        $order = $orderController->insertOrder($items, "Alipay", $price, $address, $couponId);
+        $order = $this->insertOrder($items, "Alipay", $price, $address, $couponId);
 
         if (!isset($order->order_id)) {
             die("Order not created");
         }
-        $tradeNumber = $this->generateTradeNumber($order->order_id);
+        $tradeNumber = generateTradeNumber($order->order_id);
 
         //send email
         $params['orderNumber'] = $tradeNumber;
-        $params['created_at'] = (new DateTime($order->created_at))->format('Y-m-d H:i:s');
+        $params['created_at'] = formatDateTime($order->created_at);
         $params['recipient_name'] = $order->recipient_name;
         $params['receive_address'] = $order->receive_address;
         $params['receive_phone'] = $order->receive_phone;
@@ -72,7 +71,7 @@ class OrderController extends BaseController {
             return Redirect::back()->with('error', '订单号有误');
         }
         $price = $order->total_transaction_amount;
-        $tradeNumber = $this->generateTradeNumber($orderId);
+        $tradeNumber = generateTradeNumber($orderId);
         $address = new Address;
         $address->recipient_name = $order->recipient_name;
         $address->receive_zip = $order->receive_zip;
@@ -227,7 +226,7 @@ class OrderController extends BaseController {
 
     private function recordPayment($out_trade_no, $trade_no) {
         //take the 3rd number onwards as order ID
-        $order = PlacedOrder::find(substr($out_trade_no, 2));
+        $order = PlacedOrder::find(intval(substr($out_trade_no, Config::get('optimall.orderNumberPrefixLength'))));
         if (!isset($order->payment_ref_no) && $order->order_status_id == 1) {
             $order->payment_ref_no = $trade_no;
             $order->payment_amount = Input::get('total_fee');
@@ -267,12 +266,5 @@ class OrderController extends BaseController {
         return Validator::make(Input::all(), $rules);
     }
 
-    /*
-     * transform an order ID into Alipay trade number
-     */
-
-    public function generateTradeNumber($orderId) {
-        return 'CN' . str_pad($orderId, Config::get('optimall.orderCodeLength'), "0", STR_PAD_LEFT);
-    }
 
 }

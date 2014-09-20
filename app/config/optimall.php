@@ -10,6 +10,8 @@ return array(
 
     'orderCodeLength' => 8,
     
+    'orderNumberPrefixLength' => 8,
+    
     //number of items on gallery page
     'itemsOnPage' => 12,
     
