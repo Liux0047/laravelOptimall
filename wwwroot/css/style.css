@@ -28,9 +28,6 @@
     font-style: normal;
 }
 */
-h1,h2,h3,h4,h5,h6{
-    /* font-family: "ShuiYun", Helvetica, sans-serif; */
-}
 img {
     max-width: 100%;
 }
@@ -75,20 +72,23 @@ a, a:hover, a:focus {
 .font-black {
     color: #222222;
 }
+.font-grey{
+    color: #999999;
+}
+.font-black{
+    color:black;
+}
 .font-lg{
     font-size: 1.3em;
+}
+.font-small {
+    font-size: 12px;
 }
 .font-2x{
     font-size: 2.0em;
 }
 .font-underline{
     text-decoration: underline;
-}
-.font-grey{
-    color: #999999;
-}
-.font-black{
-    color:black;
 }
 .fa.fa-weixin.font-green {
     color: #11d31d;
@@ -630,6 +630,10 @@ label, .control-label, .help-block {
     width: 100%;
     height: 100%;    
 }
+.wide-home-display .card-salient img {
+    width: 100%;
+    height: auto;
+}
 .wide-home-display .card-hidden {
     display: none;
 }
@@ -1048,7 +1052,6 @@ input.jq-validate-error{
     color: #18bc9c;
 }
 .gallery-filter-container .panel .panel-heading{
-    font-size: 1.2em;    
     font-weight: bold;
     padding-bottom: 0px;
 }
