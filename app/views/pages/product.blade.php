@@ -80,7 +80,7 @@
                 </tbody>
             </table>
 
-            <div class='row font-brown'>
+            <div class='row font-brown font-small'>
                 <div class='col-md-4'>
                     <i class='fa fa-calendar'></i> 
                     月销量: {{ $model->num_items_sold_display }} 件
