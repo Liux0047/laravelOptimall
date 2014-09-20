@@ -59,6 +59,9 @@ and open the template in the editor.
     .btn {
         padding: 8px 12px;
     }
+    .font-blue {
+        color: #2f88cc;
+    }
     </style>
 </head>
 <body>
@@ -68,7 +71,8 @@ and open the template in the editor.
             <h1>您被邀请了</h1>
             <h4>
                 您的好友{{ $nickname or '' }} 邀请了你去逛逛
-                <a href="{{ URL::to('/') }}">目光之城</a>
+                <a href="{{ URL::to('/') }}">目光之城</a>,<br>
+                <small>中国最IN的正品潮流眼镜商城, 年轻潮人最爱!</small>
             </h4>
             <h4>
                 <a href="{{ URL::to('/') }}" class="btn btn-warning">
@@ -78,11 +82,11 @@ and open the template in the editor.
             @if(isset($invitatonCode))
             <h4>
                 *请在注册时使用他（她）的邀请码:
-                <strong>{{ $invitatonCode }}</strong>
+                <strong class="font-blue">{{ $invitatonCode }}</strong>
             </h4>
             <h4>
-                即可购物卷: {{ $couponCode or '' }} <br>                
-                并立刻享受 {{ $discount }}% 的优惠吧
+                即刻获得购物卷: <span class="font-blue">{{ $couponCode or '' }} </span><br>                
+                并立刻享受 <span class="font-blue">{{ $discount }}% </span>的优惠
             </h4>
             @endif
         </div>
