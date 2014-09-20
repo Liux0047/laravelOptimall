@@ -1,14 +1,14 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <div class="row">
-            <div class="col-md-4 font-blue">
+            <div class="col-md-3 font-blue">
                 <strong>订单号: {{ generateTradeNumber($order->order_id) }}</strong>
             </div>
             <div class="col-md-3">成交时间: {{ formatDateTime($order->created_at) }}
             </div>
             <div class="col-md-2"> 合计: ¥{{ number_format($order->total_transaction_amount, 2) }}
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 订单状态: 
                 @if ($order->order_status_id == 1)
                 订单已提交
@@ -122,7 +122,7 @@
                                 @if(!isset($item->refund_id))
                                 <p>
                                     <a href="#" data-toggle="modal" data-target="#refund_{{ $item->order_line_item_id }}" >
-                                        <i class="fa fa-yen"></i> 申请退款
+                                        <i class="fa fa-bullhorn"></i> 申请退款
                                     </a>
                                 </p>        
                                 {{ Form::open(array('action'=>'MemberAccountController@postClaimRefund', 'class'=>'refund-form','files'=>true)) }}

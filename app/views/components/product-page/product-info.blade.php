@@ -143,6 +143,7 @@
                             {{ $review->thumb_ups }} 人点赞
                             @endif  
                             @else
+                            <a><i class='fa fa-thumbs-o-up fa-lg'></i></a>
                             {{ $review->thumb_ups }} 人点赞
                             @endif  
                         </span>           
