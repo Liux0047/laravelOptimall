@@ -33,7 +33,7 @@
                             记住我                                
                         </label>
                     </div>
-                    <input type="submit" class="btn btn-metro pull-right" value="登录">
+                    <input type="submit" class="btn btn-success pull-right" value="登录">
                     <a href="{{ action('MemberController@getSignUp') }}" class="btn btn-danger">
                         注册                                    
                     </a>                    

@@ -1,4 +1,4 @@
-<div class="navbar navbar-default yamm navbar-inverse" id="nav">
+<div class="navbar navbar-default yamm" id="nav">
     <div class="container">
         <div class="navbar-header">
             <button type="button" data-toggle="collapse" data-target="#navbar-collapse-2" class="navbar-toggle">
@@ -16,7 +16,7 @@
                         <li>
                             <div class="yamm-content">
                                 <div class="row row-narrow">
-                                    <div class="col-md-1 col-narrow">
+                                    <div class="col-md-1 col-sm-3 col-xs-3 col-narrow">
                                         <ul>
                                             <li>
                                                 <span class="category-header">材料</span>
@@ -47,7 +47,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="col-md-1 col-narrow">
+                                    <div class="col-md-1 col-sm-3 col-xs-3 col-narrow">
                                         <ul>
                                             <li>
                                                 <span class="category-header">风格</span>
@@ -78,14 +78,14 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-2 col-sm-6 col-xs-6">
                                         <ul>
                                             <li>
                                                 <span class="category-header">颜色</span>
                                             </li>
                                         </ul>
                                         <div class="row row-narrow">
-                                            <div class="col-md-6 col-narrow">
+                                            <div class="col-md-6 col-sm-6 col-xs-6 col-narrow">
                                                 <ul>
                                                     <li>
                                                         <a href="{{ url('gallery?colors[]=1') }}">
@@ -132,7 +132,7 @@
                                                 </ul>
 
                                             </div>
-                                            <div class="col-md-6 col-narrow">
+                                            <div class="col-md-6 col-sm-6 col-xs-6 col-narrow">
                                                 <ul>
                                                     <li>
                                                         <a href="{{ url('gallery?colors[]=8') }}">
@@ -180,12 +180,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-narrow navbar-poster">
+                                    <div class="col-md-6 col-sm-9 col-xs-9 col-narrow navbar-poster">
                                         <a href="{{ action('ProductController@getProduct', array(2008)) }}">
                                             {{ HTML::image('images/navbar/nav-poster-1.jpg')}}
                                         </a>
                                     </div>
-                                    <div class="col-md-2 col-narrow navbar-poster">
+                                    <div class="col-md-2 col-sm-3 col-xs-3 col-narrow navbar-poster">
                                         <a href="{{ action('ProductController@getProduct', array(3004)) }}">
                                             {{ HTML::image('images/navbar/nav-poster-2.jpg')}}
                                         </a>

@@ -48,7 +48,7 @@
 	<div class="panel panel-default">
 		<table class="table shopping-cart-table">
 			<thead>
-				<tr class="metro">
+				<tr class="success">
 					<th>商品信息</th>
 					<th>验光单</th>
 					<th>订购数量</th>

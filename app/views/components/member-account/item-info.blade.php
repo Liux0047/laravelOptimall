@@ -45,7 +45,7 @@
             <div class="col-md-9">
                 <table class="table table-bordered order-summary-table">                                    
                     <thead>
-                        <tr class="metro">
+                        <tr class="success">
                             <td width="20%">样品图片</td>
                             <td width="15%">品名</td>
                             <td width="10%">颜色</td>

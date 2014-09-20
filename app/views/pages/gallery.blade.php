@@ -45,7 +45,7 @@
 
 					<div class="panel-footer">
 						<div class="align-center">
-							<button onclick="loadMoreModels(); return false;" class="btn btn-metro" id="load_more_btn">
+							<button onclick="loadMoreModels(); return false;" class="btn btn-success" id="load_more_btn">
 								加载更多	{{ HTML::image('images/preloader-white.gif','loading',array('class'=>'ajax-preloader no-display', 'id'=>'load_more_preloader_img'))}}			
 							</button>													
 						</div>						
