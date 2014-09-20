@@ -133,7 +133,7 @@
                 {{ Form::close() }}
                 @endif
                 @else
-                已驳回
+                已驳回: {{ $refund->rejection_reason }}
                 @endif
             </td>
         </tr>

@@ -28,19 +28,15 @@
     font-style: normal;
 }
 */
-
-body {
-    /* font-family: "XiHei", Helvetica, sans-serif;    */
-    font-family: Helvetica, sans-serif;
-    font-size: 12px;
-}
 h1,h2,h3,h4,h5,h6{
     /* font-family: "ShuiYun", Helvetica, sans-serif; */
-    font-family: Helvetica, sans-serif;
-    font-weight: normal;
 }
 img {
     max-width: 100%;
+}
+/* diasble Baidu */
+img[width="20"][height="20"]{
+    display: none;
 }
 a, a:hover, a:focus {
     text-decoration: none;
@@ -279,10 +275,10 @@ label, .control-label, .help-block {
 /*
 * Navbar modification and yamm css
 */
-.navbar {
-    margin-bottom: 0px;
-    z-index: 998;
-    border-bottom: 1px solid #EEEEEE;
+.navbar .dropdown-menu .pill img {
+    height: 22px;
+    margin-top: -4px;
+    margin-bottom: -4px;
 }
 .navbar.affix{
     position: fixed;
@@ -294,7 +290,10 @@ label, .control-label, .help-block {
     color: #E8E8E8;
     transition: background-color 1s, color 1s;
     -webkit-transition: background-color 1s, color 1s;    
-    border-bottom: 0px;
+    border-bottom: none;
+}
+.navbar.affix .navbar-nav .open .dropdown-menu>li>a {
+    color: #f5f5f5;
 }
 .navbar.affix .navbar-brand, 
 .navbar.affix .navbar-nav>li>a,
@@ -302,16 +301,23 @@ label, .control-label, .help-block {
     color: #E8E8E8;
     background-color: inherit;
 }
+
 .navbar.affix .navbar-nav>.open>a,
 .navbar.affix .navbar-nav>.open>a:hover, 
 .navbar.affix .navbar-nav>.open>a:focus,
 .navbar.affix .navbar-nav>li>a:hover,
-.navbar.affix .navbar-nav .open .dropdown-menu>li>a:hover,
-.navbar.affix .navbar-nav .open .dropdown-menu>li>a:focus,
 .navbar.affix .dropdown-menu>li>a:hover,
 .navbar.affix .navbar-header a.navbar-brand:hover{
     color: #333333;
-    background-color:  #f5f5f5;
+    background-color: #f5f5f5;
+}
+
+.navbar.affix .navbar-nav .open .dropdown-menu>li>a:hover,
+.navbar.affix .navbar-nav .open .dropdown-menu>li>a:focus,
+.yamm-content ul>li>a:hover, 
+.yamm-content ul>li>a:focus{
+    color: #fff;
+    background-color: #ee4054;
 }
 .navbar.affix .navbar-toggle .icon-bar,
 .navbar.affix .navbar-toggle:hover .icon-bar{
@@ -327,11 +333,8 @@ label, .control-label, .help-block {
     right: 15px; //to compensate the 15px margin of container
 }
 
-.yamm .dropdown-menu {
-    min-width: 80px;
-}
 .yamm .yamm-content {       
-    color: #222222 ;
+    color: #222 ;
     padding: 20px 30px;
 }
 .yamm .yamm-content.content-narrow {       
@@ -354,13 +357,12 @@ label, .control-label, .help-block {
 .yamm-content ul>li>a {
     clear: both;
     font-weight: 400;    
-    color: #333;
+    color: #222;
 }
-.yamm-content ul>li a:hover, 
-.yamm-content ul>li a:focus {
-    color: white;
-    background-color: #ee4054;
+.navbar.affix .yamm-content ul>li>a {
+    color: #f5f5f5;
 }
+
 
 .yamm-content ul>li .category-header {
     font-weight: bold;
@@ -382,9 +384,6 @@ label, .control-label, .help-block {
 .yamm-content .navbar-poster{
     padding-top: 8px;
 }
-.yamm-content .pill img {
-    height: 20px;
-}
 .yamm-content .WB_widget .follow_text {
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
@@ -392,9 +391,19 @@ label, .control-label, .help-block {
 }
 
 @media (min-width: 992px) {
+    .navbar .navbar-collapse {
+        padding-left: 0;
+        padding-right: 0;
+    }
 
+    .navbar.affix .navbar-nav .open .dropdown-menu>li>a {
+        color: #222;
+    }
+    
+    .navbar.affix  .yamm-content ul>li>a {  
+        color: #333;
+    }
 }
-
 /*
 * Pagination modification
 */

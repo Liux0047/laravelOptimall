@@ -71,19 +71,19 @@ and open the template in the editor.
                 <a href="{{ URL::to('/') }}">目光之城</a>
             </h4>
             <h4>
-                您获得了购物卷: {{ $couponCode or '' }} <br>                
-                立刻享受 {{ $discount }}% 的优惠吧
-            </h4>
-            <h4>
                 <a href="{{ URL::to('/') }}" class="btn btn-warning">
                     现在就去看看
                 </a>
             </h4>
             @if(isset($invitatonCode))
-            <p>
-                *请在注册时使用他（她）的邀请码: <br>
+            <h4>
+                *请在注册时使用他（她）的邀请码:
                 <strong>{{ $invitatonCode }}</strong>
-            </p>
+            </h4>
+            <h4>
+                即可购物卷: {{ $couponCode or '' }} <br>                
+                并立刻享受 {{ $discount }}% 的优惠吧
+            </h4>
             @endif
         </div>
     </div>

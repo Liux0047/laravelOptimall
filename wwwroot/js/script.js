@@ -105,12 +105,11 @@ $(document).ready(function() {
     //enable dropdown on hover
     //also add hovered class to hovered dropdown menu
     $('.navbar .dropdown-hover').hover(function() {
-        $(this).find('.yamm-content').first().stop(true, true).delay(150).slideDown(200);
         $(this).addClass("open");
-        //$('.dropdown').removeClass("open");
+        $(this).find('.dropdown-menu').stop(true, true).hide().delay(150).slideDown(200);
     }, function() {
-        $(this).find('.yamm-content').first().stop(true, true).delay(0).slideUp(1);
-        $(this).removeClass("open");
+        $(this).find('.dropdown-menu').stop(true, true).delay(0).slideUp(1);
+        $(this).removeClass("open");        
     });
 
 
