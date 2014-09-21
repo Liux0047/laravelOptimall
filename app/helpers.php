@@ -17,6 +17,15 @@ function formatDate($dateTimeString) {
 }
 
 /*
+ * get the difference in days
+ */
+
+function getDateDiffToNow($date) {
+    $dateNow = new DateTime();
+    return abs($dateNow->diff(new DateTime($date))->days);
+}
+
+/*
  * transform an order ID into trade number accepted by payment vendor
  */
 

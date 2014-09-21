@@ -143,7 +143,7 @@ class AmbassadorController extends BaseController {
      */
 
     private function isRewardOverDue($order) {
-        $daysOrderCreated = $this->getDaysDiff($order->order_created_at);
+        $daysOrderCreated = getDateDiffToNow($order->payment_time);
         return $daysOrderCreated > Config::get('optimall.ambassadorClaimDuration');
     }
 
@@ -153,14 +153,10 @@ class AmbassadorController extends BaseController {
      */
 
     private function isRewardNotConfirmed($order) {
-        $daysOrderCreated = $this->getDaysDiff($order->order_created_at);
+        $daysOrderCreated = getDateDiffToNow($order->payment_time);
         return $daysOrderCreated < Config::get('optimall.ambassadorOrderConfirmation');
     }
 
-    private function getDaysDiff($date) {
-        $dateNow = new DateTime();
-        return abs($dateNow->diff(new DateTime($date))->days);
-    }
 
     private function generateUniqueId() {
         return uniqid();

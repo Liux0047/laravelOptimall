@@ -44,7 +44,7 @@
                         <tr @if($order->is_ambassador_reward_claimed || $rewards[$order->order_id]['isRewardOverDue'] || $rewards[$order->order_id]['isRewardNotConfirmed']) class="obscure" @endif>
                             <td>{{ $order->nickname }}</td>
                             <td>{{ $order->email }}</td>
-                            <td>{{ formatDateTime($order->order_created_at) }}</td>
+                            <td>{{ formatDateTime($order->payment_time) }}</td>
                             <td>¥{{ number_format($order->total_transaction_amount, 2) }}</td>
                             <td>
                                 @if($order->is_first_purchase)
@@ -75,8 +75,8 @@
                                 @endif
                                 @elseif ($rewards[$order->order_id]['isRewardOverDue'])      
                                 已过期 
-                                @elseif ($rewards[$order->order_id]['isRewardNotConfirmed'])    
-                                订单确认 {{ Config::get('optimall.ambassadorOrderConfirmation') }} 天后生效
+                                @elseif ($rewards[$order->order_id]['isRewardNotConfirmed'])                                    
+                                {{ Config::get('optimall.ambassadorOrderConfirmation') - getDateDiffToNow($order->payment_time) }} 天后即可领取
                                 @else                 
                                 可领取
                                 @endif
