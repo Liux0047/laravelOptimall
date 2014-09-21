@@ -6,7 +6,7 @@
  * @author Allen
  */
 class ProductController extends BaseController {
-    
+
     public static $productLabels = array(
         'promotion' => 1,
         'newArrival' => 2,
@@ -14,7 +14,6 @@ class ProductController extends BaseController {
         'featured' => 4,
         'classical' => 5
     );
-
     public static $eminentModels = array(
         'promotion' => array(1001, 1009),
         'newArrival' => array(3001, 3004),
@@ -22,8 +21,7 @@ class ProductController extends BaseController {
         'featured' => array(2007, 3002),
         'classical' => array(2002, 3009)
     );
-    
-    public static $eminentModelQuote = array (
+    public static $eminentModelQuote = array(
         1001 => "【炫彩夏威夷】<br> 缤纷夏日狂欢， 有你有我", 1009 => "【文艺.复兴】<br>在平凡的世界中不平凡",
         3001 => "【沁心】<br> Samatha", 3004 => "【雅皮士Yuppies】<br>你的爱羡为我加冕",
         2004 => "【极简主义】<br> Simply Elegant", 3010 => "【摩登时代】<br> Timeless Classic",
@@ -41,7 +39,7 @@ class ProductController extends BaseController {
         $params['product'] = $model->productViews()->firstOrFail();
         $params['products'] = $model->productViews;
         $params['lensTypes'] = LensType::all();
-        $reviews = Review::ofModel($modelId)->orderBy('created_at','DESC')->get();
+        $reviews = Review::ofModel($modelId)->orderBy('created_at', 'DESC')->get();
         $params['reviews'] = $reviews;
         //invalid review collection if contains only one entry withoug review_id
         $params['hasReview'] = !($reviews->count() == 1 && !isset($reviews[0]->review_id));
@@ -52,7 +50,8 @@ class ProductController extends BaseController {
                 $params['thumbedList'][] = $thumbUp->review_id;
             }
         }
-        $params['sequence'] = array(3,1,4,2,);
+        $params['reviewOrderLineItemId'] = $this->isReviewable($modelId);
+        $params['sequence'] = array(3, 1, 4, 2,);
         $params['alsoBuys'] = $this->getAlsoBuyModels($modelId);
         $this->recordViewHistory($modelId);
         return View::make('pages.product', $params);
@@ -66,10 +65,10 @@ class ProductController extends BaseController {
                             ->where('product_label_id', '=', $labelValue)
                             ->orderBy('num_items_sold_display', 'DESC')->take(4)->get();
             $params[$modelGroupName] = $$modelGroupName;
-        }        
+        }
 
-        foreach(self::$eminentModels as $key=>$eminentModelIds) {
-            $params['wideModels'][$key] = ProductModelView::whereIn('model_id' ,$eminentModelIds)->get();
+        foreach (self::$eminentModels as $key => $eminentModelIds) {
+            $params['wideModels'][$key] = ProductModelView::whereIn('model_id', $eminentModelIds)->get();
         }
         $params['wideModelQuote'] = self::$eminentModelQuote;
         return View::make('pages.index', $params);
@@ -177,14 +176,41 @@ class ProductController extends BaseController {
         $baseModels = OrderLineItemView::viewThisAlsoBuy($cuurentModelId)->take(5)->get();
         $models = array();
         $count = 0;
-        foreach ($baseModels as $baseModel) {            
+        foreach ($baseModels as $baseModel) {
             $models[] = ProductModelView::find($baseModel->model_id);
             $count++;
         }
-        for ($i = $count; $i<5; $i++){
+        for ($i = $count; $i < 5; $i++) {
             $models[] = ProductModelView::find(3001 + $i);
         }
         return array('models' => $models);
+    }
+
+    /*
+     * check if current member is eligible to write review for this model
+     * returns the member's orderLineItemId if eligible
+     * otherwise false
+     */
+    private function isReviewable($modelId) {
+        if (Auth::check()) {
+            $orderLineItemIds = OrderLineItemView::select('order_line_item_id')
+                    ->where('model_id', '=', $modelId)
+                    ->where('member_id', '=', Auth::id())
+                    ->get();
+            if ($orderLineItemIds->count() > 0) {                
+                foreach ($orderLineItemIds as $orderLineItemId) {
+                    $id = $orderLineItemId->order_line_item_id;
+                    if (Review::where('order_line_item_id', '=',$id )->count() == 0) {
+                        return $id;
+                    }
+                }
+                return false;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
 }

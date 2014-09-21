@@ -23,7 +23,7 @@
 							销量优先
 						</a> 
 						<a class="sorting-option @if ($sortOrder == 'average_design_rating') selected-sorting-option @endif" href="javascript:submitSortOrder('average_design_rating', 1);">
-							评分：由高到低
+							评分优先：<i class="fa fa-arrow-down"></i>
 						</a>
 						<a class="sorting-option @if ($sortOrder == 'price' && $isDesc == true) selected-sorting-option @endif" href="javascript:submitSortOrder('price', 1);">
 							价格优先：<i class="fa fa-arrow-down"></i>

@@ -389,7 +389,9 @@ label, .control-label, .help-block {
     -moz-box-sizing: content-box;
     box-sizing: content-box;
 }
-
+.yamm-content .WB_widget .intro_data {
+    display: none;
+}
 @media (min-width: 992px) {
     .navbar .navbar-collapse {
         padding-left: 0;

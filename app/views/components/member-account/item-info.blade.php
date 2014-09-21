@@ -114,7 +114,7 @@
                                 </p>            
                                 {{ Form::open(array('action'=>'ReviewController@postCreateReview', 'class'=>'review-form', 'role'=>'form')) }}
                                 {{ Form::hidden('order_line_item_id', $item->order_line_item_id) }}
-                                @include('components.member-account.review-modal', array('item'=>$item))
+                                @include('components.member-account.review-modal', array('itemId'=>$item->order_line_item_id))
                                 {{ Form::close()}}
                                 @else
                                 @endif

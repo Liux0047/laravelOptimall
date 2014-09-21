@@ -166,7 +166,21 @@
                 <hr>
                 暂无评论
                 @endif
+                @if($reviewOrderLineItemId)
+                <div class="pull-right">
+                    <a data-toggle="modal" href="#add_review_{{ $reviewOrderLineItemId }}">
+                        <i class="fa fa-pencil"></i> 添加评论
+                    </a>        
+                </div>            
+                {{ Form::open(array('action'=>'ReviewController@postCreateReview', 'class'=>'review-form', 'role'=>'form')) }}
+                {{ Form::hidden('order_line_item_id', $reviewOrderLineItemId) }}
+                @include('components.member-account.review-modal', array('itemId'=>$reviewOrderLineItemId))
+                {{ Form::close()}}
+                @endif
             </div>
         </div>
+
+        
+
     </div>
 </div>

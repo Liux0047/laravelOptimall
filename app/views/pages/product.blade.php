@@ -165,6 +165,10 @@
 {{ HTML::script('plugins/raty-2.7.0/jquery.raty.js') }}
 {{ HTML::script('plugins/fotorama-4.6.2/fotorama.js') }}
 {{ HTML::script('plugins/jQuery-Knob/jquery.knob.min.js') }}
+@if($reviewOrderLineItemId)
+{{ HTML::script('plugins/jQuery-Validation/jquery.validate.min.js') }}
+{{ HTML::script('js/jQuery-Validation-customize.js') }}
+@endif
 @stop
 
 @section("script")
@@ -352,6 +356,9 @@ function changeAlsoBuyImg(modelId, prodcutId) {
         "<img src='{{ asset('images/gallery') }}/" + modelId + "/" + prodcutId + "/{{ Config::get('optimall.smallViewImg') }}'>");
 }
 
-</script>       
+</script>  
 @include('components.product-page.jquery-knob-js', array('model'=>$model))
+@if($reviewOrderLineItemId)
+@include('components.member-account.review-modal-js')
+@endif
 @stop

@@ -1,4 +1,4 @@
-<div class="modal fade" id="add_review_{{ $item->order_line_item_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="add_review_{{ $itemId }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -10,19 +10,19 @@
                     <div class="row">
                         <div class="col-md-2">舒适 </div>
                         <div class="col-md-10">
-                            <div class="raty-star-input" id="score_comfort_{{ $item->order_line_item_id }}" data-scoreName="score_comfort"></div>
+                            <div class="raty-star-input" id="score_comfort_{{ $itemId }}" data-scoreName="score_comfort"></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-2">外观 </div>
                         <div class="col-md-10">
-                            <div class="raty-star-input" id="score_design_{{ $item->order_line_item_id }}" data-scoreName="score_design"></div>
+                            <div class="raty-star-input" id="score_design_{{ $itemId }}" data-scoreName="score_design"></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-2">质量 </div>
                         <div class="col-md-10">
-                            <div class="raty-star-input" id="score_quality_{{ $item->order_line_item_id }}" data-scoreName="score_quality"></div>                                    
+                            <div class="raty-star-input" id="score_quality_{{ $itemId }}" data-scoreName="score_quality"></div>                                    
                         </div>                        
                     </div>                    
                 </div>

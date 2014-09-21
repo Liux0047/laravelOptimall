@@ -25,15 +25,15 @@ class ReviewController extends BaseController {
         $review->content = Input::get('content');
         
         $review->design_rating = Input::get('score_design', '5');
-        if ($review->design_rating > 5) {
+        if ($review->design_rating > 5 || empty($review->design_rating)) {
             $review->design_rating = 5;
         }
         $review->comfort_rating = Input::get('score_comfort', '5');
-        if ($review->comfort_rating > 5) {
+        if ($review->comfort_rating > 5 || empty($review->comfort_rating)) {
             $review->comfort_rating = 5;
         }
         $review->quality_rating = Input::get('score_quality', '5');
-        if ($review->quality_rating > 5) {
+        if ($review->quality_rating > 5 || empty($review->quality_rating)) {
             $review->quality_rating = 5;
         }
         
