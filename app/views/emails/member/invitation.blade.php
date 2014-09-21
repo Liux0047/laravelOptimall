@@ -72,7 +72,7 @@ and open the template in the editor.
             <h4>
                 您的好友{{ $nickname or '' }} 邀请了你去逛逛
                 <a href="{{ URL::to('/') }}">目光之城</a>,<br>
-                <small>中国最IN的正品潮流眼镜商城, 年轻潮人最爱!</small>
+                <small>最IN的正品潮流眼镜商城, 年轻潮人最爱!</small>
             </h4>
             <h4>
                 <a href="{{ URL::to('/') }}" class="btn btn-warning">
