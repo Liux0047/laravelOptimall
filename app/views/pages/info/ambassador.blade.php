@@ -1,10 +1,23 @@
 @extends ('layouts.base')
 
+@section('link-css')
+@parent
+{{ HTML::style('css/info-page.css'); }}
+{{ HTML::style('css/animate.min.css'); }}
+@stop
+
 @section('content')
-<div class="container content-container">	
-	<a href="{{ action('MemberAccountController@getAmbassadorPanel') }}">
+<div class="container content-container" id="ambassador_container">	
+	<div id="call_to_action_container">
 		{{ HTML::image('images/ambassador/call-to-action.jpg') }}
-	</a>
+		<div id="call_to_action_control" class="animated rubberBand">
+			<a href="{{ action('MemberAccountController@getAmbassadorPanel') }}" class="btn btn-lg btn-danger" >
+				<i class="fa fa-play-circle-o"></i> 立即申请
+			</a>
+		</div>
+		
+	</div>
+	
 
 	<!--detailed product info -->
 	<ul class="nav nav-tabs ambassador-tabs" role="tablist">
@@ -31,34 +44,45 @@
 	</ul>
 
 	<div class="tab-content">
-		<div class="tab-pane fade in active tab-pane-bordered" id="about_ambassador">
+		<div class="tab-pane fade in active tab-pane-bordered info-pane" id="about_ambassador">
 			<div class="row">
-				<div class="col-md-12">     
-					<a href="{{ action('MemberAccountController@getAmbassadorPanel') }}">
-						<img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" data-original="{{ asset('images/ambassador/program-introduction.jpg') }}" class="lazy">
-					</a>
+				<div class="col-md-12 info-pane-content">     
+					<img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" data-original="{{ asset('images/ambassador/program-introduction.jpg') }}" class="lazy">
+					<div class="info-pane-control">
+						<a href="{{ action('MemberAccountController@getAmbassadorPanel') }}" class="btn btn-lg btn-danger" >
+							<i class="fa fa-play-circle-o"></i> 立即申请
+						</a>
+					</div>
+					
 				</div>
 			</div> 
 		</div>
 
-		<div class="tab-pane fade tab-pane-bordered" id="how_it_works">
+		<div class="tab-pane fade tab-pane-bordered info-pane" id="how_it_works">
 			<div class="row">
-				<div class="col-md-12">     
-					<a href="{{ action('MemberAccountController@getAmbassadorPanel') }}">
-						<img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" data-original="{{ asset('images/ambassador/ambassador-illustration.jpg') }}" class="lazy">
-					</a>
+				<div class="col-md-12 info-pane-content">     
+					<img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" data-original="{{ asset('images/ambassador/ambassador-illustration.jpg') }}" class="lazy">
+					<div class="info-pane-control">
+						<a href="{{ action('MemberAccountController@getAmbassadorPanel') }}" class="btn btn-lg btn-danger" >
+							<i class="fa fa-play-circle-o"></i> 立即申请
+						</a>
+					</div>
 				</div>
 			</div>            
 		</div>
 
 
-		<div class="tab-pane fade tab-pane-bordered" id="how_to_earn">
+		<div class="tab-pane fade tab-pane-bordered info-pane" id="how_to_earn">
+
 
 		</div>
 
-		<div class="tab-pane fade tab-pane-bordered" id="terms_condition">
+		<div class="tab-pane fade tab-pane-bordered info-pane" id="terms_condition">
 			<div class="row">
-				<div class="col-md-12 padding-40">     
+				<div class="col-md-12 padding-40 info-pane-content">     
+					<div class="page-header">
+						<h4><strong>目光之星条款及协议</strong></h4>
+					</div>
 					<p>目光之城运行并维护本网站，对此次促销活动负责并保有最终解释权。浏览本网站之前，请务必仔细阅读本条款和条件。当您使用本网站时，请确认您同意并接受以下条款和条件。 您可以下载网站上的资源并用于个人,非商业目的。此外，在未得到目光之城的书面许可前，您不得修改，复制， 或使用本网站的内容（包括文本，图像，音频和视频。）于公共或商业用途。 目光之城保留在任何时间取消或修改本网站的促销活动和本条款和条件的权利。任何更改都将在本网站或条款和条件内公布，恕不另行通知。</p>
 					<br>
 					<h5><strong>条款</strong></h5>
@@ -81,9 +105,9 @@
 					<p>用户行为分析 - 我们保留对用户行为及特征（包括用户对网站各领域的使用及兴趣）进行数据分析，并将此类信息以及用户对商品的曝光率和点击量告知广告刊登者/生产商的权利。我们将只会提供汇总数据给第三方。我们不对任何与第三方索求个人信息的行为负责，您应该自行检查适用的第三方隐私政策与条款。</p>
 					<p>缓存 – 您应当知道当您浏览目光之城网页的时候，信息和数据可能会因为缓存被自动收集。缓存是小的文本文件，目光之城可以用它来识别重复的用户，观察用户的行为，并编制汇总数据，以此来改善网站和广告信息。 缓存不会影响您的电脑系统，也不会损坏你的文件。如果您不想通过缓存被收集信息，在大多数浏览器软件中您都可以选择拒绝或接受缓存功能。 </p>
 					<p>更新或删除信息 -如果您对以前提供的信息需要做出任何更新，修改或更正， 您可以通过网站上的反馈表通知我们。 此外，如果您有要求，我们将在合理的商业范围内尽最大的努力将您的信息从我们的数据库中删除（在任何情况下信息删除将会在十（10）个工作日内完成）。然而，因为备份和删除记录的原因，目光之城可能会保留一些残余信息。 </p>
-					<p>条款更新/修正 - 我们保留在任何时间修改，变更或更新本隐私条款的权利。如有任何变化，我们将会及时通知您。</p>
-					
+					<p>条款更新/修正 - 我们保留在任何时间修改，变更或更新本隐私条款的权利。如有任何变化，我们将会及时通知您。</p>					
 				</div>
+
 			</div> 
 			
 

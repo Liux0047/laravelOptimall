@@ -318,7 +318,7 @@
                             <div class="yamm-content">
                                 <ul>
                                     <li>
-                                        <wb:follow-button uid="5281852072" type="red_3" width="100%" height="24" ></wb:follow-button> 
+                                        <wb:follow-button uid="5281852072" type="red_3" width="240px" height="24" ></wb:follow-button> 
                                     </li>
                                     <li class="divider"></li>
                                     <li>

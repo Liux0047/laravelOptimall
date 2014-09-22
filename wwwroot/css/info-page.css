@@ -1,9 +1,10 @@
+/* about products page */
 .about-product-section {
     padding-top: 50px;          
     min-height: 500px;
 }
 .about-product-section .section-title {
-    
+
 }
 .about-product-section .section-title img {
     display: block;
@@ -45,4 +46,23 @@
 
 #about_prescription {
     background-color: #f8eed3;
+}
+
+/* ambassador page */
+#ambassador_container #call_to_action_container {
+    position: relative;
+}
+#ambassador_container #call_to_action_container #call_to_action_control{
+    position: absolute;
+    top: 74%;
+    left: 58%;
+}
+#ambassador_container .info-pane .info-pane-content {
+    position: relative;
+    min-height: 500px;
+}
+#ambassador_container .info-pane .info-pane-content .info-pane-control{
+    position: absolute;
+    top: 89%;
+    left: 44%;
 }

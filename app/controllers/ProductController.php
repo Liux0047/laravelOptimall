@@ -9,8 +9,8 @@ class ProductController extends BaseController {
 
     public static $productLabels = array(
         'promotion' => 1,
-        'newArrival' => 2,
-        'bestSeller' => 3,
+        'bestSeller' => 2,
+        'newArrival' => 3,
         'featured' => 4,
         'classical' => 5
     );

@@ -30,7 +30,7 @@
 			<div class="form-group">
 				<label for="ambassador_plan" class="col-sm-2 control-label">目光之星计划</label>
 				<div class="col-md-6">
-					<textarea rows="3" id="ambassador_plan" name="ambassador_plan" class="form-control"  placeholder="请介绍您在成为目光之星后的计划(100字)"></textarea>
+					<textarea rows="3" id="ambassador_plan" name="ambassador_plan" class="form-control"  placeholder="请简述为什么你会成为一个成功的目光之星？你打算如何推广目光之星眼镜商城？(100字以内)"></textarea>
 				</div>				
 			</div>			
 			<div class="form-group">
@@ -39,9 +39,6 @@
 				</div>
 			</div>			
 			{{ Form::close() }}
-			
-			
-
 
 			@include('components.member-account.send-invitation')
 

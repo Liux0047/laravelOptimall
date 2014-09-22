@@ -3,7 +3,6 @@
 @section('link-css')
 @parent
 {{ HTML::style('plugins/raty-2.7.0/jquery.raty.css') }}
-{{ HTML::style('css/animate.min.css'); }}
 @stop
 
 @section ('content')
@@ -17,7 +16,7 @@
     </ol>
     <!-- Carousel items -->
     <div class="carousel-inner">
-        <div class="active animated fadeInRight item">
+        <div class="active item">
             <a href="{{ action('InfoController@getAboutProducts') }}">
                 <img src="{{ asset('images/carousel/index-carousel-cn-1.jpg') }}">
             </a>
