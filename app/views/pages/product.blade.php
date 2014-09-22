@@ -202,13 +202,13 @@ function changeColor(productId) {
 function changeProductPic(productId) {
     $("#product_pic_container").html("");
     $("#product_pic_container").append("<div class='fotorama' data-allowfullscreen='native'  data-auto='false'>");
-    @for ($i=1; $i<=4; $i++)            
+    @foreach ($sequence as $i)    
     $("#product_pic_container .fotorama").append(
         "<a href='{{ asset('images/gallery/'.$model->model_id) }}/" + productId + "/medium-view-{{ $i }}.jpg' " +
         "data-thumb='{{ asset('images/gallery/'.$model->model_id) }}/" + productId + "/medium-view-{{ $i }}.jpg' " +
         "data-full='{{ asset('images/gallery/'.$model->model_id) }}/" + productId + "/large-view-{{ $i }}.jpg'> "
         );
-    @endfor
+    @endforeach
     $("#product_pic_container").append("</div>");
     fotoramaInit();       
 }
