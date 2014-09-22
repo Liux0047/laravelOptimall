@@ -47,7 +47,7 @@
                                 <span id="sales-price" class="sales-price">
                                     {{ number_format($model->price, 2) }}
                                 </span>      
-                                <span class='label label-danger'>促销</span> 
+                                @include('components.product-page.product-label', array('productLabelId'=>$model->product_label_id))                                
                                 (市场价 ¥<del id='market-price'>{{ number_format($model->market_price, 2) }}</del>)   
                             </span>                               
                         </td>

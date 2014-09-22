@@ -264,6 +264,11 @@ label, .control-label, .help-block {
     }
 }
 
+/* label large class */
+.label.label-lg {
+    font-size: 1.0em;
+}
+
 
 /* nav tab modification */
 .tab-content .tab-pane-bordered{

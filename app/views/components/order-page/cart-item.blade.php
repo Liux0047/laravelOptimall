@@ -20,7 +20,7 @@
                     <br>
                     单价: ¥{{ number_format($item->price, 2) }}      
                 </p>
-                <span class="label label-warning">销量优先</span>
+                @include('components.product-page.product-label', array('productLabelId'=>$item->product_label_id)) 
             </div>
         </div>
     </td>

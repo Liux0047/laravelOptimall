@@ -44,7 +44,7 @@
                     @if (($model->average_design_rating + $model->average_comfort_rating + $model->average_quality_rating) > 0)
                     data-score="{{ ($model->average_design_rating + $model->average_comfort_rating + $model->average_quality_rating) / 3 }}",
                     @else
-                    data-score="5" 
+                    data-score="0" 
                     @endif
                     >                         
                 </div>
