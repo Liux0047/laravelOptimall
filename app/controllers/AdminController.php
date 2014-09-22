@@ -6,6 +6,8 @@
  * @author Allen
  */
 class AdminController extends BaseController {
+    
+    Const MAX_LOGIN_ATTEMPTS = 10;
 
     public function getLogin() {
         if (Session::has('admin')) {
@@ -25,13 +27,20 @@ class AdminController extends BaseController {
         $admin = Admin::where('username', '=', Input::get('username'))->first();
         if (!isset($admin)) {
             return Redirect::back()->with('error', '账号或者密码不对');
-        }
-        if (Hash::check(Input::get('password'), $admin->password)) {
-            Session::put('admin.username', $admin->username);
-            Session::put('admin.priviledge', $admin->priviledge);
-            return Redirect::intended('admin-dashboard');
         } else {
-            return Redirect::back()->with('error', '账号或者密码不对');
+            if (Hash::check(Input::get('password'), $admin->password)) {
+                // if login successful
+                Session::put('admin.username', $admin->username);
+                Session::put('admin.priviledge', $admin->priviledge);
+                $admin->login_attempts = 0; //clear the attempt marker
+                return Redirect::intended('admin-dashboard');
+            } else if ($admin->login_attempts < self::MAX_LOGIN_ATTEMPTS){
+                $admin->login_attempts += 1;
+                $admin->save();
+                return Redirect::back()->with('error', '账号或者密码不对');
+            } else {
+                return Redirect::back()->with('error', '对不起，改账号已经被锁定');
+            }
         }
     }
 

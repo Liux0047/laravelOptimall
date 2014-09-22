@@ -338,7 +338,7 @@ label, .control-label, .help-block {
     padding: 20px 30px;
 }
 .yamm .yamm-content.content-narrow {       
-    color: #222222 ;
+    color: #222;
     padding: 0px;
 }
 .yamm-content ul {
@@ -402,8 +402,13 @@ label, .control-label, .help-block {
         color: #222;
     }
     
-    .navbar.affix  .yamm-content ul>li>a {  
+    .navbar.affix .yamm-content ul>li>a {  
         color: #333;
+    }
+    
+    .navbar.affix .yamm-content ul>li>a:hover,
+    .navbar.affix .yamm-content ul>li>a:focus {
+        color: #fff;
     }
 }
 /*
