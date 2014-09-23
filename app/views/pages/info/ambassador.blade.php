@@ -10,7 +10,7 @@
 <div class="container content-container" id="ambassador_container">	
 	<div id="call_to_action_container">
 		{{ HTML::image('images/ambassador/call-to-action.jpg') }}
-		<div id="call_to_action_control" class="animated rubberBand">
+		<div id="call_to_action_control">
 			<a href="{{ action('MemberAccountController@getAmbassadorPanel') }}" class="btn btn-lg btn-danger" >
 				<i class="fa fa-play-circle-o"></i> 立即申请
 			</a>
@@ -49,7 +49,7 @@
 				<div class="col-md-12 info-pane-content">     
 					<img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" data-original="{{ asset('images/ambassador/program-introduction.jpg') }}" class="lazy">
 					<div class="info-pane-control">
-						<a href="{{ action('MemberAccountController@getAmbassadorPanel') }}" class="btn btn-lg btn-danger" >
+						<a href="{{ action('MemberAccountController@getAmbassadorPanel') }}" class="btn btn-danger" >
 							<i class="fa fa-play-circle-o"></i> 立即申请
 						</a>
 					</div>
@@ -63,7 +63,7 @@
 				<div class="col-md-12 info-pane-content">     
 					<img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" data-original="{{ asset('images/ambassador/ambassador-illustration.jpg') }}" class="lazy">
 					<div class="info-pane-control">
-						<a href="{{ action('MemberAccountController@getAmbassadorPanel') }}" class="btn btn-lg btn-danger" >
+						<a href="{{ action('MemberAccountController@getAmbassadorPanel') }}" class="btn btn-danger" >
 							<i class="fa fa-play-circle-o"></i> 立即申请
 						</a>
 					</div>
@@ -127,5 +127,8 @@
 @section('script')
 @parent
 <script type="text/javascript">
+$(document).ready(function(){
+	$('#call_to_action_control').addClass('animated rubberBand');
+});
 </script>
 @stop

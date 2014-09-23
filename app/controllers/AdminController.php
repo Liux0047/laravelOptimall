@@ -45,7 +45,12 @@ class AdminController extends BaseController {
     }
 
     public function getCreateAdmin($code) {
-        return Hash::make($code);
+        if (App::environment() == 'local'){
+            return Hash::make($code);
+        }        
+        else {
+            return Redirect::to('/');
+        }
     }
 
     public function getLogout() {
