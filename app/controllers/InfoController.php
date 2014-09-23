@@ -37,8 +37,7 @@ class InfoController extends BaseController {
     }
 
     public function getTest() {
-        $date = new DateTime();
-        echo 'CN' . $date->setTimezone(new DateTimeZone('Asia/Shanghai'))->format('ymd');
+        
     }
 
 }

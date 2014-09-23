@@ -14,8 +14,7 @@
 			<a href="{{ action('MemberAccountController@getAmbassadorPanel') }}" class="btn btn-lg btn-danger" >
 				<i class="fa fa-play-circle-o"></i> 立即申请
 			</a>
-		</div>
-		
+		</div>		
 	</div>
 	
 
@@ -73,8 +72,16 @@
 
 
 		<div class="tab-pane fade tab-pane-bordered info-pane" id="how_to_earn">
-
-
+			<div class="row">
+				<div class="col-md-12 info-pane-content">     
+					<img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" data-original="{{ asset('images/ambassador/how-to-claim.jpg') }}" class="lazy">
+					<div class="info-pane-control">
+						<a href="{{ action('MemberAccountController@getAmbassadorPanel') }}" class="btn btn-danger" >
+							<i class="fa fa-play-circle-o"></i> 立即申请
+						</a>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<div class="tab-pane fade tab-pane-bordered info-pane" id="terms_condition">
