@@ -105,11 +105,11 @@ class MemberController extends BaseController {
         $member = Member::where('email', '=', $email)->firstOrFail();
         $params = array();
         if ($member->reg_code == $comCode) {
+            $params['isSuccessful'] = true;
             $member->reg_code = null;
             $member->save();
             Auth::loginUsingId($member->member_id); //login this user
             Session::forget('memberRegistered');
-            $params['isSuccessful'] = true;
         } else {
             $params['isSuccessful'] = false;
         }
