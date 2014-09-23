@@ -38,7 +38,16 @@ class ProductController extends BaseController {
 
         $params['product'] = $model->productViews()->firstOrFail();
         $params['products'] = $model->productViews;
-        $params['lensTypes'] = LensType::all();
+        
+        //progressive lens not allowed for models with vetical less thant 35mm
+        if($model->dimension_vertical < 35){
+            $lensUnavailable[] = 4;
+            $params['lensTypes'] = LensType::whereNotIn('lens_type_id', $lensUnavailable)->get();
+        }
+        else {
+            $params['lensTypes'] = LensType::all();
+        }
+        
         $reviews = Review::ofModel($modelId)->orderBy('created_at', 'DESC')->get();
         $params['reviews'] = $reviews;
         //invalid review collection if contains only one entry withoug review_id
@@ -53,6 +62,9 @@ class ProductController extends BaseController {
         $params['reviewOrderLineItemId'] = $this->isReviewable($modelId);
         $params['sequence'] = array(3, 1, 4, 2,);
         $params['alsoBuys'] = $this->getAlsoBuyModels($modelId);
+        
+        
+        
         $this->recordViewHistory($modelId);
         return View::make('pages.product', $params);
     }
