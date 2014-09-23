@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'mgzcecommerce@163.com', 'name' => '目光之城客服中心'),
+	'from' => array('address' => 'mgzc_service@163.com', 'name' => '目光之城客服中心'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return array(
 	|
 	*/
 
-	'username' => 'mgzcecommerce@163.com',
+	'username' => 'mgzc_service@163.com',
 
 	/*
 	|--------------------------------------------------------------------------
