@@ -40,8 +40,6 @@
 			</div>			
 			{{ Form::close() }}
 
-			@include('components.member-account.send-invitation')
-
 
 			{{ HTML::image('images/ambassador/ambassador-illustration.jpg')}}	
 		</div>

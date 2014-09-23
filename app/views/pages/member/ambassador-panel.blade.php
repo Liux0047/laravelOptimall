@@ -142,8 +142,6 @@
             @endif
 
             @include('components.member-account.send-invitation')
-
-
         </div>
 
     </div>
