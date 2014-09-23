@@ -33,6 +33,7 @@ class AdminController extends BaseController {
                 Session::put('admin.username', $admin->username);
                 Session::put('admin.priviledge', $admin->priviledge);
                 $admin->login_attempts = 0; //clear the attempt marker
+                $admin->save();
                 return Redirect::intended('admin-dashboard');
             } else if ($admin->login_attempts < self::MAX_LOGIN_ATTEMPTS){
                 $admin->login_attempts += 1;
