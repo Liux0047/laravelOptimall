@@ -31,27 +31,27 @@ class ProductController extends BaseController {
 
     public function getProduct($modelId = 1001) {
 
-        $model = ProductModelView::findOrFail($modelId);
+        $model = ProductModelView::with('productViews')->findOrFail($modelId);
         $params['model'] = $model;
 
         $params['pageTitle'] = $model->model_name_cn . " - 目光之城";
 
-        $params['product'] = $model->productViews()->firstOrFail();
         $params['products'] = $model->productViews;
-        
+        $params['product'] = $params['products'][0];
+
         //progressive lens not allowed for models with vetical less thant 35mm
-        if($model->dimension_vertical < 35){
+        if ($model->dimension_vertical < 35) {
             $lensUnavailable[] = 4;
             $params['lensTypes'] = LensType::whereNotIn('lens_type_id', $lensUnavailable)->get();
-        }
-        else {
+        } else {
             $params['lensTypes'] = LensType::all();
         }
-        
+
         $reviews = Review::ofModel($modelId)->orderBy('created_at', 'DESC')->get();
         $params['reviews'] = $reviews;
         //invalid review collection if contains only one entry withoug review_id
         $params['hasReview'] = !($reviews->count() == 1 && !isset($reviews[0]->review_id));
+
         $params['thumbedList'] = array();
         if (Auth::check()) { //get the list of reviews that the member has thumbed up
             $thumbUps = Auth::user()->thumbUps;
@@ -62,9 +62,7 @@ class ProductController extends BaseController {
         $params['reviewOrderLineItemId'] = $this->isReviewable($modelId);
         $params['sequence'] = array(3, 1, 4, 2,);
         $params['alsoBuys'] = $this->getAlsoBuyModels($modelId);
-        
-        
-        
+
         $this->recordViewHistory($modelId);
         return View::make('pages.product', $params);
     }
@@ -73,14 +71,16 @@ class ProductController extends BaseController {
         foreach (self::$productLabels as $labelName => $labelValue) {
             //use variable variable name to form model groups of diffrent featured labels
             $modelGroupName = $labelName . 'Models';
-            $$modelGroupName = ProductModelView::active()
+            $$modelGroupName = ProductModelView::with('productViews')->active()
                             ->where('product_label_id', '=', $labelValue)
                             ->orderBy('num_items_sold_display', 'DESC')->take(4)->get();
             $params[$modelGroupName] = $$modelGroupName;
         }
 
         foreach (self::$eminentModels as $key => $eminentModelIds) {
-            $params['wideModels'][$key] = ProductModelView::whereIn('model_id', $eminentModelIds)->get();
+            $params['wideModels'][$key] = ProductModelView::with('productViews')
+                    ->whereIn('model_id', $eminentModelIds)
+                    ->get();
         }
         $params['wideModelQuote'] = self::$eminentModelQuote;
         return View::make('pages.index', $params);
@@ -88,19 +88,27 @@ class ProductController extends BaseController {
 
     public function getGallery() {
         $filters = array(
-            array('filterName' => 'styles', 'functionName' => 'ofStyles'),
-            array('filterName' => 'categories', 'functionName' => 'ofCategories'),
-            array('filterName' => 'shapes', 'functionName' => 'ofShapes'),
-            array('filterName' => 'materials', 'functionName' => 'ofMaterials'),
-            array('filterName' => 'genders', 'functionName' => 'ofGenders'),
-            array('filterName' => 'frames', 'functionName' => 'ofFrames'),
-            array('filterName' => 'colors', 'functionName' => 'ofBaseColors')
+            array('filterName' => 'styles', 'functionName' => 'ofStyles', 'displayName' => '风格'),            
+            array('filterName' => 'colors', 'functionName' => 'ofBaseColors', 'displayName' => '颜色'),
+            array('filterName' => 'shapes', 'functionName' => 'ofShapes', 'displayName' => '形状'),
+            array('filterName' => 'materials', 'functionName' => 'ofMaterials', 'displayName' => '材料'),
+            array('filterName' => 'genders', 'functionName' => 'ofGenders', 'displayName' => '性别'),
+            array('filterName' => 'frames', 'functionName' => 'ofFrames', 'displayName' => '框型'),
         );
+        $params['filters'] = $filters;
+
+        $params['filterValues'] = array();
+        $params['filterValues']['styles'] = ProductStyle::getGalleryFilters();
+        $params['filterValues']['colors'] = ProductBaseColor::getGalleryFilters();
+        $params['filterValues']['shapes'] = ProductShape::getGalleryFilters();
+        $params['filterValues']['materials'] = ProductMaterial::getGalleryFilters();
+        $params['filterValues']['genders'] = ProductGender::getGalleryFilters();
+        $params['filterValues']['frames'] = ProductFrame::getGalleryFilters();
 
         Session::forget('remainingModels');
         $params['checkedValues'] = array();
 
-        $models = ProductModelView::active()->distinct()->select("model_view.*");
+        $models = ProductModelView::with('productViews')->active()->distinct()->select("model_view.*");
         foreach ($filters as $filter) {
             if (Input::has($filter['filterName']) && count(Input::get($filter['filterName']))) {
                 $models = $models->$filter['functionName'](Input::get($filter['filterName']));
@@ -130,14 +138,6 @@ class ProductController extends BaseController {
         }
 
         $params['models'] = $modelsToDisplay;
-
-        $params['styles'] = ProductStyle::all();
-        $params['categories'] = ProductCategory::all();
-        $params['shapes'] = ProductShape::all();
-        $params['materials'] = ProductMaterial::all();
-        $params['genders'] = ProductGender::all();
-        $params['frames'] = ProductFrame::all();
-        $params['colors'] = ProductBaseColor::all();
 
         return View::make('pages.gallery', $params);
     }
@@ -189,11 +189,11 @@ class ProductController extends BaseController {
         $models = array();
         $count = 0;
         foreach ($baseModels as $baseModel) {
-            $models[] = ProductModelView::find($baseModel->model_id);
+            $models[] = ProductModelView::with('productViews')->find($baseModel->model_id);
             $count++;
         }
         for ($i = $count; $i < 5; $i++) {
-            $models[] = ProductModelView::find(3001 + $i);
+            $models[] = ProductModelView::with('productViews')->find(3001 + $i);
         }
         return array('models' => $models);
     }
@@ -203,16 +203,17 @@ class ProductController extends BaseController {
      * returns the member's orderLineItemId if eligible
      * otherwise false
      */
+
     private function isReviewable($modelId) {
         if (Auth::check()) {
             $orderLineItemIds = OrderLineItemView::select('order_line_item_id')
                     ->where('model_id', '=', $modelId)
                     ->where('member_id', '=', Auth::id())
                     ->get();
-            if ($orderLineItemIds->count() > 0) {                
+            if ($orderLineItemIds->count() > 0) {
                 foreach ($orderLineItemIds as $orderLineItemId) {
                     $id = $orderLineItemId->order_line_item_id;
-                    if (Review::where('order_line_item_id', '=',$id )->count() == 0) {
+                    if (Review::where('order_line_item_id', '=', $id)->count() == 0) {
                         return $id;
                     }
                 }

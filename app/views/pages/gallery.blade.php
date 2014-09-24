@@ -12,7 +12,7 @@
 	<div class="row row-narrow">
 
 		<div class="col-md-2">
-			@include('components.product-page.gallery-filter', array('styles'=>$styles, 'categories'=>$categories, 'shapes'=>$shapes, 'materials'=>$materials,'genders'=>$genders, 'frames'=>$frames,'colors'=>$colors, 'checkedValues'=>$checkedValues))
+			@include('components.product-page.gallery-filter', array('filters'=>$filters, 'filterValues'=>$filterValues, 'checkedValues'=>$checkedValues))
 		</div>
 
 		<div class='col-md-10 col-narrow'>
