@@ -82,22 +82,22 @@ class AmbassadorController extends BaseController {
         }
         $emails = preg_split("/[,;；，]+/", Input::get('emails'));
         $count = 0;
-        $emailsSent = array();
+        $emailsList = array();
         foreach ($emails as $email) {
             $email = trim($email);
             if (!empty($email)) {
                 $email = filter_var($email, FILTER_VALIDATE_EMAIL);
                 if ($email && !empty($email)) {
-                    Mail::queue('emails.member.invitation', $data, function($message) use ($email) {
-                        $message->to($email)->subject(Auth::user()->nickname . ' 邀请了你去逛逛目光之城');
-                    });
                     $count++;
-                    $emailsSent[] = $email;
+                    $emailsList[] = $email;
                 }
             }
         }
+        Mail::send('emails.member.invitation', $data, function($message) use ($emailsList) {
+            $message->to($emailsList)->subject(Auth::user()->nickname . ' 邀请了你去逛逛目光之城');
+        });
         if ($count) {
-            return Redirect::back()->with('status', '成功发送 ' . $count . ' 封邮件: ' . implode(";", $emailsSent));
+            return Redirect::back()->with('status', '成功发送 ' . $count . ' 封邮件: ' . implode(";", $emailsList));
         } else {
             return Redirect::back()->with('error', '没有发送任何邮件');
         }
@@ -192,13 +192,12 @@ class AmbassadorController extends BaseController {
     }
 
     /*
-    private function validateInvitaion() {
-        $rules = array(
-            'email' => 'required|email|max:45'
-        );
-        return Validator::make(Input::all(), $rules);
-    }
+      private function validateInvitaion() {
+      $rules = array(
+      'email' => 'required|email|max:45'
+      );
+      return Validator::make(Input::all(), $rules);
+      }
      * 
      */
-
 }
