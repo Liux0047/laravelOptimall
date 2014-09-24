@@ -82,20 +82,25 @@ class AmbassadorController extends BaseController {
         }
         $emails = preg_split("/[,;；，]+/", Input::get('emails'));
         $count = 0;
+        $emailsSent = array();
         foreach ($emails as $email) {
-            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                Mail::queue('emails.member.invitation', $data, function($message) use ($email) {
-                    $message->to(trim($email))->subject(Auth::user()->nickname . ' 邀请了你去逛逛目光之城');
-                });
-                $count ++;
+            $email = trim($email);
+            if (!empty($email)) {
+                $email = filter_var($email, FILTER_VALIDATE_EMAIL);
+                if ($email && !empty($email)) {
+                    Mail::queue('emails.member.invitation', $data, function($message) use ($email) {
+                        $message->to($email)->subject(Auth::user()->nickname . ' 邀请了你去逛逛目光之城');
+                    });
+                    $count++;
+                    $emailsSent[] = $email;
+                }
             }
         }
-        if($count) {
-            return Redirect::back()->with('status', '成功发送 '.$count.' 封邮件');
+        if ($count) {
+            return Redirect::back()->with('status', '成功发送 ' . $count . ' 封邮件: ' . implode(";", $emailsSent));
         } else {
             return Redirect::back()->with('error', '没有发送任何邮件');
         }
-        
     }
 
     public static function findAmbassadorRelation($code) {
@@ -186,11 +191,14 @@ class AmbassadorController extends BaseController {
         return Validator::make(Input::all(), $rules);
     }
 
+    /*
     private function validateInvitaion() {
         $rules = array(
             'email' => 'required|email|max:45'
         );
         return Validator::make(Input::all(), $rules);
     }
+     * 
+     */
 
 }
