@@ -74,13 +74,31 @@ class AmbassadorController extends BaseController {
     }
 
     public function postSendInvitation() {
+        $validator = $this->validateInvitaion();
+
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator);
+        }
+        
         $data['nickname'] = Auth::user()->nickname;
         $data['couponCode'] = "WELCOME";
+        $email = Input::get('email');
+                
         if (Auth::user()->is_approved_ambassador) {
             $data['invitatonCode'] = Auth::user()->ambassadorInfo->ambassador_code;
             $data['discount'] = Config::get('optimall.ambassadorInvitedReward') * 100;
         }
-        $emails = preg_split("/[,;；，]+/", Input::get('emails'));
+        
+        Mail::send('emails.member.invitation', $data, function($message) use ($email) {
+            $message->to($email)->subject(Auth::user()->nickname . ' 邀请了你去逛逛目光之城');
+        });        
+        
+        if (empty(Mail::failures())) {
+            return Redirect::back()->with('status', '成功发送邮件至: ' . $email);
+        } else {
+            return Redirect::back()->with('error', '没有发送任何邮件');
+        }
+        /*
         $count = 0;
         $emailsList = array();
         foreach ($emails as $email) {
@@ -93,14 +111,9 @@ class AmbassadorController extends BaseController {
                 }
             }
         }
-        Mail::send('emails.member.invitation', $data, function($message) use ($emailsList) {
-            $message->to($emailsList)->subject(Auth::user()->nickname . ' 邀请了你去逛逛目光之城');
-        });
-        if ($count) {
-            return Redirect::back()->with('status', '成功发送 ' . $count . ' 封邮件: ' . implode(";", $emailsList));
-        } else {
-            return Redirect::back()->with('error', '没有发送任何邮件');
-        }
+         * 
+         */
+        
     }
 
     public static function findAmbassadorRelation($code) {
@@ -191,13 +204,11 @@ class AmbassadorController extends BaseController {
         return Validator::make(Input::all(), $rules);
     }
 
-    /*
-      private function validateInvitaion() {
-      $rules = array(
-      'email' => 'required|email|max:45'
-      );
-      return Validator::make(Input::all(), $rules);
-      }
-     * 
-     */
+    private function validateInvitaion() {
+        $rules = array(
+            'email' => 'required|email|max:45'
+        );
+        return Validator::make(Input::all(), $rules);
+    }
+
 }

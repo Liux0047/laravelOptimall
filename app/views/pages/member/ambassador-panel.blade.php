@@ -194,17 +194,37 @@ $(document).ready(function() {
         //onfocusout: true,
         onclick: true
     });
-});
 
-$(".invitation-container input[name=emails]").on('input', function(){
-    value = $(this).val();
-    if(value.length > 0 && value.length <= 200){            
-        $('.invitation-container #send_invitation_btn').prop('disabled',false);
-    }
-    else {
-        $('.invitation-container #send_invitation_btn').prop('disabled',true);
-    }
+    $("#invitation_form").validate({
+        rules: {
+            email: {
+                required: true,
+                email: true
+            }
+        },
+        messages: {
+            email: {
+                required: warningIcon + "请输入好友邮箱",
+                email: warningIcon + "请输入有效的邮箱地址"
+            }
+        },
+        errorElement: "span",
+        errorPlacement: function(error, element) {
+            error.appendTo($(element).parent());
+        },
+        validClass: "",
+        errorClass: "jq-validate-error",
+        ignore: [], //validate hidden input
+        onkeyup: function(element) {
+            $(element).valid();
+        },
+        onfocusout: function(element) {
+            $(element).valid();
+        },
+        //onkeyup: true,
+        //onfocusout: true,
+        onclick: true
+    });
 });
-
 </script>
 @stop
