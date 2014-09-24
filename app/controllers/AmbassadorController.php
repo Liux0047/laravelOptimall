@@ -76,17 +76,26 @@ class AmbassadorController extends BaseController {
     public function postSendInvitation() {
         $data['nickname'] = Auth::user()->nickname;
         $data['couponCode'] = "WELCOME";
-        if(Auth::user()->is_approved_ambassador){
+        if (Auth::user()->is_approved_ambassador) {
             $data['invitatonCode'] = Auth::user()->ambassadorInfo->ambassador_code;
-            $data['discount'] = Config::get('optimall.ambassadorInvitedReward')  * 100;
-        }        
-        $emails = preg_split("/[\s,;；，]+/", Input::get('emails'));
-        foreach ($emails as $email) {
-            Mail::queue('emails.member.invitation', $data, function($message) use ($email) {
-                $message->to($email)->subject(Auth::user()->nickname . ' 邀请了你去逛逛目光之城');
-            });
+            $data['discount'] = Config::get('optimall.ambassadorInvitedReward') * 100;
         }
-        return Redirect::back()->with('status', '成功发送邮件');
+        $emails = preg_split("/[,;；，]+/", Input::get('emails'));
+        $count = 0;
+        foreach ($emails as $email) {
+            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                Mail::queue('emails.member.invitation', $data, function($message) use ($email) {
+                    $message->to(trim($email))->subject(Auth::user()->nickname . ' 邀请了你去逛逛目光之城');
+                });
+                $count ++;
+            }
+        }
+        if($count) {
+            return Redirect::back()->with('status', '成功发送 '.$count.' 封邮件');
+        } else {
+            return Redirect::back()->with('error', '没有发送任何邮件');
+        }
+        
     }
 
     public static function findAmbassadorRelation($code) {
@@ -156,7 +165,6 @@ class AmbassadorController extends BaseController {
         $daysOrderCreated = getDateDiffToNow($order->payment_time);
         return $daysOrderCreated < Config::get('optimall.ambassadorOrderConfirmation');
     }
-
 
     private function generateUniqueId() {
         return uniqid();
