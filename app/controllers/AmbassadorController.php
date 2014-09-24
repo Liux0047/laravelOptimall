@@ -92,8 +92,8 @@ class AmbassadorController extends BaseController {
         Mail::send('emails.member.invitation', $data, function($message) use ($email) {
             $message->to($email)->subject(Auth::user()->nickname . ' 邀请了你去逛逛目光之城');
         });        
-        
-        if (empty(Mail::failures())) {
+        $failed = Mail::failures();
+        if (empty($failed)) {
             return Redirect::back()->with('status', '成功发送邮件至: ' . $email);
         } else {
             return Redirect::back()->with('error', '没有发送任何邮件');
