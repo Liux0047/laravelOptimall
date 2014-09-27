@@ -5,7 +5,8 @@
  *
  * @author Allen
  */
-class ProductController extends BaseController {
+class ProductController extends BaseController
+{
 
     public static $productLabels = array(
         'promotion' => 1,
@@ -29,7 +30,8 @@ class ProductController extends BaseController {
         2002 => "【潮人】<br>Glitterati", 3009 => "【罗曼蒂克】<br> Romantic"
     );
 
-    public function getProduct($modelId = 1001) {
+    public function getProduct($modelId = 1001)
+    {
 
         $model = ProductModelView::with('productViews')->findOrFail($modelId);
         $params['model'] = $model;
@@ -67,28 +69,30 @@ class ProductController extends BaseController {
         return View::make('pages.product', $params);
     }
 
-    public function getIndex() {
+    public function getIndex()
+    {
         foreach (self::$productLabels as $labelName => $labelValue) {
             //use variable variable name to form model groups of diffrent featured labels
             $modelGroupName = $labelName . 'Models';
             $$modelGroupName = ProductModelView::with('productViews')->active()
-                            ->where('product_label_id', '=', $labelValue)
-                            ->orderBy('num_items_sold_display', 'DESC')->take(4)->get();
+                ->where('product_label_id', '=', $labelValue)
+                ->orderBy('num_items_sold_display', 'DESC')->take(4)->get();
             $params[$modelGroupName] = $$modelGroupName;
         }
 
         foreach (self::$eminentModels as $key => $eminentModelIds) {
             $params['wideModels'][$key] = ProductModelView::with('productViews')
-                    ->whereIn('model_id', $eminentModelIds)
-                    ->get();
+                ->whereIn('model_id', $eminentModelIds)
+                ->get();
         }
         $params['wideModelQuote'] = self::$eminentModelQuote;
         return View::make('pages.index', $params);
     }
 
-    public function getGallery() {
+    public function getGallery()
+    {
         $filters = array(
-            array('filterName' => 'styles', 'functionName' => 'ofStyles', 'displayName' => '风格'),            
+            array('filterName' => 'styles', 'functionName' => 'ofStyles', 'displayName' => '风格'),
             array('filterName' => 'colors', 'functionName' => 'ofBaseColors', 'displayName' => '颜色'),
             array('filterName' => 'shapes', 'functionName' => 'ofShapes', 'displayName' => '形状'),
             array('filterName' => 'materials', 'functionName' => 'ofMaterials', 'displayName' => '材料'),
@@ -142,7 +146,8 @@ class ProductController extends BaseController {
         return View::make('pages.gallery', $params);
     }
 
-    public function postShowRemainingModels() {
+    public function postShowRemainingModels()
+    {
         $models = array();
 
         $itemsOnPage = Config::get('optimall.itemsOnPage');
@@ -170,11 +175,12 @@ class ProductController extends BaseController {
         return View::make('components.product-page.ajax-load-product-cards', $params);
     }
 
-    private function recordViewHistory($modelId) {
+    private function recordViewHistory($modelId)
+    {
         if (Auth::check()) {
             $count = ViewItemHistory::where('member_id', '=', Auth::id())
-                    ->where('model_id', '=', $modelId)
-                    ->count();
+                ->where('model_id', '=', $modelId)
+                ->count();
             if ($count == 0) {
                 $viewhistory = new ViewItemHistory;
                 $viewhistory->member_id = Auth::id();
@@ -184,7 +190,8 @@ class ProductController extends BaseController {
         }
     }
 
-    private function getAlsoBuyModels($cuurentModelId) {
+    private function getAlsoBuyModels($cuurentModelId)
+    {
         $baseModels = OrderLineItemView::viewThisAlsoBuy($cuurentModelId)->take(5)->get();
         $models = array();
         $count = 0;
@@ -204,12 +211,13 @@ class ProductController extends BaseController {
      * otherwise false
      */
 
-    private function isReviewable($modelId) {
+    private function isReviewable($modelId)
+    {
         if (Auth::check()) {
             $orderLineItemIds = OrderLineItemView::select('order_line_item_id')
-                    ->where('model_id', '=', $modelId)
-                    ->where('member_id', '=', Auth::id())
-                    ->get();
+                ->where('model_id', '=', $modelId)
+                ->where('member_id', '=', Auth::id())
+                ->get();
             if ($orderLineItemIds->count() > 0) {
                 foreach ($orderLineItemIds as $orderLineItemId) {
                     $id = $orderLineItemId->order_line_item_id;

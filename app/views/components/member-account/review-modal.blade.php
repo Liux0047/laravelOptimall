@@ -32,6 +32,8 @@
                 <div class="form-group">
                     <textarea class="form-control" id="content" name="content" rows="3" placeholder="评论内容（不超过200字）"></textarea>
                 </div>
+
+                <input type="file" name="review_pic_1">
             </div><!-- /.modal-body -->
             <div class="modal-footer">                                            
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>

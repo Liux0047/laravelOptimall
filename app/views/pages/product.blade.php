@@ -3,6 +3,7 @@
 @section('link-css')
 @parent
 {{ HTML::style('plugins/fotorama-4.6.2/fotorama.css') }}
+{{ HTML::style('plugins/Magnific-Popup/magnific-popup.css') }}
 @stop
 
 @section ('content')
@@ -165,6 +166,7 @@
 {{ HTML::script('plugins/raty-2.7.0/jquery.raty.js') }}
 {{ HTML::script('plugins/fotorama-4.6.2/fotorama.js') }}
 {{ HTML::script('plugins/jQuery-Knob/jquery.knob.min.js') }}
+{{ HTML::script('plugins/Magnific-Popup/jquery.magnific-popup.min.js') }}
 @if($reviewOrderLineItemId)
 {{ HTML::script('plugins/jQuery-Validation/jquery.validate.min.js') }}
 {{ HTML::script('js/jQuery-Validation-customize.js') }}
