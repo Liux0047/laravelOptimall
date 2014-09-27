@@ -5,6 +5,7 @@
     <meta name='keywords' content='目光之城，眼镜商城，网上配镜，在线配镜，眼镜，隐形眼镜，淘宝眼镜，天猫眼镜，眼镜团购，买眼镜' />
     <meta name='description' content="目光之城是全国最IN的正品潮流眼镜网络商城，致力于为年轻人提供最时尚，最具性价比的眼镜以及最完美的网络配镜用户体验. 目光之城有海量超值眼镜和配镜相关的活动与信息，详情请登录目光之城官网：mgzc.net">    
     <meta name='token' content='{{ csrf_token() }}'/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     @section('link-css')
     {{ HTML::style('css/bootstrap.min.css'); }}
     {{ HTML::style('plugins/font-awesome/css/font-awesome.min.css'); }}
