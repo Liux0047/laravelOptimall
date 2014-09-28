@@ -8,7 +8,7 @@
 
 @section ('content')
 
-<div class="container content-container">
+<div class="container content-container">`
     @include('components.product-page.progress-tracker', array('progtrckrStep' => 1))
     <br>
     @include('components.page-frame.message-bar')
