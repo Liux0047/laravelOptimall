@@ -154,6 +154,11 @@ Route::controller('info', 'InfoController');
  */
 Route::controller('password-remind', 'RemindersController');
 
+/*
+ * RESTFUL Controller for uploads
+ */
+Route::controller('upload', 'UploadController');
+
 
 
 /*

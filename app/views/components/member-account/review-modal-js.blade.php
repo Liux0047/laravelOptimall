@@ -1,4 +1,5 @@
 <script type="text/javascript">
+
 $(document).ready(function() {
     var warningIcon = "<i class='fa fa-warning fa-lg'></i> ";
     //validate review form
@@ -55,6 +56,14 @@ $(document).ready(function() {
             return $(this).attr('data-scoreName');
         },
         score: 5
+    });
+
+    //initialize jQuery File Upload
+    $('#fileupload').fileupload({
+        // Uncomment the following to send cross-domain cookies:
+        //xhrFields: {withCredentials: true},
+        url: '{{ action('UploadController@anyReviewImage', array('item_id' => '3')) }}',
+        maxFileSize: '{{ Config::get('optimall.maxImageUploadSize') * 1024 * 1024 }}'
     });
 
 });

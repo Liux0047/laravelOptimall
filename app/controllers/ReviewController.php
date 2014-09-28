@@ -90,6 +90,15 @@ class ReviewController extends BaseController {
             return Redirect::back()->with('status', '评论回复成功');
         }        
     }
+
+    public function postImageUpload($itemId) {
+        $options = array(
+            'upload_dir' => Config::get('optimall.reviewPicPath').$itemId.DIRECTORY_SEPARATOR,
+            'upload_url' => asset('images/uploads/reviews/'.$itemId.'/')
+        );
+        $uploadHandler = new UploadHandler($options);
+
+    }
     
     private function validateReview() {
         $rules = array(

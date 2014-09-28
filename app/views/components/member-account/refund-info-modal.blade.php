@@ -23,8 +23,8 @@
                 <p>退货数量: {{ $item->refund_quantity }}</p>
                 <p>退货原因: {{ $item->refund_reason }}</p>
                 <p>
-                    @if(File::exists('images/uploads/refunds/'.$item->refund_id.'.jpg')) 
-                    {{ HTML::image('images/uploads/refunds/'.$item->refund_id.'.jpg')}}
+                    @if(File::exists(Config::get('optimall.refundPicPath').$item->refund_id.'.jpg'))
+                    {{ HTML::image(Config::get('optimall.refundPicPath').$item->refund_id.'.jpg')}}
                     @else
                     没有图片上传
                     @endif                    

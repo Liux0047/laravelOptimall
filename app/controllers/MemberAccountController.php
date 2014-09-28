@@ -110,8 +110,7 @@ class MemberAccountController extends BaseController {
         //save refund claim picture uploaded by user
         if (Input::hasFile('photo') && Input::file('photo')->isValid()) {
             if (Input::file('photo')->getSize() < 2 * pow(2, 20)) {
-                $path = public_path();
-                Input::file('photo')->move($path . '/images/uploads/refunds/', $refund->refund_id . ".jpg");
+                Input::file('photo')->move(Config::get('optimall.refundPicPath'), $refund->refund_id . ".jpg");
             } else {
                 return Redirect::action('MemberAccountController@getShoppingHistory')->with('error', '文件尺寸过大，请重新上传');
             }

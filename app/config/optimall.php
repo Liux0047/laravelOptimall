@@ -38,5 +38,15 @@ return array(
     
     //the minimum amount that an ambassador can claim
     'minAmbassadorClaim'=> 80,
+
+    //max image upload size, in M
+    'maxImageUploadSize' => 5,
+
+    //path for review pictures uploads
+    'reviewPicPath' => public_path().DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'uploads'.DIRECTORY_SEPARATOR.'reviews'.DIRECTORY_SEPARATOR,
+
+    //path to refund picture uploads
+    'refundPicPath' => public_path().DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'uploads'.DIRECTORY_SEPARATOR.'refunds'.DIRECTORY_SEPARATOR,
+
         
 );

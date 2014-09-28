@@ -182,17 +182,17 @@ class ProductController extends BaseController
                 ->where('model_id', '=', $modelId)
                 ->count();
             if ($count == 0) {
-                $viewhistory = new ViewItemHistory;
-                $viewhistory->member_id = Auth::id();
-                $viewhistory->model_id = $modelId;
-                $viewhistory->save();
+                $viewHistory = new ViewItemHistory;
+                $viewHistory->member_id = Auth::id();
+                $viewHistory->model_id = $modelId;
+                $viewHistory->save();
             }
         }
     }
 
-    private function getAlsoBuyModels($cuurentModelId)
+    private function getAlsoBuyModels($currentModelId)
     {
-        $baseModels = OrderLineItemView::viewThisAlsoBuy($cuurentModelId)->take(5)->get();
+        $baseModels = OrderLineItemView::viewThisAlsoBuy($currentModelId)->take(5)->get();
         $models = array();
         $count = 0;
         foreach ($baseModels as $baseModel) {
