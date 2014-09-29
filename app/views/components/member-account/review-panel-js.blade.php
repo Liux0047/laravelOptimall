@@ -21,11 +21,11 @@ $(document).ready(function() {
             messages: {
                 title: {
                     required: warningIcon + "请输入评论标题",
-                    maxlength: warningIcon + "请不要超过字符上限(45)"
+                    maxlength: warningIcon + "请不要超过字数上限(45)"
                 },
                 content: {
                     required: warningIcon + "请输入评论内容",
-                    maxlength: warningIcon + "请不要超过字符上限(200)"
+                    maxlength: warningIcon + "请不要超过字数上限(200)"
                 },
                 score_comfort: {
                     required: warningIcon + "请选择分数"
@@ -59,11 +59,14 @@ $(document).ready(function() {
     });
 
     //initialize jQuery File Upload
-    $('#fileupload').fileupload({
-        // Uncomment the following to send cross-domain cookies:
-        //xhrFields: {withCredentials: true},
-        url: '{{ action('UploadController@anyReviewImage', array('item_id' => '3')) }}',
-        maxFileSize: '{{ Config::get('optimall.maxImageUploadSize') * 1024 * 1024 }}'
+    $('.file-upload').each(function() {
+        var lineItemId = $(this).attr('data-item-id');
+        $(this).fileupload({
+            // Uncomment the following to send cross-domain cookies:
+            //xhrFields: {withCredentials: true},
+            url: '{{ url('upload/review') }}/' + lineItemId,
+            maxFileSize: '{{ Config::get('optimall.maxImageUploadSize') * 1024 * 1024 }}'
+        });
     });
 
 });
