@@ -54,7 +54,7 @@
                     </td> 
                     <td colspan="4">
                         {{ Form::open(array('action' => 'CouponController@postApplyCoupon', 'role' => 'form', 'class'=>'form-horizontal'))}}
-                        <div class="form-group has-feedback" id="coupon-form-group">             
+                        <div class="form-group has-feedback" id="coupon-form-group">
                             <label for="coupon_code" class="col-md-2 col-md-offset-4 control-label font-blue">
                                 <strong>优惠券</strong>
                             </label>     

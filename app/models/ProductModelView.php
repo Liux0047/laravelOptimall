@@ -26,21 +26,21 @@ class ProductModelView extends Eloquent {
     public function productViews() {
         return $this->hasMany('ProductView', 'model_id');
     }
-    
+
     /*
      * live models are ones with  is_active = 1
      */
-    public function scopeActive ($query){
-        return $query->where('is_active','=','1');
+    public function scopeActive($query) {
+        return $query->where('is_active', '=', '1');
     }
-    
+
     /*
      * dynmaic scope to get models of certain styles
      */
 
     public function scopeOfStyles($query, $styles) {
-        return $query->join('product_style_mapping','product_style_mapping.model_id','=','model_view.model_id')
-                ->whereIn('product_style_id', $styles);
+        return $query->join('product_style_mapping', 'product_style_mapping.model_id', '=', 'model_view.model_id')
+            ->whereIn('product_style_id', $styles);
     }
 
     /*
@@ -64,8 +64,8 @@ class ProductModelView extends Eloquent {
      */
 
     public function scopeOfMaterials($query, $materials) {
-        return $query->join('product_material_mapping','product_material_mapping.model_id','=','model_view.model_id')
-                ->whereIn('product_material_id', $materials);
+        return $query->join('product_material_mapping', 'product_material_mapping.model_id', '=', 'model_view.model_id')
+            ->whereIn('product_material_id', $materials);
     }
 
     /*
@@ -90,9 +90,17 @@ class ProductModelView extends Eloquent {
 
     public function scopeOfBaseColors($query, $baseColors) {
         return $query->join('product', 'model_view.model_id', '=', 'product.model_id')
-                        ->join('product_color_mapping', 'product_color_mapping.product_color_id', '=', 'product.product_color_id')
-                        ->whereIn('product_color_mapping.product_base_color_id', $baseColors)
-                        ->groupBy('model_view.model_id');
+            ->join('product_color_mapping', 'product_color_mapping.product_color_id', '=', 'product.product_color_id')
+            ->whereIn('product_color_mapping.product_base_color_id', $baseColors)
+            ->groupBy('model_view.model_id');
+    }
+
+    /*
+     * Dynamic scope to determine if keyword matches
+     */
+    public function scopeOfKeyword($query, $keyword) {
+        return $query->where('model_name_cn', 'LIKE', '%' . $keyword . '%')
+            ->whereOr('model_name_en', 'LIKE', '%' . $keyword . '%');
     }
 
 }

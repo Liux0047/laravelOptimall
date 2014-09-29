@@ -67,7 +67,7 @@
                                     data-score="{{ ($model->average_design_rating + $model->average_comfort_rating + $model->average_quality_rating) / 3 }}">
                                 </div>
                             </div>
-                            <div class="reivew-count-container">
+                            <div class="review-count-container">
                                 <a href="#" id="review_count_button" >
                                     (点击查看 {{ $reviews->count() }} 条评论)
                                 </a>

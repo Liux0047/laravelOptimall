@@ -18,20 +18,39 @@
 		<div class='col-md-10 col-narrow'>
 			<div class="shop-items-container">
 				<div class="panel panel-default" id="options">
-					<div class="panel-heading">		
-						<a class="sorting-option @if ($sortOrder == 'num_items_sold_display') selected-sorting-option @endif" href="javascript:submitSortOrder('num_items_sold_display', 1);">
-							销量优先
-						</a> 
-						<a class="sorting-option @if ($sortOrder == 'average_design_rating') selected-sorting-option @endif" href="javascript:submitSortOrder('average_design_rating', 1);">
-							评分优先：<i class="fa fa-arrow-down"></i>
-						</a>
-						<a class="sorting-option @if ($sortOrder == 'price' && $isDesc == true) selected-sorting-option @endif" href="javascript:submitSortOrder('price', 1);">
-							价格优先：<i class="fa fa-arrow-down"></i>
-						</a> 
-						<a class="sorting-option @if ($sortOrder == 'price' && $isDesc == false) selected-sorting-option @endif" href="javascript:submitSortOrder('price', 0);">
-							价格优先：<i class="fa fa-arrow-up"></i>
-						</a> 
-					</div>
+					<div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-8">
+
+                                <button type="button" class="btn btn-xs @if ($sortOrder == 'num_items_sold_display') btn-success @else btn-default @endif"
+                                    onclick="submitSortOrder('num_items_sold_display', 1);">
+                                    销量优先
+                                </button>
+
+                                <button type="button" class="btn btn-xs @if ($sortOrder == 'average_design_rating') btn-success @else btn-default @endif"
+                                    onclick="submitSortOrder('average_design_rating', 1);">
+                                    评分优先：<i class="fa fa-arrow-down"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-xs @if ($sortOrder == 'price' && $isDesc == true) btn-success @else btn-default @endif"
+                                    onclick="submitSortOrder('price', 1);">
+                                    价格优先：<i class="fa fa-arrow-down"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-xs @if ($sortOrder == 'price' && $isDesc == false) btn-success @else btn-default @endif"
+                                    onclick="submitSortOrder('price', 0);">
+                                    价格优先：<i class="fa fa-arrow-up"></i>
+                                </button>
+
+                            </div>
+                            <div class="col-md-4 align-right">
+                                @if(Input::has('search_keyword'))
+                                与“{{ Input::get('search_keyword') }}” 相关的产品
+                                {{ Form::hidden('search_keyword', Input::get('search_keyword')) }}
+                                @endif
+                            </div>
+                        </div>
+                    </div>
 
 					<div class="panel-body" id="product_cards_container">
 						@if($models->count())
