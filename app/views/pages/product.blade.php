@@ -4,6 +4,11 @@
 @parent
 {{ HTML::style('plugins/fotorama-4.6.2/fotorama.css') }}
 {{ HTML::style('plugins/Magnific-Popup/magnific-popup.css') }}
+
+@if($reviewOrderLineItemId)
+@include('components.plugin.jquery-file-upload-css')
+@endif
+
 @stop
 
 @section ('content')
@@ -170,6 +175,7 @@
 @if($reviewOrderLineItemId)
 {{ HTML::script('plugins/jQuery-Validation/jquery.validate.min.js') }}
 {{ HTML::script('js/jQuery-Validation-customize.js') }}
+@include('components.plugin.jquery-file-upload-js')
 @endif
 @stop
 
@@ -360,7 +366,9 @@ function changeAlsoBuyImg(modelId, prodcutId) {
 
 </script>  
 @include('components.product-page.jquery-knob-js', array('model'=>$model))
+
 @if($reviewOrderLineItemId)
-@include('components.member-account.review-modal-js')
+@include('components.member-account.review-panel-js', array('itemId'=>$reviewOrderLineItemId))
 @endif
+
 @stop

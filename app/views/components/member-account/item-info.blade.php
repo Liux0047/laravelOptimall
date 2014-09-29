@@ -47,8 +47,8 @@
                     <thead>
                         <tr class="success">
                             <td width="20%">样品图片</td>
-                            <td width="15%">品名</td>
-                            <td width="10%">颜色</td>
+                            <td width="10%">品名</td>
+                            <td width="15%">颜色</td>
                             <td width="15%">镜片</td>
                             <td width="10%">单价</td>
                             <td width="10%">订购数量</td>      
@@ -111,12 +111,7 @@
                                     <a data-toggle="modal" href="#add_review_{{ $item->order_line_item_id }}">
                                         <i class="fa fa-pencil"></i> 添加评论
                                     </a>        
-                                </p>            
-                                {{ Form::open(array('action'=>'ReviewController@postCreateReview', 'class'=>'review-form', 'role'=>'form')) }}
-                                {{ Form::hidden('order_line_item_id', $item->order_line_item_id) }}
-                                @include('components.member-account.review-modal', array('itemId'=>$item->order_line_item_id))
-                                {{ Form::close()}}
-                                @else
+                                </p>
                                 @endif
 
                                 @if(!isset($item->refund_id))

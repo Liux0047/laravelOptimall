@@ -18,24 +18,24 @@ class UploadHandler
     // PHP File Upload error message codes:
     // http://php.net/manual/en/features.file-upload.errors.php
     protected $error_messages = array(
-        1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
-        2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
-        3 => 'The uploaded file was only partially uploaded',
-        4 => 'No file was uploaded',
-        6 => 'Missing a temporary folder',
-        7 => 'Failed to write file to disk',
-        8 => 'A PHP extension stopped the file upload',
-        'post_max_size' => 'The uploaded file exceeds the post_max_size directive in php.ini',
-        'max_file_size' => 'File is too big',
-        'min_file_size' => 'File is too small',
-        'accept_file_types' => 'Filetype not allowed',
-        'max_number_of_files' => 'Maximum number of files exceeded',
-        'max_width' => 'Image exceeds maximum width',
-        'min_width' => 'Image requires a minimum width',
-        'max_height' => 'Image exceeds maximum height',
-        'min_height' => 'Image requires a minimum height',
-        'abort' => 'File upload aborted',
-        'image_resize' => 'Failed to resize image'
+        1 => '上传文件的大小超过了最大限制(2M)',
+        2 => '上传文件的大小超过了最大限制(2M)',
+        3 => '文件还没有完全上传',
+        4 => '没有文件被上传',
+        6 => '没有找到临时文件夹',
+        7 => '向服务器写入文件失败',
+        8 => '文件上传被阻止',
+        'post_max_size' => '上传文件的大小超过了最大限制',
+        'max_file_size' => '文件太大',
+        'min_file_size' => '文件太小',
+        'accept_file_types' => '不允许该文件格式',
+        'max_number_of_files' => '超过最多可上传文件个数',
+        'max_width' => '图片超过最大宽度',
+        'min_width' => '图片没有达到最低宽度',
+        'max_height' => '图片超过最大高度',
+        'min_height' => '图片没有达到最低高度',
+        'abort' => '文件上传被中止',
+        'image_resize' => '调整图片大小失败'
     );
 
     protected $image_objects = array();
@@ -1335,7 +1335,7 @@ class UploadHandler
                     }
                 }
             }
-            $response[$file_name] = $success;
+            $response[$file_name] = $file_path;
         }
         return $this->generate_response($response, $print_response);
     }

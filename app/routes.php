@@ -155,10 +155,14 @@ Route::controller('info', 'InfoController');
 Route::controller('password-remind', 'RemindersController');
 
 /*
- * RESTFUL Controller for uploads
+ * Route for review uploads
  */
-Route::controller('upload', 'UploadController');
+Route::post('upload/review/{itemId}', 'UploadController@anyReviewImage');
 
+/*
+ * Route for review delete
+ */
+Route::delete('upload/review/{itemId}', 'UploadController@anyReviewImage');
 
 
 /*

@@ -1283,7 +1283,7 @@ input.jq-validate-error{
 #baisc_property {
     text-align: center;
 }
-#user_review .panel {
+#user_review>.panel {
     border-top: 0px;
 }
 .review-cell{
