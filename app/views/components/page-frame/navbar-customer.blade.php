@@ -345,7 +345,7 @@
                         </a>
                     </span>
                     <input type="text" class="form-control" name="search_keyword" placeholder="关键字"
-                        value="@if(Input::has('search_keyword')){{ Input::get('search_keyword')}}@endif">
+                        value="@if(Input::has('search_keyword')){{ trim(Input::get('search_keyword'))}}@endif">
                 </div>
             {{ Form::close() }}
 

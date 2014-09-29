@@ -119,7 +119,7 @@ class ProductController extends BaseController
                 $params['checkedValues'][$filter['filterName']] = Input::get($filter['filterName']);
             }
         }
-        if (Input::has('search_keyword') && strlen(Input::get('search_keyword'))){
+        if (Input::has('search_keyword') && strlen(trim(Input::get('search_keyword')))){
             $models = $models->ofKeyword(Input::get('search_keyword'));
         }
         $sortOrder = Input::get('sort_order', 'num_items_sold_display');
