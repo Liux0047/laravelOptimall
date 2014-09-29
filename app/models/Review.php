@@ -35,7 +35,7 @@ class Review extends Eloquent {
      */
     public function scopeOfModel ($query, $modelId) {
         return $query->select('review.review_id', 'review.title','review.content','review.created_at',
-                'review.design_rating','review.comfort_rating','review.quality_rating', 'member.nickname',
+                'review.design_rating','review.comfort_rating','review.quality_rating', 'review.order_line_item_id', 'member.nickname',
                 DB::raw('count(thumb_up.thumb_up_id) AS thumb_ups '))
                 ->join('order_line_item','order_line_item.order_line_item_id','=','review.order_line_item_id')
                 ->join('product', 'product.product_id','=','order_line_item.product_id')

@@ -88,9 +88,9 @@
                         <td><h4>质量</h4></td>
                     </tr>
                 </table>
-                <hr><br>
 
                 @if($reviewOrderLineItemId)
+                <hr><br>
                 @include('components.member-account.review-panel', array('itemId'=>$reviewOrderLineItemId))
                 @endif
 
@@ -134,6 +134,16 @@
                         </div>
                     </p>                
                     <p> {{ $review->content }}</p>
+                    <div>
+                        <div class="review-gallery">
+                            {{-- get all images uploaded under uploads/reviews/currentItemId folder--}}
+                            @foreach(File::files(Config::get('optimall.reviewPicPath').$review->order_line_item_id) as $file)
+                            <a href="{{ getReviewImageUrl($file, $review->order_line_item_id) }}">
+                                <img src="{{ getReviewThumbnailUrl($file, $review->order_line_item_id) }}">
+                            </a>
+                            @endforeach
+                        </div>
+                    </div>
                     <p>                    
                         <span id='thumb_btn_{{ $review->review_id }}' class='thumb-btn'>
                             @if (Auth::check())                        

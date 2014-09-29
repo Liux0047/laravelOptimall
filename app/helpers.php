@@ -34,3 +34,21 @@ function generateTradeNumber($orderId) {
     $prefix = 'CN' . $date->setTimezone(new DateTimeZone('Asia/Shanghai'))->format('ymd');
     return $prefix . str_pad($orderId, Config::get('optimall.orderCodeLength'), "0", STR_PAD_LEFT);
 }
+
+function getReviewImageName ($fullFileName, $itemId) {
+    return substr($fullFileName, strlen(Config::get('optimall.reviewPicPath').$itemId) + 1);
+}
+
+/*
+ * given a full path to a review image, return its file name
+ */
+function getReviewImageUrl ($fullFileName, $itemId) {
+    return asset('images/uploads/reviews/'.$itemId.'/'.getReviewImageName($fullFileName, $itemId));
+}
+
+/*
+ * given a full path to a review image, return its thumbnail name
+ */
+function getReviewThumbnailUrl ($fullFileName, $itemId) {
+    return asset('images/uploads/reviews/'.$itemId.'/thumbnail/'.getReviewImageName($fullFileName, $itemId));
+}
