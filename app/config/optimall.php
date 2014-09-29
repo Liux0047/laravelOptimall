@@ -40,7 +40,7 @@ return array(
     'minAmbassadorClaim'=> 80,
 
     //max image upload size, in M
-    'maxImageUploadSize' => 2,
+    'maxImageUploadSize' => 4,
 
     //path for review pictures uploads
     'reviewPicPath' => public_path().DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'uploads'.DIRECTORY_SEPARATOR.'reviews'.DIRECTORY_SEPARATOR,

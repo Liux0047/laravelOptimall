@@ -334,21 +334,21 @@
                 </li>
             </ul>
 
+            <ul class="nav navbar-nav navbar-right">
+
             {{ Form::open(array('action'=>'ProductController@getGallery', 'class'=>'navbar-form navbar-left', 'id'=>'navbar_form', 'method'=>'GET')) }}
                 <div class="form-group has-feedback form-group-inline">
                     <label class="control-label sr-only" for="search_keyword"></label>
-                    <input type="text" class="form-control" name="search_keyword" placeholder="关键字"
-                        value="@if(Input::has('search_keyword')){{ Input::get('search_keyword')}}@endif">
                     <span class="form-control-feedback">
                         <a href="#" onclick="document.getElementById('navbar_form').submit(); return false;">
                             <i class='fa fa-search fa-lg'></i>
                         </a>
                     </span>
+                    <input type="text" class="form-control" name="search_keyword" placeholder="关键字"
+                        value="@if(Input::has('search_keyword')){{ Input::get('search_keyword')}}@endif">
                 </div>
             {{ Form::close() }}
 
-
-            <ul class="nav navbar-nav navbar-right">
                 @if(Auth::check())
                 <li class="dropdown dropdown-hover">
                     <a href="#" data-toggle="dropdown" class="dropdown-toggle">
@@ -441,6 +441,7 @@
                 <li><a href="{{ action('MemberController@getSignUp') }}">注册</a></li>
                 @endif
             </ul><!-- .nav .nav-right -->
+
         </div><!-- .nav-collpase -->
     </div><!-- container -->
 </div><!-- .navbar -->

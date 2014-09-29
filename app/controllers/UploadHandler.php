@@ -18,8 +18,8 @@ class UploadHandler
     // PHP File Upload error message codes:
     // http://php.net/manual/en/features.file-upload.errors.php
     protected $error_messages = array(
-        1 => '上传文件的大小超过了最大限制(2M)',
-        2 => '上传文件的大小超过了最大限制(2M)',
+        1 => '上传文件的大小超过了最大限制(4M)',
+        2 => '上传文件的大小超过了最大限制(4M)',
         3 => '文件还没有完全上传',
         4 => '没有文件被上传',
         6 => '没有找到临时文件夹',
@@ -124,13 +124,17 @@ class UploadHandler
                 // The empty image version key defines options for the original image:
                 '' => array(
                     // Automatically rotate images based on EXIF meta data:
-                    'auto_orient' => true
+                    'auto_orient' => true,
+                    'max_width' => 1920,
+                    'max_height' => 1080,
                 ),
                 // Uncomment the following to create medium sized images:
+                /*
                 'medium' => array(
                     'max_width' => 1600,
                     'max_height' => 1200
                 ),
+                */
                 'thumbnail' => array(
                     // Uncomment the following to use a defined directory for the thumbnails
                     // instead of a subdirectory based on the version identifier.

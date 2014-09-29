@@ -43,7 +43,7 @@ function getReviewImageName ($fullFileName, $itemId) {
  * given a full path to a review image, return its file name
  */
 function getReviewImageUrl ($fullFileName, $itemId) {
-    return asset('images/uploads/reviews/'.$itemId.'/medium/'.getReviewImageName($fullFileName, $itemId));
+    return asset('images/uploads/reviews/'.$itemId.'/'.getReviewImageName($fullFileName, $itemId));
 }
 
 /*

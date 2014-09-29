@@ -108,7 +108,7 @@
                                 @if($order->order_status_id > 1)
                                 @if(!isset($item->review_id))       
                                 <p>
-                                    <a data-toggle="modal" href="#add_review_{{ $item->order_line_item_id }}">
+                                    <a href="{{ action('ProductController@getProduct', array($item->model_id)).'?show_review='.urlencode('1') }}">
                                         <i class="fa fa-pencil"></i> 添加评论
                                     </a>        
                                 </p>

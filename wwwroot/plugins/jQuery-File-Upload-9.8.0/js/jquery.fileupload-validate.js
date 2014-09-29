@@ -69,7 +69,7 @@
             messages: {
                 maxNumberOfFiles: '超过最多上传文件个数',
                 acceptFileTypes: '不允许改文件给事',
-                maxFileSize: '文件超过最大限制（2M）',
+                maxFileSize: '文件超过最大限制（4M）',
                 minFileSize: '文件太小'
             }
         },

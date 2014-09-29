@@ -46,7 +46,8 @@
                             <div class="col-md-4 align-right">
                                 @if(Input::has('search_keyword'))
                                 与“{{ Input::get('search_keyword') }}” 相关的产品
-                                {{ Form::hidden('search_keyword', Input::get('search_keyword')) }}
+                                {{ Form::hidden('search_keyword', Input::get('s
+                                earch_keyword')) }}
                                 @endif
                             </div>
                         </div>

@@ -253,18 +253,27 @@ $(document).ready(function() {
             return $(this).attr('data-score');
         }
     });
+
+    //if show review
+    @if(Input::has('show_review') && Input::get('show_review') == 1)
+    showReviewSection();
+    @endif
     
 });
 
 //scroll to tab content
 $('#review_count_button').click(function(e) {
     e.preventDefault();
+    showReviewSection();
+    return false;
+});
+
+function showReviewSection () {
     $("#user_review_tab").trigger("click");
     $('html, body').animate({
         scrollTop: ($('.nav-tabs').offset().top) - 100
     }, 1000);
-    return false;
-});
+}
 
 //toggle submit button for review reply
 $(".review-reply-content").each(function(){
