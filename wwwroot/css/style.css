@@ -1286,6 +1286,13 @@ input.jq-validate-error{
 #user_review>.panel {
     border-top: 0px;
 }
+#user_review .review-gallery {
+    padding-bottom: 20px;
+}
+#user_review .review-gallery a {
+    cursor: zoom-in;
+    padding-right: 10px;
+}
 .review-cell{
     position: relative;
 }
