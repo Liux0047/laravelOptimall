@@ -13,13 +13,13 @@ class CouponController extends BaseController {
         if (isset($coupon) && $this->isEligibleForCoupon($coupon)) {    //if a valid coupon was found
             if ($coupon->couponUsages()->where('member_id', '=', Auth::id())->count() > 0) {
                 //if this coupon has been used
-                return Redirect::back()->with('error', '消费卷已经被使用');
+                return Redirect::back()->with('error', '对不起，改消费卷已经被您使用');
             } else {
                 Session::put('couponId', $coupon->coupon_id);
                 return Redirect::back()->with('status', '成功添加消费卷');
             }
         } else {
-            return Redirect::back()->with('error', '消费卷无效或者已经过期');
+            return Redirect::back()->with('error', '对不起，您输入的消费卷无效或者已经过期');
         }
     }
     
