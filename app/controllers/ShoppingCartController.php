@@ -106,7 +106,7 @@ class ShoppingCartController extends BaseController {
 
     public function postUpdatePrescription() {
         $prescriptionNames = PrescriptionController::getPrescriptionNameArray();
-        $orderLineItem = $this->getItemsFromPost();
+        $orderLineItem = $this->getItemFromPost();
         $orderLineItem->is_plano = 0;
         foreach ($prescriptionNames as $prescriptionName) {
             $orderLineItem->$prescriptionName = Input::get($prescriptionName);
@@ -121,7 +121,7 @@ class ShoppingCartController extends BaseController {
     }
 
     public function postUpdateQuatity() {
-        $orderLineItem = $this->getItemsFromPost();
+        $orderLineItem = $this->getItemFromPost();
         if (Input::get('action') == 'increment') {
             $orderLineItem->quantity += 1;
         } else if (Input::get('action') == 'decrement') {
@@ -145,7 +145,7 @@ class ShoppingCartController extends BaseController {
     }
 
     public function postRemoveItem() {
-        $orderLineItem = $this->getItemsFromPost();
+        $orderLineItem = $this->getItemFromPost();
         if ($orderLineItem->member_id != Auth::id()){
             return Redirect::back()->with('error', '无法移除此商品');
         }            
@@ -154,7 +154,7 @@ class ShoppingCartController extends BaseController {
     }
 
     public function postSetPlano() {
-        $orderLineItem = $this->getItemsFromPost();
+        $orderLineItem = $this->getItemFromPost();
         if ($orderLineItem->member_id != Auth::id()){
             return Redirect::back()->with('error', '无法修改验光单');
         }
@@ -171,13 +171,13 @@ class ShoppingCartController extends BaseController {
         }
     }
 
-    private function getItemsFromPost() {
+    private function getItemFromPost() {
         $itemId = Input::get('order_line_item_id');
         return OrderLineItem::find($itemId);
     }
 
     private function getCartItems() {
-        return OrderLineItemView::cartItems(Auth::id())->get();
+        return OrderLineItemView::cartItems(Auth::id())->orderBy('created_at')->get();
     }
 
     private function calculatePrice($items, $coupon) {

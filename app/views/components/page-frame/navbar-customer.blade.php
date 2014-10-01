@@ -2,10 +2,10 @@
     <div class="container">
         <div class="navbar-header">
             <button type="button" data-toggle="collapse" data-target="#navbar-collapse-2" class="navbar-toggle">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+                菜单
+                <i class="fa fa-bars fa-lg"></i>
             </button>
+
             <a href="{{ URL::to('/') }}" class="navbar-brand">首页</a>
         </div>
         <div id="navbar-collapse-2" class="navbar-collapse collapse">

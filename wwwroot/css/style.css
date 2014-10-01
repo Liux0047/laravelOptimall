@@ -398,7 +398,15 @@ label, .control-label, .help-block {
     background-color: #fff;
 }
 
-.navbar.affix .navbar-brand {
+.navbar .navbar-toggle {
+    color: #ee4054;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    vert-align: baseline;
+}
+
+.navbar.affix .navbar-brand,
+.navbar.affix .navbar-toggle{
     color: #E8E8E8;
 }
 
