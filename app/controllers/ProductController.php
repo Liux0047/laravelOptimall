@@ -8,6 +8,9 @@
 class ProductController extends BaseController
 {
 
+    const MIN_FILTER_PRICE = 0;
+    const MAX_FILTER_PRICE = 500;
+
     public static $productLabels = array(
         'promotion' => 1,
         'bestSeller' => 2,
@@ -96,7 +99,6 @@ class ProductController extends BaseController
             array('filterName' => 'colors', 'functionName' => 'ofBaseColors', 'displayName' => '颜色'),
             array('filterName' => 'shapes', 'functionName' => 'ofShapes', 'displayName' => '形状'),
             array('filterName' => 'materials', 'functionName' => 'ofMaterials', 'displayName' => '材料'),
-            array('filterName' => 'genders', 'functionName' => 'ofGenders', 'displayName' => '性别'),
             array('filterName' => 'frames', 'functionName' => 'ofFrames', 'displayName' => '框型'),
         );
         $params['filters'] = $filters;
@@ -106,7 +108,7 @@ class ProductController extends BaseController
         $params['filterValues']['colors'] = ProductBaseColor::getGalleryFilters();
         $params['filterValues']['shapes'] = ProductShape::getGalleryFilters();
         $params['filterValues']['materials'] = ProductMaterial::getGalleryFilters();
-        $params['filterValues']['genders'] = ProductGender::getGalleryFilters();
+        //$params['filterValues']['genders'] = ProductGender::getGalleryFilters();
         $params['filterValues']['frames'] = ProductFrame::getGalleryFilters();
 
         Session::forget('remainingModels');
@@ -119,9 +121,20 @@ class ProductController extends BaseController
                 $params['checkedValues'][$filter['filterName']] = Input::get($filter['filterName']);
             }
         }
-        if (Input::has('search_keyword') && strlen(trim(Input::get('search_keyword')))){
+        if (Input::has('search_keyword') && strlen(trim(Input::get('search_keyword')))) {
             $models = $models->ofKeyword(Input::get('search_keyword'));
         }
+
+        $params['price_min'] = self::MIN_FILTER_PRICE;
+        $params['price_max'] = self::MAX_FILTER_PRICE;
+        if (( Input::has('price_min') && Input::has('price_max'))) {
+            if ( Input::get('price_min') != self::MIN_FILTER_PRICE || Input::get('price_max') != self::MAX_FILTER_PRICE ) {
+                $params['price_min'] = Input::get('price_min');
+                $params['price_max'] = Input::get('price_max');
+                $models = $models->ofPrices(array($params['price_min'], $params['price_max']));
+            }
+        }
+
         $sortOrder = Input::get('sort_order', 'num_items_sold_display');
         $params['isDesc'] = false;
         if (Input::get('is_desc') == 1) {

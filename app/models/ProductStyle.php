@@ -5,7 +5,8 @@
  *
  * @author Allen
  */
-class ProductStyle extends Eloquent {
+class ProductStyle extends Eloquent
+{
 
     /**
      * The database table used by the model.
@@ -17,7 +18,8 @@ class ProductStyle extends Eloquent {
     protected $primaryKey = 'product_style_id';
 
     //gallery filters
-    public static function getGalleryFilters() {
+    public static function getGalleryFilters()
+    {
         return array(
             array("option_id" => 1, "name" => "英伦学院"),
             array("option_id" => 2, "name" => "户外阳光"),

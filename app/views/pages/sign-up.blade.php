@@ -46,6 +46,16 @@
                 </div>
             </div>
             <div class="form-group">
+                <div class="col-md-offset-2 col-md-4">
+                    <div class="checkbox">
+                        <label for="show_ambassador_code">
+                            <input type="checkbox" name="show_ambassador_code" id="show_ambassador_code" onchange="toggleAmbassadorCode();">
+                            我被目光之星邀请了
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group no-display" id="ambassador_code_container">
                 <label for="ambassador_code" class="col-md-2 control-label">邀请码</label>
                 <div class="col-md-6">
                     <input type="text" class="form-control" id="ambassador_code" name="ambassador_code" placeholder="请输入对方提供的邀请码" {{ Input::old('ambassador_code') }}>
@@ -130,7 +140,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" onclick="checkTemrsAndConditions()">
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" onclick="checkTermsAndConditions()">
                         同意
                     </button>
                 </div>
@@ -223,8 +233,12 @@ $(document).ready(function() {
         });
 });
 
-function checkTemrsAndConditions() {
+function checkTermsAndConditions() {
     document.getElementById('agree_terms').checked = true;
+}
+
+function toggleAmbassadorCode(){
+    $('#ambassador_code_container').toggle(300);
 }
 
 $('#terms_modal').on('show.bs.modal', function() {

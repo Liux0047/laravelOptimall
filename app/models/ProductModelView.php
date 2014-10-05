@@ -35,7 +35,7 @@ class ProductModelView extends Eloquent {
     }
 
     /*
-     * dynmaic scope to get models of certain styles
+     * dynamic scope to get models of certain styles
      */
 
     public function scopeOfStyles($query, $styles) {
@@ -44,7 +44,7 @@ class ProductModelView extends Eloquent {
     }
 
     /*
-     * dynmaic scope to get models of certain categories
+     * dynamic scope to get models of certain categories
      */
 
     public function scopeOfCategories($query, $categories) {
@@ -52,7 +52,7 @@ class ProductModelView extends Eloquent {
     }
 
     /*
-     * dynmaic scope to get models of certain shapes
+     * dynamic scope to get models of certain shapes
      */
 
     public function scopeOfShapes($query, $shapes) {
@@ -60,7 +60,7 @@ class ProductModelView extends Eloquent {
     }
 
     /*
-     * dynmaic scope to get models of certain materials
+     * dynamic scope to get models of certain materials
      */
 
     public function scopeOfMaterials($query, $materials) {
@@ -69,7 +69,7 @@ class ProductModelView extends Eloquent {
     }
 
     /*
-     * dynmaic scope to get models of certain genders
+     * dynamic scope to get models of certain genders
      */
 
     public function scopeOfGenders($query, $genders) {
@@ -77,11 +77,19 @@ class ProductModelView extends Eloquent {
     }
 
     /*
-     * dynmaic scope to get models of certain frames
+     * dynamic scope to get models of certain frames
      */
 
     public function scopeOfFrames($query, $frames) {
         return $query->whereIn('product_frame_id', $frames);
+    }
+
+    /*
+     * dynamic scope to get models of certain prices
+     */
+
+    public function scopeOfPrices($query, $prices) {
+        return $query->whereBetween('price', $prices);
     }
 
     /*

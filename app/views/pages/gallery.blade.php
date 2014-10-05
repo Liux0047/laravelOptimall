@@ -3,6 +3,7 @@
 @section('link-css')
 @parent
 {{ HTML::style('plugins/raty-2.7.0/jquery.raty.css') }}
+{{ HTML::style('plugins/jquery-ui-slider/jquery-ui.min.css') }}
 @stop
 
 @section ('content')
@@ -16,11 +17,19 @@
 		</div>
 
 		<div class='col-md-10 col-narrow'>
+
+		    <p>
+                @if(Input::has('search_keyword'))
+                与 <strong>“{{ Input::get('search_keyword') }}”</strong> 相关的产品：
+                {{ Form::hidden('search_keyword', Input::get('search_keyword')) }}
+                @endif
+            </p>
+
 			<div class="shop-items-container">
-				<div class="panel panel-default" id="options">
+				<div class="panel panel-default" id="gallery_options">
 					<div class="panel-heading">
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-5">
 
                                 <button type="button" class="btn btn-xs @if ($sortOrder == 'num_items_sold_display') btn-success @else btn-default @endif"
                                     onclick="submitSortOrder('num_items_sold_display', 1);">
@@ -41,13 +50,24 @@
                                     onclick="submitSortOrder('price', 0);">
                                     价格优先：<i class="fa fa-arrow-up"></i>
                                 </button>
-
                             </div>
-                            <div class="col-md-4 align-right">
-                                @if(Input::has('search_keyword'))
-                                与“{{ Input::get('search_keyword') }}” 相关的产品
-                                {{ Form::hidden('search_keyword', Input::get('search_keyword')) }}
-                                @endif
+                            <div class="col-md-3 padding-align align-right">
+                                <label for="price_min">价格范围:</label>
+                                <strong>¥</strong><span id="price_min_display"></span> <strong>-</strong>
+                                <strong>¥</strong><span id="price_max_display"></span>
+                                <input type="hidden" id="price_min" name="price_min">
+                                <input type="hidden" id="price_max" name="price_max">
+                            </div>
+
+                            <div class="col-md-3 padding-align">
+                                <div id="price_range_slider"></div>
+                            </div>
+
+                            <div class="col-md-1">
+                                <button type="button" class="btn btn-xs btn-success"
+                                    onclick="document.getElementById('product_gallery_form').submit();">
+                                    更新
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -83,6 +103,7 @@
 @section('link-script')
 @parent
 {{ HTML::script('plugins/raty-2.7.0/jquery.raty.js') }}
+{{ HTML::script('plugins/jquery-ui-slider/jquery-ui.min.js') }}
 @stop
 
 
@@ -93,12 +114,12 @@
 <script type="text/javascript">
 
 function submitSortOrder(orderName, isDesc){
-	$('#options').append("<input type='hidden' name='sort_order' value="+ orderName +">");   
+	$('#gallery_options').append("<input type='hidden' name='sort_order' value="+ orderName +">");
 	if (isDesc){
-		$('#options').append("<input type='hidden' name='is_desc' value='1'>");   
+		$('#gallery_options').append("<input type='hidden' name='is_desc' value='1'>");
 	}	
 	else {
-		$('#options').append("<input type='hidden' name='is_desc' value='0'>");
+		$('#gallery_options').append("<input type='hidden' name='is_desc' value='0'>");
 	}
 	document.getElementById("product_gallery_form").submit();
 }
@@ -146,6 +167,28 @@ function loadMoreModels() {
         $("#load_more_preloader_img").hide();
     });
 }
+
+// jquery range slider
+$(function() {
+    var values = [{{ $price_min }}, {{ $price_max }}];
+
+    $( "#price_range_slider" ).slider({
+        range: true,
+        min: '{{ ProductController::MIN_FILTER_PRICE }}',
+        max: '{{ ProductController::MAX_FILTER_PRICE }}',
+        values: values,
+        slide: function( event, ui ) {
+            $( "#price_min" ).val( ui.values[ 0 ]);
+            $( "#price_max" ).val( ui.values[ 1 ]);
+            $( "#price_min_display" ).html( ui.values[ 0 ]);
+            $( "#price_max_display" ).html( ui.values[ 1 ]);
+        }
+    });
+    $( "#price_min" ).val( $( "#price_range_slider" ).slider( "values", 0 ));
+    $( "#price_max" ).val( $( "#price_range_slider" ).slider( "values", 1 ));
+    $( "#price_min_display" ).html( $( "#price_range_slider" ).slider( "values", 0 ));
+    $( "#price_max_display" ).html( $( "#price_range_slider" ).slider( "values", 1 ));
+});
 
 </script>
 @stop
