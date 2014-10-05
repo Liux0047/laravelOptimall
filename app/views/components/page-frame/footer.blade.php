@@ -124,7 +124,7 @@
                     </li>
                     <li>
                         <a href="{{ action('InfoController@getAboutPrescription') }}">
-                            如何填写验光单
+                            如何优雅地填验光单
                         </a>
                     </li>
                     <li>

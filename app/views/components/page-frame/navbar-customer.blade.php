@@ -11,8 +11,8 @@
         <div id="navbar-collapse-2" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class="dropdown dropdown-hover yamm-fw">
-                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-                        所有产品
+                    <a href="{{ action('ProductController@getGallery') }}" class="dropdown-toggle">
+                        所有眼镜
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
