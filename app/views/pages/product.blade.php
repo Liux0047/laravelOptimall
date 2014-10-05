@@ -130,9 +130,10 @@
                                     (套餐价: +<strong>¥{{ number_format($lensTypes[$i]->price, 2) }}</strong>)
                                     <i class='fa fa-check'></i>                                
                                 </div>
-                                <a href="#" data-toggle="popover"  data-title="{{ $lensTypes[$i]->title_cn }}" 
-                                    data-content="{{ $lensTypes[$i]->description_cn }}" >
-                                    <i class='fa fa-info-circle fa-lg'></i> 
+                                <a href="#" data-toggle="popover"  data-title="{{ $lensTypes[$i]->title_cn }}"
+                                    data-content="{{ $lensTypes[$i]->description_cn }}"
+                                    onclick="showLensDesc({{ $i+1 }});return false;">
+                                    <i class='fa fa-question-circle fa-lg'></i> 详情
                                 </a>
                             </div>
                             @endfor
@@ -156,7 +157,15 @@
     <div class="product-info-container">
         <div class="row">
             <div class="col-md-9">
-                @include('components.product-page.product-info', array('model' => $model, 'reviews'=>$reviews,'thumbedList'=>$thumbedList, 'hasReview'=>$hasReview))
+                @include('components.product-page.product-info',
+                    array(
+                        'model' => $model,
+                        'lensTypes' => $lensTypes,
+                        'reviews'=>$reviews,
+                        'thumbedList'=>$thumbedList,
+                        'hasReview'=>$hasReview
+                    )
+                )
             </div>
             <div class="col-md-3">
                 @include('components.product-page.also-buy', array('alsoBuyModels'=>$alsoBuys['models']))
@@ -270,9 +279,19 @@ $('#review_count_button').click(function(e) {
 
 function showReviewSection () {
     $("#user_review_tab").trigger("click");
+    scrollToProductInfo($('.nav-tabs'));
+}
+
+function showLensDesc (posterId) {
+    $("#len_desc_tab").trigger("click");
+    scrollToProductInfo($('.nav-tabs'));
+}
+
+function scrollToProductInfo (element, time) {
+    time = typeof time !== 'undefined' ? time : 1000;
     $('html, body').animate({
-        scrollTop: ($('.nav-tabs').offset().top) - 100
-    }, 1000);
+        scrollTop: (element.offset().top) - 50
+    }, time);
 }
 
 //toggle submit button for review reply

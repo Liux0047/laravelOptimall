@@ -6,7 +6,7 @@
         </a>
     </li>
     <li>
-        <a href="#lens_description" role="tab" data-toggle="tab">
+        <a href="#lens_description" role="tab" data-toggle="tab" id="len_desc_tab">
             镜片描述
         </a>
     </li>
@@ -51,11 +51,25 @@
     <div class="tab-pane fade tab-pane-bordered" id="lens_description">
         <div class="row">
             <div class="col-md-12">
-                @for ($i=1; $i<=7; $i++)
-                <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" 
-                data-original="{{ asset('images/lens/lens-poster-'.$i.'.jpg') }}"
-                class="lazy poster">
-                <br>
+                <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}"
+                    data-original="{{ asset('images/lens/lens-top-banner.jpg') }}"
+                    class="lazy poster" >
+                @foreach($lensTypes as $lensType)
+                @if ($lensType->lens_type_id != 1)
+                <section id="lens_description_{{ $lensType->lens_type_id }}">
+                    <h4>{{ $lensType->title_cn }}</h4>
+                    <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}"
+                        data-original="{{ asset('images/lens/lens-poster-'.$lensType->lens_type_id.'.jpg') }}"
+                        class="lazy poster" >
+                    <br>
+                </section>
+                @endif
+                @endforeach
+
+                @for ($i=1; $i<=3; $i++)
+                <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}"
+                    data-original="{{ asset('images/lens/lens-feature-'.$i.'.jpg') }}"
+                    class="lazy poster" >
                 @endfor
             </div>
         </div>            
