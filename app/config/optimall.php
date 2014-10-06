@@ -51,5 +51,11 @@ return array(
     //models to show on 404 error
     'errorPageModels' => array(3001, 3002, 3004, 3005),
 
+    //max number of product posters on product page
+    'maxProductPosters' => 5,
+
+    //max number of lens posters on product page
+    'maxLensPosters' => 2
+
         
 );

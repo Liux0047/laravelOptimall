@@ -28,22 +28,22 @@
             <div class="col-md-12">
 
                 <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" 
-                data-original="{{ asset('images/gallery/'.$model->model_id.'/spec.jpg') }}"
-                class="lazy poster">
+                    data-original="{{ asset('images/gallery/'.$model->model_id.'/spec.jpg') }}"
+                    class="lazy poster">
 
-                @for ($i=1; $i<=5; $i++)
+                @for ($i=1; $i<=Config::get('optimall.maxProductPosters'); $i++)
                 @if (File::exists('images/gallery/'.$model->model_id.'/poster-'.$i.'.jpg'))
                 <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" 
-                data-original="{{ asset('images/gallery/'.$model->model_id.'/poster-'.$i.'.jpg') }}"
-                class="lazy poster">
+                    data-original="{{ asset('images/gallery/'.$model->model_id.'/poster-'.$i.'.jpg') }}"
+                    class="lazy poster">
                 @endif
                 @endfor
 
                 @for ($i=1; $i<=4; $i++)
                 <br>
                 <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" 
-                data-original="{{ asset('images/gallery/'.$model->model_id.'/detail-'.$i.'.jpg') }}"
-                class="lazy poster">
+                    data-original="{{ asset('images/gallery/'.$model->model_id.'/detail-'.$i.'.jpg') }}"
+                    class="lazy poster">
                 @endfor
             </div>
         </div>
@@ -51,26 +51,33 @@
     <div class="tab-pane fade tab-pane-bordered" id="lens_description">
         <div class="row">
             <div class="col-md-12">
-                <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}"
-                    data-original="{{ asset('images/lens/lens-top-banner.jpg') }}"
-                    class="lazy poster" >
-                @foreach($lensTypes as $lensType)
-                @if ($lensType->lens_type_id != 1)
-                <section id="lens_description_{{ $lensType->lens_type_id }}">
-                    <h4>{{ $lensType->title_cn }}</h4>
-                    <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}"
-                        data-original="{{ asset('images/lens/lens-poster-'.$lensType->lens_type_id.'.jpg') }}"
-                        class="lazy poster" >
-                    <br>
-                </section>
-                @endif
-                @endforeach
 
                 @for ($i=1; $i<=3; $i++)
                 <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}"
                     data-original="{{ asset('images/lens/lens-feature-'.$i.'.jpg') }}"
                     class="lazy poster" >
                 @endfor
+
+                @foreach($lensTypes as $lensType)
+                @if ($lensType->lens_type_id != 1)
+                <section id="lens_description_{{ $lensType->lens_type_id }}">
+                    <h1 class="shelf-header">
+                        <span class="title">
+                            {{ $lensType->title_cn }}
+                        </span>
+                        <span class="divider"></span>
+                    </h1>
+                    @for ($i=1; $i<=Config::get('optimall.maxLensPosters'); $i++)
+                    @if (File::exists('images/lens/lens-'.$lensType->lens_type_id.'/lens-poster-'.$i.'.jpg'))
+                    <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}"
+                        data-original="{{ asset('images/lens/lens-'.$lensType->lens_type_id.'/lens-poster-'.$i.'.jpg') }}"
+                        class="lazy poster" >
+                    @endif
+                    @endfor
+                    <br>
+                </section>
+                @endif
+                @endforeach
             </div>
         </div>            
     </div>
