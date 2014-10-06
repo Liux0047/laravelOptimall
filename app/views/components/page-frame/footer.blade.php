@@ -94,7 +94,7 @@
                 <div class="post">                    
                     <i class="fa fa-weixin fa-3x fa-fw"></i> 
                     <a href="{{ action('InfoController@getWechat')}}" class="title">
-                        微信公共平台
+                        微信官方订阅号
                     </a>
                     <p><a href="{{ action('InfoController@getWechat')}}">点击查看二维码</a></p>
                 </div>

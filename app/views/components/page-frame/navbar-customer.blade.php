@@ -323,7 +323,7 @@
                                     <li class="divider"></li>
                                     <li>
                                         <h6>
-                                            <i class="fa fa-weixin fa-lg font-green"></i> 微信公共平台
+                                            <i class="fa fa-weixin fa-lg font-green"></i> 微信官方订阅号
                                         </h6>
                                         {{ HTML::image('images/icons/wechat.jpg') }}
                                     </li>
