@@ -17,7 +17,8 @@ class ProductFrame extends Eloquent {
     protected $primaryKey = 'product_frame_id';
 
     //gallery filters
-    public static function getGalleryFilters() {
+    public static function getGalleryFilters()
+    {
         return array(
             array("option_id" => 1, "name" => "全框"),
             array("option_id" => 2, "name" => "半框"),

@@ -100,6 +100,7 @@ class ProductController extends BaseController
             array('filterName' => 'shapes', 'functionName' => 'ofShapes', 'displayName' => '形状'),
             array('filterName' => 'materials', 'functionName' => 'ofMaterials', 'displayName' => '材料'),
             array('filterName' => 'frames', 'functionName' => 'ofFrames', 'displayName' => '框型'),
+            array('filterName' => 'faces', 'functionName' => 'ofFaces', 'displayName' => '脸型'),
         );
         $params['filters'] = $filters;
 
@@ -108,7 +109,7 @@ class ProductController extends BaseController
         $params['filterValues']['colors'] = ProductBaseColor::getGalleryFilters();
         $params['filterValues']['shapes'] = ProductShape::getGalleryFilters();
         $params['filterValues']['materials'] = ProductMaterial::getGalleryFilters();
-        //$params['filterValues']['genders'] = ProductGender::getGalleryFilters();
+        $params['filterValues']['faces'] = ProductFace::getGalleryFilters();
         $params['filterValues']['frames'] = ProductFrame::getGalleryFilters();
 
         Session::forget('remainingModels');

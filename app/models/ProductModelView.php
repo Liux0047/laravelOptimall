@@ -93,6 +93,15 @@ class ProductModelView extends Eloquent {
     }
 
     /*
+     * dynamic scope to get models of certain materials
+     */
+
+    public function scopeOfFaces($query, $faces) {
+        return $query->join('product_face_mapping', 'product_face_mapping.model_id', '=', 'model_view.model_id')
+            ->whereIn('product_face_id', $faces);
+    }
+
+    /*
      * dynamic scope to test if this model contains products of certain base colors
      */
 
