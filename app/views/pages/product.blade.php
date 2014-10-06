@@ -146,9 +146,15 @@
                         <td></td>
                         <td>
                             <button class='btn btn-warning view-item-table-btn' type='submit' ><i class='fa fa-credit-card'></i> 立即购买</button>
+                            @if (Auth::check())
                             <button class='btn btn-danger view-item-table-btn' type="button" onclick="addToCart(); return false;" id="add_to_cart_btn">
                                 <i class='fa fa-shopping-cart'></i> 加入购物车
                             </button>
+                            @else
+                            <a href="{{ action('MemberController@getSignUp') }}" class='btn btn-danger view-item-table-btn' >
+                                <i class='fa fa-shopping-cart'></i> 加入购物车
+                            </a>
+                            @endif
                         </td>
                     </tr>
                 </tbody>                            
