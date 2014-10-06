@@ -48,5 +48,8 @@ return array(
     //path to refund picture uploads
     'refundPicPath' => public_path().DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'uploads'.DIRECTORY_SEPARATOR.'refunds'.DIRECTORY_SEPARATOR,
 
+    //models to show on 404 error
+    'errorPageModels' => array(3001, 3002, 3004, 3005),
+
         
 );

@@ -1023,7 +1023,7 @@ label, .control-label, .help-block {
     vertical-align: baseline;
 }
 
-.top-banner .cart-icon-ontainer {
+.top-banner .cart-icon-container {
     text-align: right;
     padding-top: 20px;
 }
@@ -1513,6 +1513,11 @@ input.jq-validate-error {
 
 .view-item-table thead tr td {
     height: 0px;
+}
+
+.view-item-table .view-item-table-btn {
+    width: 46%;
+    margin-right: 2%;
 }
 
 .price-prominent .sales-price {

@@ -27,11 +27,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-1 col-sm-4 col-xs-4 cart-icon-ontainer">
+            <div class="col-md-1 col-sm-4 col-xs-4 cart-icon-container">
                 <a href="{{ action('ShoppingCartController@getMyCart') }}" >
                     <i class="fa fa-shopping-cart fa-2x"></i> 
                 </a>
-                <span class="badge">{{ $numCartItems }}</span>  
+                <span class="badge" id="num_cart_items">{{ $numCartItems }}</span>
             </div>
         </div>
     </div>

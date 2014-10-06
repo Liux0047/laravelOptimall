@@ -136,13 +136,15 @@ class ProductController extends BaseController
             }
         }
 
+        //get the sort order
+        //default is number of items sold, descending
         $sortOrder = Input::get('sort_order', 'num_items_sold_display');
-        $params['isDesc'] = false;
-        if (Input::get('is_desc') == 1) {
-            $params['isDesc'] = true;
-            $models = $models->orderBy($sortOrder, 'DESC');
-        } else {
+        $params['isDesc'] = true;
+        if (Input::has('is_desc') && Input::get('is_desc') == 0) {
+            $params['isDesc'] = false;
             $models = $models->orderBy($sortOrder);
+        } else {
+            $models = $models->orderBy($sortOrder, 'DESC');
         }
         $params['sortOrder'] = $sortOrder;
         $models = $models->get();

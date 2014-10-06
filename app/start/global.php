@@ -44,8 +44,13 @@ Log::useFiles(storage_path() . '/logs/laravel.log');
   |
  */
 
-App::error(function(Exception $exception, $code) {
+App::error(function (Exception $exception, $code) {
     Log::error($exception);
+    $modelIds = Config::get('optimall.errorPageModels');
+    foreach ($modelIds as $id) {
+        $params['models'][] = ProductModelView::find($id);
+    }
+    return View::make('pages.not-found', $params);
 });
 
 /*
@@ -59,9 +64,29 @@ App::error(function(Exception $exception, $code) {
   |
  */
 
-App::down(function() {
+App::down(function () {
     return Response::make("Be right back!", 503);
 });
+
+
+App::before(function ($request) {
+    //register warning flag
+    if (!Cookie::has('internalTestWarning')) {
+        Cookie::queue('internalTestWarning', 1, 60 * 24);
+    }
+});
+
+
+App::missing(function ($exception) {
+    $modelIds = Config::get('optimall.errorPageModels');
+    foreach ($modelIds as $id) {
+        $params['models'][] = ProductModelView::find($id);
+    }
+    return View::make('pages.not-found', $params);
+});
+
+
+
 
 /*
   |--------------------------------------------------------------------------
@@ -73,25 +98,6 @@ App::down(function() {
   | definitions instead of putting them all in the main routes file.
   |
  */
-
-
-App::before(function($request) {
-    //register warning flag
-    if (!Cookie::has('internalTestWarning')) {
-        Cookie::queue('internalTestWarning', 1, 60 * 24);
-    }
-});
-
-
-App::missing(function($exception) {
-    $modelIds = array(3001, 3002, 3004, 3005);
-    foreach ($modelIds as $id) {
-        $params['models'][] = ProductModelView::find($id);
-    }
-    return View::make('pages.not-found', $params);
-});
-
-
 require app_path() . '/filters.php';
 require app_path() . '/helpers.php';
 require app_path() . '/composers.php';

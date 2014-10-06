@@ -4,6 +4,7 @@
 @parent
 {{ HTML::style('plugins/fotorama-4.6.2/fotorama.css') }}
 {{ HTML::style('plugins/Magnific-Popup/magnific-popup.css') }}
+{{ HTML::style('css/animate.min.css'); }}
 
 @if($reviewOrderLineItemId)
 @include('components.plugin.jquery-file-upload-css')
@@ -37,7 +38,7 @@
                 </small>                        
             </h3>
 
-            {{ Form::open(array('action' => 'ShoppingCartController@getAddItem', 'class'=>'form','method'=>'GET')) }}
+            {{ Form::open(array('action' => 'ShoppingCartController@getAddItem', 'class'=>'form','method'=>'GET', 'id'=>'add_item_form')) }}
             <table class="view-item-table">
                 <thead>
                     <tr>
@@ -144,7 +145,10 @@
                     <tr>
                         <td></td>
                         <td>
-                            <button class='btn btn-danger' type='submit' ><i class='fa fa-shopping-cart'></i> 加入购物车</button>                                       
+                            <button class='btn btn-warning view-item-table-btn' type='submit' ><i class='fa fa-credit-card'></i> 立即购买</button>
+                            <button class='btn btn-danger view-item-table-btn' type="button" onclick="addToCart(); return false;" id="add_to_cart_btn">
+                                <i class='fa fa-shopping-cart'></i> 加入购物车
+                            </button>
                         </td>
                     </tr>
                 </tbody>                            
@@ -242,6 +246,41 @@ function changeLens(lensId, lensPrice, basePrice, baseMarketPrice) {
     //change the markete price
     var newMarketPrice = baseMarketPrice + lensPrice;
     document.getElementById("market-price").innerHTML = newMarketPrice.toFixed(2);
+}
+
+// ajax add to cart
+function addToCart () {
+    $("#add_to_cart_btn").prop("disabled", true);
+    $("#add_to_cart_btn").html("<i class='fa fa-shopping-cart'></i> 正在添加...");
+    $.ajax({
+        type: "GET",
+        url: "{{ action('ShoppingCartController@getAddItem') }}",
+        data: {
+            product_id: $("#add_item_form input[name=product_id]").val(),
+            lens_type: $("#add_item_form input[name=lens_type]").val()
+        },
+        datatype: 'json',
+        beforeSend: function(request) {
+            return request.setRequestHeader('X-CSRF-Token', $("meta[name='token']").attr('content'));
+        }
+    }).done(function (data){
+        if(data.success){
+            $("#add_to_cart_btn").html("<i class='fa fa-shopping-cart'></i> 已加入购物车");
+            $(".cart-icon-container #num_cart_items").html(data.num_cart_items).addClass("animated bounce");
+        }
+        else {
+            $("#add_to_cart_btn").prop("disabled", false);
+            alert("添加购物车失败");
+        }
+    }).fail(function() {
+        $("#add_to_cart_btn").prop("disabled", false);
+        $("#add_to_cart_btn").html("<i class='fa fa-shopping-cart'></i> 加入购物车");
+        //if the connection to database failed
+        alert("连接服务器失败");
+    }).always(function() {
+
+    });
+    return false;
 }
 
 //enable popover

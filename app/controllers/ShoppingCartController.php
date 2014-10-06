@@ -5,19 +5,22 @@
  *
  * @author Allen
  */
-class ShoppingCartController extends BaseController {
+class ShoppingCartController extends BaseController
+{
 
     private $totalPrice = 0;
     private $totalDiscount = 0;
     private $netPrice = 0;
 
-    public function __construct() {
+    public function __construct()
+    {
         $items = $this->getCartItems();
         $coupon = CouponController::getCoupon();
         $this->calculatePrice($items, $coupon);
     }
 
-    public function getMyCart() {
+    public function getMyCart()
+    {
         $params['pageTitle'] = "购物车 - 目光之城";
         $params['prescriptionNames'] = PrescriptionController::getPrescriptionNames();
         $params['prescriptionOptions'] = PrescriptionController::getPrescriptionOptionList();
@@ -51,7 +54,8 @@ class ShoppingCartController extends BaseController {
         return View::make('pages.shopping-cart', $params);
     }
 
-    public function getCheckout() {
+    public function getCheckout()
+    {
         $params['pageTitle'] = "结算 - 目光之城";
 
         $items = $this->getCartItems();
@@ -65,7 +69,7 @@ class ShoppingCartController extends BaseController {
             if ($isRequired) {
                 if (!$this->isPrescriptionEntered($item)) {
                     return Redirect::action('ShoppingCartController@getMyCart')
-                                    ->with('error', '请完整填写所有验光单');
+                        ->with('error', '请完整填写所有验光单');
                 }
             }
         }
@@ -87,13 +91,14 @@ class ShoppingCartController extends BaseController {
             }
         }
         $params['newAddress'] = new Address;
-        
+
         $params['prescriptionNames'] = PrescriptionController::getPrescriptionNames();
 
         return View::make('pages.checkout', $params);
     }
 
-    public function getAddItem() {
+    public function getAddItem()
+    {
         $item = new OrderLineItem;
         $item->product_id = Input::get('product_id');
         $item->lens_type_id = Input::get('lens_type');
@@ -101,10 +106,20 @@ class ShoppingCartController extends BaseController {
         $item->member_id = Auth::id();
         $item->is_plano = 0;
         $item->save();
-        return Redirect::action('ShoppingCartController@getMyCart')->with('status', '成功添加商品');
+        if (Request::ajax()) {
+            if (isset($item->order_line_item_id)) {
+                return Response::json(array('success' => true, 'num_cart_items' => self::getNumberOfItems()));
+            } else {
+                return Response::json(array('success' => false));
+            }
+        } else {
+            return Redirect::action('ShoppingCartController@getMyCart')->with('status', '成功添加商品');
+        }
+
     }
 
-    public function postUpdatePrescription() {
+    public function postUpdatePrescription()
+    {
         $prescriptionNames = PrescriptionController::getPrescriptionNameArray();
         $orderLineItem = $this->getItemFromPost();
         $orderLineItem->is_plano = 0;
@@ -120,7 +135,8 @@ class ShoppingCartController extends BaseController {
         return Redirect::back()->with('status', '成功填写验光单');
     }
 
-    public function postUpdateQuatity() {
+    public function postUpdateQuatity()
+    {
         $orderLineItem = $this->getItemFromPost();
         if (Input::get('action') == 'increment') {
             $orderLineItem->quantity += 1;
@@ -136,26 +152,28 @@ class ShoppingCartController extends BaseController {
         $price = $orderLineItem->product->productModel->price;
         $lensPrice = $orderLineItem->lensType->price;
         return Response::json(array(
-                    'quantity' => $orderLineItem->quantity,
-                    'itemTotal' => $orderLineItem->quantity * ($price + $lensPrice),
-                    'totalPrice' => $this->totalPrice,
-                    'discountAmount' => $this->totalDiscount,
-                    'netAmount' => $this->netPrice
+            'quantity' => $orderLineItem->quantity,
+            'itemTotal' => $orderLineItem->quantity * ($price + $lensPrice),
+            'totalPrice' => $this->totalPrice,
+            'discountAmount' => $this->totalDiscount,
+            'netAmount' => $this->netPrice
         ));
     }
 
-    public function postRemoveItem() {
+    public function postRemoveItem()
+    {
         $orderLineItem = $this->getItemFromPost();
-        if ($orderLineItem->member_id != Auth::id()){
+        if ($orderLineItem->member_id != Auth::id()) {
             return Redirect::back()->with('error', '无法移除此商品');
-        }            
+        }
         $orderLineItem->delete();
         return Redirect::back()->with('status', '成功移除此商品');
     }
 
-    public function postSetPlano() {
+    public function postSetPlano()
+    {
         $orderLineItem = $this->getItemFromPost();
-        if ($orderLineItem->member_id != Auth::id()){
+        if ($orderLineItem->member_id != Auth::id()) {
             return Redirect::back()->with('error', '无法修改验光单');
         }
         $orderLineItem->is_plano = 1;
@@ -163,7 +181,8 @@ class ShoppingCartController extends BaseController {
         return Redirect::back()->with('status', '成功修改验光单');
     }
 
-    public static function getNumberOfItems() {
+    public static function getNumberOfItems()
+    {
         if (!Auth::check()) {
             return 0;
         } else {
@@ -171,16 +190,19 @@ class ShoppingCartController extends BaseController {
         }
     }
 
-    private function getItemFromPost() {
+    private function getItemFromPost()
+    {
         $itemId = Input::get('order_line_item_id');
         return OrderLineItem::find($itemId);
     }
 
-    private function getCartItems() {
+    private function getCartItems()
+    {
         return OrderLineItemView::cartItems(Auth::id())->orderBy('created_at')->get();
     }
 
-    private function calculatePrice($items, $coupon) {
+    private function calculatePrice($items, $coupon)
+    {
         $this->totalPrice = 0;
         $this->totalDiscount = 0;
         $this->netPrice = 0;
@@ -201,7 +223,8 @@ class ShoppingCartController extends BaseController {
         $this->netPrice = $this->totalPrice - $this->totalDiscount;
     }
 
-    private function isPrescriptionEntered($orderLineItem) {
+    private function isPrescriptionEntered($orderLineItem)
+    {
         $prescriptionNames = PrescriptionController::getPrescriptionNameArray();
         foreach ($prescriptionNames as $prescriptionName) {
             if (!isset($orderLineItem->$prescriptionName)) { //false if at least one entry is blank
@@ -211,15 +234,18 @@ class ShoppingCartController extends BaseController {
         return true;
     }
 
-    public function getTotalDiscount() {
+    public function getTotalDiscount()
+    {
         return $this->totalDiscount;
     }
 
-    public function getNetPrice() {
+    public function getNetPrice()
+    {
         return $this->netPrice;
     }
 
-    private function isPrescriptionRequired($item) {
+    private function isPrescriptionRequired($item)
+    {
         return $item->lens_type_id != 1 && !$item->is_plano;
     }
 

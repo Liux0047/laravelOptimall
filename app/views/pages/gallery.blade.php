@@ -33,7 +33,7 @@
 
                                 <button type="button" class="btn btn-xs @if ($sortOrder == 'num_items_sold_display') btn-success @else btn-default @endif"
                                     onclick="submitSortOrder('num_items_sold_display', 1);">
-                                    销量优先
+                                    销量优先：<i class="fa fa-arrow-down"></i>
                                 </button>
 
                                 <button type="button" class="btn btn-xs @if ($sortOrder == 'average_design_rating') btn-success @else btn-default @endif"
