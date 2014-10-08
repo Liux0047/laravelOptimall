@@ -273,6 +273,9 @@ function addToCart () {
         if(data.success){
             $("#add_to_cart_btn").html("<i class='fa fa-shopping-cart'></i> 已加入购物车");
             $(".cart-icon-container #num_cart_items").html(data.num_cart_items).addClass("animated bounce");
+            $('html, body').animate({
+                scrollTop: 0
+            }, 500);
         }
         else {
             $("#add_to_cart_btn").prop("disabled", false);

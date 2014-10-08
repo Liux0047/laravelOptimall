@@ -1028,6 +1028,12 @@ label, .control-label, .help-block {
     padding-top: 20px;
 }
 
+.top-banner #num_cart_items {
+    background: white;
+    color: #ee4054;
+    font-weight: bold;
+}
+
 @media (max-width: 991px) {
     .top-banner .optimall-promises {
         display: none;

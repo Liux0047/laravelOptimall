@@ -11,7 +11,7 @@
         <div id="navbar-collapse-2" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class="dropdown dropdown-hover yamm-fw">
-                    <a href="{{ action('ProductController@getGallery') }}" class="dropdown-toggle">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">
                         所有眼镜
                         <b class="caret"></b>
                     </a>
@@ -45,7 +45,7 @@
                                             <li>
                                                 <a href="{{ url('gallery') }}">
                                                     <i class="fa fa-angle-double-right"></i> 
-                                                    更多
+                                                    <strong>所有商品</strong>
                                                 </a>                                                    
                                             </li>
                                         </ul>
@@ -73,12 +73,7 @@
                                             <li>
                                                 <a href="{{ url('gallery?styles[]=6') }}">摩登时代</a>
                                             </li>
-                                            <li>
-                                                <a href="{{ url('gallery') }}">
-                                                    <i class="fa fa-angle-double-right"></i> 
-                                                    更多
-                                                </a>                                                    
-                                            </li>
+
                                         </ul>
                                     </div>
                                     <div class="col-md-2 col-sm-6 col-xs-6">
@@ -344,7 +339,7 @@
                             <i class='fa fa-search fa-lg'></i>
                         </a>
                     </span>
-                    <input type="text" class="form-control" name="search_keyword" placeholder="关键字"
+                    <input type="text" class="form-control" name="search_keyword" placeholder="原木物语"
                         value="@if(Input::has('search_keyword')){{ trim(Input::get('search_keyword'))}}@endif">
                 </div>
             {{ Form::close() }}

@@ -13,6 +13,7 @@
         <li data-target="#index-carousel" data-slide-to="1"></li> 
         <li data-target="#index-carousel" data-slide-to="2"></li> 
         <li data-target="#index-carousel" data-slide-to="3"></li>             
+        <li data-target="#index-carousel" data-slide-to="4"></li>
     </ol>
     <!-- Carousel items -->
     <div class="carousel-inner">
@@ -35,7 +36,12 @@
             <a href="{{ action('ProductController@getProduct', array(1009)) }}">
                 <img data-lazy-load-src="{{ asset('images/carousel/index-carousel-cn-4.jpg') }}">
             </a>
-        </div>                            
+        </div>
+        <div class="item">
+            <a href="{{ action('ProductController@getProduct', array(1009)) }}">
+                <img data-lazy-load-src="{{ asset('images/carousel/index-carousel-cn-5.jpg') }}">
+            </a>
+        </div>
     </div>
     <!-- Controls -->
     <a class="left carousel-control" href="#index-carousel" data-slide="prev">

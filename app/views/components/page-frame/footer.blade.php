@@ -79,10 +79,10 @@
                 </div>                                
                 <div class="post">                    
                     <i class="fa fa-envelope fa-3x fa-fw"></i> 
-                    <a href="#" class="title">
+                    <a href="mailto:mgzc_service@163.com" class="title">
                         邮箱
                     </a>
-                    <p>mgzcecommerce@163.com</p>
+                    <p>mgzc_service@163.com</p>
                 </div>
                 <div class="post">
                     <i class="fa fa-weibo fa-3x fa-fw"></i> 
