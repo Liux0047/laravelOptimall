@@ -149,9 +149,8 @@ function loadMoreModels() {
 	})
 	.done(function(data) {            
 		$("#product_cards_container").append(data);
-		ratyInit();
+		productCardInit();
 		$("img.lazy").lazyload();
-		$(".color-icon-link").click(colorIconClickFunc);		
 		$(".ajax-load-container").show(300, function() {
 			$(this).hide().fadeIn(1000, function() {
 				$('body,html').scroll();

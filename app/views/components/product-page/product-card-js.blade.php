@@ -1,18 +1,19 @@
 <script type="text/javascript">
     //change the small img on click of color icon
-    function changeSmallImg(modelId, prodcutId) {
-    	$("#small-view-" + modelId + " img").remove();
-    	$("#small-view-" + modelId).append(
-    		"<img src='{{ asset('images/gallery') }}/" + modelId + "/" + prodcutId + "/{{ Config::get('optimall.smallViewImg') }}'>");
-        renderRetinaImg("#small-view-" + modelId + " img");
-    }
+    var colorIconHoverFunc = function() {
+        var modelId = $(this).attr("data-model-id");
+        var productId = $(this).attr("data-product-id");
+        $(this).parent().parent().parent().find(".small-view-link img").remove();
+        $(this).parent().parent().parent().find(".small-view-link").append(
+            "<img src='{{ asset('images/gallery') }}/" + modelId + "/" + productId +
+            "/{{ Config::get('optimall.smallViewImg') }}'>"
+        );
+        renderRetinaImg($(this).parent().parent().parent().find(".small-view-link img"));
 
-    var colorIconClickFunc = function() {
-        $(".color-icon-link").removeClass("color-icon-clicked");
-        $(this).addClass("color-icon-clicked");
-    }
-    $(".color-icon-link").click(colorIconClickFunc);
-    
+        $(".color-icon-link").removeClass("color-icon-active");
+        $(this).addClass("color-icon-active");
+    };
+
     var ratyInit = function () {
         $('.raty-star').raty({
             path: "{{ asset('plugins/raty-2.7.0/images') }}",
@@ -24,8 +25,14 @@
             }
         });
     }
+
+    function productCardInit () {
+        $(".shop-item-details .color-icon-link").mouseover(colorIconHoverFunc);
+        ratyInit();
+    }
+
     $(document).ready(function() {
-    	ratyInit();
+    	productCardInit();
     });
 
     $(".wide-home-display").hover(function(){

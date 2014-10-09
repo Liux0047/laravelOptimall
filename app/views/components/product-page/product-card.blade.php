@@ -21,7 +21,8 @@
             </div>
         </div>
         <div class="shop-item-image item-image-single">
-            <a target="_blank" href="{{ url('product', array($model->model_id)) }}" id="small-view-{{ $model->model_id }}">
+            <a target="_blank" href="{{ url('product', array($model->model_id)) }}"
+                class="small-view-link" id="small-view-{{ $model->model_id }}">
                 <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" 
                 data-original="{{ asset('images/gallery/'.$model->model_id.'/'.$model->productViews()->first()->product_id.'/'.Config::get('optimall.smallViewImg')) }}" 
                 class="lazy retina-alt">
@@ -31,7 +32,7 @@
             <h5>{{ $model->model_name_cn }}</h5>
             <p>
                 @foreach( $model->productViews as $product)
-                <span onclick="changeSmallImg({{ $model->model_id }}, {{ $product->product_id }});" class="color-icon-link"> 
+                <span class="color-icon-link" data-model-id="{{ $model->model_id }}" data-product-id="{{ $product->product_id }}">
                     <img src="{{ asset('images/color/color-'.$product->product_color_id.'.png') }}" class="color-icon">
                 </span>
                 @endforeach
