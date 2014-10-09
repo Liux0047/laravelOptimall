@@ -12,7 +12,7 @@ and open the template in the editor.
 </head>
 <body>
     <p>
-        亲爱的顾客：
+        亲爱的 {{ $nickname }}：
     </p>
     <p>
         感谢您注册目光之城！我们诚挚地欢迎您的到来！ 
@@ -32,7 +32,7 @@ and open the template in the editor.
 
     </p>
     <p>
-        更多信息，请参见 frequently asked questions.
+        更多信息，请参见 <a href="{{ action('InfoController@getAboutShoppings') }}">frequently asked questions</a>.
     </p>
     <p>
         谢谢，<br>

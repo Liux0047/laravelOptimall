@@ -307,7 +307,8 @@ label, .control-label, .help-block {
     color: #ee4054;
 }
 
-/* modal modification
+/*
+* modal modification
 * http://codepen.io/anon/pen/LeBlm
 */
 .modal-dialog {
@@ -339,6 +340,16 @@ label, .control-label, .help-block {
 /* label large class */
 .label.label-lg {
     font-size: 1.0em;
+}
+
+/* badge modification */
+.badge.badge-danger {
+    background-color: #ee4054;
+    color: #fff;
+}
+.badge.badge-info {
+    background-color: #5bc0de;
+    color: #fff;
 }
 
 /* nav tab modification */
@@ -1609,7 +1620,7 @@ input.jq-validate-error {
     margin-top: 40px;
 }
 
-#user_review > .panel {
+.panel-no-border {
     border-top: 0px;
 }
 
@@ -1635,6 +1646,12 @@ input.jq-validate-error {
 .review-reply-container {
     margin-top: 20px;
     margin-left: 50px;
+    margin-bottom: 20px;
+}
+#user_question .table>tbody>tr>td.answer-cell{
+    padding-bottom: 20px;
+}
+#user_question .table>tbody>tr>td.question-cell{
     margin-bottom: 20px;
 }
 

@@ -73,7 +73,7 @@
 @include('components.page-frame.login-dropdown-js')
 @include ('components.plugin.mailtip-js')
 <script type="text/javascript">
-@if(App::environment() != 'local' && !Cookie::has('internalTestWarning'))    
+@if(!App::environment('local') && !Cookie::has('internalTestWarning'))
 $(document).ready(function() {
     $("#internal_test_warning").modal('show');
 });

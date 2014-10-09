@@ -68,6 +68,8 @@ class ProductController extends BaseController
         $params['sequence'] = array(3, 1, 4, 2,);
         $params['alsoBuys'] = $this->getAlsoBuyModels($modelId);
 
+        $params['userQuestions'] = ProductQuestion::ofModel($modelId)->get();
+
         $this->recordViewHistory($modelId);
         return View::make('pages.product', $params);
     }

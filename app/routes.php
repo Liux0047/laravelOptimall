@@ -137,6 +137,12 @@ Route::group(array('before' => 'auth'), function() {
      * RESTFUL Route to handle review functions
      */
     Route::controller('review', 'ReviewController');
+
+    /*
+     * RESTFUL Route to handle user question functions
+     */
+    Route::controller('question', 'QuestionController');
+
 });
 
 /*
@@ -164,7 +170,6 @@ Route::post('upload/review/{itemId}', 'UploadController@anyReviewImage');
  */
 Route::delete('upload/review/{itemId}', 'UploadController@anyReviewImage');
 
-
 /*
  * Route to admin account controller
  */
@@ -185,5 +190,6 @@ Route::when('address/*', 'csrf', array('post'));
 Route::when('member/*', 'csrf', array('post'));
 Route::when('ambassador/*', 'csrf', array('post'));
 Route::when('review/*', 'csrf', array('post'));
+Route::when('question/*', 'csrf', array('post'));
 Route::when('alipay/*', 'csrf', array('post'));
 Route::when('admin/*', 'csrf', array('post'));

@@ -171,9 +171,10 @@
                     array(
                         'model' => $model,
                         'lensTypes' => $lensTypes,
-                        'reviews'=>$reviews,
-                        'thumbedList'=>$thumbedList,
-                        'hasReview'=>$hasReview
+                        'reviews' => $reviews,
+                        'thumbedList' => $thumbedList,
+                        'hasReview' => $hasReview,
+                        'userQuestions' => $userQuestions
                     )
                 )
             </div>
@@ -338,14 +339,14 @@ function showLensDesc (posterId) {
 function scrollToProductInfo (element, time) {
     time = typeof time !== 'undefined' ? time : 1000;
     $('html, body').animate({
-        scrollTop: (element.offset().top) - 50
+        scrollTop: (element.offset().top) - 80
     }, time);
 }
 
 //toggle submit button for review reply
 $(".review-reply-content").each(function(){
     $(this).on('input', function(){
-        value = $(this).val();
+        var value = $(this).val();
         if(value.length > 0 && value.length <= 200){            
             $(this).parent().parent().find('.review-reply-btn').prop('disabled',false);
         }
@@ -353,6 +354,18 @@ $(".review-reply-content").each(function(){
             $(this).parent().parent().find('.review-reply-btn').prop('disabled',true);
         }
     });
+});
+
+
+//toggle submit button for ask question
+$("#user_question_form .user_question").on('input', function(){
+    var value = $(this).val();
+    if(value.length > 0 && value.length <= 200){
+        $("#user_question_form input[type=submit]").prop('disabled',false);
+    }
+    else {
+        $("#user_question_form input[type=submit]").prop('disabled',true);
+    }
 });
 
 

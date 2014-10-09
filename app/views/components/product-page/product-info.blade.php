@@ -20,6 +20,11 @@
             用户评价
         </a>
     </li>
+    <li>
+        <a href="#user_question" role="tab" data-toggle="tab" id="user_question_tab">
+            我有疑问
+        </a>
+    </li>
 </ul>
 
 <div class="tab-content">
@@ -84,14 +89,14 @@
 
 
     <div class="tab-pane fade tab-pane-bordered" id="prescription_guide">
-        <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" 
-        data-original="{{ asset('images/info/beginner-guide/guide.jpg') }}"
-        class="lazy poster">
+        <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}"
+            data-original="{{ asset('images/info/beginner-guide/guide.jpg') }}"
+            class="lazy poster">
     </div>
 
 
     <div class="tab-pane fade" id="user_review">
-        <div class="panel panel-default">
+        <div class="panel panel-default panel-no-border">
             <div class="panel-body">
                 <table class="align-center" width="100%">
                     <tr>
@@ -212,4 +217,48 @@
             </div>
         </div>
     </div>
+
+
+    <div class="tab-pane fade" id="user_question">
+    <div class="panel panel-default panel-no-border">
+        <div class="panel-body">
+            @if ($userQuestions->count() == 0)
+            暂时没有对改商品的提问
+            @else
+            <h4>看看大家都问了些什么</h4>
+            <br>
+            <table class="table table-striped">
+                <tbody>
+                    @foreach($userQuestions as $userQuestion)
+                    <tr>
+                        <td width="5%"><span class="badge badge-danger">Q</span></td>
+                        <td>{{{ $userQuestion->question }}}</td>
+                    </tr>
+                        <td width="5%"><span class="badge badge-info">A</span></td>
+                        <td class="answer-cell">
+                            {{{ $userQuestion->answer }}}
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            @endif
+
+            @if (Auth::check())
+            <hr>
+            {{ Form::open(array('action'=>'QuestionController@postAskQuestion', 'id'=>'user_question_form')) }}
+            <div class="form-group">
+                <textarea class="form-control user_question" rows="3" name="question" placeholder="请填写您的问题（200字以内哦）"></textarea>
+            </div>
+            {{ Form::hidden('model_id', $model->model_id) }}
+            {{ Form::submit('提交我的问题', array('class'=>'btn btn-primary pull-right', 'disabled'=>'true')) }}
+            {{ Form::close() }}
+            @endif
+
+        </div>
+    </div>
+
+
+    </div>
+
 </div>

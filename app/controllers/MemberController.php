@@ -97,6 +97,7 @@ class MemberController extends BaseController {
         $member = Member::findOrFail(Session::get('memberRegistered'));
         //send email
         $data['email'] = $member->email;
+        $data['nickname'] = $member->nickname;
         $data['link'] = action('MemberController@verifyRegistration', array($member->email, $member->reg_code));
         Mail::queue('emails.auth.verify-registration', $data, function($message) use ($member) {
             $nickname = $member->nickname;

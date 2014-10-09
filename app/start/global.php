@@ -46,11 +46,14 @@ Log::useFiles(storage_path() . '/logs/laravel.log');
 
 App::error(function (Exception $exception, $code) {
     Log::error($exception);
-    $modelIds = Config::get('optimall.errorPageModels');
-    foreach ($modelIds as $id) {
-        $params['models'][] = ProductModelView::find($id);
+    if (!App::environment('local')) {
+        $modelIds = Config::get('optimall.errorPageModels');
+        foreach ($modelIds as $id) {
+            $params['models'][] = ProductModelView::find($id);
+        }
+        return View::make('pages.not-found', $params);
     }
-    return View::make('pages.not-found', $params);
+
 });
 
 /*

@@ -5,13 +5,16 @@
  *
  * @author Allen
  */
-class AdminFunctionController extends BaseController {
+class AdminFunctionController extends BaseController
+{
 
-    public function getIndex() {
+    public function getIndex()
+    {
         return $this->getUndispatchedOrders();
     }
 
-    public function getUndispatchedOrders() {
+    public function getUndispatchedOrders()
+    {
         $params['pageTitle'] = "未发货的订单";
         $orders = PlacedOrder::undispatched()->orderBy('created_at')->paginate(10);
         $params['orders'] = $orders;
@@ -19,15 +22,17 @@ class AdminFunctionController extends BaseController {
         return View::make('pages.admin.orders', $params);
     }
 
-    public function getDispatchedOrders() {
+    public function getDispatchedOrders()
+    {
         $params['pageTitle'] = "已发货的订单";
         $orders = PlacedOrder::dispatched()->orderBy('created_at', 'DESC')->paginate(10);
         $params['orders'] = $orders;
         $params['prescriptionNames'] = PrescriptionController::getPrescriptionNames();
         return View::make('pages.admin.orders', $params);
     }
-    
-    public function getUnpaidOrders() {
+
+    public function getUnpaidOrders()
+    {
         $params['pageTitle'] = "未付款的订单";
         $orders = PlacedOrder::unpaid()->orderBy('created_at', 'DESC')->paginate(10);
         $params['orders'] = $orders;
@@ -35,7 +40,8 @@ class AdminFunctionController extends BaseController {
         return View::make('pages.admin.orders', $params);
     }
 
-    public function postDispatchOrder() {
+    public function postDispatchOrder()
+    {
         $order = PlacedOrder::findOrFail(Input::get('order_id'));
         if ($order->order_status_id == 2) {
             $order->order_status_id = 3;
@@ -51,25 +57,29 @@ class AdminFunctionController extends BaseController {
         }
     }
 
-    public function getPendingRefundClaims() {
+    public function getPendingRefundClaims()
+    {
         $params['pageTitle'] = "未处理的退款申请";
         $params['refunds'] = Refund::pending()->orderBy('created_at')->paginate(10);
         return View::make('pages.admin.refund', $params);
     }
 
-    public function getRefundedClaims() {
+    public function getRefundedClaims()
+    {
         $params['pageTitle'] = "已经退款";
         $params['refunds'] = Refund::refunded()->orderBy('created_at', 'DESC')->paginate(10);
         return View::make('pages.admin.refund', $params);
     }
 
-    public function getRejectedClaims() {
+    public function getRejectedClaims()
+    {
         $params['pageTitle'] = "已经驳回退款";
         $params['refunds'] = Refund::rejected()->orderBy('created_at', 'DESC')->paginate(10);
         return View::make('pages.admin.refund', $params);
     }
 
-    public function postRefund() {
+    public function postRefund()
+    {
         $validator = $this->validateClaimRefund();
 
         if ($validator->fails()) {
@@ -90,14 +100,15 @@ class AdminFunctionController extends BaseController {
         return Redirect::back()->with('status', '成功处理退款申请');
     }
 
-    public function postRejectRefund() {
-        
+    public function postRejectRefund()
+    {
+
         $validator = $this->validateRejectRefund();
 
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator);
         }
-        
+
         $refund = Refund::findOrFail(Input::get('refund_id'));
         $refund->is_rejected = 1;
         $refund->rejection_reason = Input::get('rejection_reason');
@@ -106,7 +117,8 @@ class AdminFunctionController extends BaseController {
         return Redirect::back()->with('status', '成功驳回退款申请');
     }
 
-    public function getAmbassadorClaim() {
+    public function getAmbassadorClaim()
+    {
         $params['pageTitle'] = "目光之星返利申请";
         $params['claims'] = AmbassadorView::ambassadorRewardClaims()->paginate(10);
         $ambassadorController = new AmbassadorController();
@@ -115,7 +127,8 @@ class AdminFunctionController extends BaseController {
         return View::make('pages.admin.ambassador-claim', $params);
     }
 
-    public function getProcessedAmbassadorClaim() {
+    public function getProcessedAmbassadorClaim()
+    {
         $params['pageTitle'] = "目光之星返利申请";
         $params['claims'] = AmbassadorView::ambassadorRewardProcessed()->paginate(10);
         $ambassadorController = new AmbassadorController();
@@ -124,7 +137,8 @@ class AdminFunctionController extends BaseController {
         return View::make('pages.admin.ambassador-claim', $params);
     }
 
-    public function postAmbassadorClaim() {
+    public function postAmbassadorClaim()
+    {
         if (Input::has('orders')) {
             $orderIds = Input::get('orders');
             foreach ($orderIds as $orderId) {
@@ -138,25 +152,28 @@ class AdminFunctionController extends BaseController {
         }
     }
 
-    public function getAmbassadorApplication() {
+    public function getAmbassadorApplication()
+    {
         $params['pageTitle'] = "目光之星注册申请";
         $params['applications'] = Member::newAmbassadorApplication()->paginate(10);
         return View::make('pages.admin.ambassador-application', $params);
     }
 
-    public function getApprovedAmbassadorApplication() {
+    public function getApprovedAmbassadorApplication()
+    {
         $params['pageTitle'] = "目光之星注册申请成功";
         $params['applications'] = Member::approvedAmbassadorApplication()->paginate(10);
         return View::make('pages.admin.ambassador-application', $params);
     }
 
-    public function postAmbassadorApplication() {
+    public function postAmbassadorApplication()
+    {
         if (Input::has('member_id')) {
             $member = Member::findOrFail(Input::get('member_id'));
             $member->is_approved_ambassador = 1;
             $member->save();
             $data['nickname'] = $member->nickname;
-            Mail::queue('emails.member.ambassador-approval', $data, function($message) use ($member) {
+            Mail::queue('emails.member.ambassador-approval', $data, function ($message) use ($member) {
                 $message->to($member->email)->subject('恭喜您成为目光之星');
             });
             return Redirect::back()->with('status', '成功批准申请');
@@ -165,14 +182,40 @@ class AdminFunctionController extends BaseController {
         }
     }
 
-    private function validateClaimRefund() {
+    public function getUnansweredQuestion()
+    {
+        $params['pageTitle'] = "用户提问";
+        $questions = ProductQuestion::with('member')
+            ->whereNull('answer')
+            ->orderBy('created_at')
+            ->paginate(20);
+        $params['questions'] = $questions;
+        return View::make('pages.admin.user-question', $params);
+
+    }
+
+    public function getAnsweredQuestion()
+    {
+        $params['pageTitle'] = "已回答的用户提问";
+        $questions = ProductQuestion::with('member')
+            ->whereNotNull('answer')
+            ->orderBy('created_at')
+            ->paginate(20);
+        $params['questions'] = $questions;
+        return View::make('pages.admin.user-question', $params);
+
+    }
+
+    private function validateClaimRefund()
+    {
         $rules = array(
             'amount' => 'required|numeric'
         );
         return Validator::make(Input::all(), $rules);
     }
-    
-    private function validateRejectRefund() {
+
+    private function validateRejectRefund()
+    {
         $rules = array(
             'rejection_reason' => 'required|max:200'
         );
