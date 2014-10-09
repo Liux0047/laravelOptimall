@@ -37,7 +37,6 @@ class InfoController extends BaseController {
     }
 
     public function getTest() {
-        return View::make('test');
     }
 
 }

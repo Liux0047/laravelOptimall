@@ -45,6 +45,11 @@ class MemberController extends BaseController {
         Input::flash();
 
         $nickname = Input::get('nickname');
+        //check for reserved keywords
+        if (hasReservedKeyword($nickname)) {
+            return Redirect::back()->with('error', '对不起。请不要使用“管理员”，“目光之城”等关键字注册');
+        }
+
         $email = Input::get('email');
         $password = Input::get('password');
         $confirmPassword = Input::get('confirm_password');
@@ -134,5 +139,7 @@ class MemberController extends BaseController {
         );
         return Validator::make(Input::all(), $rules);
     }
+
+
 
 }

@@ -189,10 +189,16 @@
                     {{-- Review replies --}}
                     <div class="review-reply-container">
                         @foreach($review->reviewReplies()->orderBy('created_at')->get() as $reply)
-                        <p> 
-                            {{ $reply->member->nickname }} 
-                            <span class="font-grey">于 {{ formatDateTime($reply->created_at) }} 回复：</span>
-                            {{$reply->content}}
+                        <p>
+                            @if( hasReservedKeyword($reply->member->nickname))
+                            <span class="font-orange">{{ $reply->member->nickname }}</span>
+                            <span class="font-orange"> 于 {{ formatDateTime($reply->created_at) }} 回复：</span>
+                            <span class="font-orange">{{ $reply->content }}</span>
+                            @else
+                            {{ $reply->member->nickname }}
+                            <span class="font-grey"> 于 {{ formatDateTime($reply->created_at) }} 回复：</span>
+                            <span>{{$reply->content}}</span>
+                            @endif
                         </p>          
                         @endforeach
                     </div>
