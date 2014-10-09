@@ -3,7 +3,7 @@
         <i class="fa fa-user fa-2x"></i>
     </div>
     <div class="float-box">
-        <p>请扫描下方微信二维码</p>
+        <p>目光之城为您在线解惑</p>
         {{ HTML::image('images/icons/wechat.jpg') }}
     </div>
 </div>

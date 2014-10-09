@@ -23,6 +23,8 @@
 						{{ HTML::image('images/color/base-color-icons/base-color-'.$filterValue['option_id'].'.png', '', array('class'=>'color-icon')) }}
 						@elseif ($filter['filterName'] == 'shapes')
 						{{ HTML::image('images/shapes/shape-'.$filterValue['option_id'].'.jpg') }}
+						@elseif ($filter['filterName'] == 'faces')
+						{{ HTML::image('images/faces/face-'.$filterValue['option_id'].'.jpg') }}
 						@endif				
 						{{ $filterValue['name'] }}
 					</label>
