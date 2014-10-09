@@ -6,9 +6,14 @@
  *
  * @author Allen
  */
-class CouponController extends BaseController {
-    
-    public function postApplyCoupon() {
+class CouponController extends BaseController
+{
+
+    const AMBASSADOR_COUPON = 1;
+    const AMBASSADOR_INVITED_COUPON = 2;
+
+    public function postApplyCoupon()
+    {
         $coupon = Coupon::validCoupon(Input::get('coupon_code'))->first();
         if (isset($coupon) && $this->isEligibleForCoupon($coupon)) {    //if a valid coupon was found
             if ($coupon->couponUsages()->where('member_id', '=', Auth::id())->count() > 0) {
@@ -22,20 +27,22 @@ class CouponController extends BaseController {
             return Redirect::back()->with('error', '对不起，您输入的消费卷无效或者已经过期');
         }
     }
-    
-    public function postRemoveCoupon () {
-        if (Session::has('couponId')){
+
+    public function postRemoveCoupon()
+    {
+        if (Session::has('couponId')) {
             Session::forget('couponId');
         }
-        return Redirect::back()->with('status','成功删除消费卷');
+        return Redirect::back()->with('status', '成功删除消费卷');
     }
-    
+
     /*
      * Record this coupon usage
      * returns the coupon ID if successful
      */
-    public function recordCouponUsage () {
-        if (Session::has('couponId')){
+    public function recordCouponUsage()
+    {
+        if (Session::has('couponId')) {
             $couponId = Session::get('couponId');
             $couponUsage = new CouponUsage;
             $couponUsage->coupon_id = $couponId;
@@ -43,39 +50,39 @@ class CouponController extends BaseController {
             $couponUsage->save();
             Session::forget('couponId');
             return $couponId;
-        }
-        else {
+        } else {
             return null;
         }
     }
-    
-    public function isEligibleForCoupon ($coupon) {
-        if(!isset($coupon->coupon_rule_id)){
+
+    public function isEligibleForCoupon($coupon)
+    {
+        if (!isset($coupon->coupon_rule_id)) {
             //if no more additional rule, eligible
             return true;
         }
-        switch ($coupon->coupon_rule_id){
-            case '1':   //rule 1: must be an ambassador
+        switch ($coupon->coupon_rule_id) {
+            case AMBASSADOR_COUPON:   //rule 1: must be an ambassador
                 return Auth::user()->is_approved_ambassador;
-            case '2':   //must have been invited by an ambassador
-                if (!isset(Auth::user()->invited_by)){
+            case AMBASSADOR_INVITED_COUPON:   //must have been invited by an ambassador
+                if (!isset(Auth::user()->invited_by)) {
                     return false;
                 } else {
                     return Member::find(Auth::user()->invited_by)->is_approved_ambassador;
-                }                
+                }
             default:
                 return false;
         }
     }
-    
-    public static function getCoupon (){
-        if (Session::has('couponId')){
+
+    public static function getCoupon()
+    {
+        if (Session::has('couponId')) {
             return Coupon::find(Session::get('couponId'));
-        }
-        else {
+        } else {
             return null;
         }
-        
+
     }
 
 }

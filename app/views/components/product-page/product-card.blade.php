@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="shop-item-image item-image-single">
-            <a href="{{ URL::to('product/'.$model->model_id) }}" id="small-view-{{ $model->model_id }}">
+            <a target="_blank" href="{{ url('product', array($model->model_id)) }}" id="small-view-{{ $model->model_id }}">
                 <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" 
                 data-original="{{ asset('images/gallery/'.$model->model_id.'/'.$model->productViews()->first()->product_id.'/'.Config::get('optimall.smallViewImg')) }}" 
                 class="lazy retina-alt">
@@ -38,7 +38,7 @@
             </p>
         </div>
         <div class="info-bar-hover">
-            <a href="{{ URL::to('product/'.$model->model_id) }}">
+            <a target="_blank" href="{{ url('product', array($model->model_id)) }}">
                 评分: 
                 <div id="star_id_{{ $model->model_id }}" class="raty-star" 
                     @if (($model->average_design_rating + $model->average_comfort_rating + $model->average_quality_rating) > 0)

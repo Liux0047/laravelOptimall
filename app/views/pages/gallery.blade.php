@@ -29,7 +29,7 @@
 				<div class="panel panel-default" id="gallery_options">
 					<div class="panel-heading">
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-6 col-sm-12 col-xs-12">
 
                                 <button type="button" class="btn btn-xs @if ($sortOrder == 'num_items_sold_display') btn-success @else btn-default @endif"
                                     onclick="submitSortOrder('num_items_sold_display', 1);">
@@ -51,7 +51,7 @@
                                     价格优先：<i class="fa fa-arrow-up"></i>
                                 </button>
                             </div>
-                            <div class="col-md-3 padding-align align-right">
+                            <div class="col-md-2 col-sm-3 col-xs-3 padding-align">
                                 <label for="price_min">价格范围:</label>
                                 <strong>¥</strong><span id="price_min_display"></span> <strong>-</strong>
                                 <strong>¥</strong><span id="price_max_display"></span>
@@ -59,11 +59,11 @@
                                 <input type="hidden" id="price_max" name="price_max">
                             </div>
 
-                            <div class="col-md-3 padding-align">
+                            <div class="col-md-3 col-sm-7 col-xs-7 padding-align">
                                 <div id="price_range_slider"></div>
                             </div>
 
-                            <div class="col-md-1">
+                            <div class="col-md-1 col-sm-1 col-xs-1">
                                 <button type="button" class="btn btn-xs btn-success"
                                     onclick="document.getElementById('product_gallery_form').submit();">
                                     更新
