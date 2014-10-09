@@ -55,6 +55,7 @@
     </div><!-- /.modal -->
     @endif
     @yield('content')
+    @include('components.page-frame.float-box')
     @include('components.page-frame.footer')
 </body>
 

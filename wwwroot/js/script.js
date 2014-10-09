@@ -1,7 +1,7 @@
 //prevent dropdown collapse accidentally closed
-$(function() {
+$(function () {
     window.prettyPrint && prettyPrint();
-    $(document).on('click', '.yamm .dropdown-menu', function(e) {
+    $(document).on('click', '.yamm .dropdown-menu', function (e) {
         e.stopPropagation();
     });
 });
@@ -11,12 +11,12 @@ $(function() {
  * http://www.sitepoint.com/css-techniques-for-retina-displays/
  */
 var isRetina = (
-        window.devicePixelRatio > 1 ||
-        (window.matchMedia && window.matchMedia("(-webkit-min-device-pixel-ratio: 1.5),(-moz-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5)").matches)
-        );
+window.devicePixelRatio > 1 ||
+(window.matchMedia && window.matchMedia("(-webkit-min-device-pixel-ratio: 1.5),(-moz-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5)").matches)
+);
 if (isRetina) {
     var images = $('img.retina-alt.lazy');
-    images.each(function(i) {
+    images.each(function (i) {
         var lowres = $(this).attr('data-original');
         var highres = replaceRetinaImg(lowres);
         $(this).attr('data-original', highres);
@@ -41,7 +41,7 @@ function replaceRetinaImg(lowresPath) {
  * http://codepen.io/anon/pen/LeBlm
  */
 function adjustModalMaxHeightAndPosition() {
-    $('.modal').each(function() {
+    $('.modal').each(function () {
         if (!$(this).hasClass('in')) {
             $(this).show();
         }
@@ -51,22 +51,22 @@ function adjustModalMaxHeightAndPosition() {
         var footerHeight = $(this).find('.modal-footer').outerHeight() || 2;
 
         $(this).find('.modal-content').css({
-            'max-height': function() {
+            'max-height': function () {
                 return contentHeight;
             }
         });
 
         $(this).find('.modal-body').css({
-            'max-height': function() {
+            'max-height': function () {
                 return (contentHeight - (headerHeight + footerHeight));
             }
         });
 
         $(this).find('.modal-dialog').css({
-            'margin-top': function() {
+            'margin-top': function () {
                 return -($(this).outerHeight() / 2);
             },
-            'margin-left': function() {
+            'margin-left': function () {
                 return -($(this).outerWidth() / 2);
             }
         });
@@ -82,7 +82,7 @@ $(window).resize(adjustModalMaxHeightAndPosition).trigger("resize");
 /*
  * This code will prevent unexpected menu close when using some components (like accordion, forms, etc)
  */
-$(document).on('click', '.yamm .dropdown-menu', function(e) {
+$(document).on('click', '.yamm .dropdown-menu', function (e) {
     e.stopPropagation();
 });
 
@@ -94,22 +94,33 @@ $('.navbar').affix({
     }
 });
 
+// float box toggle function
+function toggleFloatBox() {
+    if ($("#float_box").hasClass("float-box-shown")) {
+        $("#float_box").removeClass("float-box-shown");
+        $("#float_box").addClass("float-box-hidden");
+    } else {
+        $("#float_box").removeClass("float-box-hidden");
+        $("#float_box").addClass("float-box-shown");
+    }
+}
+
 
 //trigger a fake scroll to lazy load image
-$(document).ready(function() {
+$(document).ready(function () {
 
-    $('.nav-tabs li a').on('shown.bs.tab', function(e) {
+    $('.nav-tabs li a').on('shown.bs.tab', function (e) {
         $(window).trigger("scroll");
     });
 
     //enable dropdown on hover
     //also add hovered class to hovered dropdown menu
-    $('.navbar .dropdown-hover').hover(function() {
+    $('.navbar .dropdown-hover').hover(function () {
         $(this).addClass("open");
         $(this).find('.dropdown-menu').stop(true, true).hide().delay(150).slideDown(200);
-    }, function() {
+    }, function () {
         $(this).find('.dropdown-menu').stop(true, true).delay(0).slideUp(1);
-        $(this).removeClass("open");        
+        $(this).removeClass("open");
     });
 
 

@@ -347,6 +347,7 @@ label, .control-label, .help-block {
     background-color: #ee4054;
     color: #fff;
 }
+
 .badge.badge-info {
     background-color: #5bc0de;
     color: #fff;
@@ -1170,6 +1171,99 @@ label, .control-label, .help-block {
     margin-bottom: 30px;
 }
 
+/* float box */
+.float-box-container {
+    position: fixed;
+    top: 100px;
+    right: -200px;
+    color: white;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.float-box-container .switcher {
+    background-color: #585f69;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    left: -40px;
+    cursor: pointer;
+    padding: 6px 6px 6px 8px;
+}
+
+.float-box-container .float-box {
+    background-color: #585f69;
+    width: 200px;
+    height: 500px;
+}
+
+.float-box-container.float-box-shown {
+    -webkit-animation: float-box-slide-left 0.5s;
+    -moz-animation: float-box-slide-left 0.5s;
+    animation: float-box-slide-left 0.5s;
+    right: 0px;
+}
+.float-box-container.float-box-hidden {
+    -webkit-animation: float-box-slide-right 0.5s;
+    -moz-animation: float-box-slide-right 0.5s;
+    animation: float-box-slide-right 0.5s;
+}
+/* Chrome, Safari, Opera */
+@-webkit-keyframes float-box-slide-left {
+    0% {
+        right: -200px;
+    }
+    100% {
+        right: 0px;
+    }
+}
+
+@-moz-keyframes float-box-slide-left {
+    0% {
+        right: -200px;
+    }
+    100% {
+        right: 0px;
+    }
+}
+
+@keyframes float-box-slide-left {
+    0% {
+        right: -200px;
+    }
+    100% {
+        right: 0px;
+    }
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes float-box-slide-right {
+    0% {
+        right: 0px;
+    }
+    100% {
+        right: -200px;
+    }
+}
+
+@-moz-keyframes float-box-slide-right {
+    0% {
+        right: 0px;
+    }
+    100% {
+        right: -200px;
+    }
+}
+
+@keyframes float-box-slide-right {
+    0% {
+        right: 0px;
+    }
+    100% {
+        right: -200px;
+    }
+}
+
 /* progress tracker */
 ol.progtrckr {
     margin: 10px 0px 0px 0px;
@@ -1648,10 +1742,12 @@ input.jq-validate-error {
     margin-left: 50px;
     margin-bottom: 20px;
 }
-#user_question .table>tbody>tr>td.answer-cell{
+
+#user_question .table > tbody > tr > td.answer-cell {
     padding-bottom: 20px;
 }
-#user_question .table>tbody>tr>td.question-cell{
+
+#user_question .table > tbody > tr > td.question-cell {
     margin-bottom: 20px;
 }
 
