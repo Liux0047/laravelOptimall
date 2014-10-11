@@ -24,10 +24,10 @@
 
         For the backgrounds, you can combine from the bgs folder :D
     -->
-    <article class="slide" id="showcasing" style="background-image: url('{{  asset('images/carousel/backgrounds/bg.jpg') }}');">
-        <img class="asset left-595 sp600 t55 z1" src="{{ asset('images/carousel/slides/scene2/glasses.png') }}" />
-        <img class="asset left50 sp600 t200 z1" src="{{ asset('images/carousel/slides/scene2/words.png') }}" />
-        <img class="asset left300 sp600 t50 z1" src="{{ asset('images/carousel/slides/scene2/price.png') }}" />
+    <article class="slide" id="showcasing" style="background-image: url('{{  asset('images/carousel/backgrounds/background.jpg') }}');">
+        <img class="asset left-595 sp600 t55 z1" src="{{ asset('images/carousel/slides/scene2/product.png') }}" />
+        <img class="asset left50 sp600 t200 z1" src="{{ asset('images/carousel/slides/scene2/headline.png') }}" />
+        <img class="asset left300 sp600 t50 z1" src="{{ asset('images/carousel/slides/scene2/price-tag.png') }}" />
         <div class="info">
             <h2></h2>
         </div>
