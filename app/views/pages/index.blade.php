@@ -2,7 +2,7 @@
 
 @section('link-css')
 @parent
-{{ HTML::style('plugins/clean-canvas/css/compiled/index.css'); }}
+{{ HTML::style('plugins/clean-canvas/css/compiled/slider.css'); }}
 {{ HTML::style('plugins/clean-canvas/css/lib/animate.css'); }}
 {{ HTML::style('plugins/raty-2.7.0/jquery.raty.css') }}
 @stop
