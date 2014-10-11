@@ -9,7 +9,7 @@
     @section('link-css')
     {{ HTML::style('css/bootstrap.min.css'); }}
     {{ HTML::style('plugins/font-awesome/css/font-awesome.min.css'); }}
-    {{ HTML::style('css/yamm.css'); }}        
+    {{ HTML::style('css/yamm.css'); }}
     {{ HTML::style('plugins/jQuery-mailtip/mailtip.css') }}
     <link rel='shortcut icon' type="image/x-icon" href="{{ asset('images/favicon.ico') }}"> 
     @show

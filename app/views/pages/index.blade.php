@@ -2,6 +2,8 @@
 
 @section('link-css')
 @parent
+{{ HTML::style('plugins/clean-canvas/css/compiled/index.css'); }}
+{{ HTML::style('plugins/clean-canvas/css/lib/animate.css'); }}
 {{ HTML::style('plugins/raty-2.7.0/jquery.raty.css') }}
 @stop
 
@@ -198,6 +200,8 @@
 
 @section('link-script')
 @parent
+{{ HTML::script('plugins/clean-canvas/js/theme.js') }}
+{{ HTML::script('plugins/clean-canvas/js/index-slider.js') }}
 {{ HTML::script('plugins/raty-2.7.0/jquery.raty.js') }}
 @stop
 
