@@ -680,24 +680,28 @@ label, .control-label, .help-block {
 
 }
 
-.new-arrival-badge {
+.promotion-badge {
     background-position: -5px -5px;
 }
 
-.promotion-badge {
+.new-arrival-badge {
     background-position: -55px -5px;
 }
 
-.best-seller-badge {
-    background-position: -105px -5px;
+.new-arrival-badge {
+    background-position: -5px -65px;
 }
 
 .featured-badge {
-    background-position: -155px -5px;
+    background-position: -55px -65px;
 }
 
 .classical-badge {
-    background-position: -205px -5px;
+    background-position: -105px -5px;
+}
+
+.best-seller-badge {
+    background-position: -105px -65px;
 }
 
 .shop-items-container .shop-item .shop-item-label {
