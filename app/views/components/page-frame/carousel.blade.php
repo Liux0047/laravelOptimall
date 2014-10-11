@@ -1,48 +1,4 @@
-<div id="index-carousel" class="carousel slide">                        
-    <!-- Indicators -->
-    <ol class="carousel-indicators">                
-        <li data-target="#index-carousel" data-slide-to="0" class="active"></li> 
-        <li data-target="#index-carousel" data-slide-to="1"></li> 
-        <li data-target="#index-carousel" data-slide-to="2"></li> 
-        <li data-target="#index-carousel" data-slide-to="3"></li>             
-        <li data-target="#index-carousel" data-slide-to="4"></li>
-    </ol>
-    <!-- Carousel items -->
-    <div class="carousel-inner">
-        <div class="active item">
-            <a href="{{ action('InfoController@getAboutProducts') }}">
-                <img src="{{ asset('images/carousel/index-carousel-cn-1.jpg') }}">
-            </a>
-        </div>
-        <div class="item">
-            <a href="{{ action('InfoController@getAmbassadorIntro') }}">
-                <img data-lazy-load-src="{{ asset('images/carousel/index-carousel-cn-2.jpg') }}">
-            </a>
-        </div>
-        <div class="item">
-            <a href="{{ action('ProductController@getProduct', array(3001)) }}">
-                <img data-lazy-load-src="{{ asset('images/carousel/index-carousel-cn-3.jpg') }}">
-            </a>
-        </div>
-        <div class="item">
-            <a href="{{ action('ProductController@getProduct', array(1009)) }}">
-                <img data-lazy-load-src="{{ asset('images/carousel/index-carousel-cn-4.jpg') }}">
-            </a>
-        </div>
-        <div class="item">
-            <a href="{{ action('ProductController@getProduct', array(1009)) }}">
-                <img data-lazy-load-src="{{ asset('images/carousel/index-carousel-cn-5.jpg') }}">
-            </a>
-        </div>
-    </div>
-    <!-- Controls -->
-    <a class="left carousel-control" href="#index-carousel" data-slide="prev">
-        <span class="icon-prev"></span>
-    </a>
-    <a class="right carousel-control" href="#index-carousel" data-slide="next">
-        <span class="icon-next"></span>
-    </a>
-</div>
+
 
 <article class="slide" id="ideas" style="background-image: url('{{  asset('images/carousel/backgrounds/aqua.jpg') }}');">
     <div class="info">
