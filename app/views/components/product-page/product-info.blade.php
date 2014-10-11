@@ -50,6 +50,10 @@
                     data-original="{{ asset('images/gallery/'.$model->model_id.'/detail-'.$i.'.jpg') }}"
                     class="lazy poster">
                 @endfor
+
+                <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}"
+                    data-original="{{ asset('images/model-poster/glasses-box-sample.jpg') }}"
+                    class="lazy poster">
             </div>
         </div>
     </div>

@@ -684,25 +684,22 @@ label, .control-label, .help-block {
     background-position: -5px -5px;
 }
 
+.best-seller-badge {
+    background-position: -55px -65px;
+}
+
 .new-arrival-badge {
     background-position: -55px -5px;
 }
 
-.new-arrival-badge1 {
-    background-position: -5px -65px;
-}
-
 .featured-badge {
-    background-position: -55px -65px;
+    background-position: -5px -65px;
 }
 
 .classical-badge {
     background-position: -105px -5px;
 }
 
-.best-seller-badge {
-    background-position: -105px -65px;
-}
 
 .shop-items-container .shop-item .shop-item-label {
     height: 40px;
