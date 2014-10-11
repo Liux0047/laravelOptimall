@@ -700,7 +700,6 @@ label, .control-label, .help-block {
     background-position: -105px -5px;
 }
 
-
 .shop-items-container .shop-item .shop-item-label {
     height: 40px;
 }
@@ -798,15 +797,33 @@ label, .control-label, .help-block {
     overflow: hidden;
 }
 
-.shop-items-container .shop-item-image.item-image-single img {
+.shop-items-container .shop-item-image.item-image-single {
     width: 275px;
     height: 155px;
     min-height: 155px;
+    text-align: center;
+}
+
+.shop-items-container .shop-item-image {
+    min-height: 100px;
+    max-width: 100%;
 }
 
 .shop-items-container .shop-item-image img {
-    min-height: 100px;
     max-width: 100%;
+    vertical-align: middle;
+    max-width: 270px;
+}
+
+.shop-items-container .shop-item-image a {
+    text-align: center;
+}
+
+.shop-items-container .shop-item-image .vertical-align-helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    width: 0px;
 }
 
 .shop-items-container .shop-item-details h5 {

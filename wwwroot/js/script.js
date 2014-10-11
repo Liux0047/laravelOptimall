@@ -24,9 +24,9 @@ if (isRetina) {
 }
 function renderRetinaImg(element) {
     if (isRetina) {
-        var lowres = $(element).attr('src');
+        var lowres = $(element).attr('data-original');
         var highres = replaceRetinaImg(lowres);
-        $(element).attr('src', highres);
+        $(element).attr('data-original', highres);
     }
 }
 function replaceRetinaImg(lowresPath) {
