@@ -227,7 +227,7 @@
     <div class="panel panel-default panel-no-border">
         <div class="panel-body">
             @if ($userQuestions->count() == 0)
-            暂时没有对改商品的提问
+            暂时没有对该商品的提问
             @else
             <h4>看看大家都问了些什么</h4>
             <br>
