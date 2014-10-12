@@ -109,13 +109,13 @@
                         <tr>
                             <td class="">总价:</td>
                             <td class="" id="total_price_cell">
-                                ¥{{ number_format($totalPrice, 2) }}                                
+                                <span class="rmb-sign">￥</span>{{ number_format($totalPrice, 2) }}
                             </td>
                         </tr>
                         <tr>
                             <td class="">折扣:</td>
                             <td class="">
-                                -(<span id="discount_amt_cell">¥{{ number_format($totalDiscount, 2) }} </span>)
+                                -(<span id="discount_amt_cell"><span class="rmb-sign">￥</span>{{ number_format($totalDiscount, 2) }} </span>)
                             </td>
                         </tr>
                         <tr>
@@ -123,7 +123,7 @@
                                 <strong>合计:</strong>
                             </td>
                             <td class="font-lg font-orange">
-                                <strong id="net_amt_cell">¥{{ number_format($netPrice, 2) }}</strong>
+                                <strong id="net_amt_cell"><span class="rmb-sign">￥</span>{{ number_format($netPrice, 2) }}</strong>
                             </td>
                         </tr>
                     </tbody>                          
@@ -203,7 +203,7 @@ function toggleAddPrescription (itemId) {
     }
 }
 
-var currency = "¥";
+var currency = "￥";
 function updateQuantity(itemId, action) {
     $.ajax({
         type: "POST",

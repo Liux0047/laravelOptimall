@@ -18,7 +18,7 @@
                     <br>
                     镜片: {{ $item->lens_title_cn }}
                     <br>
-                    单价: ¥{{ number_format($item->price, 2) }}      
+                    单价: ￥{{ number_format($item->price, 2) }}
                 </p>
                 @include('components.product-page.product-label', array('productLabelId'=>$item->product_label_id)) 
             </div>
@@ -120,7 +120,7 @@
     </td>
     <td class="col-md-1">
         <span class="shopping-cart-price" id="item_total_{{ $item->order_line_item_id }}">
-            ¥{{ number_format(($item->price+$item->lens_price)* $item->quantity, 2) }}
+            <span class="rmb-sign">￥</span>{{ number_format(($item->price+$item->lens_price)* $item->quantity, 2) }}
         </span>
     </td>
     <td class="col-md-1">

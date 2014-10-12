@@ -10,7 +10,7 @@
 					{{ HTML::image('images/color/color-'.$item->product_color_id.'.png') }}
 					{{ $item->color_name_cn }} 
 					<br>镜片: {{ $item->lens_title_cn }} 
-					<br>单价: ¥{{ number_format($item->price, 2) }}
+					<br>单价: <span class="rmb-sign">￥</span>{{ number_format($item->price, 2) }}
 					<br>
 				</p>
 				<span class="label label-danger">热销</span>
@@ -30,6 +30,6 @@
 	</td>
 	<td class="col-md-1">{{ $item->quantity }}</td>
 	<td class="col-md-1">
-		<span class="shopping-cart-price">¥{{ number_format(($item->price+$item->lens_price)*$item->quantity, 2) }}</span>
+		<span class="shopping-cart-price"><span class="rmb-sign">￥</span>{{ number_format(($item->price+$item->lens_price)*$item->quantity, 2) }}</span>
 	</td>
 </tr>

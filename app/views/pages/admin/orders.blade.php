@@ -96,7 +96,7 @@
                         {{ $item->color_name_cn }}
                     </td>
                     <td>{{ $item->lens_title_cn }}</td>
-                    <td>¥{{ number_format($item->price+$item->lens_price, 2) }}</td>
+                    <td>￥{{ number_format($item->price+$item->lens_price, 2) }}</td>
                     <td>{{ $item->quantity }}</td>
                     <td>
                         @if ($item->lens_type_id == 1)

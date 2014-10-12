@@ -28,6 +28,10 @@
     font-style: normal;
 }
 */
+body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: tahoma,arial,'Hiragino Sans GB','\5b8b\4f53',sans-serif;
+}
+
 img {
     max-width: 100%;
 }
@@ -94,6 +98,10 @@ a, a:hover, a:focus {
     color: black;
 }
 
+.font-dark-red {
+    color: #c40000
+}
+
 .font-lg {
     font-size: 1.3em;
 }
@@ -136,6 +144,10 @@ a, a:hover, a:focus {
 div.vertical-divider {
     height: 90%;
     border-right: 1px solid #909090;
+}
+
+.rmb-sign {
+    font-family: Tahoma;
 }
 
 /* row and col modification */
@@ -1658,7 +1670,7 @@ input.jq-validate-error {
 
 .price-prominent .sales-price {
     font-size: 30px;
-    color: #b60000;
+    color: #c40000;
 }
 
 .price-prominent .label {

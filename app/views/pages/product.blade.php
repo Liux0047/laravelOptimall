@@ -47,15 +47,15 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><span class="font-grey">价格</span></td>
+                        <td><span class="font-grey" id="price_title">价格</span></td>
                         <td>
                             <span class="price-prominent">
-                                ¥
-                                <span id="sales-price" class="sales-price">
+                                <span class="font-dark-red rmb-sign">￥</span>
+                                <span id="sales_price" class="sales-price">
                                     {{ number_format($model->price, 2) }}
                                 </span>      
                                 @include('components.product-page.product-label', array('productLabelId'=>$model->product_label_id))                                
-                                (市场价 ¥<del id='market-price'>{{ number_format($model->market_price, 2) }}</del>)   
+                                (市场价 <del id='market_price'><span class="rmb-sign">￥</span>{{ number_format($model->market_price, 2) }}</del>)
                             </span>                               
                         </td>
                     </tr>
@@ -128,7 +128,7 @@
                             <div class="lens-selection-container">
                                 <div class="selection-box lens-selection-box @if ($i == 0) selected @endif" id="lens_{{ $lensTypes[$i]->lens_type_id }}" onclick="changeLens({{ $lensTypes[$i]->lens_type_id }}, {{ $lensTypes[$i]->price }}, {{ $model->price }}, {{ $model->market_price }});" > 
                                     {{ $lensTypes[$i]->title_cn }} 
-                                    (套餐价: +<strong>¥{{ number_format($lensTypes[$i]->price, 2) }}</strong>)
+                                    (<strong class="rmb-sign">￥{{ number_format($lensTypes[$i]->price, 2) }}</strong>)
                                     <i class='fa fa-check'></i>                                
                                 </div>
                                 <a href="#" data-toggle="popover"  data-title="{{ $lensTypes[$i]->title_cn }}"
@@ -247,12 +247,18 @@ function changeLens(lensId, lensPrice, basePrice, baseMarketPrice) {
     $(".lens-selection-box#lens_" + lensId).addClass("selected");
     //change the hidden input value
     $("input[name='lens_type']").val(lensId);
+    //change the title
+    if (lensId == 1){
+        $("#price_title").removeClass("font-dark-red").addClass("font-grey").html("单买镜框");
+    } else {
+        $("#price_title").removeClass("font-grey").addClass("font-dark-red").html("配镜套餐");
+    }
     //change the sales price
     var newPrice = basePrice + lensPrice;
-    document.getElementById("sales-price").innerHTML = newPrice.toFixed(2);
+    $("#sales_price").html(newPrice.toFixed(2));
     //change the markete price
     var newMarketPrice = baseMarketPrice + lensPrice;
-    document.getElementById("market-price").innerHTML = newMarketPrice.toFixed(2);
+    document.getElementById("market_price").innerHTML = newMarketPrice.toFixed(2);
 }
 
 // ajax add to cart

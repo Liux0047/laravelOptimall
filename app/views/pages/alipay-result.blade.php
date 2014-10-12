@@ -8,13 +8,13 @@
         <h1>
             <i class="fa fa-check-circle font-green"></i> 
             支付成功
-            <small>共计金额 ¥{{ number_format($totalAmount, 2) }} 元</small>
+            <small>共计金额 ￥{{ number_format($totalAmount, 2) }} 元</small>
         </h1>
     </div>    
     <div class="panel panel-success">
         <div class="panel-heading">
             <h5 class="panel-title">                
-                以下订单已经支付成功 - 共计 ¥{{ number_format($totalAmount, 2) }} 元
+                以下订单已经支付成功 - 共计 ￥{{ number_format($totalAmount, 2) }} 元
             </h5>
         </div>
         <div class="panel-body">
@@ -25,7 +25,7 @@
                 订单号： {{ $orderId }}
             </p>
             <p>
-                在线支付: ¥{{ number_format($totalAmount, 2) }} 元
+                在线支付: ￥{{ number_format($totalAmount, 2) }} 元
             </p>
             <p>
                 由目光之城发货

@@ -4,7 +4,7 @@
     <table class="table">
         @foreach($alsoBuyModels as $alsoBuyModel)
         <tr>
-            <td width="60%" id="also_buy_{{ $alsoBuyModel->model_id }}" class="also-buy-img-cell">
+            <td width="55%" id="also_buy_{{ $alsoBuyModel->model_id }}" class="also-buy-img-cell">
                 <a href="{{ action('ProductController@getProduct', [$alsoBuyModel->model_id]) }}" class="thumbnail-link">
                     <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" 
                     data-original="{{ asset('images/gallery/'.$alsoBuyModel->model_id.'/'.$alsoBuyModel->productViews()->first()->product_id.'/'.Config::get('optimall.smallViewImg') ) }}" 
@@ -18,9 +18,9 @@
             <td>        
                 <p> 
                     <span class="discount-price">
-                        ¥{{ number_format($alsoBuyModel->price, 0) }} 
+                        <span class="rmb-sign">￥</span>{{ number_format($alsoBuyModel->price, 0) }}
                     </span>
-                    <span class="market-price"><del>¥{{ $alsoBuyModel->price + 300 }}</del></span>                                    
+                    <span class="market-price"><del><span class="rmb-sign">￥</span>{{ $alsoBuyModel->price + 300 }}</del></span>
                 </p>
                 <p>                                    
                     @foreach($alsoBuyModel->productViews as $product)

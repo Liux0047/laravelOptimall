@@ -6,7 +6,7 @@
             </div>
             <div class="col-md-3">成交时间: {{ formatDateTime($order->created_at) }}
             </div>
-            <div class="col-md-2"> 合计: ¥{{ number_format($order->total_transaction_amount, 2) }}
+            <div class="col-md-2"> 合计: <span class="rmb-sign">￥</span>{{ number_format($order->total_transaction_amount, 2) }}
             </div>
             <div class="col-md-3">
                 订单状态: 
@@ -73,7 +73,7 @@
                                 {{ $item->color_name_cn }}
                             </td>
                             <td>{{ $item->lens_title_cn }}</td>
-                            <td>¥{{ number_format($item->price+$item->lens_price, 2) }}</td>
+                            <td><span class="rmb-sign">￥</span>{{ number_format($item->price+$item->lens_price, 2) }}</td>
                             <td>{{ $item->quantity }}</td>
                             <td>
                                 @if ($item->lens_type_id == 1)

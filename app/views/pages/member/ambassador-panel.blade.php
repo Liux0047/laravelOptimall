@@ -45,7 +45,7 @@
                             <td>{{ $order->nickname }}</td>
                             <td>{{ $order->email }}</td>
                             <td>{{ formatDateTime($order->payment_time) }}</td>
-                            <td>¥{{ number_format($order->total_transaction_amount, 2) }}</td>
+                            <td>￥{{ number_format($order->total_transaction_amount, 2) }}</td>
                             <td>
                                 @if($order->is_first_purchase)
                                 首次购买
@@ -61,7 +61,7 @@
                                 @endif
                             </td>
                             <td>
-                                ¥{{ number_format($rewards[$order->order_id]['amount'], 2) }}
+                                ￥{{ number_format($rewards[$order->order_id]['amount'], 2) }}
                                 @if($rewards[$order->order_id]['amount'] == 50)
                                 (单笔订单最高返现50)
                                 @endif
@@ -88,7 +88,7 @@
                 <div class="panel-footer">
                     <div class="align-right">
                         总计可返利: 
-                        <span class="font-orange"><strong>¥{{ number_format($totalRewards, 2) }}</strong></span>
+                        <span class="font-orange"><strong>￥{{ number_format($totalRewards, 2) }}</strong></span>
                     </div>
                 </div>
             </div>

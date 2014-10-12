@@ -53,8 +53,8 @@
                             </div>
                             <div class="col-md-3 col-sm-3 col-xs-3 padding-align align-right">
                                 <label for="price_min">价格范围:</label>
-                                <strong>¥</strong><span id="price_min_display"></span> <strong>-</strong>
-                                <strong>¥</strong><span id="price_max_display"></span>
+                                <strong class="rmb-sign">￥</strong><span id="price_min_display"></span> <strong>-</strong>
+                                <strong class="rmb-sign">￥</strong><span id="price_max_display"></span>
                                 <input type="hidden" id="price_min" name="price_min">
                                 <input type="hidden" id="price_max" name="price_max">
                             </div>
