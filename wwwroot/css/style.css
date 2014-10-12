@@ -29,7 +29,7 @@
 }
 */
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-    font-family: tahoma,arial,'Hiragino Sans GB','\5b8b\4f53',sans-serif;
+    font-family: arial,  微软雅黑, 宋体, sans-serif;
 }
 
 img {
@@ -147,7 +147,7 @@ div.vertical-divider {
 }
 
 .rmb-sign {
-    font-family: Tahoma;
+    font-family: Microsoft YaHei;
 }
 
 /* row and col modification */
