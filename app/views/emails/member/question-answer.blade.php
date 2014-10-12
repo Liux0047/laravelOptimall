@@ -10,18 +10,13 @@
         亲爱的 {{ $nickname }}：
     </p>
     <p>
-        感谢您提出的疑问，我们已经做出了答复
+        您提出的问题我们已经解决。如果您还有任何疑问，请务必联系我们。
     </p>
     <p>
-        您的问题：<br>
-        {{{ $question }}}
+        您的问题是：“ {{{ $question }}} ”
     </p>
     <p>
-        我们的答复：<br>
-        {{{ $answer }}}
-    </p>
-    <p>
-        更多信息，请参见 <a href="{{ action('InfoController@getAboutShoppings') }}">frequently asked questions</a>.
+        目光之城：“{{{ $answer }}}”
     </p>
     <p>
         谢谢，<br>
