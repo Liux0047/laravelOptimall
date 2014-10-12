@@ -55,7 +55,7 @@
                                     {{ number_format($model->price, 2) }}
                                 </span>      
                                 @include('components.product-page.product-label', array('productLabelId'=>$model->product_label_id))                                
-                                (市场价 <del id='market_price'><span class="rmb-sign">￥</span>{{ number_format($model->market_price, 2) }}</del>)
+                                (市场价 <span class="rmb-sign">￥</span><del id='market_price'>{{ number_format($model->market_price, 2) }}</del>)
                             </span>                               
                         </td>
                     </tr>
