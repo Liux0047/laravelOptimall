@@ -53,7 +53,7 @@
                         支付方式： {{ $order->payment_method }}
                     </p>
                     <p>
-                        支付时间： {{ $order->payment_time }}
+                        支付时间： {{ formatDateTime($order->payment_time) }}
                     </p>
                     <p>
                         付款总额: {{ $order->payment_amount }}
