@@ -37,7 +37,7 @@
                 <div class="page-header">
                     <h4>
                         {{ $prescription->name }}
-                        <small> 创建于 {{ formateDate($prescription->created_at) }}</small>
+                        <small> 创建于 {{ formatDate($prescription->created_at) }}</small>
                     </h4>
                 </div>
 
