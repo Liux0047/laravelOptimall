@@ -151,7 +151,7 @@
                                 <i class='fa fa-shopping-cart'></i> 加入购物车
                             </button>
                             @else
-                            <a href="{{ action('MemberController@getLogin') }}" class='btn btn-danger view-item-table-btn' >
+                            <a href="{{ action('MemberController@getSignUp') }}" class='btn btn-danger view-item-table-btn' >
                                 <i class='fa fa-shopping-cart'></i> 加入购物车
                             </a>
                             @endif
