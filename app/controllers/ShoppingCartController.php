@@ -99,21 +99,29 @@ class ShoppingCartController extends BaseController
 
     public function getAddItem()
     {
-        $item = new OrderLineItem;
-        $item->product_id = Input::get('product_id');
-        $item->lens_type_id = Input::get('lens_type');
-        $item->quantity = 1;
-        $item->member_id = Auth::id();
-        $item->is_plano = 0;
-        $item->save();
-        if (Request::ajax()) {
-            if (isset($item->order_line_item_id)) {
+        if ($this->isProductInCart(Input::get('product_id'))) { // if this product already been added to cart
+            if (Request::ajax()) {
                 return Response::json(array('success' => true, 'num_cart_items' => self::getNumberOfItems()));
             } else {
-                return Response::json(array('success' => false));
+                return Redirect::action('ShoppingCartController@getMyCart')->with('status', '该商品已经在您的购物车中');
             }
         } else {
-            return Redirect::action('ShoppingCartController@getMyCart')->with('status', '成功添加商品');
+            $item = new OrderLineItem;
+            $item->product_id = Input::get('product_id');
+            $item->lens_type_id = Input::get('lens_type');
+            $item->quantity = 1;
+            $item->member_id = Auth::id();
+            $item->is_plano = 0;
+            $item->save();
+            if (Request::ajax()) {
+                if (isset($item->order_line_item_id)) {
+                    return Response::json(array('success' => true, 'num_cart_items' => self::getNumberOfItems()));
+                } else {
+                    return Response::json(array('success' => false));
+                }
+            } else {
+                return Redirect::action('ShoppingCartController@getMyCart')->with('status', '成功添加商品');
+            }
         }
 
     }
@@ -249,4 +257,12 @@ class ShoppingCartController extends BaseController
         return $item->lens_type_id != 1 && !$item->is_plano;
     }
 
+    private function isProductInCart($productId)
+    {
+        $count = OrderLineItemView::cartItems(Auth::id())
+            ->where('product_id', '=', $productId)
+            ->count();
+
+        return ($count > 0);
+    }
 }

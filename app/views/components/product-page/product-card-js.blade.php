@@ -1,20 +1,44 @@
 <script type="text/javascript">
     //change the small img on click of color icon
     var colorIconHoverFunc = function() {
-        var modelId = $(this).attr("data-model-id");
-        var productId = $(this).attr("data-product-id");
-        var imgHolder = $(this).parent().parent().parent().find(".small-view-link");
-        imgHolder.find("img").remove();
-        imgHolder.append(
-            "<img src='{{ asset('images/preloader.gif') }}' data-original='{{ asset('images/gallery') }}/" + modelId + "/" + productId +
-            "/{{ Config::get('optimall.smallViewImg') }}'>"
-        );
-        renderRetinaImg(imgHolder.find("img"));
-        imgHolder.find("img").lazyload();
+        if (!$(this).hasClass("color-icon-active")) {
+            var modelId = $(this).attr("data-model-id");
+            var productId = $(this).attr("data-product-id");
 
-        $(".color-icon-link").removeClass("color-icon-active");
-        $(this).addClass("color-icon-active");
+            //get the img holder, <a> tag
+            var imgHolder = $(this).parent().parent().parent().find(".small-view-link");
+
+            imgHolder.fadeOut(400, function () {
+
+                // replace with the new image
+                imgHolder.find("img").remove();
+                imgHolder.append(
+                    "<img src='{{ asset('images/preloader.gif') }}' data-original='{{ asset('images/gallery') }}/" + modelId + "/" + productId +
+                    "/{{ Config::get('optimall.smallViewImg') }}'>"
+                );
+
+                //render retina support and init lazyload
+                renderRetinaImg($(this).find("img"));
+                $(this).find("img").lazyload();
+
+
+                //fadeIn animation to prevent preloader showing even if img has been loaded
+                $(this).fadeIn( {
+                    duration: 400,
+                    start: function () {
+                        $(window).trigger("scroll");
+                    }
+                });
+            });
+
+            $(".color-icon-link").removeClass("color-icon-active");
+            $(this).addClass("color-icon-active");
+
+        }
+
+
     };
+
 
     var ratyInit = function () {
         $('.raty-star').raty({
