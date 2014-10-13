@@ -83,6 +83,7 @@ class MemberController extends BaseController {
 
         //send email
         $data['email'] = $email;
+        $data['nickname'] = $nickname;
         $data['link'] = action('MemberController@verifyRegistration', array($email, $member->reg_code));
         Mail::queue('emails.auth.verify-registration', $data, function($message) {
             $nickname = Input::get('nickname');
