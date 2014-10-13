@@ -24,7 +24,7 @@
             <a target="_blank" href="{{ url('product', array($model->model_id)) }}"
                 class="small-view-link" id="small-view-{{ $model->model_id }}">
                 <span class="vertical-align-helper"></span>
-                <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" 
+                <img src="{{ asset('images/preloader.gif') }}"
                 data-original="{{ asset('images/gallery/'.$model->model_id.'/'.$model->productViews()->first()->product_id.'/'.Config::get('optimall.smallViewImg')) }}" 
                 class="lazy retina-alt">
             </a>
