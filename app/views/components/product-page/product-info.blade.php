@@ -52,7 +52,10 @@
                 @endfor
 
                 <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}"
-                    data-original="{{ asset('images/model-poster/glasses-box-sample.jpg') }}"
+                    data-original="{{ asset('images/package-poster/glasses-box.jpg') }}"
+                    class="lazy poster">
+                <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}"
+                    data-original="{{ asset('images/package-poster/package-conceptual.jpg') }}"
                     class="lazy poster">
             </div>
         </div>
