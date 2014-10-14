@@ -229,6 +229,11 @@
     <div class="tab-pane fade" id="user_question">
     <div class="panel panel-default panel-no-border">
         <div class="panel-body">
+            <div class="alert alert-info">
+                <i class="fa fa-exclamation-circle"></i>
+                <strong>温馨小提示：</strong>该版块是用于会员们提交对该款眼镜的疑问，我们将在第一时间通过邮件回答。
+                在此您也可以看到别人层级提出的问题，解决您个人问题的同时也可以了解到大家的一些常见疑问，希望对您的购镜体验有所帮助
+            </div>
             @if ($userQuestions->count() == 0)
             暂时没有对该商品的提问
             @else
