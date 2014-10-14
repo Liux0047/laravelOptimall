@@ -30,7 +30,8 @@
 			<div class="form-group">
 				<label for="ambassador_plan" class="col-sm-2 control-label">目光之星计划</label>
 				<div class="col-md-6">
-					<textarea rows="3" id="ambassador_plan" name="ambassador_plan" class="form-control"  placeholder="请简述为什么你会成为一个成功的目光之星？你打算如何推广目光之星眼镜商城？(100字以内)"></textarea>
+					<textarea rows="3" id="ambassador_plan" name="ambassador_plan" class="form-control"
+					    placeholder="请和我们分享您成为目光之星后的计划是什么？比如宣传策略，目标人群等，我们期待您的加入！(100字以内)"></textarea>
 				</div>				
 			</div>			
 			<div class="form-group">

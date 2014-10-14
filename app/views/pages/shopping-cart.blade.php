@@ -115,7 +115,7 @@
                         <tr>
                             <td class="">折扣:</td>
                             <td class="">
-                                -(<span id="discount_amt_cell"><span class="rmb-sign">￥</span>{{ number_format($totalDiscount, 2) }} </span>)
+                                －(<span id="discount_amt_cell"><span class="rmb-sign">￥</span>{{ number_format($totalDiscount, 2) }}</span>)
                             </td>
                         </tr>
                         <tr>

@@ -50,7 +50,7 @@
                     <div class="checkbox">
                         <label for="show_ambassador_code">
                             <input type="checkbox" name="show_ambassador_code" id="show_ambassador_code" onchange="toggleAmbassadorCode();">
-                            我被目光之星邀请了
+                            我被朋友邀请了
                         </label>
                     </div>
                 </div>
