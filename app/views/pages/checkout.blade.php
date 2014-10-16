@@ -35,14 +35,15 @@
 	{{ Form::close() }}		
 
 
-	<div class="checkbox">
+	<div class="checkbox" id="toggle_address_container">
 		<label>
 			<input type="checkbox" id="toggle_address">
 			使用支付宝地址                    
 		</label>
 	</div>
 
-    {{ Form::open(array('action'=>'OrderController@postSubmitOrder', 'onsubmit'=>'alertIfNoAddress();', 'id'=>'order_submit_form', 'role'=>'form')) }}
+
+    {{ Form::open(array('action'=>'OrderController@postSubmitOrder', 'onsubmit'=>'return alertIfNoAddress();', 'id'=>'order_submit_form', 'role'=>'form')) }}
 	<div class="page-header">
         <h2>选择支付方式 </h2>
     </div>
@@ -187,12 +188,20 @@
 	 		}
 	 	});
 
+
+	 	$("#payment_service_partner_trade").change(function () {
+            if ($(this).is(':checked')){
+                $("#toggle_address_container").show(300);
+            }
+	 	});
+
         // toggle the bank selection dropdown
         $("#payment_service_direct_pay").change ( function() {
             if ($(this).is(':checked')){
                 $("#payment_default_bank").prop("disabled", false);
+                $("#toggle_address_container").hide(300);
             }
-        })
+        });
 
 	    //address input validation rule
 	    var warningIcon = "<i class='fa fa-warning fa-lg'></i> ";
@@ -303,6 +312,7 @@ function alertIfNoAddress(){
 		@else
 		if ($("#payment_service_direct_pay").is(':checked')) {
 		    // direct pay does not guarantee address return
+		    alert("对不起，使用网银支付时，需要您填写地址");
 		    return false;
 		} else {
 		    return confirm("确认不填入地址？（您可以在支付宝中选择您的送货地址）？");
