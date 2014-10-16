@@ -200,6 +200,8 @@
             if ($(this).is(':checked')){
                 $("#payment_default_bank").prop("disabled", false);
                 $("#toggle_address_container").hide(300);
+                $("#address_section").show(300);
+                $("#address_summary").show(300);
             }
         });
 
