@@ -42,6 +42,30 @@
 		</label>
 	</div>
 
+    {{ Form::open(array('action'=>'OrderController@postSubmitOrder', 'onsubmit'=>'alertIfNoAddress();', 'id'=>'order_submit_form', 'role'=>'form')) }}
+	<div class="page-header">
+        <h2>选择支付方式 </h2>
+    </div>
+    <div class="radio">
+        <label>
+            <input type="radio" name="payment_service" id="payment_service_partner_trade" value="Alipay_partner_trade" checked>
+            支付宝担保交易
+        </label>
+    </div>
+    <div class="radio">
+        <label>
+            <input type="radio" name="payment_service" id="payment_service_direct_pay" value="Alipay_direct_pay">
+            网银支付（请使用IE浏览器）
+            <select name="default_bank" id="payment_default_bank" disabled>
+                @foreach(Config::get('alipay.payment_banks') as $bankCode => $bankName)
+                <option value="{{ $bankCode }}">{{ $bankName }}</option>
+                @endforeach
+            </select>
+        </label>
+    </div>
+
+
+
 	<div class="page-header">
 		<h2>确认订单详情 </h2>
 	</div>                
@@ -63,7 +87,6 @@
 		</table>
 	</div>
 
-	{{ Form::open(array('action'=>'OrderController@postSubmitOrder', 'onsubmit'=>'alertIfNoAddress();', 'id'=>'order_submit_form', 'role'=>'form')) }}   
 	<div class="row">		
 		<div class="col-md-6">
 			<div class="form-group">
@@ -162,7 +185,14 @@
 	 		else {
 	 			$("#invoice_header").hide(300);
 	 		}
-	 	});                
+	 	});
+
+        // toggle the bank selection dropdown
+        $("#payment_service_direct_pay").change ( function() {
+            if ($(this).is(':checked')){
+                $("#payment_default_bank").prop("disabled", false);
+            }
+        })
 
 	    //address input validation rule
 	    var warningIcon = "<i class='fa fa-warning fa-lg'></i> ";
@@ -271,7 +301,12 @@ function alertIfNoAddress(){
 		@if(isset($selectedAddress))
 		return true;
 		@else
-		return confirm("确认不填入地址？（您可以在支付宝中选择您的送货地址）？");
+		if ($("#payment_service_direct_pay").is(':checked')) {
+		    // direct pay does not guarantee address return
+		    return false;
+		} else {
+		    return confirm("确认不填入地址？（您可以在支付宝中选择您的送货地址）？");
+		}
 		@endif
 	}
 }

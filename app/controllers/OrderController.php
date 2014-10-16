@@ -5,9 +5,11 @@
  *
  * @author Allen
  */
-class OrderController extends BaseController {
+class OrderController extends BaseController
+{
 
-    public function postSubmitOrder() {
+    public function postSubmitOrder()
+    {
 
         $validator = $this->validateAddress();
 
@@ -37,12 +39,19 @@ class OrderController extends BaseController {
         $address->receive_zip = Input::get('receive_zip', '');
         $address->receive_phone = Input::get('receive_phone', '');
 
-        $order = $this->insertOrder($items, "Alipay", $price, $address, $couponId);
+        //get the payment service
+        $paymentService = Input::get('payment_service');
+        //get the bank code
+        $bankCode = Input::get('default_bank', '');
+
+        $order = $this->insertOrder($items, $paymentService, $price, $address, $couponId);
 
         if (!isset($order->order_id)) {
             die("Order not created");
         }
         $tradeNumber = generateTradeNumber($order->order_id);
+
+        $itemNames = Input::get('item_names');
 
         //send email
         $params['orderNumber'] = $tradeNumber;
@@ -52,14 +61,15 @@ class OrderController extends BaseController {
         $params['receive_phone'] = $order->receive_phone;
         $params['net_amount'] = $cartController->getNetPrice();
         $params['discount_amount'] = $cartController->getTotalDiscount();
-        Mail::queue('emails.order.confirm-order', $params, function($message) {
+        Mail::queue('emails.order.confirm-order', $params, function ($message) {
             $message->to(Auth::user()->email)->subject('订单提交成功');
         });
 
-        return $alipayController->generateAlipayPage($tradeNumber, $price, $address);
+        return $alipayController->generateAlipayPage($tradeNumber, $price, $address, $paymentService, $bankCode, $itemNames);
     }
 
-    public function postReSubmitPayment() {
+    public function postReSubmitPayment()
+    {
         if (!Input::has('order_id')) {
             return Redirect::back();
         }
@@ -78,11 +88,14 @@ class OrderController extends BaseController {
         $address->receive_phone = $order->receive_phone;
         $address->receive_address = $order->receive_address;
 
+        //get the payment service
+        $paymentService = Input::get('payment_service');
 
-        return $alipayController->generateAlipayPage($tradeNumber, $price, $address);
+        return $alipayController->generateAlipayPage($tradeNumber, $price, $address, $paymentService);
     }
 
-    public function getAlipayReturn() {
+    public function getAlipayReturn()
+    {
         $AlipayController = new AlipayController();
         $verify_result = $AlipayController->verifyReturn();
         if ($verify_result) {    //verify success
@@ -90,16 +103,7 @@ class OrderController extends BaseController {
             //获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表
             //商户订单号
             $out_trade_no = Input::get('out_trade_no');
-            //支付宝交易号
-            $trade_no = Input::get('trade_no');
-            //交易状态
-            $trade_status = Input::get('trade_status');
 
-            if ($trade_status == 'WAIT_SELLER_SEND_GOODS') {
-                //判断该笔订单是否在商户网站中已经做过处理
-                //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-                //如果有做过处理，不执行商户的业务程序
-            }
             $params['isPaymentSuccessful'] = true;
             $params['totalAmount'] = Input::get('total_fee');
             $params['orderId'] = $out_trade_no;
@@ -111,7 +115,9 @@ class OrderController extends BaseController {
         return View::make('pages.alipay-result', $params);
     }
 
-    public function postAlipayNotify() {
+
+    public function postAlipayPartnerTradeNotify()
+    {
         //计算得出通知验证结果
         $AlipayController = new AlipayController();
         $verify_result = $AlipayController->verifyNotify();
@@ -130,54 +136,8 @@ class OrderController extends BaseController {
             //交易状态
             $trade_status = Input::get('trade_status');
 
+            return $this->processPartnerTradeUpdate($trade_status, $out_trade_no, $trade_no);
 
-            if ($trade_status == 'WAIT_BUYER_PAY') {
-                //该判断表示买家已在支付宝交易管理中产生了交易记录，但没有付款
-                //判断该笔订单是否在商户网站中已经做过处理
-                //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-                //如果有做过处理，不执行商户的业务程序
-
-                return "success";  //请不要修改或删除
-                //调试用，写文本函数记录程序运行情况是否正常
-                //logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
-            } else if ($trade_status == 'WAIT_SELLER_SEND_GOODS') {
-                //该判断表示买家已在支付宝交易管理中产生了交易记录且付款成功，但卖家没有发货
-                //判断该笔订单是否在商户网站中已经做过处理
-                //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-                //如果有做过处理，不执行商户的业务程序
-                $this->recordPayment($out_trade_no, $trade_no);
-
-                return "success";  //请不要修改或删除
-                //调试用，写文本函数记录程序运行情况是否正常
-                //logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
-            } else if ($trade_status == 'WAIT_BUYER_CONFIRM_GOODS') {
-                //该判断表示卖家已经发了货，但买家还没有做确认收货的操作
-                //判断该笔订单是否在商户网站中已经做过处理
-                //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-                //如果有做过处理，不执行商户的业务程序
-
-                return "success";  //请不要修改或删除
-                //调试用，写文本函数记录程序运行情况是否正常
-                //logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
-            } else if ($trade_status == 'TRADE_FINISHED') {
-                //该判断表示买家已经确认收货，这笔交易完成
-                //判断该笔订单是否在商户网站中已经做过处理
-                //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-                //如果有做过处理，不执行商户的业务程序
-
-                return "success";  //请不要修改或删除
-                //调试用，写文本函数记录程序运行情况是否正常
-                //logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
-            } else {
-                //其他状态判断
-                return "success";
-
-                //调试用，写文本函数记录程序运行情况是否正常
-                //logResult ("这里写入想要调试的代码变量值，或其他运行的结果记录");
-            }
-
-            //——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         } else {
             //验证失败
             return "fail";
@@ -187,7 +147,119 @@ class OrderController extends BaseController {
         }
     }
 
-    public function insertOrder($items, $paymentMethod, $amount, $address, $couponId) {
+
+    public function postAlipayDirectPayNotify()
+    {
+        //计算得出通知验证结果
+        $AlipayController = new AlipayController();
+        $verify_result = $AlipayController->verifyNotify();
+
+        if ($verify_result) {//验证成功
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //请在这里加上商户的业务逻辑程序代
+            //——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
+            //获取支付宝的通知返回参数，可参考技术文档中服务器异步通知参数列表
+            //商户订单号
+            $out_trade_no = Input::get('out_trade_no');
+
+            //支付宝交易号
+            $trade_no = Input::get('trade_no');
+
+            //交易状态
+            $trade_status = Input::get('trade_status');
+
+            return $this->processDirectPayUpdate($trade_status, $out_trade_no, $trade_no);
+
+        } else {
+            //验证失败
+            return "fail";
+
+            //调试用，写文本函数记录程序运行情况是否正常
+            //logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
+        }
+    }
+
+    private function processPartnerTradeUpdate ($trade_status, $out_trade_no, $trade_no) {
+        if ($trade_status == 'WAIT_BUYER_PAY') {
+            //该判断表示买家已在支付宝交易管理中产生了交易记录，但没有付款
+            //判断该笔订单是否在商户网站中已经做过处理
+            //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+            //如果有做过处理，不执行商户的业务程序
+
+            return "success";  //请不要修改或删除
+            //调试用，写文本函数记录程序运行情况是否正常
+            //logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
+        } else if ($trade_status == 'WAIT_SELLER_SEND_GOODS') {
+            //该判断表示买家已在支付宝交易管理中产生了交易记录且付款成功，但卖家没有发货
+            //判断该笔订单是否在商户网站中已经做过处理
+            //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+            //如果有做过处理，不执行商户的业务程序
+            $this->recordPayment($out_trade_no, $trade_no);
+
+            return "success";  //请不要修改或删除
+            //调试用，写文本函数记录程序运行情况是否正常
+            //logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
+        } else if ($trade_status == 'WAIT_BUYER_CONFIRM_GOODS') {
+            //该判断表示卖家已经发了货，但买家还没有做确认收货的操作
+            //判断该笔订单是否在商户网站中已经做过处理
+            //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+            //如果有做过处理，不执行商户的业务程序
+
+            return "success";  //请不要修改或删除
+            //调试用，写文本函数记录程序运行情况是否正常
+            //logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
+        } else if ($trade_status == 'TRADE_FINISHED') {
+            //该判断表示买家已经确认收货，这笔交易完成
+            //判断该笔订单是否在商户网站中已经做过处理
+            //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+            //如果有做过处理，不执行商户的业务程序
+
+            return "success";  //请不要修改或删除
+            //调试用，写文本函数记录程序运行情况是否正常
+            //logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
+        } else {
+            //其他状态判断
+            return "success";
+
+            //调试用，写文本函数记录程序运行情况是否正常
+            //logResult ("这里写入想要调试的代码变量值，或其他运行的结果记录");
+        }
+
+    }
+
+    private function processDirectPayUpdate ($trade_status, $out_trade_no, $trade_no) {
+        if($trade_status == 'TRADE_FINISHED') {
+            //判断该笔订单是否在商户网站中已经做过处理
+            //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+            //如果有做过处理，不执行商户的业务程序
+
+            //注意：
+            //该种交易状态只在两种情况下出现
+            //1、开通了普通即时到账，买家付款成功后。
+            //2、开通了高级即时到账，从该笔交易成功时间算起，过了签约时的可退款时限（如：三个月以内可退款、一年以内可退款等）后。
+
+            //调试用，写文本函数记录程序运行情况是否正常
+            //logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
+        }
+        else if ($trade_status == 'TRADE_SUCCESS') {
+            //判断该笔订单是否在商户网站中已经做过处理
+            //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+            //如果有做过处理，不执行商户的业务程序
+            $this->recordPayment($out_trade_no, $trade_no);
+
+            //注意：
+            //该种交易状态只在一种情况下出现——开通了高级即时到账，买家付款成功后。
+
+            //调试用，写文本函数记录程序运行情况是否正常
+            //logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
+        }
+
+        echo "success";		//请不要修改或删除
+
+    }
+
+    public function insertOrder($items, $paymentMethod, $amount, $address, $couponId)
+    {
         $order = new PlacedOrder;
         $order->member_id = Auth::id();
         $order->coupon_id = $couponId;
@@ -224,7 +296,8 @@ class OrderController extends BaseController {
         return $order;
     }
 
-    private function recordPayment($out_trade_no, $trade_no) {
+    private function recordPayment($out_trade_no, $trade_no)
+    {
         //take the 3rd number onwards as order ID
         $order = PlacedOrder::find(intval(substr($out_trade_no, Config::get('optimall.orderNumberPrefixLength'))));
         if (!isset($order->payment_ref_no) && $order->order_status_id == 1) {
@@ -254,7 +327,8 @@ class OrderController extends BaseController {
         }
     }
 
-    private function validateAddress() {
+    private function validateAddress()
+    {
         $rules = array(
             'recipient_name' => 'max:45',
             'receive_address' => 'min:5|max:120',

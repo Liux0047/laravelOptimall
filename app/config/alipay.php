@@ -22,26 +22,48 @@
 //↓↓↓↓↓↓↓↓↓↓请在这里配置您的基本信息↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 
 return array(
-    
+
     //合作身份者id，以2088开头的16位纯数字
     'partner' => '2088611146364530',
-    
+
     //安全检验码，以数字和字母组成的32位字符
     'key' => 'dwsmt7lowddbigw5vdso2mnyl5rcvvnk',
-    
+
     //seller's email, alipay account
     'seller_email' => 'mgzcecommerce@163.com',
-    
+
     //签名方式 不需修改
     'sign_type' => 'MD5',
-    
+
     //字符编码格式 目前支持 gbk 或 utf-8
     'input_charset' => 'utf-8',
-    
+
     //ca证书路径地址，用于curl中ssl校验
     //请保证cacert.pem文件在当前文件夹目录中
-    'cacert' => public_path().DIRECTORY_SEPARATOR.'cacert.pem',
-    
+    'cacert' => public_path() . DIRECTORY_SEPARATOR . 'cacert.pem',
+
     //访问模式,根据自己的服务器是否支持ssl访问，若支持请选择https；若不支持请选择http
-    'transport' => 'https'
+    'transport' => 'https',
+
+    // default bank for direct pay
+    'payment_banks' => array(
+        "BOCB2C" => "中国银行",
+        "ICBCB2C" => "中国工商银行",
+        "CMB" => "招商银行",
+        "CCB" => "中国建设银行",
+        "ABC" => "中国农业银行",
+        "SPDB" => "上海浦东发展银行",
+        "CIB" => "兴业银行",
+        "GDB" => "广发银行",
+        "FDB" => "富滇银行",
+        "CITIC" => "中信银行",
+        "HZCBB2C" => "杭州银行",
+        "SHBANK" => "上海银行",
+        "NBBANK" => "宁波银行",
+        "SPABANK" => "平安银行",
+        "POSTGC" => "中国邮政储蓄银行",
+        "abc1003" => "Visa",
+        "abc1004" => "Master",
+
+    ),
 );

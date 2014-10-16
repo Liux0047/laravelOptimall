@@ -24,6 +24,7 @@
                 @if ($order->order_status_id == 1)
                 {{ Form::open(array('action'=>'OrderController@postReSubmitPayment'))}}
                 {{ Form::hidden('order_id', $order->order_id)}}
+                {{ Form::hidden('payment_service', $order->payment_method) }}
                 {{ Form::submit('去付款', array('class'=>'btn btn-warning btn-xs')) }}
                 {{ Form::close() }}
                 @endif

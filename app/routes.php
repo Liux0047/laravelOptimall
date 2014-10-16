@@ -146,9 +146,13 @@ Route::group(array('before' => 'auth'), function() {
 });
 
 /*
- * Route to Alipay notify URL
+ * Route to Alipay partner trade notify URL
  */
-Route::post('alipay-return/notify', 'OrderController@postAlipayNotify');
+Route::post('alipay-return/partner-trade-notify', 'OrderController@postAlipayPartnerTradeNotify');
+/*
+ * Route to Alipay direct pay notify URL
+ */
+Route::post('alipay-return/direct-pay-notify', 'OrderController@postAlipayDirectPayNotify');
 
 /*
  * Route to about page
