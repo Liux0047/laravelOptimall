@@ -45,7 +45,7 @@ class MemberAccountController extends BaseController {
             Auth::user()->save();
             return Redirect::back()->with('status', '密码修改成功');
         } else {
-            return Redirect::back()->with('error', '密码修改失败');
+            return Redirect::back()->with('error', '密码修改失败，请检查当前密码是否正确');
         }
     }
 

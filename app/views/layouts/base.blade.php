@@ -22,11 +22,20 @@
     {{ HTML::script('js/respond.min.js')}}
     <![endif]-->
     @endif
-    <title>{{{ $pageTitle or '目光之城 - 最IN的正品潮流眼镜商城，年轻潮人最爱，超高性价比，最佳网络配镜体验！'}}}</title>  
+    <title>{{{ $pageTitle or '目光之城 - 最IN的正品潮流眼镜商城，年轻潮人最爱，超高性价比，最佳网络配镜体验！'}}}</title>
+
+
 </head>        
 
 
 <body>
+    <noscript>
+        <div class="alert alert-danger">
+            <i class="fa fa-exclamation-circle"></i>
+            为了正常显示页面，请打开您浏览器中的JavasScript脚本支持。您可以按照<a href="http://www.enable-javascript.com" target="_blank"> 该链接</a> 提供的方式打开
+        </div>
+
+    </noscript>
     @if($isLessThanIE9)
     <div class="alert alert-error">
         为了更好的购物体验，我们推荐您更新目前使用的IE版本，或者使用最新的<a href="http://www.google.cn/intl/zh-CN/chrome/">Chrome</a>，<a href="se.360.cn">360浏览器</a>以及<a href="www.firefox.com.cn">火狐浏览器
@@ -57,7 +66,9 @@
     @yield('content')
     @include('components.page-frame.float-box')
     @include('components.page-frame.footer')
+
 </body>
+
 
 
 @section('link-script')

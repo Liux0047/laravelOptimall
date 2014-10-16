@@ -107,5 +107,5 @@ $(document).ready(function() {
         onclick: true
     });
 });
-</script> 
+</script>
 @stop

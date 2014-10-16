@@ -72,11 +72,14 @@ $(document).ready(function() {
         },
         messages: {
             email: {
-                required: warningIcon + "请输入您的邮箱"
+                required: warningIcon + "请输入您的邮箱",
+                email: warningIcon + "请输入有效的邮箱地址",
             },
             password: {
                 required: warningIcon + "请输入新密码",
-                passwordCheck: warningIcon + "请输入6-16位半角字符（必须包括数字，小写字母和大写字母）"
+                minlength: warningIcon + "密码至少需要6位",
+                passwordCheck: warningIcon + "密码必须包括至少一个数字和字母，且不能有其他字符",
+                maxlength: warningIcon + "密码最多20位"
             },
             password_confirmation: {
                 required: warningIcon + "请再次输入新密码",
@@ -104,5 +107,5 @@ $(document).ready(function() {
         onclick: true
     });
 });
-</script> 
+</script>
 @stop

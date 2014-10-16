@@ -1,13 +1,15 @@
 <?php
 
-class RemindersController extends Controller {
+class RemindersController extends Controller
+{
 
     /**
      * Display the password reminder view.
      *
      * @return Response
      */
-    public function getRemind() {
+    public function getRemind()
+    {
         return View::make('pages.password.remind');
     }
 
@@ -16,8 +18,9 @@ class RemindersController extends Controller {
      *
      * @return Response
      */
-    public function postRemind() {
-        switch ($response = Password::remind(Input::only('email'), function($message) {
+    public function postRemind()
+    {
+        switch ($response = Password::remind(Input::only('email'), function ($message) {
             $message->subject('重置密码请求');
         })) {
             case Password::INVALID_USER:
@@ -31,10 +34,11 @@ class RemindersController extends Controller {
     /**
      * Display the password reset view for the given token.
      *
-     * @param  string  $token
+     * @param  string $token
      * @return Response
      */
-    public function getReset($token = null) {
+    public function getReset($token = null)
+    {
         if (is_null($token))
             App::abort(404);
 
@@ -46,16 +50,17 @@ class RemindersController extends Controller {
      *
      * @return Response
      */
-    public function postReset() {
+    public function postReset()
+    {
         $credentials = Input::only(
-                        'email', 'password', 'password_confirmation', 'token'
+            'email', 'password', 'password_confirmation', 'token'
         );
 
-        $response = Password::reset($credentials, function($user, $password) {
-                    $user->password = Hash::make($password);
-
-                    $user->save();
-                });
+        $response = Password::reset($credentials, function ($user, $password) {
+            $user->password = Hash::make($password);
+            $user->reg_code = null;
+            $user->save();
+        });
 
         switch ($response) {
             case Password::INVALID_PASSWORD:

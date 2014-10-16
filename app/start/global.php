@@ -51,7 +51,7 @@ App::error(function (Exception $exception, $code) {
         foreach ($modelIds as $id) {
             $params['models'][] = ProductModelView::find($id);
         }
-        return View::make('pages.not-found', $params);
+        return Response::view('pages.not-found', $params, 404);
     }
 
 });
@@ -85,7 +85,7 @@ App::missing(function ($exception) {
     foreach ($modelIds as $id) {
         $params['models'][] = ProductModelView::find($id);
     }
-    return View::make('pages.not-found', $params);
+    return Response::view('pages.not-found', $params, 404);
 });
 
 
