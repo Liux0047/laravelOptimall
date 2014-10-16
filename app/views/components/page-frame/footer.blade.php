@@ -164,6 +164,7 @@
             <div class="col-md-12">
                 © Copyright 2012-2014 All Rights Reserved. Designed by MuHen Ecommerce. 苏ICP编号：14006372号
             </div>
+            <a href="http://www.aikuaidi.cn/" target="_blank" >快递单号查询</a>
         </div>
     </div>
 </footer>

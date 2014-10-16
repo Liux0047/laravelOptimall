@@ -34,14 +34,38 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-md-3">
-                <strong>寄送至:</strong>
-                <br>
-                {{ $order->receive_address }}, 
-                {{ $order->receive_zip }}
-                <br>
-                {{ $order->recipient_name }} 收
-                <br>
-                电话: {{ $order->receive_phone }}<br>
+                <p>
+                    <strong>寄送至:</strong>
+                    <br>
+                    {{ $order->receive_address }},
+                    {{ $order->receive_zip }}
+                    <br>
+                    {{ $order->recipient_name }} 收
+                    <br>
+                    电话: {{ $order->receive_phone }}
+                </p>
+
+                <a href="#shipping_info_{{ $order->order_id }}" data-toggle="modal" data-target="#shipping_info_{{ $order->order_id }}">查看物流信息</a>
+
+                <div class="modal fade shipping-info-modal" id="shipping_info_{{ $order->order_id }}"  tabindex="-1" role="dialog"
+                    aria-labelledby="myModalLabel" aria-hidden="true"
+                    data-shipping-track-num="{{ $order->shipping_track_num }}" data-shipping-company="{{ $order->shipping_company }}">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title">物流信息</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>One fine body&hellip;</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+
             </div>
             <div class="col-md-9">
                 <table class="table table-bordered order-summary-table">                                    

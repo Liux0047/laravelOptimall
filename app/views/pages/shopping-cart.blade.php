@@ -215,21 +215,21 @@ function updateQuantity(itemId, action) {
         }
     })
     .done(function(data) {            
-            //var ajaxReturn = JSON.parse(data);      //parse the return data
-            $("#quantity_" + itemId).text(data.quantity);
-            $("#item_total_" + itemId).text(currency + data.itemTotal.toFixed(2));
-            $("#total_price_cell").text(currency + data.totalPrice.toFixed(2));
-            $("#discount_amt_cell").text(currency + data.discountAmount.toFixed(2));
-            $("#net_amt_cell").text(currency + data.netAmount.toFixed(2));
-            
-        })
+        //var ajaxReturn = JSON.parse(data);      //parse the return data
+        $("#quantity_" + itemId).text(data.quantity);
+        $("#item_total_" + itemId).text(currency + data.itemTotal.toFixed(2));
+        $("#total_price_cell").text(currency + data.totalPrice.toFixed(2));
+        $("#discount_amt_cell").text(currency + data.discountAmount.toFixed(2));
+        $("#net_amt_cell").text(currency + data.netAmount.toFixed(2));
+
+    })
     .fail(function() {
-            //if the connection to database failed
-            alert("connection to database has failed");
-        })
+        //if the connection to database failed
+        alert("connection to database has failed");
+    })
     .always(function() {
-            //
-        });
+        //
+    });
 }
 
 var warningIcon = "<i class='fa fa-warning fa-lg'></i> ";
@@ -300,5 +300,5 @@ var rule = {
     @endforeach
 
 
-    </script> 
-    @stop
+</script>
+@stop

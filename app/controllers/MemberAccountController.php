@@ -8,6 +8,7 @@
 class MemberAccountController extends BaseController {
 
     public function getShoppingHistory() {
+
         $params['pageTitle'] = "已下单 - 我的目光之城";
 
         $params['prescriptionNames'] = PrescriptionController::getPrescriptionNames();

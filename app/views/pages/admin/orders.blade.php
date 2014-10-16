@@ -140,7 +140,7 @@
                 <input type="text" class="form-control" id="shipping_track_num" name='shipping_track_num' placeholder="物流公司运单号">
             </div>
             <select class="form-control" name="shipping_company">
-                <option value="Shun Feng">顺丰</option>
+                <option value="shunfeng">顺丰</option>
             </select>
             {{ Form::submit('确认发货', array('class'=>'btn btn-warning btn-sm'))}}
             {{ Form::close() }}

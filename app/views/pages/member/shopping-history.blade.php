@@ -78,6 +78,37 @@ $(document).ready(function() {
         });
     });
 });
+
+
+// shipping info query
+$(".shipping-info-modal").each(function () {
+    $(this).on('show.bs.modal', function (e) {
+        var orderId = $(this).attr("data-shipping-track-num");
+        var company = $(this).attr("data-shipping-company");
+        $.ajax({
+            type: "GET",
+            url: "http://www.kuaidiapi.cn/rest/",
+            data: {
+                uid: "{{ Config::get('kuaidiapi.uid') }}",
+                key: "{{ Config::get('kuaidiapi.key') }}",
+                order: orderId,
+                id: company,
+                show: "json"
+            },
+            crossDomain: true,
+            dataType: "json"
+        })
+        .done(function(data) {
+            alert("done");
+        })
+        .fail(function() {
+            alert("获取物流信息失败");
+        })
+        .always(function() {
+            //
+        });
+    });
+});
 </script>
 
 @stop
