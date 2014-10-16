@@ -49,7 +49,7 @@
 
                 <div class="modal fade shipping-info-modal" id="shipping_info_{{ $order->order_id }}"  tabindex="-1" role="dialog"
                     aria-labelledby="myModalLabel" aria-hidden="true"
-                    data-shipping-track-num="{{ $order->shipping_track_num }}" data-shipping-company="{{ $order->shipping_company }}">
+                    data-shipping-track-num="{{ $order->shipping_track_num }}" data-shipping-company="{{ $order->shipping_company }}" data-shipping-info-retrieved="false">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -57,7 +57,8 @@
                                 <h4 class="modal-title">物流信息</h4>
                             </div>
                             <div class="modal-body">
-                                <p>One fine body&hellip;</p>
+                                <p>正在获取物流信息...</p>
+                                <img src="{{ asset('images/preloader.gif') }}">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>

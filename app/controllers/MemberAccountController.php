@@ -5,9 +5,11 @@
  *
  * @author Allen
  */
-class MemberAccountController extends BaseController {
+class MemberAccountController extends BaseController
+{
 
-    public function getShoppingHistory() {
+    public function getShoppingHistory()
+    {
 
         $params['pageTitle'] = "已下单 - 我的目光之城";
 
@@ -19,12 +21,40 @@ class MemberAccountController extends BaseController {
         return View::make('pages.member.shopping-history', $params);
     }
 
-    public function getSecurity() {
+    public function postShippingInfo()
+    {
+        $url = Config::get('kuaidiapi.url');
+        $uidParam = 'uid=' . Config::get('kuaidiapi.uid');
+        $keyParam = 'key=' . Config::get('kuaidiapi.key');
+        $trackingNumberParam = 'order=' . trim(Input::get('tracking_number'));
+        $companyParam = 'id=' . trim(Input::get('company'));
+        $dataTypeParam = 'show=json';
+
+        $requestUrl = $url . '?' . $uidParam . '&' . $keyParam . '&' . $trackingNumberParam . '&' . $companyParam . '&' . $dataTypeParam;
+
+        $ch = curl_init($requestUrl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $output = curl_exec($ch);
+        curl_close($ch);
+
+        $returnData = json_decode($output);
+        $params['company'] = $returnData->name;
+        $params['trackingNumber'] = $returnData->order;
+        $params['status'] = Config::get('kuaidiapi.statusDescription')[$returnData->status];
+        $params['shippingRoutes'] = $returnData->data;
+        if (Request::ajax()) {
+            return View::make('components.member-account.shipping-info', $params);
+        }
+    }
+
+    public function getSecurity()
+    {
         $params['pageTitle'] = "安全设置 - 我的目光之城";
         return View::make('pages.member.security', $params);
     }
 
-    public function postChangePassword() {
+    public function postChangePassword()
+    {
         $validator = $this->validateSecurity();
 
         if ($validator->fails()) {
@@ -50,14 +80,16 @@ class MemberAccountController extends BaseController {
         }
     }
 
-    public function getMyPrescription() {
+    public function getMyPrescription()
+    {
         $params['pageTitle'] = "验光单 - 我的目光之城";
         $params['prescriptions'] = Auth::user()->prescriptions()->orderBy('created_at')->get();
         $params['prescriptionNames'] = PrescriptionController::getPrescriptionNames();
         return View::make('pages.member.my-prescription', $params);
     }
 
-    public function postDeletePrescription() {
+    public function postDeletePrescription()
+    {
         $prescription = Prescription::findOrFail(Input::get('prescription_id'));
         if (isset($prescription) && $prescription->member_id == Auth::id()) {
             $prescription->delete();
@@ -67,8 +99,9 @@ class MemberAccountController extends BaseController {
         }
     }
 
-    public function getAmbassadorPanel() {
-        $params['pageTitle'] = "目光之星 - 我的目光之城";        
+    public function getAmbassadorPanel()
+    {
+        $params['pageTitle'] = "目光之星 - 我的目光之城";
         if (Auth::user()->ambassadorInfo()->count() > 0) {
             $params['reward'] = array();
             $params['ambassadorInfo'] = Auth::user()->ambassadorInfo;
@@ -79,13 +112,13 @@ class MemberAccountController extends BaseController {
             $params['totalRewards'] = $ambassadorController->getTotalRewards();
             $params['isMinMet'] = $ambassadorController->isMinRewardMet();
             return View::make('pages.member.ambassador-panel', $params);
-        }
-        else {
+        } else {
             return View::make('pages.member.create-ambassador', $params);
         }
     }
 
-    public function postClaimRefund() {
+    public function postClaimRefund()
+    {
         $validator = $this->validateClaimRefund();
 
         if ($validator->fails()) {
@@ -107,7 +140,7 @@ class MemberAccountController extends BaseController {
         $refund->refund_status_id = 1;
         $refund->order_line_item_id = $item->order_line_item_id;
         $refund->save();
-        
+
         //save refund claim picture uploaded by user
         if (Input::hasFile('photo') && Input::file('photo')->isValid()) {
             if (Input::file('photo')->getSize() < 2 * pow(2, 20)) {
@@ -116,18 +149,20 @@ class MemberAccountController extends BaseController {
                 return Redirect::action('MemberAccountController@getShoppingHistory')->with('error', '文件尺寸过大，请重新上传');
             }
         }
-        
+
         return Redirect::back()->with('status', '退款申请提交成功');
     }
 
-    private function validateSecurity() {
+    private function validateSecurity()
+    {
         $rules = array(
             'new_password' => 'required|min:6|max:16|alpha_num'
         );
         return Validator::make(Input::all(), $rules);
     }
 
-    private function validateClaimRefund() {
+    private function validateClaimRefund()
+    {
         $rules = array(
             'reason' => 'required|max:150'
         );
