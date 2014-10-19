@@ -145,6 +145,7 @@
             {{ Form::submit('确认发货', array('class'=>'btn btn-warning btn-sm'))}}
             {{ Form::close() }}
             @elseif($order->order_status_id >= 3)
+            物流单号：{{ $order->shipping_track_num }} ({{ $order->shipping_company }})<br>
             发货于: {{ $order->dispatched_at }} ( 由 {{ $order->dispatched_by }} 确认发货) 
             @endif
         </div>
