@@ -29,6 +29,17 @@ class ProductModelView extends Eloquent
         return $this->hasMany('ProductView', 'model_id');
     }
 
+
+    public function productMaterialMappings()
+    {
+        return $this->hasMany('ProductMaterialMapping', 'model_id');
+    }
+
+    public function productTagMappings()
+    {
+        return $this->hasMany('ProductTagMapping', 'model_id');
+    }
+
     /*
      * live models are ones with  is_active = 1
      */

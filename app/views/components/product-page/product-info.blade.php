@@ -31,6 +31,50 @@
     <div class="tab-pane fade in active tab-pane-bordered" id="detailed_description">
         <div class="row">
             <div class="col-md-12">
+                <div class="panel panel-default panel-no-border">
+                    <div class="panel-body">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td class="active align-right">商品名称</td>
+                                    <td>{{ $model->model_name_cn }}</td>
+                                    <td class="active align-right">材料</td>
+                                    <td>
+                                        @foreach($model->productMaterialMappings as $materialMapping)
+                                        {{ $materialMapping->productMaterial->material_name_cn }}
+                                        @endforeach
+                                    </td>
+                                    <td class="active align-right">重量</td>
+                                    <td>{{ $model->weight }}g</td>
+                                </tr>
+                                <tr>
+                                    <td class="active align-right">鼻间距</td>
+                                    <td>{{ $model->dimension_bridge }}mm</td>
+                                    <td class="active align-right">镜宽</td>
+                                    <td>{{ $model->dimension_eye }}mm</td>
+                                    <td class="active align-right">镜腿</td>
+                                    <td>{{ $model->dimension_temple }}mm</td>
+                                </tr>
+                                <tr>
+                                    <td class="active align-right">镜高</td>
+                                    <td>{{ $model->dimension_vertical }}mm</td>
+                                    <td class="active align-right">总宽</td>
+                                    <td>{{ $model->dimension_eye*2 + $model->dimension_bridge}}mm</td>
+                                    <td class="active align-right">形状</td>
+                                    <td>{{ $model->shape_name_cn }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        标签：
+                        @foreach($model->productTagMappings as $tagMapping)
+                        <span class="label">
+                            <a target="_blank" href="{{ url('gallery?search_keyword='.$tagMapping->productTag->tag_name_cn) }}">
+                                #{{ $tagMapping->productTag->tag_name_cn }}#
+                            </a>
+                        </span>
+                        @endforeach
+                    </div>
+                </div>
 
                 <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}" 
                     data-original="{{ asset('images/gallery/'.$model->model_id.'/spec.jpg') }}"

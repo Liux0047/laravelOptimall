@@ -90,7 +90,10 @@
                         {{ HTML::image('images/gallery/'.$item->model_id.'/'.$item->product_id.'/medium-view-3.jpg','', array('class'=>'item-small-view')) }}
                     </td>
                     <td>{{ $item->model_name_cn }}</td>
-                    <td>{{ $item->model_code }}</td>
+                    <td>
+                        {{ $item->model_code }} <br>
+                        厂商：{{ $item->manufacturer }}
+                    </td>
                     <td> 
                         {{ HTML::image('images/color/color-'.$item->product_color_id.'.png') }}
                         {{ $item->color_name_cn }}
