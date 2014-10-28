@@ -146,7 +146,7 @@
     </div>
 
 
-    <div class="tab-pane fade" id="user_review">
+    <div class="tab-pane fade tab-pane-bordered" id="user_review">
         <div class="panel panel-default panel-no-border">
             <div class="panel-body">
                 <table class="align-center" width="100%">
@@ -270,7 +270,7 @@
     </div>
 
 
-    <div class="tab-pane fade" id="user_question">
+    <div class="tab-pane fade tab-pane-bordered" id="user_question">
     <div class="panel panel-default panel-no-border">
         <div class="panel-body">
             <div class="alert alert-info">
