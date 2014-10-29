@@ -4,7 +4,7 @@
             <div class="col-md-3 col-sm-4 col-xs-4">
                 <div class="logo">
                     <a href="{{ URL::to('/') }}" title="Return to the homepage">
-                        {{ HTML::image('images/optimall.png', 'Optimall logo') }} 
+                        {{ HTML::image('images/optimall.png', 'Optimall logo', array('class'=>'retina-alt lazy')) }}
                     </a>
                 </div>
             </div>
