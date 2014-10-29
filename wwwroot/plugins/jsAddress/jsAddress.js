@@ -474,7 +474,5 @@ var provinceList = [
 {name:'香港', cityList:[
 ]},
 {name:'澳门', cityList:[
-]},
-{name:'新加坡', cityList:[
 ]}
 ];

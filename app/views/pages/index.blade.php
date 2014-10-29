@@ -19,12 +19,12 @@
     <!-- Carousel items -->
     <div class="carousel-inner">
         <div class="active item">
-            <a href="{{ action('InfoController@getAboutProducts') }}">
+            <a href="{{ action('InfoController@getAmbassadorIntro') }}">
                 <img src="{{ asset('images/carousel/index-carousel-cn-1.jpg') }}">
             </a>
         </div>
         <div class="item">
-            <a href="{{ action('InfoController@getAmbassadorIntro') }}">
+            <a href="{{ action('InfoController@getBeginnerGuide') }}">
                 <img data-lazy-load-src="{{ asset('images/carousel/index-carousel-cn-2.jpg') }}">
             </a>
         </div>
@@ -34,7 +34,7 @@
             </a>
         </div>
         <div class="item">
-            <a href="{{ action('ProductController@getProduct', array(1009)) }}">
+            <a href="{{ action('ProductController@getProduct', array(3001)) }}">
                 <img data-lazy-load-src="{{ asset('images/carousel/index-carousel-cn-4.jpg') }}">
             </a>
         </div>
