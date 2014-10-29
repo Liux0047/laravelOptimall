@@ -74,9 +74,11 @@ App::down(function () {
 
 App::before(function ($request) {
     //register warning flag
+    /*
     if (!Cookie::has('internalTestWarning')) {
         Cookie::queue('internalTestWarning', 1, 60 * 24);
     }
+    */
 });
 
 
