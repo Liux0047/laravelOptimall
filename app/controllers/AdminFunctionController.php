@@ -206,6 +206,66 @@ class AdminFunctionController extends BaseController
 
     }
 
+    public function getFakeReview()
+    {
+        $params['pageTitle'] = "Fake Review";
+        return View::make('pages.admin.fake-review', $params);
+    }
+
+    public function postFakeReview()
+    {
+
+        $model = ProductModel::findOrFail(Input::get('model_id'));
+        $productId = $model->products()->first()->product_id;
+
+        $member = new Member;
+        $member->email = Input::get('email');
+        $member->password = Hash::make(Input::get('password'));
+        $member->nickname = Input::get('nickname');
+        $member->save();
+
+        if (!isset($member->member_id)) {
+            return Redirect::back()->with('error', 'Failed to create review - Member not created');
+        }
+
+        $order = new PlacedOrder;
+        $order->member_id = $member->member_id;
+        $order->recipient_name = 'Fake Review';
+        $order->order_status_id = 3;
+        $order->save();
+
+        if (!isset($order->order_id)) {
+            return Redirect::back()->with('error', 'Failed to create review - Order not created');
+        }
+
+        $item = new OrderLineItem;
+        $item->member_id = $member->member_id;
+        $item->order_id = $order->order_id;
+        $item->lens_type_id = 1;
+        $item->product_id = $productId;
+        $item->save();
+
+        if (!isset($item->order_line_item_id)) {
+            return Redirect::back()->with('error', 'Failed to create review - Line Item not created');
+        }
+
+        $review = new Review;
+        $review->order_line_item_id = $item->order_line_item_id;
+        $review->title = Input::get('title');
+        $review->design_rating = Input::get('design_rating', 5);
+        $review->comfort_rating = Input::get('comfort_rating', 5);
+        $review->quality_rating = Input::get('quality_rating', 5);
+        $review->content = Input::get('content');
+        $review->save();
+
+        if (!isset($review->review_id)) {
+            return Redirect::back()->with('error', 'Failed to create review - Review not created');
+        }
+
+        return Redirect::back()->with('status', 'Successfully created Review');
+
+    }
+
     private function validateClaimRefund()
     {
         $rules = array(

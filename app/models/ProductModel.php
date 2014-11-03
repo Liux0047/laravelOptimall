@@ -27,4 +27,8 @@ class ProductModel extends Eloquent {
         return $this->hasMany('ProductView','model_id');
     }
 
+    public function products () {
+        return $this->hasMany('Product','model_id');
+    }
+
 }

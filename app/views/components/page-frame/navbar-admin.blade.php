@@ -46,7 +46,7 @@
 						<li><a href = "{{ action('AdminFunctionController@getAnsweredQuestion') }}">已回答的问题</a></li>
 					</ul>
 				</li>
-				<li><a href = "#">Link</a></li>
+				<li><a href = "{{ action('AdminFunctionController@getFakeReview') }}">Fake Review</a></li>
 			</ul>
 			<ul class = "nav navbar-nav navbar-right">				
 				<li class = "dropdown">
