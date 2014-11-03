@@ -4,9 +4,7 @@
             <div class="col-md-3 col-sm-4 col-xs-4">
                 <div class="logo">
                     <a href="{{ URL::to('/') }}" title="Return to the homepage">
-                        <img src="{{ asset(Config::get('optimall.lazyloadImg')) }}"
-                            data-original="{{ asset('images/optimall.png') }}"
-                            class="lazy retina-alt">
+                        {{ HTML::image('images/optimall@2x.png', 'Optimall logo') }}
                     </a>
                 </div>
             </div>
