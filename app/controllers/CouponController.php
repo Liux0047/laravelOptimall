@@ -13,6 +13,12 @@ class CouponController extends BaseController
     const AMBASSADOR_INVITED_COUPON = 2;
     const ONE_TIME = 3;
 
+    public static $discountRules = array(
+        self::AMBASSADOR_COUPON => 'Coupon for Ambassador himself',
+        self::AMBASSADOR_INVITED_COUPON => 'Coupon for members invited by Ambassador',
+        self::ONE_TIME => 'Coupon for one time usage',
+    );
+
     public function postApplyCoupon()
     {
         $coupon = Coupon::validCoupon(Input::get('coupon_code'))->first();

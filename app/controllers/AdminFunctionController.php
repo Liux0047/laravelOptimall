@@ -266,6 +266,45 @@ class AdminFunctionController extends BaseController
 
     }
 
+    public function getNewCoupon($length = 8)
+    {
+        $params['pageTitle'] = "New Coupon";
+        do {    //generate random string
+            $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $charactersLength = strlen($characters);
+            $randomString = '';
+            for ($i = 0; $i < $length; $i++) {
+                $randomString .= $characters[rand(0, $charactersLength - 1)];
+            }
+
+            $duplicateCount = Coupon::where('coupon_code', '=', $randomString)->count();
+
+        } while ($duplicateCount > 0);
+        $params['couponCode'] = $randomString;
+        $params['expiryDate'] = date("Y-m-d H:i:s");
+        $params['discountRules'] = CouponController::$discountRules;
+        return View::make('pages.admin.new-coupon', $params);
+    }
+
+    public function postNewCoupon()
+    {
+        $coupon = new Coupon;
+        $coupon->coupon_code = Input::get('coupon_code');
+        $coupon->discount_type_id = Input::get('discount_type');
+        $coupon->discount_value = Input::get('discount_value');
+        $coupon->expire_date = Input::get('expiry_date');
+        $coupon->coupon_rule_id = Input::get('coupon_rule');
+        $coupon->is_active = 1;
+        $coupon->save();
+
+        if (!isset($coupon->coupon_id)) {
+            return Redirect::back()->with('error', 'Failed to create new coupon');
+        }
+
+        return Redirect::back()->with('status', 'Successfully created new coupon: ' . $coupon->coupon_code);
+
+    }
+
     private function validateClaimRefund()
     {
         $rules = array(
