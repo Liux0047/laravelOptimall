@@ -39,6 +39,12 @@
 
         <button type="submit" class="btn btn-primary">Submit</button>
         {{ Form::close() }}
+        <br>
+
+        <p>
+            Suggested Codes:
+            {{ $suggestedStr }}
+        </p>
 
     </div>
 @stop

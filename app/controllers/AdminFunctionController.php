@@ -269,18 +269,13 @@ class AdminFunctionController extends BaseController
     public function getNewCoupon($length = 8)
     {
         $params['pageTitle'] = "New Coupon";
-        do {    //generate random string
-            $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            $charactersLength = strlen($characters);
-            $randomString = '';
-            for ($i = 0; $i < $length; $i++) {
-                $randomString .= $characters[rand(0, $charactersLength - 1)];
-            }
-
-            $duplicateCount = Coupon::where('coupon_code', '=', $randomString)->count();
-
-        } while ($duplicateCount > 0);
+        $randomString = $this->generateCouponCode($length);
+        $suggestedStr = "";
+        for ($i = 0; $i < 30; $i++) {
+            $suggestedStr .= $this->generateCouponCode($length) . " ";
+        }
         $params['couponCode'] = $randomString;
+        $params['suggestedStr'] = $suggestedStr;
         $params['expiryDate'] = date("Y-m-d H:i:s");
         $params['discountRules'] = CouponController::$discountRules;
         return View::make('pages.admin.new-coupon', $params);
@@ -319,6 +314,24 @@ class AdminFunctionController extends BaseController
             'rejection_reason' => 'required|max:200'
         );
         return Validator::make(Input::all(), $rules);
+    }
+
+    private function generateCouponCode($length)
+    {
+        do {    //generate random string
+            $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $charactersLength = strlen($characters);
+            $randomString = '';
+            for ($i = 0; $i < $length; $i++) {
+                $randomString .= $characters[rand(0, $charactersLength - 1)];
+            }
+
+            $duplicateCount = Coupon::where('coupon_code', '=', $randomString)->count();
+
+        } while ($duplicateCount > 0);
+
+        return $randomString;
+
     }
 
 }
