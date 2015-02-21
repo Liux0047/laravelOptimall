@@ -11,6 +11,7 @@ class CouponController extends BaseController
 
     const AMBASSADOR_COUPON = 1;
     const AMBASSADOR_INVITED_COUPON = 2;
+    const ONE_TIME = 3;
 
     public function postApplyCoupon()
     {
@@ -62,13 +63,20 @@ class CouponController extends BaseController
             return true;
         }
         switch ($coupon->coupon_rule_id) {
-            case AMBASSADOR_COUPON:   //rule 1: must be an ambassador
+            case self::AMBASSADOR_COUPON:   //rule 1: must be an ambassador
                 return Auth::user()->is_approved_ambassador;
-            case AMBASSADOR_INVITED_COUPON:   //must have been invited by an ambassador
+            case self::AMBASSADOR_INVITED_COUPON:   //must have been invited by an ambassador
                 if (!isset(Auth::user()->invited_by)) {
                     return false;
                 } else {
                     return Member::find(Auth::user()->invited_by)->is_approved_ambassador;
+                }
+            case self::ONE_TIME:
+                $usageCount = CouponUsage::where('coupon_id','=',$coupon->coupon_id)->count();
+                if ($usageCount > 0) {
+                    return false;
+                } else {
+                    return true;
                 }
             default:
                 return false;

@@ -19,7 +19,7 @@
     <!-- Carousel items -->
     <div class="carousel-inner">
         <div class="active item">
-            <a href="{{ action('InfoController@getAmbassadorIntro') }}">
+            <a href="http://www.weibo.com/u/5281852072">
                 <img src="{{ asset('images/carousel/index-carousel-cn-1.jpg') }}">
             </a>
         </div>
