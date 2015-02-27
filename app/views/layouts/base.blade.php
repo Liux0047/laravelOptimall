@@ -45,7 +45,7 @@
 @if($isLessThanIE9)
     <div class="alert alert-error">
         为了更好的购物体验，我们推荐您更新目前使用的IE版本，或者使用最新的<a href="http://www.google.cn/intl/zh-CN/chrome/">Chrome</a>，<a
-                href="se.360.cn">360浏览器</a>以及<a href="www.firefox.com.cn">火狐浏览器
+                href="se.360.cn">360浏览器</a>以及<a href="www.firefox.com.cn">火狐浏览器</a>
     </div>
 @endif
 @include('components.page-frame.top-banner')
