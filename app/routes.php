@@ -197,6 +197,7 @@ Route::when('review/*', 'csrf', array('post'));
 Route::when('question/*', 'csrf', array('post'));
 Route::when('alipay/*', 'csrf', array('post'));
 Route::when('admin/*', 'csrf', array('post'));
+Route::when('share/*', 'csrf', array('post'));
 
 
 /*

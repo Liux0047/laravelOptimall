@@ -15,7 +15,14 @@ class MarketingController extends BaseController
         $numJoined = TuanGou::where('is_verified', '=', '1')->count();
 
         $params['numJoined'] = $numJoined;
-
+        $params['isVerified'] = false;
+        if (Session::has('tuanGouId')) {
+            $tuanEntry = TuanGou::find(Session::get('tuanGouId'));
+            if ($tuanEntry->is_verified) {
+                $params['isVerified'] = true;
+                Session::forget('tuanGouId');
+            }
+        }
         return View::make('pages.marketing.tuan', $params);
     }
 
@@ -26,11 +33,12 @@ class MarketingController extends BaseController
 
     public function postJoinTuan()
     {
-
         $phoneNumber = Input::get('phone_number');
         if (!is_numeric($phoneNumber) || strlen($phoneNumber) != 11) {
             return Redirect::back()->with('error', '手机号码格式不正确');
 
+        } else if (TuanGou::where('phone_number', '=', $phoneNumber)->count()) {
+            return Redirect::back()->with('error', '该号码已经加入团购');
         } else {
             $verificationCode = $this->generateVerificationCode();
             $this->sendVerificationCode($verificationCode);
@@ -58,14 +66,9 @@ class MarketingController extends BaseController
         } else {
             $tuanEntry->is_verified = 1;
             $tuanEntry->save();
-            return Redirect::action('MarketingController@getVerifyTuanSuccess');
+            return Redirect::action('MarketingController@getTuan');
         }
 
-    }
-
-    public function getVerifyTuanSuccess()
-    {
-        return View::make('pages.marketing.verify-tuan-success');
     }
 
     private function generateVerificationCode()
