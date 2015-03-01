@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>目光之城 大型团购活动</title>
     <meta name="author" content="Alvaro Trigo Lopez"/>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name='token' content='{{ csrf_token() }}'/>
     <meta name="description"
           content="fullPage plugin by Alvaro Trigo. Create fullscreen pages fast and simple. One page scroll like iPhone website."/>
@@ -18,7 +19,7 @@
     <style>
 
         body {
-            font-size: 2em;
+            font-size: 28px;
         }
 
         .font-white {
@@ -41,7 +42,7 @@
             font-weight: bold !important;
             font-size: 28px;
             padding: 22px 36px;
-            border-radius: 4px;
+            border-radius: 8px;
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
             -webkit-font-smoothing: antialiased !important;
             -moz-osx-font-smoothing: grayscale !important;
@@ -75,26 +76,23 @@
             font-weight: bold !important;
         }
 
-        .label {
+        label {
             font-size: 24px;
         }
 
-        @media (min-width: 768px) {
+        @media (min-device-width: 768px) {
 
             body {
                 font-size: 14px;
             }
 
-            .second-col {
-                margin-top: 15%;
-            }
-
             .btn {
                 font-size: 16px;
                 padding: 11px 18px;
+                border-radius: 4px;
             }
 
-            .label {
+            label {
                 font-size: 12px;
             }
         }
