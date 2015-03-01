@@ -54,9 +54,6 @@
 @include('components.page-frame.float-box')
 @include('components.page-frame.footer')
 
-</body>
-
-
 
 @section('link-script')
     {{ HTML::script('js/jquery.min.js') }}
@@ -81,5 +78,7 @@
 
     </script>
 @show
+
+</body>
 
 </html>

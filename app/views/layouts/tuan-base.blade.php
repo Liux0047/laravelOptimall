@@ -105,8 +105,6 @@
 
 @yield('content')
 
-</body>
-
 @section('link-script')
     {{ HTML::script('js/jquery.min.js') }}
     {{ HTML::script('js/bootstrap.min.js') }}
@@ -114,3 +112,7 @@
 
 @section('javascript')
 @show
+
+</body>
+</html>
+
