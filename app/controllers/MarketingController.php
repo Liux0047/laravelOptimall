@@ -26,19 +26,14 @@ class MarketingController extends BaseController
         return View::make('pages.marketing.tuan', $params);
     }
 
-    public function getJoinTuan()
-    {
-        return View::make('pages.marketing.join-tuan');
-    }
-
     public function postJoinTuan()
     {
         $phoneNumber = Input::get('phone_number');
         if (!is_numeric($phoneNumber) || strlen($phoneNumber) != 11) {
-            return Redirect::back()->with('error', '手机号码格式不正确');
+            return Response::json(array('isValid' => 'false', 'message' => '手机号码格式不正确'));;
 
         } else if (TuanGou::where('phone_number', '=', $phoneNumber)->count()) {
-            return Redirect::back()->with('error', '该号码已经加入团购');
+            return Response::json(array('isValid' => 'false', 'message' => '该号码已经加入团购'));
         } else {
             $verificationCode = $this->generateVerificationCode();
             $this->sendVerificationCode($verificationCode);
@@ -48,7 +43,7 @@ class MarketingController extends BaseController
             $tuanEntry->verification_code = $verificationCode;
             $tuanEntry->save();
             Session::put('tuanGouId', $tuanEntry->tuan_gou_id);
-            return Redirect::action('MarketingController@getVerifyTuan');
+            return Response::json(array('isValid' => 'true'));
         }
 
     }
