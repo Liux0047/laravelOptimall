@@ -17,6 +17,10 @@
 
     <style>
 
+        body {
+            font-size: 2em;
+        }
+
         .font-white {
             color: #FFFFFF;
         }
@@ -25,14 +29,18 @@
             color: #ee4054;
         }
 
+        .second-col {
+            margin-top: 0%;
+        }
+
         .btn {
             background-color: #eeeeee !important;
             background-image: none !important;
             color: #555555 !important;
             text-shadow: 0 -1px transparent !important;
             font-weight: bold !important;
-            padding: 11px 18px;
-            font-size: 16px;
+            font-size: 28px;
+            padding: 22px 36px;
             border-radius: 4px;
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
             -webkit-font-smoothing: antialiased !important;
@@ -65,6 +73,30 @@
             color: #ffffff !important;
             text-shadow: 0 -1px transparent !important;
             font-weight: bold !important;
+        }
+
+        .label {
+            font-size: 24px;
+        }
+
+        @media (min-width: 768px) {
+
+            body {
+                font-size: 14px;
+            }
+
+            .second-col {
+                margin-top: 15%;
+            }
+
+            .btn {
+                font-size: 16px;
+                padding: 11px 18px;
+            }
+
+            .label {
+                font-size: 12px;
+            }
         }
 
     </style>

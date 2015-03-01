@@ -20,10 +20,10 @@
                 <div class="row">
 
                     <div class="col-lg-6">
-                        <img src="{{ asset('images/marketing/school_days.jpg') }}" style="width: 70%">
+                        <img src="{{ asset('images/marketing/school_days.jpg') }}" style="width: 100%">
                     </div>
 
-                    <div class="col-lg-6" style="margin-top: 10%;">
+                    <div class="col-lg-6 second-col">
                         <p class="text-center font-red">已参团人数： {{ $numJoined }}/1000</p>
                         <div class="row">
                             <div class="col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2 col-xs-8 col-xs-offset-2">
@@ -102,7 +102,7 @@
 
             <div class="section" id="section2">
                 <div class="container">
-                    <h4>加入团购活动</h4>
+                    <h1>加入团购活动</h1>
 
                     <div class="alert alert-warning" style="display: none" id="message_box">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -147,7 +147,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#fullpage').fullpage({
-                sectionsColor: ['#F5D67C', '#4BBFC3', '#7BAABE',],
+                sectionsColor: ['#F9DA80', '#4BBFC3', '#7BAABE',],
                 anchors: ['poster', 'info', 'join'],
                 menu: '#menu',
                 scrollingSpeed: 1000,
