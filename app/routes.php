@@ -46,11 +46,19 @@ Route::post('login', 'MemberController@postLogin');
  * Route to sign up
  */
 Route::get('sign-up', 'MemberController@getSignUp');
+Route::get('mobile-sign-up', 'MemberController@getMobileSignUp');
+
+
+/*
+ * Route to send verification code SMS
+ */
+Route::post('send-verification-code', 'MemberController@postSendVerificationCode');
 
 /*
  * Route to process sign up form submit
  */
 Route::post('sign-up', 'MemberController@postSignUp');
+Route::post('mobile-sign-up', 'MemberController@postMobileSignUp');
 
 /*
  * Route to resend verification email

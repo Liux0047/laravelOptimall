@@ -17,7 +17,7 @@
                     <hr> 
                     {{ Form::open(array('action' => 'MemberController@postLogin')) }}
                     <div class="form-group">
-                        <input type="email" class="form-control mailtip-input" id="email" name="email" placeholder="邮箱地址" value="{{ Input::old('email') }}">
+                        <input type="text" class="form-control" id="email_mobile" name="email_mobile" placeholder="邮箱地址/手机号码" value="{{ Input::old('email_mobile') }}">
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control" id="password" name="password" placeholder="密码">

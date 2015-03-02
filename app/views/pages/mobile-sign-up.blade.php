@@ -19,40 +19,66 @@
                 {{ HTML::image('images/background-images/registration.jpg') }}
             </div>
             <div class="col-md-8">
-                {{ Form::open(array('action' => 'MemberController@postSignUp', 'role'=>'form', 'id'=>'registration_form',
+                {{ Form::open(array('action' => 'MemberController@postMobileSignUp', 'role'=>'form', 'id'=>'registration_form',
                 'novalidate'=>'novalidate', 'class'=>'form-horizontal')) }}
                 <div class="form-group">
                     <label for="nickname" class="col-md-2 control-label">昵称*</label>
 
                     <div class="col-md-6">
-                        <input type="text" class="form-control" id="nickname" name="nickname" placeholder="昵称"
-                               value="{{ Input::old('nickname') }}">
+                        <div>
+                            <input type="text" class="form-control" id="nickname" name="nickname" placeholder="昵称"
+                                   value="{{ Input::old('nickname') }}">
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="email" class="col-md-2 control-label">邮箱*</label>
+                    <label for="mobile_number" class="col-md-2 control-label">手机号*</label>
 
                     <div class="col-md-6">
-                        <input type="email" class="form-control mailtip-input" id="email" name="email" placeholder="邮箱"
-                               value="{{ Input::old('email') }}">
+                        <div class="input-group">
+                            <div class="input-group-addon">+86</div>
+                            <input type="text" class="form-control" id="mobile_number" name="mobile_number"
+                                   placeholder="手机号" value="{{ Input::old('mobile_number') }}">
+                        </div>
                         <span id="helpBlock" class="help-block">
-                            没有邮箱？使用 <a href="{{ action('MemberController@getMobileSignUp') }}">手机注册</a>
+                            或者使用 <a href="{{ action('MemberController@getSignUp') }}">邮箱注册</a>
                         </span>
                     </div>
+
                 </div>
                 <div class="form-group">
                     <label for="password" class="col-md-2 control-label">密码*</label>
 
                     <div class="col-md-6">
-                        <input type="password" class="form-control" id="password" name="password" placeholder="密码">
+                        <div>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="密码">
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="confirm-password" class="col-md-2 control-label">确认密码*</label>
 
                     <div class="col-md-6">
-                        <input type="password" class="form-control" id="confirm_password" name="confirm_password"
-                               placeholder="确认密码">
+                        <div>
+                            <input type="password" class="form-control" id="confirm_password" name="confirm_password"
+                                   placeholder="确认密码">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="verification_code" class="col-md-2 control-label"></label>
+
+                    <div class="col-md-2">
+                        <button class="btn btn-warning btn-block" id="verify_btn" onclick="sendVerificationCode();return false;"
+                                @if (!Input::old('mobile_number')) disabled @endif>
+                            获取验证码
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <div>
+                            <input type="text" class="form-control" id="verification_code" name="verification_code"
+                                   placeholder="请输入验证码">
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -70,8 +96,10 @@
                     <label for="ambassador_code" class="col-md-2 control-label">邀请码</label>
 
                     <div class="col-md-6">
-                        <input type="text" class="form-control" id="ambassador_code" name="ambassador_code"
-                               placeholder="请输入对方提供的邀请码" {{ Input::old('ambassador_code') }}>
+                        <div>
+                            <input type="text" class="form-control" id="ambassador_code" name="ambassador_code"
+                                   placeholder="请输入对方提供的邀请码" {{ Input::old('ambassador_code') }}>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -143,10 +171,11 @@
                         required: true,
                         maxlength: 15
                     },
-                    email: {
+                    mobile_number: {
                         required: true,
-                        email: true,
-                        maxlength: 50
+                        digits: true,
+                        minlength: 11,
+                        maxlength: 11
                     },
                     password: {
                         required: true,
@@ -158,6 +187,10 @@
                         required: true,
                         equalTo: "#password"
                     },
+                    verification_code: {
+                        required: true,
+                        minlength: 6
+                    },
                     agree_terms: {
                         required: true
                     }
@@ -167,10 +200,11 @@
                         required: warningIcon + "请输入您的昵称",
                         maxlength: warningIcon + "昵称不能超过15个字符"
                     },
-                    email: {
-                        required: warningIcon + "请输入您的邮箱",
-                        email: warningIcon + "请输入正确的邮箱",
-                        maxlength: warningIcon + "邮箱长度不能超过50个字符"
+                    mobile_number: {
+                        required: warningIcon + "请输入您的手机号码",
+                        digits: warningIcon + "请输入正确的手机号码",
+                        minlength: warningIcon + "请输入正确的手机号码",
+                        maxlength: warningIcon + "请输入正确的手机号码"
                     },
                     password: {
                         required: warningIcon + "请输入新密码",
@@ -182,13 +216,17 @@
                         required: warningIcon + "请再次输入新密码",
                         equalTo: warningIcon + "两次输入的密码不匹配"
                     },
+                    verification_code: {
+                        required: warningIcon + "请输入验证码",
+                        minlength: warningIcon + "请输入验证码"
+                    },
                     agree_terms: {
                         required: warningIcon + "请同意我们的条款"
                     }
                 },
                 errorElement: "span",
                 errorPlacement: function (error, element) {
-                    error.appendTo($(element).parent().parent());
+                    error.appendTo($(element).parent().parent().parent());
                 },
                 success: function (label) {
                     label.html("<span class='jq-validate-valid'><i class='fa fa-check-circle fa-lg'></i></span>");
@@ -220,6 +258,39 @@
             $('.modal-content').css('margin-top', $(window).height() * 0.15);
             $('.modal-body').css('height', $(window).height() * 0.5);
         });
+
+        $('#mobile_number').on('input', function() {
+            if ($(this).val().length == 11 ) {
+                $('#verify_btn').attr('disabled', false);
+            } else {
+                $('#verify_btn').attr('disabled', true);
+            }
+        })
+
+        function sendVerificationCode() {
+            $('#verify_btn').attr('disabled', true);
+            $('#verify_btn').html('发送中...');
+            var mobileNumber = $('#mobile_number').val();
+
+            $.ajax({
+                type: "POST",
+                url: "{{ action('MemberController@postSendVerificationCode') }}",
+                data: {
+                    mobile_number: mobileNumber
+                },
+                beforeSend: function (request) {
+                    return request.setRequestHeader('X-CSRF-Token', $("meta[name='token']").attr('content'));
+                },
+                dataType: "json"
+            }).done(function (data) {
+
+            }).fail(function () {
+
+            }).always(function () {
+                $('#verify_btn').attr('disabled', false);
+                $('#verify_btn').html('再次获取');
+            });
+        }
 
     </script>
 @stop

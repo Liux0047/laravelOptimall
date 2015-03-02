@@ -303,7 +303,7 @@
                                     <div class="form-group">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-envelope fa-fw fa-lg"></i></span>
-                                            <input type="text" class="form-control" id="login_email" onkeyup="enableSubmit();" name="login_email" placeholder="邮箱地址">
+                                            <input type="text" class="form-control" id="login_email_mobile" onkeyup="enableSubmit();" name="login_email_mobile" placeholder="邮箱地址/手机号码">
                                         </div>
                                     </div>
                                     <div class="form-group">
