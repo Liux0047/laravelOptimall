@@ -32,6 +32,15 @@ class RemindersController extends Controller
     }
 
     /**
+     * Handle a POST request to remind a user of their password using mobile.
+     *
+     * @return Response
+     */
+    public function postRemindMobile() {
+
+    }
+
+    /**
      * Display the password reset view for the given token.
      *
      * @param  string $token
