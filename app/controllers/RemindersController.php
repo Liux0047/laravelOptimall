@@ -37,8 +37,41 @@ class RemindersController extends Controller
      * @return Response
      */
     public function postRemindMobile() {
+        $mobileNumber = Input::get('mobile_number');
+
+        if (!SMSController::verifyMobileCode($mobileNumber, Input::get('verification_code'), SMSController::PASSWORD_REMINDER)) {
+            return Redirect::back()->with('error', '对不起,您输入的验证码有误，请重试');
+        }
+
+        $member = Member::where('mobile_number', '=', $mobileNumber)
+            ->first();
+
+        if (empty($member)){
+            return Redirect::back()->with('error', '对不起，手机号码似乎不对，请再试试');
+        } else {
+            return View::make('pages.password.reset-mobile')->with('verificationCode', Input::get('verification_code'));
+        }
+    }
+
+    public function postSendVerificationCode()
+    {
+        $validator = SMSController::validateMobileNumber('mobile_number');
+        if ($validator->fails()) {
+            return Response::json(array('isSent' => 0, 'message' => '号码无效'));
+        }
+
+        $mobileNumber = Input::get('mobile_number');
+        $sms = new SMSVerification;
+        $sms->mobile_number = $mobileNumber;
+        $code = SMSController::generateVerificationCode();
+        $sms->verification_code = $code;
+        $sms->purpose = SMSController::PASSWORD_REMINDER;
+        $sms->save();
+
+        SMSController::sendSMS($mobileNumber, '请输入该验证码以找回密码：' . $code);
 
     }
+
 
     /**
      * Display the password reset view for the given token.
@@ -79,6 +112,27 @@ class RemindersController extends Controller
 
             case Password::PASSWORD_RESET:
                 return Redirect::to('/');
+        }
+    }
+
+    public function postResetMobile() {
+        $mobileNumber = Input::get('mobile_number');
+
+        if (!SMSController::verifyMobileCode($mobileNumber, Input::get('verification_code'), SMSController::PASSWORD_REMINDER)) {
+            return Redirect::back()->with('error', '对不起,您输入的验证码有误，请重试');
+        }
+
+        $member = Member::where('mobile_number', '=', $mobileNumber)
+            ->first();
+
+        if (empty($member)){
+            return Redirect::back()->with('error', '对不起，手机号码似乎不对，请再试试');
+        } else {
+            $member->password = Hash::make(Input::get('password'));
+            $member->reg_code = null;
+            $member->save();
+
+            return Redirect::to('/');
         }
     }
 

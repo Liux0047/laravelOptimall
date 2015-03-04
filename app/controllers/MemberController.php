@@ -50,7 +50,7 @@ class MemberController extends BaseController
     public function postSendVerificationCode()
     {
 
-        $validator = $this->validateMobileNumber();
+        $validator = SMSController::validateMobileNumber('mobile_number');
         if ($validator->fails()) {
             return Response::json(array('isSent' => 0, 'message' => '号码无效'));
         }
@@ -58,8 +58,9 @@ class MemberController extends BaseController
         $mobileNumber = Input::get('mobile_number');
         $sms = new SMSVerification;
         $sms->mobile_number = $mobileNumber;
-        $code = $this->generateVerificationCode();
+        $code = SMSController::generateVerificationCode();
         $sms->verification_code = $code;
+        $sms->purpose = SMSController::REGISTRATION;
         $sms->save();
 
         SMSController::sendSMS($mobileNumber, '您注册所需的验证码：' . $code);
@@ -140,7 +141,7 @@ class MemberController extends BaseController
         $confirmPassword = Input::get('confirm_password');
 
 
-        if (!$this->verifyMobileCode($mobileNumber, Input::get('verification_code'))) {
+        if (!SMSController::verifyMobileCode($mobileNumber, Input::get('verification_code'), SMSController::REGISTRATION)) {
             return Redirect::back()->with('error', '对不起,您输入的验证码有误，请重试');
         }
 
@@ -245,46 +246,8 @@ class MemberController extends BaseController
         return Validator::make(Input::all(), $rules);
     }
 
-    private function validateMobileNumber()
-    {
-        $rules = array(
-            'mobile_number' => 'required|digits:11'
-        );
-        return Validator::make(Input::only('mobile_number'), $rules);
-    }
 
-    private function generateVerificationCode()
-    {
-        $characters = '0123456789';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < 6; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
-        }
 
-        return $randomString;
-    }
-
-    private function verifyMobileCode($mobileNumber, $code)
-    {
-        $verification = SMSVerification::where('mobile_number', '=', $mobileNumber)
-            ->where('verification_code', '=', $code)
-            ->orderBy('created_at', 'desc')
-            ->first();
-
-        if (empty($verification)) {
-            return false;
-        } else {
-            $createdAt = new DateTime($verification->created_at);
-            $now = new DateTime();
-            $diffInSeconds = $now->getTimestamp() - $createdAt->getTimestamp();
-            if ($diffInSeconds > 10 * 60) { //after 10 minutes
-                return false;
-            }
-        }
-
-        return true;
-    }
 
 
 }

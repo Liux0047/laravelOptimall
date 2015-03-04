@@ -73,7 +73,7 @@ $(document).ready(function() {
         messages: {
             email: {
                 required: warningIcon + "请输入您的邮箱",
-                email: warningIcon + "请输入有效的邮箱地址",
+                email: warningIcon + "请输入有效的邮箱地址"
             },
             password: {
                 required: warningIcon + "请输入新密码",

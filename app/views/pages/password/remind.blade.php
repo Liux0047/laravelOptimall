@@ -90,5 +90,30 @@
                 $('#verify_btn').attr('disabled', true);
             }
         });
+
+        function sendVerificationCode() {
+            $('#verify_btn').attr('disabled', true);
+            $('#verify_btn').html('发送中...');
+            var mobileNumber = $('#mobile_number').val();
+
+            $.ajax({
+                type: "POST",
+                url: "{{ action('RemindersController@postSendVerificationCode') }}",
+                data: {
+                    mobile_number: mobileNumber
+                },
+                beforeSend: function (request) {
+                    return request.setRequestHeader('X-CSRF-Token', $("meta[name='token']").attr('content'));
+                },
+                dataType: "json"
+            }).done(function (data) {
+
+            }).fail(function () {
+
+            }).always(function () {
+                $('#verify_btn').attr('disabled', false);
+                $('#verify_btn').html('再次获取');
+            });
+        }
     </script>
 @stop
