@@ -50,9 +50,11 @@ class QuestionController extends BaseController
         $data['nickname'] = $question->member->nickname;
         $email = $question->member->email;
 
-        Mail::send('emails.member.question-answer', $data, function($message) use ($email) {
-            $message->to($email)->subject('目光之城有问必答');
-        });
+        if(!empty($email)){
+            Mail::send('emails.member.question-answer', $data, function($message) use ($email) {
+                $message->to($email)->subject('目光之城有问必答');
+            });
+        }
 
         return Redirect::back()->with('status', '回答问题成功');
     }

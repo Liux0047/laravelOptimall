@@ -61,9 +61,12 @@ class OrderController extends BaseController
         $params['receive_phone'] = $order->receive_phone;
         $params['net_amount'] = $cartController->getNetPrice();
         $params['discount_amount'] = $cartController->getTotalDiscount();
-        Mail::queue('emails.order.confirm-order', $params, function ($message) {
-            $message->to(Auth::user()->email)->subject('订单提交成功');
-        });
+
+        if (!empty(Auth::user()->email)) {
+            Mail::queue('emails.order.confirm-order', $params, function ($message) {
+                $message->to(Auth::user()->email)->subject('订单提交成功');
+            });
+        }
 
         return $alipayController->generateAlipayPage($tradeNumber, $price, $address, $paymentService, $bankCode, $itemNames);
     }
@@ -179,7 +182,8 @@ class OrderController extends BaseController
         }
     }
 
-    private function processPartnerTradeUpdate ($trade_status, $out_trade_no, $trade_no) {
+    private function processPartnerTradeUpdate($trade_status, $out_trade_no, $trade_no)
+    {
         if ($trade_status == 'WAIT_BUYER_PAY') {
             //该判断表示买家已在支付宝交易管理中产生了交易记录，但没有付款
             //判断该笔订单是否在商户网站中已经做过处理
@@ -227,8 +231,9 @@ class OrderController extends BaseController
 
     }
 
-    private function processDirectPayUpdate ($trade_status, $out_trade_no, $trade_no) {
-        if($trade_status == 'TRADE_FINISHED') {
+    private function processDirectPayUpdate($trade_status, $out_trade_no, $trade_no)
+    {
+        if ($trade_status == 'TRADE_FINISHED') {
             //判断该笔订单是否在商户网站中已经做过处理
             //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
             //如果有做过处理，不执行商户的业务程序
@@ -240,8 +245,7 @@ class OrderController extends BaseController
 
             //调试用，写文本函数记录程序运行情况是否正常
             //logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
-        }
-        else if ($trade_status == 'TRADE_SUCCESS') {
+        } else if ($trade_status == 'TRADE_SUCCESS') {
             //判断该笔订单是否在商户网站中已经做过处理
             //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
             //如果有做过处理，不执行商户的业务程序
@@ -254,7 +258,7 @@ class OrderController extends BaseController
             //logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
         }
 
-        echo "success";		//请不要修改或删除
+        echo "success";        //请不要修改或删除
 
     }
 

@@ -16,7 +16,7 @@
                     <label for="mobile_number" class="col-md-2 control-label">您的手机</label>
 
                     <div class="col-md-4">
-                        <input type="email" class="form-control" id="mobile_number" name="mobile_number"
+                        <input type="text" class="form-control" id="mobile_number" name="mobile_number"
                                placeholder="您的手机号码">
                     </div>
                 </div>

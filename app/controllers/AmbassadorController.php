@@ -37,9 +37,12 @@ class AmbassadorController extends BaseController {
             $ambassadorInfo->member_id = Auth::id();
             $ambassadorInfo->save();
             $data['nickname'] = Auth::user()->nickname;
-            Mail::queue('emails.member.ambassador-application', $data, function($message) {
-                $message->to(Auth::user()->email)->subject('目光之星申请提交成功');
-            });
+            if (!empty(Auth::user()->email)) {
+                Mail::queue('emails.member.ambassador-application', $data, function($message) {
+                    $message->to(Auth::user()->email)->subject('目光之星申请提交成功');
+                });
+            }
+
             return Redirect::back()->with('status', '目光之星申请提交成功，请等待回复');
         } else {
             return Redirect::back()->with('warning', '您已经是目光之星了');
@@ -82,13 +85,14 @@ class AmbassadorController extends BaseController {
         
         $data['nickname'] = Auth::user()->nickname;
         $data['couponCode'] = "WELCOME";
-        $email = Input::get('email');
+
                 
         if (Auth::user()->is_approved_ambassador) {
             $data['invitatonCode'] = Auth::user()->ambassadorInfo->ambassador_code;
             $data['discount'] = Config::get('optimall.ambassadorInvitedReward') * 100;
         }
-        
+
+        $email = Input::get('email');
         Mail::send('emails.member.invitation', $data, function($message) use ($email) {
             $message->to($email)->subject(Auth::user()->nickname . ' 邀请了你去逛逛目光之城');
         });        
