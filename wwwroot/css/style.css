@@ -1948,18 +1948,3 @@ body, hr.fancy-line:after {
 .ambassador-tabs > li > a {
     margin-right: 0px;
 }
-
-/* vote modal */
-#vote_modal .modal-body{
-    background-color: #50b9e7;
-    color: #fff;
-}
-
-#vote_modal .modal-footer{
-    background-color: #313640;
-}
-
-#vote_modal .progress {
-    background-color: transparent;
-    border: none;
-}
