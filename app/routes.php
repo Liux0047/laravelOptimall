@@ -183,6 +183,16 @@ Route::post('upload/review/{itemId}', 'UploadController@anyReviewImage');
 Route::delete('upload/review/{itemId}', 'UploadController@anyReviewImage');
 
 /*
+ * Marketing pages
+ */
+Route::controller('share', 'MarketingController');
+
+/*
+ * Route for vote controller
+*/
+Route::controller('vote', 'VoteController');
+
+/*
  * Route to admin account controller
  */
 Route::controller('admin', 'AdminController');
@@ -206,10 +216,6 @@ Route::when('question/*', 'csrf', array('post'));
 Route::when('alipay/*', 'csrf', array('post'));
 Route::when('admin/*', 'csrf', array('post'));
 Route::when('share/*', 'csrf', array('post'));
+Route::when('vote/*', 'csrf', array('post'));
 
-
-/*
- * Marketing pages
- */
-Route::controller('share', 'MarketingController');
 
