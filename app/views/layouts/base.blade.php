@@ -54,6 +54,54 @@
 @include('components.page-frame.float-box')
 @include('components.page-frame.footer')
 
+@if (is_null(Cookie::get('hasVoted')))
+    <!-- Vote Modal -->
+    <div class="modal fade" id="vote_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h3>希望在镜架上激光刻字吗？请让我们知道您的想法吧</h3>
+
+                    <h1>A pic to describe laser engrave</h1>
+
+
+                    <div>
+                        <span class="pull-left">赞 ({{ $voteForCount }}人)</span>
+                        <span class="pull-right">踩 ({{ $voteAgainstCount }}人)</span>
+                        <br>
+                    </div>
+
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success progress-bar-striped"
+                             style="width: {{ $voteForCount / ($voteForCount + $voteAgainstCount) * 100 }}%">
+                            <span class="sr-only">35% Complete (success)</span>
+                        </div>
+                        <div class="progress-bar progress-bar-warning progress-bar-striped"
+                             style="width: {{ $voteAgainstCount / ($voteForCount + $voteAgainstCount) * 100 }}%">
+                            <span class="sr-only">10% Complete (danger)</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-md-4 col-md-offset-2">
+                            <button type="button" class="btn btn-success btn-lg btn-block" onclick="vote(1);">
+                                我想要
+                            </button>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-warning btn-lg btn-block" onclick="vote(0);">没意思
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Vote Modal -->
+@endif
 
 @section('link-script')
     {{ HTML::script('js/jquery.min.js') }}
@@ -74,6 +122,38 @@
         //baidu analytics
         var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
         document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F97599e376911217c874380e476e60e0c' type='text/javascript'%3E%3C/script%3E"));
+        @endif
+
+        @if (is_null(Cookie::get('hasVoted')))
+        $('#vote_modal').modal('show');
+
+        function vote(isFor) {
+            $('#vote_modal .modal-footer .btn').attr('disabled', true);
+            $.ajax({
+                type: "POST",
+                url: "{{ action('VoteController@postVote') }}",
+                data: {
+                    is_for: isFor
+                },
+                beforeSend: function (request) {
+                    return request.setRequestHeader('X-CSRF-Token', $("meta[name='token']").attr('content'));
+                },
+                dataType: "json"
+            }).done(function (data) {
+                if (data.success == 1) {
+                    $('#vote_modal .modal-body').slideUp(400, function () {
+                        $('#vote_modal .modal-footer').html("<div class='col-md-6 col-md-offset-3'>" +
+                        "<button type='button' class='btn btn-warning btn-lg btn-block' data-dismiss='modal'>关闭</button></div>");
+                        $(this).html("<h3>感谢您的支持，我们会尽快推出您喜爱的产品</h3>");
+                        $(this).slideDown();
+                    });
+                }
+            }).fail(function () {
+
+            }).always(function () {
+                $('#vote_modal .modal-footer .btn').attr('disabled', false);
+            });
+        }
         @endif
 
     </script>
