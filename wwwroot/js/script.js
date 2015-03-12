@@ -77,6 +77,9 @@ function adjustModalMaxHeightAndPosition() {
     });
 }
 ;
+$(document).ready(function () {
+    adjustModalMaxHeightAndPosition();
+});
 $(window).resize(adjustModalMaxHeightAndPosition).trigger("resize");
 
 /*
