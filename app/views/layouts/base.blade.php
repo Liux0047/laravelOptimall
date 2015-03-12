@@ -63,8 +63,7 @@
                 <div class="modal-body">
                     <h3>希望在镜架上激光刻字吗？请让我们知道您的想法吧</h3>
 
-                    <h1>A pic to describe laser engrave</h1>
-
+                    {{ HTML::image('images/background-images/laser-icon.png', 'laser-icon', array('height' => '10%')) }}
 
                     <div>
                         <span class="pull-left">赞 ({{ $voteForCount }}人)</span>
@@ -86,12 +85,12 @@
                 </div>
                 <div class="modal-footer">
                     <div class="row">
-                        <div class="col-md-4 col-md-offset-2">
+                        <div class="col-md-4 col-md-offset-2 col-sm-4 col-sm-offset-2">
                             <button type="button" class="btn btn-success btn-lg btn-block" onclick="vote(1);">
                                 我想要
                             </button>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 col-sm-4">
                             <button type="button" class="btn btn-warning btn-lg btn-block" onclick="vote(0);">没意思
                             </button>
                         </div>
