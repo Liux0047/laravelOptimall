@@ -19,7 +19,7 @@
     <!-- Carousel items -->
     <div class="carousel-inner">
         <div class="active item">
-            <a href="http://www.weibo.com/u/5281852072">
+            <a href="{{ action('ProductController@getProduct', array(3003)) }}">
                 <img src="{{ asset('images/carousel/index-carousel-cn-1.jpg') }}">
             </a>
         </div>
@@ -34,7 +34,7 @@
             </a>
         </div>
         <div class="item">
-            <a href="{{ action('ProductController@getProduct', array(3001)) }}">
+            <a href="{{ action('ProductController@getProduct', array(4001)) }}">
                 <img data-lazy-load-src="{{ asset('images/carousel/index-carousel-cn-4.jpg') }}">
             </a>
         </div>
